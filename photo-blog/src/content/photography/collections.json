@@ -1,0 +1,14 @@
+{
+    "collections": [
+      {
+        "id": "mountains",
+        "title": "Mountain Collection",
+        "description": "A collection of mountain photographs",
+        "coverImage": "/images/collections/mountains/cover.jpg",
+        "images": [
+          "/images/collections/mountains/1.jpg",
+          "/images/collections/mountains/2.jpg"
+        ]
+      }
+    ]
+  }

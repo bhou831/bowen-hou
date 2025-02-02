@@ -1,0 +1,16 @@
+{
+    "albums": [
+      {
+        "id": "album1",
+        "title": "Album Name",
+        "artist": "Artist Name",
+        "coverImage": "/images/albums/album1/cover.jpg",
+        "description": "Why I love this album...",
+        "links": {
+          "spotify": "https://open.spotify.com/album/...",
+          "appleMusic": "https://music.apple.com/album/...",
+          "youtube": "https://youtube.com/playlist/..."
+        }
+      }
+    ]
+  }

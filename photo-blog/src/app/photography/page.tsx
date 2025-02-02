@@ -8,29 +8,14 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog';
-
-interface Collection {
-  id: string;
-  title: string;
-  description: string;
-  coverImage: string;
-  images: string[];
-}
+import { Collection, getCollections } from '@/lib/photo-utils';
 
 export default function Photography() {
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const collections: Collection[] = [
-    {
-      id: '1',
-      title: 'Mountain Sunrise',
-      description: 'A collection of sunrise photographs from various mountain peaks.',
-      coverImage: '/collections/mountains/cover.jpg',
-      images: ['/collections/mountains/1.jpg', '/collections/mountains/2.jpg']
-    },
-  ];
+  const collections = getCollections();
 
   const handleCollectionClick = (collection: Collection) => {
     setSelectedCollection(collection);
@@ -55,38 +40,40 @@ export default function Photography() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="w-full">
+      {/* Grid container with larger frames */}
+      <div className="grid grid-cols-3 gap-x-8 gap-y-12">
         {collections.map((collection) => (
           <div 
             key={collection.id}
             className="cursor-pointer group"
             onClick={() => handleCollectionClick(collection)}
           >
-            <div className="relative aspect-[4/3] flex items-center justify-center">
-              {/* Frame container */}
+            {/* Frame container with fixed aspect ratio */}
+            <div className="relative w-full aspect-[4/3] flex items-center justify-center">
               <div className="relative w-full h-full">
-                {/* Wooden frame image */}
+                {/* Frame image */}
                 <Image
                   src="/images/frame.png"
-                  alt="Wooden frame"
+                  alt="Frame"
                   fill
                   className="object-contain"
                 />
-                {/* Photo container - adjust padding based on your frame image */}
-                <div className="absolute inset-[10%] flex items-center justify-center">
-                  <div className="relative w-full h-full">
+                {/* Photo container with padding for frame */}
+                <div className="absolute inset-[12%] flex items-center justify-center">
+                  <div className="relative w-[80%] h-[80%] mx-auto">
                     <Image
                       src={collection.coverImage}
                       alt={collection.title}
                       fill
-                      className="object-cover"
+                      className="object-contain"
+                      quality={100}
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <h3 className="mt-2 text-center text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h3 className="mt-4 text-center text-lg font-medium text-gray-900 dark:text-gray-100">
               {collection.title}
             </h3>
           </div>
@@ -118,7 +105,7 @@ export default function Photography() {
                 <ChevronLeft className="w-8 h-8" />
               </button>
               
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full px-16">
                 <Image
                   src={selectedCollection.images[currentImageIndex]}
                   alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}

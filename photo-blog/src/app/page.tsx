@@ -34,15 +34,14 @@ export default function Home() {
   }, [images.length]);
 
   return (
-    <div className="space-y-8">
-      {/* Title */}
+    <div className="pl-8 pr-8 space-y-8">
       <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
         Bowen Hou
       </h1>
       
-      {/* Slideshow container with 4:3 aspect ratio and 30vh minimum height */}
-      <div className="relative w-full min-h-[30vh]">
-        <div className="relative w-full aspect-[4/3] bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden">
+      {/* Slideshow container */}
+      <div className="w-full max-w-[1200px] mx-auto">
+        <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden">
           {images.length > 0 && (
             <Image
               src={images[currentImageIndex]}
@@ -71,8 +70,8 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Bio section */}
-      <div className="prose dark:prose-invert max-w-none">
+      {/* Bio section - aligned with the slideshow width */}
+      <div className="max-w-[1200px] mx-auto prose dark:prose-invert">
         <div className="mt-4 text-gray-800 dark:text-gray-200">
           <p>
             This is your bio section. You can write about yourself, your interests,

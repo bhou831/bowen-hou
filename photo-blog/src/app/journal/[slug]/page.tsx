@@ -1,34 +1,53 @@
-import { getPostBySlug, getLocalPostBySlug } from '@/lib/blog-utils';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
-interface Props {
-  params: {
-    slug: string;
+// Function to get a single post
+async function getPost(fileName: string) {
+  const fullPath = path.join(process.cwd(), 'src/content/journal', `${fileName}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  // Convert markdown to HTML string
+  const processedContent = await remark().use(html).process(content);
+  const contentHtml = processedContent.toString();
+
+  return {
+    title: data.title,
+    date: data.date,
+    contentHtml,
   };
 }
 
-export default async function JournalPost({ params }: Props) {
-  const post = process.env.NODE_ENV === 'development'
-    ? await getLocalPostBySlug(params.slug)
-    : await getPostBySlug(params.slug);
+// Generate static params for pre-rendering
+export async function generateStaticParams() {
+  const postsDirectory = path.join(process.cwd(), 'src/content/journal');
+  const fileNames = fs.readdirSync(postsDirectory);
 
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+  return fileNames.map((fileName) => ({
+    slug: fileName.replace(/\.md$/, ''),
+  }));
+}
+
+export default async function JournalPost({ params }: { params: { slug: string } }) {
+  const { slug } = await params; // Ensure params is awaited before using its properties
+  const post = await getPost(slug);
 
   return (
-    <article className="max-w-2xl mx-auto prose dark:prose-invert">
-      <h1>{post.title}</h1>
-      <time className="text-sm text-gray-600 dark:text-gray-400">
-        {new Date(post.date).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </time>
-      <div className="mt-8">
-        <MDXRemote source={post.content} />
-      </div>
-    </article>
+    <div className="w-full pl-8 pr-8">
+      <article className="w-full max-w-3xl">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{post.title}</h1>
+        <time className="text-sm text-gray-600 dark:text-gray-400 block mt-2 mb-8">
+          {new Date(post.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+        <div className="prose dark:prose-invert" dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      </article>
+    </div>
   );
 }
