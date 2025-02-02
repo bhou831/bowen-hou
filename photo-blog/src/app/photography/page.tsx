@@ -2,8 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Dialog } from '@/components/ui/dialog';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface Collection {
   id: string;
@@ -18,7 +22,6 @@ export default function Photography() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  // This would come from your S3 bucket or content management system
   const collections: Collection[] = [
     {
       id: '1',
@@ -27,7 +30,6 @@ export default function Photography() {
       coverImage: '/collections/mountains/cover.jpg',
       images: ['/collections/mountains/1.jpg', '/collections/mountains/2.jpg']
     },
-    // Add more collections here
   ];
 
   const handleCollectionClick = (collection: Collection) => {
@@ -61,16 +63,27 @@ export default function Photography() {
             className="cursor-pointer group"
             onClick={() => handleCollectionClick(collection)}
           >
-            <div className="relative aspect-[4/3] bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-102">
-              {/* Wooden frame effect */}
-              <div className="absolute inset-0 border-[20px] border-[#8B4513] rounded-lg pointer-events-none" />
+            <div className="relative aspect-[4/3] flex items-center justify-center">
+              {/* Frame container */}
               <div className="relative w-full h-full">
+                {/* Wooden frame image */}
                 <Image
-                  src={collection.coverImage}
-                  alt={collection.title}
+                  src="/images/frame.png"
+                  alt="Wooden frame"
                   fill
-                  className="object-cover rounded-sm"
+                  className="object-contain"
                 />
+                {/* Photo container - adjust padding based on your frame image */}
+                <div className="absolute inset-[10%] flex items-center justify-center">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={collection.coverImage}
+                      alt={collection.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <h3 className="mt-2 text-center text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -82,35 +95,44 @@ export default function Photography() {
 
       {/* Lightbox */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center">
-          <button
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-4 right-4 text-white"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          
-          {selectedCollection && (
-            <>
+        {selectedCollection && (
+          <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full bg-black/95 border-none p-0">
+            <DialogTitle className="sr-only">
+              {selectedCollection.title} - Image {currentImageIndex + 1} of {selectedCollection.images.length}
+            </DialogTitle>
+            
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-4 right-4 text-white z-50 hover:text-gray-300"
+            >
+              <X className="w-6 h-6" />
+              <span className="sr-only">Close gallery</span>
+            </button>
+            
+            <div className="relative h-[90vh] flex items-center justify-center">
               <button
                 onClick={previousImage}
-                className="absolute left-4 text-white"
+                className="absolute left-4 text-white hover:text-gray-300"
+                aria-label="Previous image"
               >
                 <ChevronLeft className="w-8 h-8" />
               </button>
               
-              <div className="relative w-full max-w-4xl h-[80vh]">
+              <div className="relative w-full h-full">
                 <Image
                   src={selectedCollection.images[currentImageIndex]}
-                  alt={selectedCollection.title}
+                  alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
                   fill
                   className="object-contain"
+                  quality={100}
+                  priority
                 />
               </div>
               
               <button
                 onClick={nextImage}
-                className="absolute right-4 text-white"
+                className="absolute right-4 text-white hover:text-gray-300"
+                aria-label="Next image"
               >
                 <ChevronRight className="w-8 h-8" />
               </button>
@@ -121,9 +143,9 @@ export default function Photography() {
                   {selectedCollection.description}
                 </p>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </DialogContent>
+        )}
       </Dialog>
     </div>
   );
