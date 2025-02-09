@@ -50,6 +50,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       excerpt: data.excerpt,
     };
   } catch (error) {
+    console.error(`Error fetching post with slug ${slug}:`, error);
     return null;
   }
 }

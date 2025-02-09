@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { X } from 'lucide-react';
 import albums from '@/content/music/albums.json';
 
 interface Album {
