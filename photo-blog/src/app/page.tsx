@@ -69,7 +69,7 @@ export default function Home() {
               <p>This is Bowen Hou, I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in civil engineering and engineering and tech management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering at <a href="https://lafayette.edu">Lafayette College</a>.
               </p>
               <p>I love photography and music. it This site is an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and update new stuff regularly.</p>
-              <p>Why build this website? I used to post photos on instagram, recent grid design update <a href="https://about.instagram.com/brand/layout">href: https://about.instagram.com/brand/layout</a> and their focus towards engagement based recommendation makes to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer control of content layout for me. Hope you enjoy this page and be a regular visitor.</p>
+              <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer control of content layout for me. Hope you enjoy this page and be a regular visitor.</p>
             </div>
           </div>
         </div>
