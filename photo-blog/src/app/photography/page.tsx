@@ -40,13 +40,13 @@ export default function Photography() {
   };
 
   return (
-    <div className="w-full">
-      {/* Grid container with larger frames */}
-      <div className="grid grid-cols-3 gap-x-8 gap-y-12">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      {/* Responsive grid container */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {collections.map((collection) => (
           <div 
             key={collection.id}
-            className="cursor-pointer group"
+            className="cursor-pointer group mx-auto w-full max-w-lg"
             onClick={() => handleCollectionClick(collection)}
           >
             {/* Frame container with fixed aspect ratio */}
@@ -60,8 +60,8 @@ export default function Photography() {
                   className="object-contain"
                 />
                 {/* Photo container with padding for frame */}
-                <div className="absolute inset-[12%] flex items-center justify-center">
-                  <div className="relative w-[80%] h-[80%] mx-auto">
+                <div className="absolute inset-[8%] flex items-center justify-center">
+                  <div className="relative w-[90%] h-[90%] mx-auto">
                     <Image
                       src={collection.coverImage}
                       alt={collection.title}
@@ -124,9 +124,9 @@ export default function Photography() {
                 <ChevronRight className="w-8 h-8" />
               </button>
 
-              <div className="absolute bottom-4 left-0 right-0 text-center text-white">
+              <div className="absolute bottom-4 left-0 right-0 text-center text-white px-4">
                 <h3 className="text-xl font-medium">{selectedCollection.title}</h3>
-                <p className="mt-2 max-w-2xl mx-auto">
+                <p className="mt-2 max-w-2xl mx-auto text-sm sm:text-base">
                   {selectedCollection.description}
                 </p>
               </div>
