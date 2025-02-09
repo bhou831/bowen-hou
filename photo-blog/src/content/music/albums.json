@@ -1,15 +1,13 @@
 {
     "albums": [
       {
-        "id": "album1",
-        "title": "Album Name",
-        "artist": "Artist Name",
+        "id": "album-02-08",
+        "title": "Freak Smile",
+        "artist": "Spank Happy",
         "coverImage": "/images/albums/album1/cover.jpg",
-        "description": "Why I love this album...",
+        "description": "One of the best shibuya-kei (渋谷系) albums from the 90s. Unfortunately, it's not available on most music streaming platforms. The album expertly blends Japanese Jazz Fusion, orchestral elements, electronics, R&B, and even touches of new age and experimental sounds, carefully layered together. It somehow reminds me of Sheena Ringo's 'Kalk Samen Chesnut Flower' - sharing the same level of richness and complexity, but choreographed in a beautiful way.",
         "links": {
-          "spotify": "https://open.spotify.com/album/...",
-          "appleMusic": "https://music.apple.com/album/...",
-          "youtube": "https://youtube.com/playlist/..."
+          "youtube": "https://youtu.be/IkldzmILY48?si=QevxulggdMCjS-2X"
         }
       }
     ]

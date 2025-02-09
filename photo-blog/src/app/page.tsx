@@ -34,20 +34,17 @@ export default function Home() {
   }, [images.length]);
 
   return (
-    <div className="pl-8 pr-8 space-y-8">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+  <div className="pl-8 pr-8 space-y-8">
+    <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
         Bowen Hou
-      </h1>
+    </h1>
       
       {/* Slideshow container */}
-      <div className="w-full max-w-[1200px] mx-auto">
-        <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden">
+    <div className="w-full max-w-[1200px] mx-auto">
+      <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800">
           {images.length > 0 && (
-            <Image
-              src={images[currentImageIndex]}
-              alt={`Slideshow image ${currentImageIndex + 1}`}
-              fill
-              className="object-cover transition-opacity duration-500"
+        <Image src={images[currentImageIndex]} alt={`Slideshow image ${currentImageIndex + 1}`}
+              fill className="object-cover transition-opacity duration-500"
               priority
             />
           )}
@@ -55,30 +52,26 @@ export default function Home() {
           {/* Navigation dots */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full ${
+          <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2 h-2 rounded-full ${
                   index === currentImageIndex 
                     ? 'bg-white' 
                     : 'bg-white/50'
-                }`}
-                aria-label={`Go to image ${index + 1}`}
+                }`} aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>
-        </div>
-      </div>
+</div>
+</div>
       
       {/* Bio section - aligned with the slideshow width */}
       <div className="max-w-[1200px] mx-auto prose dark:prose-invert">
-        <div className="mt-4 text-gray-800 dark:text-gray-200">
-          <p>
-            This is your bio section. You can write about yourself, your interests,
-            and your background here.
-          </p>
+            <div className="mt-4 text-gray-800 dark:text-gray-200">
+              <p>This is Bowen Hou, I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in civil engineering and engineering and tech management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering at <a href="https://lafayette.edu">Lafayette College</a>.
+              </p>
+              <p>I love photography and music. it This site is an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and update new stuff regularly.</p>
+              <p>Why build this website? I used to post photos on instagram, recent grid design update <a href="https://about.instagram.com/brand/layout">href: https://about.instagram.com/brand/layout</a> and their focus towards engagement based recommendation makes to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer control of content layout for me. Hope you enjoy this page and be a regular visitor.</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
   );
 }
