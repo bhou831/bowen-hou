@@ -100,7 +100,7 @@ export default function Photography() {
                     fill 
                     className="object-contain" 
                     quality={100}
-                    priority
+                    loading="lazy"
                   />
                 </div>
 
