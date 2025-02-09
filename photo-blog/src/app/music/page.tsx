@@ -57,7 +57,86 @@ export default function Music() {
       <Dialog open={!!selectedAlbum} onOpenChange={() => setSelectedAlbum(null)}>
         {selectedAlbum && (
           <DialogContent className="max-w-2xl bg-white dark:bg-gray-900">
-            {/* Rest of the modal code remains the same */}
+            <DialogTitle className="sr-only">
+              {selectedAlbum.title} by {selectedAlbum.artist}
+            </DialogTitle>
+            
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Album Cover */}
+              <div className="relative w-full md:w-1/2 aspect-square">
+                <Image
+                  src={selectedAlbum.coverImage}
+                  alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+
+              {/* Album Details */}
+              <div className="flex flex-col w-full md:w-1/2">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {selectedAlbum.title}
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-400 mt-1">
+                  {selectedAlbum.artist}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mt-4">
+                  {selectedAlbum.description}
+                </p>
+
+                {/* Streaming Links */}
+                <div className="flex gap-4 mt-6">
+                  {selectedAlbum.links.spotify && (
+                    <a
+                      href={selectedAlbum.links.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center"
+                    >
+                      <Image
+                        src="/images/icons/spotify.png"
+                        alt="Listen on Spotify"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-80"
+                      />
+                    </a>
+                  )}
+                  {selectedAlbum.links.appleMusic && (
+                    <a
+                      href={selectedAlbum.links.appleMusic}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center"
+                    >
+                      <Image
+                        src="/images/icons/apple-music.png"
+                        alt="Listen on Apple Music"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-80"
+                      />
+                    </a>
+                  )}
+                  {selectedAlbum.links.youtube && (
+                    <a
+                      href={selectedAlbum.links.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center"
+                    >
+                      <Image
+                        src="/images/icons/youtube.png"
+                        alt="Watch on YouTube"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-80"
+                      />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
           </DialogContent>
         )}
       </Dialog>
