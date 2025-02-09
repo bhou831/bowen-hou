@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogHeader } from '@/components/ui/dialog';
 import albums from '@/content/music/albums.json';
 
 interface Album {
@@ -55,84 +55,85 @@ export default function Music() {
       {/* Modal */}
       <Dialog open={!!selectedAlbum} onOpenChange={() => setSelectedAlbum(null)}>
         {selectedAlbum && (
-          <DialogContent className="max-w-2xl bg-white dark:bg-gray-900">
-            <DialogTitle className="sr-only">
-              {selectedAlbum.title} by {selectedAlbum.artist}
-            </DialogTitle>
+          <DialogContent className="max-w-2xl bg-white dark:bg-gray-900 max-h-[90vh] overflow-hidden">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {selectedAlbum.title}
+              </DialogTitle>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                {selectedAlbum.artist}
+              </p>
+            </DialogHeader>
             
-            <div className="flex flex-col md:flex-row gap-6">
-              {/* Album Cover */}
-              <div className="relative w-full md:w-1/2 aspect-square">
-                <Image
-                  src={selectedAlbum.coverImage}
-                  alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
-                  fill
-                  className="object-cover rounded-lg"
-                />
-              </div>
+            <div className="overflow-y-auto max-h-[calc(90vh-8rem)] pr-2">
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Album Cover */}
+                <div className="relative w-full md:w-1/2 aspect-square shrink-0">
+                  <Image
+                    src={selectedAlbum.coverImage}
+                    alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
 
-              {/* Album Details */}
-              <div className="flex flex-col w-full md:w-1/2">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {selectedAlbum.title}
-                </h2>
-                <p className="text-lg text-gray-600 dark:text-gray-400 mt-1">
-                  {selectedAlbum.artist}
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mt-4">
-                  {selectedAlbum.description}
-                </p>
+                {/* Album Details */}
+                <div className="flex flex-col w-full md:w-1/2">
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {selectedAlbum.description}
+                  </p>
 
-                {/* Streaming Links */}
-                <div className="flex gap-4 mt-6">
-                  {selectedAlbum.links.spotify && (
-                    <a
-                      href={selectedAlbum.links.spotify}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center"
-                    >
-                      <Image
-                        src="/images/icons/spotify.png"
-                        alt="Listen on Spotify"
-                        width={32}
-                        height={32}
-                        className="transition-opacity hover:opacity-80"
-                      />
-                    </a>
-                  )}
-                  {selectedAlbum.links.appleMusic && (
-                    <a
-                      href={selectedAlbum.links.appleMusic}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center"
-                    >
-                      <Image
-                        src="/images/icons/apple-music.png"
-                        alt="Listen on Apple Music"
-                        width={32}
-                        height={32}
-                        className="transition-opacity hover:opacity-80"
-                      />
-                    </a>
-                  )}
-                  {selectedAlbum.links.youtube && (
-                    <a
-                      href={selectedAlbum.links.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center"
-                    >
-                      <Image
-                        src="/images/icons/youtube.png"
-                        alt="Watch on YouTube"
-                        width={32}
-                        height={32}
-                        className="transition-opacity hover:opacity-80"
-                      />
-                    </a>
-                  )}
+                  {/* Streaming Links */}
+                  <div className="flex gap-4 mt-6">
+                    {selectedAlbum.links.spotify && (
+                      <a
+                        href={selectedAlbum.links.spotify}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center"
+                      >
+                        <Image
+                          src="/images/icons/spotify.png"
+                          alt="Listen on Spotify"
+                          width={32}
+                          height={32}
+                          className="transition-opacity hover:opacity-80"
+                        />
+                      </a>
+                    )}
+                    {selectedAlbum.links.appleMusic && (
+                      <a
+                        href={selectedAlbum.links.appleMusic}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center"
+                      >
+                        <Image
+                          src="/images/icons/apple-music.png"
+                          alt="Listen on Apple Music"
+                          width={32}
+                          height={32}
+                          className="transition-opacity hover:opacity-80"
+                        />
+                      </a>
+                    )}
+                    {selectedAlbum.links.youtube && (
+                      <a
+                        href={selectedAlbum.links.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center"
+                      >
+                        <Image
+                          src="/images/icons/youtube.png"
+                          alt="Watch on YouTube"
+                          width={32}
+                          height={32}
+                          className="transition-opacity hover:opacity-80"
+                        />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
