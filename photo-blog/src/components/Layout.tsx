@@ -25,9 +25,9 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Navigation bar with items aligned left */}
       <nav className="w-full border-b border-gray-200 dark:border-gray-800">
-        <div className="pl-8 pr-8 flex justify-between items-center h-16 max-w-full">
+        <div className="pl-4 pr-4 md:pl-8 md:pr-8 flex justify-between items-center h-16 max-w-full">
           {/* Left-aligned navigation items */}
-          <div className="flex space-x-5">
+          <div className="flex space-x-4 md:space-x-5">
             <Link href="/" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
               Home
             </Link>
@@ -45,7 +45,7 @@ export default function Layout({ children }: LayoutProps) {
           {/* Right-aligned theme toggle */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800"
+            className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 ml-2 md:ml-0"
           >
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Main content */}
-      <main className="w-full pl-8 pr-8 py-8">
+      <main className="w-full pl-4 pr-4 md:pl-8 md:pr-8 py-8">
         {children}
       </main>
     </div>
