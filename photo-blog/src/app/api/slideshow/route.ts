@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// Add these two lines for static export
+export const dynamic = 'force-static'
+export const revalidate = false
+
 export async function GET() {
   try {
     const slideshowDir = path.join(process.cwd(), 'public/images/slideshow');

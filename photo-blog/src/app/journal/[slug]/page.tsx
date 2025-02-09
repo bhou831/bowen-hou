@@ -4,6 +4,9 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
+// Define params type as a Promise
+type ParamsType = Promise<{ slug: string }>;
+
 // Function to get a single post
 async function getPost(fileName: string) {
   const fullPath = path.join(process.cwd(), 'src/content/journal', `${fileName}.md`);
@@ -31,8 +34,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function JournalPost({ params }: { params: { slug: string } }) {
-  const { slug } = await params; // Ensure params is awaited before using its properties
+export default async function JournalPost({ params }: { params: ParamsType }) {
+  const { slug } = await params;
   const post = await getPost(slug);
 
   return (
