@@ -27,7 +27,7 @@ export default function Layout({ children }: LayoutProps) {
       <nav className="w-full border-b border-gray-200 dark:border-gray-800">
         <div className="pl-8 pr-8 flex justify-between items-center h-16 max-w-full">
           {/* Left-aligned navigation items */}
-          <div className="flex space-x-6">
+          <div className="flex space-x-5">
             <Link href="/" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
               Home
             </Link>
