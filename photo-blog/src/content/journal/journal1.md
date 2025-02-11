@@ -1,7 +1,7 @@
 ---
-title: My First Post
+title: Blog Post 01
 date: '2024-02-01'
-excerpt: nothig here 
+excerpt: I will post something eventually
 ---
 
-# Todo
+## Todo
