@@ -24,7 +24,7 @@ export default function Music() {
   return (
     <div className="w-full pl-8 pr-8">
       {/* Responsive grid container */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
         {albums.albums.map((album) => (
           <div 
             key={album.id}
