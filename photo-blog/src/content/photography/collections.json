@@ -18,6 +18,23 @@
           "/images/collections/svid/svidec_10.JPG",
           "/images/collections/svid/svidec_11.JPG"
         ]
+      },
+      {
+        "id": "asbury-park",
+        "title": "Sunrise in Asbury Park",
+        "description": "sunrise with snow-covered beach",
+        "coverImage": "/images/collections/asbury_park/cover.jpg",
+        "images": [
+          "/images/collections/asbury_park/asbury_park_1.JPG",
+          "/images/collections/asbury_park/asbury_park_2.JPG",
+          "/images/collections/asbury_park/asbury_park_3.JPG",
+          "/images/collections/asbury_park/asbury_park_4.JPG",
+          "/images/collections/asbury_park/asbury_park_5.JPG",
+          "/images/collections/asbury_park/asbury_park_6.JPG",
+          "/images/collections/asbury_park/asbury_park_7.JPG",
+          "/images/collections/asbury_park/asbury_park_8.JPG",
+          "/images/collections/asbury_park/asbury_park_9.JPG"
+        ]
       }
     ]
   }
