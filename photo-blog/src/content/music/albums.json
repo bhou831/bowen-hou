@@ -1,13 +1,25 @@
 {
     "albums": [
       {
-        "id": "album-02-08",
+        "id": "album-02-08-25",
         "title": "Freak Smile",
         "artist": "Spank Happy",
-        "coverImage": "/images/albums/album1/cover.jpg",
+        "coverImage": "/images/albums/sh-freaksmile/cover.jpg",
         "description": "One of the best shibuya-kei (渋谷系) albums from the 90s. Unfortunately, it's not available on most music streaming platforms. The album expertly blends Japanese Jazz Fusion, orchestral elements, electronics, R&B, and even touches of new age and experimental sounds, carefully layered together. It somehow reminds me of Sheena Ringo's 'Kalk Samen Chesnut Flower' - sharing the same level of richness and complexity, but choreographed in a beautiful way.",
         "links": {
           "youtube": "https://youtu.be/IkldzmILY48?si=QevxulggdMCjS-2X"
+        }
+      },
+      {
+        "id": "album-02-10-25",
+        "title": "Beta",
+        "artist": "Peter Cat Recording Co.",
+        "coverImage": "/images/albums/ppc-beta/cover.jpg",
+        "description": "I stumbled upon this album while casually browsing Rate Your Music, but it really clicked with me on my second listen, a couple of months after the first. It’s a rich, indie, and playful album, blending R&B chords with deep synth bass. Lots of surprises when I played it all the way through. It is similar to some of Honne’s early songs, just good vibes and great melodies. My favorite tracks are People Never Change, 21C, Black and White, and Control Room.",
+        "links": {
+          "youtube": "https://youtu.be/b6r4AP4TKtQ?si=hqf7VOJECLFRtRgV",
+          "appleMusic": "https://music.apple.com/us/album/beta/1750922465",
+          "spotify": "https://open.spotify.com/album/5RyDQJIkTOl0QMeFZz8UGe"
         }
       }
     ]
