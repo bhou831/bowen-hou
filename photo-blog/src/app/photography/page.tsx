@@ -47,12 +47,12 @@ export default function Photography() {
     <div key={collection.id} className="cursor-pointer group mx-auto w-full max-w-lg" onClick={() => handleCollectionClick(collection)}
           >
             {/* Simple container with aspect ratio and shadow */}
-            <div className="relative w-full aspect-[4/3] shadow-lg hover:shadow-xl transition-all duration-300 border border-black/20 dark:border-white/20 rounded-lg overflow-hidden">
+            <div className="relative w-full aspect-[4/3] shadow-lg hover:shadow-xl transition-all duration-300 border border-black/20 dark:border-white/20 rounded-md overflow-hidden">
       <Image src={collection.coverImage} alt={collection.title}
                 fill className="object-cover" quality={100}
               />
 </div>
-<h3 className="mt-4 text-center text-lg text-gray-900 dark:text-gray-100">
+<h3 className="mt-2 text-center text-md text-gray-700 dark:text-gray-200">
               {collection.title}
       </h3>
     </div>
