@@ -34,17 +34,20 @@ export default function Home() {
   }, [images.length]);
 
   return (
-  <div className="pl-8 pr-8 space-y-8">
-    <h1 className="text-2xl text-gray-900 dark:text-gray-100">
+    <div className="px-2 sm:px-8 space-y-8">
+      <h1 className="text-2xl text-gray-900 dark:text-gray-100">
         Bowen Hou
-    </h1>
+      </h1>
       
       {/* Slideshow container */}
-    <div className="w-full max-w-[1000px] mx-auto">
-      <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800">
+      <div className="w-full max-w-[1000px] mx-auto">
+        <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800">
           {images.length > 0 && (
-        <Image src={images[currentImageIndex]} alt={`Slideshow image ${currentImageIndex + 1}`}
-              fill className="object-cover transition-opacity duration-500"
+            <Image 
+              src={images[currentImageIndex]} 
+              alt={`Slideshow image ${currentImageIndex + 1}`}
+              fill 
+              className="object-cover transition-opacity duration-500"
               priority
             />
           )}
@@ -52,26 +55,29 @@ export default function Home() {
           {/* Navigation dots */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
-          <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2 h-2 rounded-full ${
+              <button 
+                key={index} 
+                onClick={() => setCurrentImageIndex(index)} 
+                className={`w-2 h-2 rounded-full ${
                   index === currentImageIndex 
                     ? 'bg-white' 
                     : 'bg-white/50'
-                }`} aria-label={`Go to image ${index + 1}`}
+                }`}
+                aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>
-</div>
-</div>
+        </div>
+      </div>
       
       {/* Bio section - aligned with the slideshow width */}
       <div className="max-w-[1000px] mx-auto prose dark:prose-invert">
-            <div className="mt-4 text-gray-800 dark:text-gray-200">
-              <p>I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in Civil Engineering and Engineering & Tech Management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering from <a href="https://ce.lafayette.edu">Lafayette College</a>.
-              </p>
-              <p>This site serves as an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and upload new content regularly.</p>
-              <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes me to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer creator control over content layout and arrangement. Hope you enjoy this page and be a regular visitor.</p>
-            </div>
-          </div>
+        <div className="mt-4 text-gray-800 dark:text-gray-200">
+          <p>I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in Civil Engineering and Engineering & Tech Management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering from <a href="https://ce.lafayette.edu">Lafayette College</a>.</p>
+          <p>This site serves as an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and upload new content regularly.</p>
+          <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes me to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer creator control over content layout and arrangement. Hope you enjoy this page and be a regular visitor.</p>
         </div>
+      </div>
+    </div>
   );
 }
