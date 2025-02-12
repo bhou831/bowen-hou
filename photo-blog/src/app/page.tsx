@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
   <div className="pl-8 pr-8 space-y-8">
-    <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+    <h1 className="text-4xl text-gray-900 dark:text-gray-100">
         Bowen Hou
     </h1>
       
@@ -64,7 +64,7 @@ export default function Home() {
 </div>
       
       {/* Bio section - aligned with the slideshow width */}
-      <div className="max-w-[1200px] mx-auto prose dark:prose-invert">
+      <div className="max-w-[1000px] mx-auto prose dark:prose-invert">
             <div className="mt-4 text-gray-800 dark:text-gray-200">
               <p>I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in Civil Engineering and Engineering & Tech Management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering from <a href="https://ce.lafayette.edu">Lafayette College</a>.
               </p>
