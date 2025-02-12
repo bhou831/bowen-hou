@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
   <div className="pl-8 pr-8 space-y-8">
-    <h1 className="text-4xl text-gray-900 dark:text-gray-100">
+    <h1 className="text-2xl text-gray-900 dark:text-gray-100">
         Bowen Hou
     </h1>
       

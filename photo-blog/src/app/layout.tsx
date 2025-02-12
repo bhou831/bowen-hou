@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Spectral } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Layout from '@/components/Layout';
 
-const inter = Inter({ subsets: ['latin'] });
+const spectral = Spectral({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['200', '300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-spectral',
+});
 
 export const metadata: Metadata = {
   title: 'Bowen Hou',
@@ -17,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning className={spectral.variable}>
+      <body className={spectral.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
