@@ -66,7 +66,7 @@ export default function Home() {
       {/* Bio section - aligned with the slideshow width */}
       <div className="max-w-[1200px] mx-auto prose dark:prose-invert">
             <div className="mt-4 text-gray-800 dark:text-gray-200">
-              <p>This is Bowen Hou, I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in civil engineering and engineering and tech management at <a href="https://cmu.edu">carnegie mellon</a> and a bachlars degree in civil engineering from <a href="https://lafayette.edu">lafayette college</a>.
+              <p>This is Bowen Hou, I am an software engineer for <a href="https://autodesk.com">autodesk</a> and I work on data quality assurance. I had a masters degree in civil engineering and engineering and tech management at <a href="https://cmu.edu">carnegie mellon</a> and a bachlars degree in civil engineering from <a href="https://lafayette.edu">lafayette college</a>.
               </p>
               <p>I love photography and music. This site is an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and update new stuff regularly.</p>
               <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes me to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer control of content layout for me. Hope you enjoy this page and be a regular visitor.</p>

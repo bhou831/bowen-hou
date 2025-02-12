@@ -25,8 +25,8 @@
         "description": "sunrise with snow-covered beach",
         "coverImage": "/images/collections/asbury_park/cover.jpg",
         "images": [
-          "/images/collections/asbury_park/asbury_park_1.JPG",
           "/images/collections/asbury_park/asbury_park_2.JPG",
+          "/images/collections/asbury_park/asbury_park_1.JPG",
           "/images/collections/asbury_park/asbury_park_3.JPG",
           "/images/collections/asbury_park/asbury_park_4.JPG",
           "/images/collections/asbury_park/asbury_park_5.JPG",
@@ -34,6 +34,25 @@
           "/images/collections/asbury_park/asbury_park_7.JPG",
           "/images/collections/asbury_park/asbury_park_8.JPG",
           "/images/collections/asbury_park/asbury_park_9.JPG"
+        ]
+      },
+      {
+        "id": "yiliang-railway",
+        "title": "Yiliang Railway Station",
+        "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
+        "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
+        "images": [
+          "/images/collections/yiliang_01_25/yiliang0125_7.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_2.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_3.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_4.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_5.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_6.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_1.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_8.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_9.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_10.JPG",
+          "/images/collections/yiliang_01_25/yiliang0125_11.JPG"
         ]
       }
     ]
