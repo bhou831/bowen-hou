@@ -69,7 +69,7 @@ export default function Home() {
               <p>I am an software engineer for <a href="https://autodesk.com">Autodesk</a> and I work on data quality assurance. I had a masters degree in Civil Engineering and Engineering & Tech Management at <a href="https://cmu.edu">Carnegie Mellon</a> and a bachlars degree in Civil Engineering from <a href="https://ce.lafayette.edu">Lafayette College</a>.
               </p>
               <p>This site serves as an archive of my photos and music recommendations, sometimes random blog posts. I will maintain this website and upload new content regularly.</p>
-              <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes me to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer creator's control over content layout and arrangement. Hope you enjoy this page and be a regular visitor.</p>
+              <p>Why build this website? I used to post photos on instagram, recent <a href="https://about.instagram.com/brand/layout">grid design update</a> and their focus towards engagement based recommendation makes me to think this is no longer a serious platform for photo sharing, and other platforms like <a href="https://500px.com/">500px</a> still does not provide a finer creator control over content layout and arrangement. Hope you enjoy this page and be a regular visitor.</p>
             </div>
           </div>
         </div>
