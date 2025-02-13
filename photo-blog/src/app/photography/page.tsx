@@ -116,7 +116,7 @@ export default function Photography() {
               <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col justify-end">
                 <div className="text-white">
                   <h3 className="text-xl font-medium mb-4">{selectedCollection.title}</h3>
-                  <p className="text-sm leading-relaxed">
+                  <p className="text-lg leading-relaxed">
                     {selectedCollection.description}
                   </p>
                   <p className="text-sm mt-4 text-gray-400">

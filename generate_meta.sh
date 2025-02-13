@@ -61,7 +61,7 @@ for file in *.jpg *.jpeg *.JPG *.JPEG; do
     new_filename="${PREFIX_NAME}_${counter}.${ext}"
     
     # Compress the image with quality 7 and save with new name
-    ffmpeg -i "$file" -vf "scale=5000:-1" "$new_filename"
+    ffmpeg -i "$file" -vf "scale=4500:-1" "$new_filename"
     
     # Remove the original file
     rm "$file"

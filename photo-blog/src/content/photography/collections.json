@@ -1,6 +1,33 @@
 {
     "collections": [
       {
+        "id": "tre_cime",
+        "title": "Enter the Tre Cime",
+        "description": "Hands down the best hike of 2024. Even though the trail was completely covered in snow, we enjoyed every moment of it. The Dolomites are truly one of the most stunning parts of the Alps.",
+        "coverImage": "/images/collections/tre_cime/cover.jpg",
+        "images": [
+          "/images/collections/tre_cime/tre_cime_11.jpg",
+          "/images/collections/tre_cime/tre_cime_10.JPG",
+          "/images/collections/tre_cime/tre_cime_1.JPG",
+          "/images/collections/tre_cime/tre_cime_12.JPG",
+          "/images/collections/tre_cime/tre_cime_13.JPG",
+          "/images/collections/tre_cime/tre_cime_14.JPG",
+          "/images/collections/tre_cime/tre_cime_15.JPG",
+          "/images/collections/tre_cime/tre_cime_16.JPG",
+          "/images/collections/tre_cime/tre_cime_17.JPG",
+          "/images/collections/tre_cime/tre_cime_18.JPG",
+          "/images/collections/tre_cime/tre_cime_19.JPG",
+          "/images/collections/tre_cime/tre_cime_2.JPG",
+          "/images/collections/tre_cime/tre_cime_3.JPG",
+          "/images/collections/tre_cime/tre_cime_4.JPG",
+          "/images/collections/tre_cime/tre_cime_5.JPG",
+          "/images/collections/tre_cime/tre_cime_6.JPG",
+          "/images/collections/tre_cime/tre_cime_7.JPG",
+          "/images/collections/tre_cime/tre_cime_8.JPG",
+          "/images/collections/tre_cime/tre_cime_9.JPG"
+        ]
+      },
+      {
         "id": "summer-vibes-in-dec",
         "title": "Summer Vibes in December",
         "description": "I’ve been working on this project for a month. It’s easy to take summer-like photos during the actual summer season, but December is the farthest month from summer especially in the Northeast, where Christmas lights and cold air strip away any remaining traces of warmth. How challenging is it to find summer elements during this time of year? \nIn this series, I tried to create photos with a summer vibe in the cold month of December, and make them indistinguishable from actual summer scenes, without any context. I hope you enjoy this collection.",
@@ -20,20 +47,148 @@
         ]
       },
       {
-        "id": "asbury-park",
-        "title": "Sunrise in Asbury Park",
-        "description": "sunrise with snow-covered beach",
-        "coverImage": "/images/collections/asbury_park/cover.jpg",
+        "id": "hk2025",
+        "title": "Urbanism of Hong Kong Pt.2",
+        "description": "Jan 2024 Another layover day in Hong Kong—spent about five hours between flights, took a brief walk through Central (中環). Despite recent economic hiccups and political changes, HK remains incredibly walkable, clean, diverse, and well-organized.",
+        "coverImage": "/images/collections/hk2025/cover.jpg",
         "images": [
-          "/images/collections/asbury_park/asbury_park_2.JPG",
-          "/images/collections/asbury_park/asbury_park_1.JPG",
-          "/images/collections/asbury_park/asbury_park_3.JPG",
-          "/images/collections/asbury_park/asbury_park_4.JPG",
-          "/images/collections/asbury_park/asbury_park_5.JPG",
-          "/images/collections/asbury_park/asbury_park_6.JPG",
-          "/images/collections/asbury_park/asbury_park_7.JPG",
-          "/images/collections/asbury_park/asbury_park_8.JPG",
-          "/images/collections/asbury_park/asbury_park_9.JPG"
+          "/images/collections/hk2025/hk_2025_1.JPG",
+          "/images/collections/hk2025/hk_2025_10.JPG",
+          "/images/collections/hk2025/hk_2025_11.JPG",
+          "/images/collections/hk2025/hk_2025_2.JPG",
+          "/images/collections/hk2025/hk_2025_3.JPG",
+          "/images/collections/hk2025/hk_2025_4.JPG",
+          "/images/collections/hk2025/hk_2025_5.JPG",
+          "/images/collections/hk2025/hk_2025_6.JPG",
+          "/images/collections/hk2025/hk_2025_7.JPG",
+          "/images/collections/hk2025/hk_2025_8.JPG",
+          "/images/collections/hk2025/hk_2025_9.JPG"
+        ]
+      },
+      {
+        "id": "hk2022",
+        "title": "Urbanism of HongKong Pt.1",
+        "description": "Dec 2022. First time back home after three years of COVID travel restrictions. Because of the jetlag, I woke up early, had a feast at the hotel buffet, and took a walk around North Point (北角) on Hong Kong Island. Most of my photos were taken at North Point Ferry Pier—a quiet, almost anime-like spot with layers of beams and walls creating beautiful natural frames for the ocean view.",
+        "coverImage": "/images/collections/hk2022/cover.jpg",
+        "images": [
+          "/images/collections/hk2022/hk_2022_3.JPG",
+          "/images/collections/hk2022/hk_2022_10.JPG",
+          "/images/collections/hk2022/hk_2022_11.JPG",
+          "/images/collections/hk2022/hk_2022_12.JPG",
+          "/images/collections/hk2022/hk_2022_13.JPG",
+          "/images/collections/hk2022/hk_2022_14.JPG",
+          "/images/collections/hk2022/hk_2022_15.JPG",
+          "/images/collections/hk2022/hk_2022_16.JPG",
+          "/images/collections/hk2022/hk_2022_2.JPG",
+          "/images/collections/hk2022/hk_2022_1.JPG",
+          "/images/collections/hk2022/hk_2022_4.JPG",
+          "/images/collections/hk2022/hk_2022_5.JPG",
+          "/images/collections/hk2022/hk_2022_6.JPG",
+          "/images/collections/hk2022/hk_2022_7.JPG",
+          "/images/collections/hk2022/hk_2022_8.JPG",
+          "/images/collections/hk2022/hk_2022_9.JPG"
+        ]
+      },
+      {
+        "id": "siusi2024",
+        "title": "Seis am Schlern",
+        "description": "This is a more relaxed part of the Dolomites, where everything is easily accessible by cable car. The mountain weather is unpredictable, much like what I experienced in Yunnan. I hiked the mountain behind the hotel in the morning, and it was completely fogged up for hours. But at the last moment, the sun came out, shining the entire Siusi Valley.",
+        "coverImage": "/images/collections/siusi2024/cover.jpg",
+        "images": [
+          "/images/collections/siusi2024/siusi_1.jpg",
+          "/images/collections/siusi2024/siusi_10.JPG",
+          "/images/collections/siusi2024/siusi_2.JPG",
+          "/images/collections/siusi2024/siusi_3.JPG",
+          "/images/collections/siusi2024/siusi_4.JPG",
+          "/images/collections/siusi2024/siusi_5.JPG",
+          "/images/collections/siusi2024/siusi_6.JPG",
+          "/images/collections/siusi2024/siusi_7.JPG",
+          "/images/collections/siusi2024/siusi_8.JPG",
+          "/images/collections/siusi2024/siusi_9.JPG"
+        ]
+      },
+      {
+        "id": "mohonk2024",
+        "title": "Mohonk Mountain",
+        "description": "Heading upstate or deep into New Jersey to see the fall foliage has been a must since day one. These photos were taken along the Lemon Squeeze trail at Mohonk Mountain.",
+        "coverImage": "/images/collections/mohonk2024/cover.jpg",
+        "images": [
+          "/images/collections/mohonk2024/mohonk_2024_10.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_1.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_2.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_3.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_4.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_5.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_6.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_7.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_8.JPG",
+          "/images/collections/mohonk2024/mohonk_2024_9.JPG"
+        ]
+      },
+      {
+        "id": "tasa2024",
+        "title": "Tasa Village 2024",
+        "description": "This is a Hani(哈尼族) owned village deep in Yunnan. The white ceramic tiles and green shaded windows reflect 80s Chinese architecture. Not the best looking, but they gave me a childhood flashback.",
+        "coverImage": "/images/collections/tasa2024/cover.jpg",
+        "images": [
+          "/images/collections/tasa2024/tasa_2024_1.JPG",
+          "/images/collections/tasa2024/tasa_2024_10.JPG",
+          "/images/collections/tasa2024/tasa_2024_11.JPG",
+          "/images/collections/tasa2024/tasa_2024_12.JPG",
+          "/images/collections/tasa2024/tasa_2024_13.JPG",
+          "/images/collections/tasa2024/tasa_2024_2.JPG",
+          "/images/collections/tasa2024/tasa_2024_3.JPG",
+          "/images/collections/tasa2024/tasa_2024_4.JPG",
+          "/images/collections/tasa2024/tasa_2024_5.JPG",
+          "/images/collections/tasa2024/tasa_2024_6.JPG",
+          "/images/collections/tasa2024/tasa_2024_7.JPG",
+          "/images/collections/tasa2024/tasa_2024_8.JPG",
+          "/images/collections/tasa2024/tasa_2024_9.JPG"
+        ]
+      },
+      {
+        "id": "como2024",
+        "title": "Lake Como",
+        "description": "Lake Como in rain",
+        "coverImage": "/images/collections/como2024/cover.jpg",
+        "images": [
+          "/images/collections/como2024/lake_como_4.JPG",
+          "/images/collections/como2024/lake_como_10.JPG",
+          "/images/collections/como2024/lake_como_11.JPG",
+          "/images/collections/como2024/lake_como_12.JPG",
+          "/images/collections/como2024/lake_como_13.JPG",
+          "/images/collections/como2024/lake_como_14.JPG",
+          "/images/collections/como2024/lake_como_15.JPG",
+          "/images/collections/como2024/lake_como_16.JPG",
+          "/images/collections/como2024/lake_como_17.JPG",
+          "/images/collections/como2024/lake_como_2.JPG",
+          "/images/collections/como2024/lake_como_3.JPG",
+          "/images/collections/como2024/lake_como_1.JPG",
+          "/images/collections/como2024/lake_como_5.JPG",
+          "/images/collections/como2024/lake_como_6.JPG",
+          "/images/collections/como2024/lake_como_7.JPG",
+          "/images/collections/como2024/lake_como_8.JPG",
+          "/images/collections/como2024/lake_como_9.JPG"
+        ]
+      },
+      {
+        "id": "firenze",
+        "title": "Firenze",
+        "description": "Firenze (翡冷翠), a touristy town, but surprisingly home to some reasonably priced restaurants. After a late-night steak, I was walking back to the hotel when I looked up at the Florence Cathedral and suddenly found myself in tears. Later, I learned that this overwhelming excitement wasn’t unusual, it’s called Stendhal Syndrome, and fittingly, it originated right here in Florence.",
+        "coverImage": "/images/collections/firenze/cover.jpg",
+        "images": [
+          "/images/collections/firenze/firenze_11.JPG",
+          "/images/collections/firenze/firenze_10.JPG",
+          "/images/collections/firenze/firenze_1.JPG",
+          "/images/collections/firenze/firenze_12.JPG",
+          "/images/collections/firenze/firenze_13.JPG",
+          "/images/collections/firenze/firenze_2.JPG",
+          "/images/collections/firenze/firenze_4.JPG",
+          "/images/collections/firenze/firenze_5.JPG",
+          "/images/collections/firenze/firenze_6.JPG",
+          "/images/collections/firenze/firenze_7.JPG",
+          "/images/collections/firenze/firenze_8.JPG",
+          "/images/collections/firenze/firenze_9.JPG"
         ]
       },
       {
@@ -56,6 +211,44 @@
         ]
       },
       {
+        "id": "xpj2024",
+        "title": "Construction in Progress",
+        "description": "A typical asphalt processing facility near my home.",
+        "coverImage": "/images/collections/xpj2024/cover.jpg",
+        "images": [
+          "/images/collections/xpj2024/xpj_2024_8.JPG",
+          "/images/collections/xpj2024/xpj_2024_10.JPG",
+          "/images/collections/xpj2024/xpj_2024_11.JPG",
+          "/images/collections/xpj2024/xpj_2024_12.JPG",
+          "/images/collections/xpj2024/xpj_2024_13.JPG",
+          "/images/collections/xpj2024/xpj_2024_2.JPG",
+          "/images/collections/xpj2024/xpj_2024_3.JPG",
+          "/images/collections/xpj2024/xpj_2024_4.JPG",
+          "/images/collections/xpj2024/xpj_2024_5.JPG",
+          "/images/collections/xpj2024/xpj_2024_6.JPG",
+          "/images/collections/xpj2024/xpj_2024_7.JPG",
+          "/images/collections/xpj2024/xpj_2024_1.JPG",
+          "/images/collections/xpj2024/xpj_2024_9.JPG"
+        ]
+      },
+      {
+        "id": "asbury-park",
+        "title": "Sunrise in Asbury Park",
+        "description": "Sunrise with snow-covered beach",
+        "coverImage": "/images/collections/asbury_park/cover.jpg",
+        "images": [
+          "/images/collections/asbury_park/asbury_park_2.JPG",
+          "/images/collections/asbury_park/asbury_park_1.JPG",
+          "/images/collections/asbury_park/asbury_park_3.JPG",
+          "/images/collections/asbury_park/asbury_park_4.JPG",
+          "/images/collections/asbury_park/asbury_park_5.JPG",
+          "/images/collections/asbury_park/asbury_park_6.JPG",
+          "/images/collections/asbury_park/asbury_park_7.JPG",
+          "/images/collections/asbury_park/asbury_park_8.JPG",
+          "/images/collections/asbury_park/asbury_park_9.JPG"
+        ]
+      },
+      {
         "id": "zhima-wedding",
         "title": "Wedding in Zhima",
         "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
@@ -75,6 +268,21 @@
           "/images/collections/zhima_2025/zhima25_12.JPG",
           "/images/collections/zhima_2025/zhima25_1.JPG",
           "/images/collections/zhima_2025/zhima25_14.JPG"
+        ]
+      },
+      {
+        "id": "jc2024",
+        "title": "Jsrsey City Sunset Oct 2024",
+        "description": "A short sunset walk after work",
+        "coverImage": "/images/collections/jc2024/cover.jpg",
+        "images": [
+          "/images/collections/jc2024/jc_2024_5.JPG",
+          "/images/collections/jc2024/jc_2024_2.JPG",
+          "/images/collections/jc2024/jc_2024_3.JPG",
+          "/images/collections/jc2024/jc_2024_4.JPG",
+          "/images/collections/jc2024/jc_2024_1.JPG",
+          "/images/collections/jc2024/jc_2024_6.JPG",
+          "/images/collections/jc2024/jc_2024_7.JPG"
         ]
       }
     ]
