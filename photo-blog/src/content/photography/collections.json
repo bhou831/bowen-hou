@@ -108,7 +108,7 @@
       },
       {
         "id": "mohonk2024",
-        "title": "Mohonk Mountain",
+        "title": "Mohonk Mountain 2024",
         "description": "Heading upstate or deep into New Jersey to see the fall foliage has been a must since day one. These photos were taken along the Lemon Squeeze trail at Mohonk Mountain.",
         "coverImage": "/images/collections/mohonk2024/cover.jpg",
         "images": [
@@ -147,7 +147,7 @@
       },
       {
         "id": "como2024",
-        "title": "Lake Como",
+        "title": "Lake Como 2024",
         "description": "Lake Como in rain",
         "coverImage": "/images/collections/como2024/cover.jpg",
         "images": [
@@ -172,7 +172,7 @@
       },
       {
         "id": "firenze",
-        "title": "Firenze",
+        "title": "Florence 2024",
         "description": "Firenze (翡冷翠), a touristy town, but surprisingly home to some reasonably priced restaurants. After a late-night steak, I was walking back to the hotel when I looked up at the Florence Cathedral and suddenly found myself in tears. Later, I learned that this overwhelming excitement wasn’t unusual, it’s called Stendhal Syndrome, and fittingly, it originated right here in Florence.",
         "coverImage": "/images/collections/firenze/cover.jpg",
         "images": [
@@ -192,7 +192,7 @@
       },
       {
         "id": "yiliang-railway",
-        "title": "Yiliang Railway Station",
+        "title": "Yiliang Railway Station 2025",
         "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
         "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
         "images": [
@@ -211,7 +211,7 @@
       },
       {
         "id": "xpj2024",
-        "title": "Construction in Progress",
+        "title": "Construction in Progress 2024",
         "description": "A typical asphalt processing facility near my home.",
         "coverImage": "/images/collections/xpj2024/cover.jpg",
         "images": [
@@ -232,7 +232,7 @@
       },
       {
         "id": "asbury-park",
-        "title": "Sunrise in Asbury Park",
+        "title": "Sunrise in Asbury Park 2025",
         "description": "Sunrise with snow-covered beach",
         "coverImage": "/images/collections/asbury_park/cover.jpg",
         "images": [
@@ -249,7 +249,7 @@
       },
       {
         "id": "zhima-wedding",
-        "title": "Wedding in Zhima",
+        "title": "Wedding in Zhima 2024",
         "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
         "coverImage": "/images/collections/zhima_2025/cover.jpg",
         "images": [
@@ -271,7 +271,7 @@
       },
       {
         "id": "jc2024",
-        "title": "Jsrsey City Sunset Oct 2024",
+        "title": "Jsrsey City Sunset 2024",
         "description": "A short sunset walk after work",
         "coverImage": "/images/collections/jc2024/cover.jpg",
         "images": [
@@ -282,6 +282,307 @@
           "/images/collections/jc2024/jc_2024_1.JPG",
           "/images/collections/jc2024/jc_2024_6.JPG",
           "/images/collections/jc2024/jc_2024_7.JPG"
+        ]
+      },
+      {
+        "id": "cascade24",
+        "title": "Cascade NP 2024",
+        "description": "Cascade National Park 2024",
+        "coverImage": "/images/collections/cascade24/cover.jpg",
+        "images": [
+          "/images/collections/cascade24/cascade_24_2.JPG",
+          "/images/collections/cascade24/cascade_24_1.JPG",
+          "/images/collections/cascade24/cascade_24_3.JPG",
+          "/images/collections/cascade24/cascade_24_4.JPG",
+          "/images/collections/cascade24/cascade_24_5.JPG",
+          "/images/collections/cascade24/cascade_24_6.JPG",
+          "/images/collections/cascade24/cascade_24_7.JPG",
+          "/images/collections/cascade24/cascade_24_8.JPG",
+          "/images/collections/cascade24/cascade_24_9.JPG"
+        ]
+      },
+      {
+        "id": "rainier24",
+        "title": "Mt. Rainier NP 2024",
+        "description": "Mount Rainier National Park, Skyline Trail",
+        "coverImage": "/images/collections/rainier24/cover.jpg",
+        "images": [
+          "/images/collections/rainier24/rainier_24_4.JPG",
+          "/images/collections/rainier24/rainier_24_10.JPG",
+          "/images/collections/rainier24/rainier_24_2.JPG",
+          "/images/collections/rainier24/rainier_24_3.JPG",
+          "/images/collections/rainier24/rainier_24_1.JPG",
+          "/images/collections/rainier24/rainier_24_5.JPG",
+          "/images/collections/rainier24/rainier_24_6.JPG",
+          "/images/collections/rainier24/rainier_24_7.JPG",
+          "/images/collections/rainier24/rainier_24_8.JPG",
+          "/images/collections/rainier24/rainier_24_9.JPG"
+        ]
+      },
+      {
+        "id": "cali24",
+        "title": "Monterey and US Route 1",
+        "description": "US Route 1, from San Francisco to the Julia Pfeiffer",
+        "coverImage": "/images/collections/cali24/cover.jpg",
+        "images": [
+          "/images/collections/cali24/cali_24_10.JPG",
+          "/images/collections/cali24/cali_24_1.JPG",
+          "/images/collections/cali24/cali_24_11.JPG",
+          "/images/collections/cali24/cali_24_2.JPG",
+          "/images/collections/cali24/cali_24_3.JPG",
+          "/images/collections/cali24/cali_24_4.JPG",
+          "/images/collections/cali24/cali_24_5.JPG",
+          "/images/collections/cali24/cali_24_6.JPG",
+          "/images/collections/cali24/cali_24_7.JPG",
+          "/images/collections/cali24/cali_24_8.JPG",
+          "/images/collections/cali24/cali_24_9.JPG"
+        ]
+      },
+      {
+        "id": "grandcanyon23",
+        "title": "Grand Canyon NP 2023",
+        "description": "Grand Canyon National Park",
+        "coverImage": "/images/collections/grandcanyon23/cover.jpg",
+        "images": [
+          "/images/collections/grandcanyon23/gc_23_6.JPG",
+          "/images/collections/grandcanyon23/gc_23_10.JPG",
+          "/images/collections/grandcanyon23/gc_23_11.JPG",
+          "/images/collections/grandcanyon23/gc_23_2.JPG",
+          "/images/collections/grandcanyon23/gc_23_3.JPG",
+          "/images/collections/grandcanyon23/gc_23_4.JPG",
+          "/images/collections/grandcanyon23/gc_23_5.JPG",
+          "/images/collections/grandcanyon23/gc_23_1.JPG",
+          "/images/collections/grandcanyon23/gc_23_7.JPG",
+          "/images/collections/grandcanyon23/gc_23_8.JPG",
+          "/images/collections/grandcanyon23/gc_23_9.JPG"
+        ]
+      },
+      {
+        "id": "monument23",
+        "title": "Monument Valley 2023",
+        "description": "Monument Valley, stayed at the View Hotel",
+        "coverImage": "/images/collections/monument23/cover.jpg",
+        "images": [
+          "/images/collections/monument23/monument_23_6.JPG",
+          "/images/collections/monument23/monument_23_10.JPG",
+          "/images/collections/monument23/monument_23_2.JPG",
+          "/images/collections/monument23/monument_23_3.JPG",
+          "/images/collections/monument23/monument_23_4.JPG",
+          "/images/collections/monument23/monument_23_5.JPG",
+          "/images/collections/monument23/monument_23_1.JPG",
+          "/images/collections/monument23/monument_23_7.JPG",
+          "/images/collections/monument23/monument_23_8.JPG",
+          "/images/collections/monument23/monument_23_9.JPG"
+        ]
+      },
+      {
+        "id": "page23",
+        "title": "American Wilderness",
+        "description": "Photos taken in Page, AZ",
+        "coverImage": "/images/collections/page23/cover.jpg",
+        "images": [
+          "/images/collections/page23/page_23_2.JPG",
+          "/images/collections/page23/page_23_1.JPG",
+          "/images/collections/page23/page_23_3.JPG",
+          "/images/collections/page23/page_23_4.JPG",
+          "/images/collections/page23/page_23_5.JPG"
+        ]
+      },
+      {
+        "id": "minnewaska23",
+        "title": "Lake Minnewaska SP 2023",
+        "description": "Lake Minnewaska in upstate NY, also the filmset of Severance S2E4",
+        "coverImage": "/images/collections/minnewaska23/cover.jpg",
+        "images": [
+          "/images/collections/minnewaska23/minnewaska_23_2.JPG",
+          "/images/collections/minnewaska23/minnewaska_23_1.JPG",
+          "/images/collections/minnewaska23/minnewaska_23_3.JPG",
+          "/images/collections/minnewaska23/minnewaska_23_4.JPG",
+          "/images/collections/minnewaska23/minnewaska_23_5.JPG",
+          "/images/collections/minnewaska23/minnewaska_23_6.JPG"
+        ]
+      },
+      {
+        "id": "yellowstone23",
+        "title": "Yellowstone NP 2023",
+        "description": "Yellowstone National Park",
+        "coverImage": "/images/collections/yellowstone23/cover.jpg",
+        "images": [
+          "/images/collections/yellowstone23/ys_23_6.JPG",
+          "/images/collections/yellowstone23/ys_23_10.JPG",
+          "/images/collections/yellowstone23/ys_23_11.JPG",
+          "/images/collections/yellowstone23/ys_23_2.JPG",
+          "/images/collections/yellowstone23/ys_23_3.JPG",
+          "/images/collections/yellowstone23/ys_23_4.JPG",
+          "/images/collections/yellowstone23/ys_23_5.JPG",
+          "/images/collections/yellowstone23/ys_23_1.JPG",
+          "/images/collections/yellowstone23/ys_23_7.JPG",
+          "/images/collections/yellowstone23/ys_23_8.JPG",
+          "/images/collections/yellowstone23/ys_23_9.JPG"
+        ]
+      },
+      {
+        "id": "teton23",
+        "title": "Grand Teton NP 2023",
+        "description": "The best part of the Rockies",
+        "coverImage": "/images/collections/teton23/cover.jpg",
+        "images": [
+          "/images/collections/teton23/teton_23_5.JPG",
+          "/images/collections/teton23/teton_23_2.JPG",
+          "/images/collections/teton23/teton_23_3.JPG",
+          "/images/collections/teton23/teton_23_4.JPG",
+          "/images/collections/teton23/teton_23_1.JPG",
+          "/images/collections/teton23/teton_23_6.JPG",
+          "/images/collections/teton23/teton_23_7.JPG"
+        ]
+      },
+      {
+        "id": "death_valley23",
+        "title": "Death Valley NP 2023",
+        "description": "Death Valley National Park",
+        "coverImage": "/images/collections/death_valley23/cover.jpg",
+        "images": [
+          "/images/collections/death_valley23/dv_23_4.JPG",
+          "/images/collections/death_valley23/dv_23_2.JPG",
+          "/images/collections/death_valley23/dv_23_3.JPG",
+          "/images/collections/death_valley23/dv_23_1.JPG",
+          "/images/collections/death_valley23/dv_23_5.JPG",
+          "/images/collections/death_valley23/dv_23_6.JPG"
+        ]
+      },
+      {
+        "id": "joshua23",
+        "title": "Joshua Tree NP 2023",
+        "description": "Joshua Tree National Park",
+        "coverImage": "/images/collections/joshua23/cover.jpg",
+        "images": [
+          "/images/collections/joshua23/joshua_23_1.JPG",
+          "/images/collections/joshua23/joshua_23_2.JPG",
+          "/images/collections/joshua23/joshua_23_3.JPG",
+          "/images/collections/joshua23/joshua_23_4.JPG",
+          "/images/collections/joshua23/joshua_23_5.JPG",
+          "/images/collections/joshua23/joshua_23_6.JPG",
+          "/images/collections/joshua23/joshua_23_7.JPG"
+        ]
+      },
+      {
+        "id": "banff22",
+        "title": "Banff NP 2023",
+        "description": "Banff National Park and Yoho National Park in Alberta",
+        "coverImage": "/images/collections/banff22/cover.jpg",
+        "images": [
+          "/images/collections/banff22/banff_22_2.JPG",
+          "/images/collections/banff22/banff_22_10.JPG",
+          "/images/collections/banff22/banff_22_1.JPG",
+          "/images/collections/banff22/banff_22_3.JPG",
+          "/images/collections/banff22/banff_22_4.JPG",
+          "/images/collections/banff22/banff_22_5.JPG",
+          "/images/collections/banff22/banff_22_6.JPG",
+          "/images/collections/banff22/banff_22_7.JPG",
+          "/images/collections/banff22/banff_22_8.JPG",
+          "/images/collections/banff22/banff_22_9.JPG"
+        ]
+      },
+      {
+        "id": "rocky22",
+        "title": "Rocky Mt NP 2022",
+        "description": "Rocky Mountain National Park, photos were taken during my two visits in 2022",
+        "coverImage": "/images/collections/rocky22/cover.jpg",
+        "images": [
+          "/images/collections/rocky22/rocky_22_8.jpg",
+          "/images/collections/rocky22/rocky_22_2.JPG",
+          "/images/collections/rocky22/rocky_22_3.JPG",
+          "/images/collections/rocky22/rocky_22_4.JPG",
+          "/images/collections/rocky22/rocky_22_5.JPG",
+          "/images/collections/rocky22/rocky_22_6.JPG",
+          "/images/collections/rocky22/rocky_22_7.JPG",
+          "/images/collections/rocky22/rocky_22_1.JPG",
+          "/images/collections/rocky22/rocky_22_9.JPG"
+        ]
+      },
+      {
+        "id": "sand_dune22",
+        "title": "Great Sand Dunes NP 2022",
+        "description": "The great sand dunes national park in Colorado",
+        "coverImage": "/images/collections/sand_dune22/cover.jpg",
+        "images": [
+          "/images/collections/sand_dune22/sand_dune_6.JPG",
+          "/images/collections/sand_dune22/sand_dune_2.JPG",
+          "/images/collections/sand_dune22/sand_dune_3.JPG",
+          "/images/collections/sand_dune22/sand_dune_4.JPG",
+          "/images/collections/sand_dune22/sand_dune_5.JPG",
+          "/images/collections/sand_dune22/sand_dune_1.JPG"
+        ]
+      },
+      {
+        "id": "maui22",
+        "title": "Haleakalā NP 2022",
+        "description": "Haleakalā National Park and scenery from Maui Island",
+        "coverImage": "/images/collections/maui22/cover.jpg",
+        "images": [
+          "/images/collections/maui22/maui_22_1.JPG",
+          "/images/collections/maui22/maui_22_2.JPG",
+          "/images/collections/maui22/maui_22_3.JPG",
+          "/images/collections/maui22/maui_22_4.JPG",
+          "/images/collections/maui22/maui_22_5.JPG",
+          "/images/collections/maui22/maui_22_6.JPG"
+        ]
+      },
+      {
+        "id": "half_moon22",
+        "title": "Half Moon Bay 2022",
+        "description": "Half Moon Bay, CA",
+        "coverImage": "/images/collections/half_moon22/cover.jpg",
+        "images": [
+          "/images/collections/half_moon22/half_moon_22_1.JPG",
+          "/images/collections/half_moon22/half_moon_22_2.JPG",
+          "/images/collections/half_moon22/half_moon_22_3.JPG",
+          "/images/collections/half_moon22/half_moon_22_4.JPG"
+        ]
+      },
+      {
+        "id": "crater22",
+        "title": "Crater Lake NP 2022",
+        "description": "The crater lake national park, Oregon",
+        "coverImage": "/images/collections/crater22/cover.jpg",
+        "images": [
+          "/images/collections/crater22/crater_lake_2.JPG",
+          "/images/collections/crater22/crater_lake_1.JPG",
+          "/images/collections/crater22/crater_lake_3.JPG",
+          "/images/collections/crater22/crater_lake_4.JPG",
+          "/images/collections/crater22/crater_lake_5.JPG",
+          "/images/collections/crater22/crater_lake_6.JPG",
+          "/images/collections/crater22/crater_lake_7.JPG",
+          "/images/collections/crater22/crater_lake_8.JPG"
+        ]
+      },
+      {
+        "id": "olympic21",
+        "title": "Olympic NP 2021",
+        "description": "Olympic covered in snow, WA",
+        "coverImage": "/images/collections/olympic21/cover.jpg",
+        "images": [
+          "/images/collections/olympic21/olympic_21_4.JPG",
+          "/images/collections/olympic21/olympic_21_2.JPG",
+          "/images/collections/olympic21/olympic_21_3.JPG",
+          "/images/collections/olympic21/olympic_21_1.JPG",
+          "/images/collections/olympic21/olympic_21_5.JPG",
+          "/images/collections/olympic21/olympic_21_6.JPG",
+          "/images/collections/olympic21/olympic_21_7.JPG"
+        ]
+      },
+      {
+        "id": "bigbend20",
+        "title": "Big Bend NP 2020",
+        "description": "The big bend national park, TX. First time using my A7Riii camera, the dynamic range was just amazing.",
+        "coverImage": "/images/collections/bigbend20/cover.jpg",
+        "images": [
+          "/images/collections/bigbend20/bigbend_6.jpg",
+          "/images/collections/bigbend20/bigbend_2.JPG",
+          "/images/collections/bigbend20/bigbend_3.JPG",
+          "/images/collections/bigbend20/bigbend_4.JPG",
+          "/images/collections/bigbend20/bigbend_5.JPG",
+          "/images/collections/bigbend20/bigbend_1.JPG"
         ]
       }
     ]
