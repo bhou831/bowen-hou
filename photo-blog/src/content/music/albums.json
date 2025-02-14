@@ -1,6 +1,30 @@
 {
     "albums": [
       {
+        "id": "album-02-14-25",
+        "title": "Avantdale Bowling Club",
+        "artist": "Avantdale Bowling Club",
+        "coverImage": "/images/albums/abc/cover.jpg",
+        "description": "This is the debut, self-titled jazz rap/hip-hop album by Avantdale Bowling Club (Tom Scott), a New Zealand-based artist. I never expected such a chill and quiet place like New Zealand to produce a hip-hop album this good. The composition is clean yet capricious, and the production has a smooth, rhythm-rich feel, much like the works by D'Angelo and Kendrick. Songs like 'Years Gone By' and 'Old Dogs' feel like listening to a jazz quartet with a storyteller at the mic, while 'F(R)Iends' leans more toward a full jazz orchestra in the background. Overall, it’s a very good album, best enjoyed from start to finish.",
+        "links": {
+          "youtube": "https://youtu.be/gSYv7_8ZJ7k?si=gj0EZ54vtndd5jo-",
+          "appleMusic": "https://music.apple.com/id/album/avantdale-bowling-club/1774437546",
+          "spotify": "https://open.spotify.com/album/4rJTVX98bAnFAMfcHmZURM"
+        }
+      },
+      {
+        "id": "album-02-13-25",
+        "title": "加爾基 精液 栗ノ花",
+        "artist": "Sheena Ringo",
+        "coverImage": "/images/albums/karuki-zahmen/cover.jpg",
+        "description": "Without a doubt, this is the best work from Sheena Ringo (椎名林檎). Compared to her previous two albums ('Winning Strip' and 'Innocence Moratorium'), this one is far more diverse and playful. From the moment the first song ('Religion') starts, I get goosebumps, it’s that good. \nIn this album, Sheena masters the dynamics of an album, striking a perfect balance between serenity and chaos, simplicity and complexity. She also blends traditional Japanese melodies and instruments with modern production and composition, perfectly demonstrated in 'Stem' and 'Rush Job'. I don’t want to say too much because this album speaks for itself — freedom within order.",
+        "links": {
+          "youtube": "https://youtu.be/pKQqsJGJKfU?si=BDKy4xg_iKy94afR",
+          "appleMusic": "https://music.apple.com/us/album/karuki-zahmen-kuri-no-hana-kalk-samen-chestnut-flower/1385320232",
+          "spotify": "https://open.spotify.com/album/2i4fy6a51XTaZOYA8rIdRK"
+        }
+      },
+      {
         "id": "album-02-08-25",
         "title": "Freak Smile",
         "artist": "Spank Happy",

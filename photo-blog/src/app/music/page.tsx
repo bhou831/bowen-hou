@@ -41,10 +41,10 @@ export default function Music() {
               />
             </div>
             <div className="mt-3 text-left">
-              <h3 className="text-base font-medium text-gray-900 dark:text-gray-100">
+              <h3 className="text-base text-center font-medium text-gray-900 dark:text-gray-100">
                 {album.title}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-center text-gray-600 dark:text-gray-400">
                 {album.artist}
               </p>
             </div>
