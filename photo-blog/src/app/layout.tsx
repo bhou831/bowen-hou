@@ -14,7 +14,42 @@ const spectral = Spectral({
 
 export const metadata: Metadata = {
   title: 'Bowen Hou',
-  description: 'Personal website of Bowen Hou',
+  description: 'Bio Page of Bowen Hou',
+  metadataBase: new URL('https://bowen-hou.com'), 
+  openGraph: {
+    title: 'Bowen Hou',
+    description: 'Bio Page of Bowen Hou',
+    url: 'https://bowen-hou.com',
+    siteName: 'Bowen Hou',
+    images: [
+      {
+        url: '/images/og/og.jpg',
+        width: 800,
+        height: 400,
+        alt: 'Bowen Hou Photograph',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bowen Hou',
+    description: 'Bio Page of Bowen Hou',
+    creator: '@yourtwitterhandle',
+    images: ['/images/og/og.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
