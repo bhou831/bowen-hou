@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
               Home
             </Link>
             <Link href="/photography" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
-              Photography
+              Photograph
             </Link>
             <Link href="/music" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
               Music

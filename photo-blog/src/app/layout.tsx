@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Bowen Hou',
     description: 'Bio Page of Bowen Hou',
-    creator: '@yourtwitterhandle',
+    creator: '@HarveyHBB',
     images: ['/images/og/og.jpg'],
   },
   robots: {
