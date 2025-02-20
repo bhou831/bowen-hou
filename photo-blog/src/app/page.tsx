@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -42,31 +43,29 @@ export default function Home() {
       {/* Slideshow container */}
       <div className="w-full max-w-[1000px] mx-auto">
         <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800">
-          {images.length > 0 && (
-            <Image 
-              src={images[currentImageIndex]} 
-              alt={`Slideshow image ${currentImageIndex + 1}`}
-              fill 
-              className="object-cover transition-opacity duration-500"
-              priority
-            />
-          )}
-          
-          {/* Navigation dots */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {images.map((_, index) => (
-              <button 
-                key={index} 
-                onClick={() => setCurrentImageIndex(index)} 
-                className={`w-2 h-2 rounded-full ${
-                  index === currentImageIndex 
-                    ? 'bg-white' 
-                    : 'bg-white/50'
-                }`}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            {images.length > 0 && (
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ 
+                  duration: 1,
+                  ease: [0.1, 0.3, 0.6, 1] // Custom easing for a more natural fade
+                }}
+                className="absolute inset-0"
+              >
+                <Image 
+                  src={images[currentImageIndex]} 
+                  alt={`Slideshow image ${currentImageIndex + 1}`}
+                  fill 
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
       

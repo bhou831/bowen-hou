@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://bowen-hou.com'), 
   openGraph: {
     title: 'Bowen Hou',
-    description: 'Bio Page of Bowen Hou',
+    description: 'Bio Page of Bowen Hou (侯博文)',
     url: 'https://bowen-hou.com',
     siteName: 'Bowen Hou',
     images: [
