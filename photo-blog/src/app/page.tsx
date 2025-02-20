@@ -29,7 +29,7 @@ export default function Home() {
       setCurrentImageIndex((current) =>
         current === images.length - 1 ? 0 : current + 1
       );
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(timer);
   }, [images.length]);
@@ -51,7 +51,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ 
-                  duration: 1,
+                  duration: 0.5,
                   ease: [0.1, 0.3, 0.6, 1] // Custom easing for a more natural fade
                 }}
                 className="absolute inset-0"

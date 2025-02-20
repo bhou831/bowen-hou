@@ -1,6 +1,25 @@
 {
     "collections": [
       {
+        "id": "kunming",
+        "title": "Kunming in a Nutshell",
+        "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
+        "coverImage": "/images/collections/kunming/cover.jpg",
+        "images": [
+          "/images/collections/kunming/km_2025_10.JPG",
+          "/images/collections/kunming/km_2025_1.JPG",
+          "/images/collections/kunming/km_2025_2.JPG",
+          "/images/collections/kunming/km_2025_11.JPG",
+          "/images/collections/kunming/km_2025_3.JPG",
+          "/images/collections/kunming/km_2025_4.JPG",
+          "/images/collections/kunming/km_2025_5.JPG",
+          "/images/collections/kunming/km_2025_6.JPG",
+          "/images/collections/kunming/km_2025_7.JPG",
+          "/images/collections/kunming/km_2025_8.JPG",
+          "/images/collections/kunming/km_2025_9.JPG"
+        ]
+      },
+      {
         "id": "tre_cime",
         "title": "Enter the Tre Cime",
         "description": "Hands down the best hike of 2024. Even though the trail was completely covered in snow, we enjoyed every moment of it. The Dolomites are truly one of the most stunning parts of the Alps.",
