@@ -1,6 +1,42 @@
 {
     "albums": [
       {
+        "id": "album-02-19-25-02",
+        "title": "Get Up",
+        "artist": "NewJeans",
+        "coverImage": "/images/albums/njs/cover.jpg",
+        "description": "NewJeans is the first and only K-pop group I’ve really listened to. I’ve never had a K-pop album before because, to me, the culture seems to place a huge emphasis on music videos—like the music is meant to be enjopyed alongside the visuals. I am ignorant and don’t know much about Korean albums, but something about NewJeans feels different.\n Their popular tracks like Ditto, ETA, and Hype Boy are simply great ,they are short, sweet, with iconic Jersey club beats, garage vibes, and crystal-clear melodies. I can’t quite explain it, but these songs immediately take me back to my middle school Art Festival (藝術節) in 2012, just sitting with friends and watching people dance on stage. It just feels good listening to NewJeans with nothing in my head.",
+        "links": {
+          "youtube": "https://youtu.be/Krr2u8BUtLw?si=9KdNH3L40jP3bkYk",
+          "appleMusic": "https://music.apple.com/us/album/newjeans-2nd-ep-get-up/1695951888",
+          "spotify": "https://open.spotify.com/album/4N1fROq2oeyLGAlQ1C1j18"
+        }
+      },
+      {
+        "id": "album-02-19-25",
+        "title": "You Will Never Know Why",
+        "artist": "Sweet Trip",
+        "coverImage": "/images/albums/st-ywnkw/cover.jpg",
+        "description": "You Will Never Know Why is a dreamy, upbeat album. With distant vocals and clear melody lines, it’s everything you’d expect from dream pop or synth pop. It literally takes me on a sweet trip, immersing myself in a beautifully crafted soundscape. It’s been almost four years since my first listen, yet this album remains in my regular rotation. There are so many favorite tracks, like 'Acting', 'Darkness, 'Air Supply', and 'Pretending', to name a few.",
+        "links": {
+          "youtube": "https://youtube.com/playlist?list=OLAK5uy_luQpEG_NkTi7-z57k9qVGX95vghXAqrCI&si=nCUstVfSzkTMAL4B",
+          "appleMusic": "https://music.apple.com/us/album/you-will-never-know-why/329455551",
+          "spotify": "https://open.spotify.com/album/78lIjVFQSSRqO47Pvw1b9M"
+        }
+      },
+      {
+        "id": "album-02-18-25",
+        "title": "David Tao",
+        "artist": "David Tao/陶喆",
+        "coverImage": "/images/albums/david-tao/cover.jpg",
+        "description": "David Tao’s self-titled debut album is, hands down, one of my favorite Chinese albums of all time. It’s the very definition of a perfect R&B album, it has beautiful vocals, melodies, and guitar, all in their purest form. While David Tao has released several great albums like I’m OK and 黑色柳丁, this one stands out in how seamlessly it flows. From the moment Airport Takeoff starts playing, you’re fully immersed in his world. Tracks like Blue Moon, Our Love, and Everything’s Gone are the holy grail of Chinese R&B—timeless, soulful, and flawless. Every time I replay this album, I feel an overwhelming nostalgia for an era I never belonged to, back when music was made simply to sound good.",
+        "links": {
+          "youtube": "https://youtube.com/playlist?list=OLAK5uy_nFLa8xrrQX8BusOoD-2cUcTnhMjn-L4ZQ&si=fc6mmikAscWONc6i",
+          "appleMusic": "https://music.apple.com/gh/album/%E9%99%B6%E5%96%86%E5%90%8C%E5%90%8D%E5%B0%88%E8%BC%AF/1416149926",
+          "spotify": "https://open.spotify.com/album/433Xh8UtsKASBYCt0QNk4Q"
+        }
+      },
+      {
         "id": "album-02-14-25",
         "title": "Avantdale Bowling Club",
         "artist": "Avantdale Bowling Club",
@@ -15,7 +51,7 @@
       {
         "id": "album-02-13-25",
         "title": "加爾基 精液 栗ノ花",
-        "artist": "Sheena Ringo",
+        "artist": "Sheena Ringo/椎名林檎",
         "coverImage": "/images/albums/karuki-zahmen/cover.jpg",
         "description": "Without a doubt, this is the best work from Sheena Ringo (椎名林檎). Compared to her previous two albums ('Winning Strip' and 'Innocence Moratorium'), this one is far more diverse and playful. From the moment the first song ('Religion') starts, I get goosebumps, it’s that good. \nIn this album, Sheena masters the dynamics of an album, striking a perfect balance between serenity and chaos, simplicity and complexity. She also blends traditional Japanese melodies and instruments with modern production and composition, perfectly demonstrated in 'Stem' and 'Rush Job'. I don’t want to say too much because this album speaks for itself — freedom within order.",
         "links": {

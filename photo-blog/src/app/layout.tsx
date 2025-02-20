@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/images/og/og.jpg',
-        width: 800,
-        height: 400,
+        width: 900,
+        height: 600,
         alt: 'Bowen Hou Photograph',
       },
     ],
