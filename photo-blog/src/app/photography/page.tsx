@@ -71,18 +71,17 @@ export default function Photography() {
       <span className="sr-only">Close gallery</span>
     </button>
 
-    <div className="min-h-screen md:min-h-0 md:h-[95vh] flex flex-col md:flex-row">
-      
-        {/* Main Image Section - Improved for iPad */}
-      <div className="flex-1 relative flex items-center justify-center min-h-[60vh] md:min-h-0 py-12 md:py-0">
+      {/* Mobile-first approach with flex-col by default and flex-row on md screens */}
+    <div className="h-screen md:min-h-0 md:h-[95vh] flex flex-col md:flex-row">
+        
+        {/* Main Image Section */}
+      <div className="flex-1 relative flex items-center justify-center min-h-[50vh] md:min-h-0 py-6 md:py-0">
         <button onClick={previousImage} className="absolute left-4 text-white hover:text-gray-300 z-10" aria-label="Previous image">
           <ChevronLeft className="w-8 h-8" />
         </button>
 
-          {/* Improved container sizing for iPad */}
         <div className="relative w-full h-full flex items-center justify-center">
-            {/* Using a wrapper div with explicit dimensions for iPad */}
-          <div className="relative w-full h-full max-w-[90vw] md:max-w-none max-h-[70vh] md:max-h-none
+          <div className="relative w-full h-full max-w-[90vw] md:max-w-none max-h-[60vh] md:max-h-none
                            iPad:max-h-[65vh] iPad:w-auto iPad:h-auto iPad:max-w-[85vw]">
             <Image src={selectedCollection.images[currentImageIndex]} alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
                 fill className="object-contain" quality={100} loading="lazy" />
@@ -94,19 +93,18 @@ export default function Photography() {
         </button>
       </div>
 
-        {/* Description Panel */}
-        
-      <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col max-h-[40vh] md:max-h-full overflow-y-auto">
-          {/* Content area */}
+        {/* Description Panel - Fixed for iPhone */}
+      <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col md:max-h-full overflow-y-auto">
+          {/* Image counter moved to the top for mobile visibility */}
         <div className="text-white">
-          <h3 className="text-xl font-medium mb-4">{selectedCollection.title}</h3>
-                    {/* Counter */}
-          <div className="pt-4 sticky bottom-0 bg-black/80 mt-2">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-xl font-medium">{selectedCollection.title}</h3>
             <p className="text-sm text-gray-400">
-              image {currentImageIndex + 1} of {selectedCollection.images.length}
+                {currentImageIndex + 1}/{selectedCollection.images.length}
             </p>
           </div>
-          <p className="text-lg leading-relaxed">
+
+          <p className="text-lg leading-relaxed py-2 pb-10 mb-4">
               {selectedCollection.description}
           </p>
         </div>
