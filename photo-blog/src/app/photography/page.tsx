@@ -58,7 +58,8 @@ export default function Photography() {
         ))}
   </div>
 
-     {/* Lightbox */}
+{/* Lightbox */}
+{/* Lightbox */}
   <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
   {selectedCollection && (
     <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/95 border-none p-0 overflow-hidden">
@@ -71,20 +72,19 @@ export default function Photography() {
       <span className="sr-only">Close gallery</span>
     </button>
 
-      {/* Mobile-first approach with flex-col by default and flex-row on md screens */}
-    <div className="h-screen md:min-h-0 md:h-[95vh] flex flex-col md:flex-row">
+      {/* Mobile-first approach with flex-col by default, flex-row only on desktop */}
+    <div className="h-screen xl:min-h-0 xl:h-[95vh] flex flex-col xl:flex-row">
         
         {/* Main Image Section */}
-      <div className="flex-1 relative flex items-center justify-center min-h-[50vh] md:min-h-0 py-6 md:py-0">
+      <div className="flex-1 relative flex items-center justify-center min-h-[50vh] xl:min-h-0 py-6 xl:py-0">
         <button onClick={previousImage} className="absolute left-4 text-white hover:text-gray-300 z-10" aria-label="Previous image">
           <ChevronLeft className="w-8 h-8" />
         </button>
 
         <div className="relative w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full max-w-[90vw] md:max-w-none max-h-[60vh] md:max-h-none
-                           iPad:max-h-[65vh] iPad:w-auto iPad:h-auto iPad:max-w-[85vw]">
+          <div className="relative w-full h-full max-w-[90vw] xl:max-w-none max-h-[60vh] xl:max-h-none">
             <Image src={selectedCollection.images[currentImageIndex]} alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
-                fill className="object-contain" quality={100} loading="lazy" />
+                 fill className="object-contain" quality={100} loading="lazy" />
           </div>
         </div>
 
@@ -93,8 +93,8 @@ export default function Photography() {
         </button>
       </div>
 
-        {/* Description Panel - Fixed for iPhone */}
-      <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col md:max-h-full overflow-y-auto">
+        {/* Description Panel - Column layout for mobile and iPad portrait */}
+      <div className="xl:w-80 bg-black/80 p-4 xl:p-8 flex flex-col xl:max-h-full overflow-y-auto">
           {/* Image counter moved to the top for mobile visibility */}
         <div className="text-white">
           <div className="flex justify-between items-center mb-2">
