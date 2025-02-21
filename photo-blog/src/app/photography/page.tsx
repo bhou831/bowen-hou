@@ -58,7 +58,7 @@ export default function Photography() {
         ))}
   </div>
 
-      {/* Lightbox */}
+     {/* Lightbox */}
   <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
   {selectedCollection && (
     <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/95 border-none p-0 overflow-hidden">
@@ -72,15 +72,21 @@ export default function Photography() {
     </button>
 
     <div className="min-h-screen md:min-h-0 md:h-[95vh] flex flex-col md:flex-row">
-        {/* Main Image Section */}
+      
+        {/* Main Image Section - Improved for iPad */}
       <div className="flex-1 relative flex items-center justify-center min-h-[60vh] md:min-h-0 py-12 md:py-0">
         <button onClick={previousImage} className="absolute left-4 text-white hover:text-gray-300 z-10" aria-label="Previous image">
           <ChevronLeft className="w-8 h-8" />
         </button>
 
-        <div className="relative w-full h-full">
-          <Image src={selectedCollection.images[currentImageIndex]} alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
-              fill className="object-contain" quality={100} loading="lazy" />
+          {/* Improved container sizing for iPad */}
+        <div className="relative w-full h-full flex items-center justify-center">
+            {/* Using a wrapper div with explicit dimensions for iPad */}
+          <div className="relative w-full h-full max-w-[90vw] md:max-w-none max-h-[70vh] md:max-h-none
+                           iPad:max-h-[65vh] iPad:w-auto iPad:h-auto iPad:max-w-[85vw]">
+            <Image src={selectedCollection.images[currentImageIndex]} alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
+                fill className="object-contain" quality={100} loading="lazy" />
+          </div>
         </div>
 
         <button onClick={nextImage} className="absolute right-4 text-white hover:text-gray-300" aria-label="Next image">
@@ -88,15 +94,20 @@ export default function Photography() {
         </button>
       </div>
 
-        {/* Description Panel - Fixed for both mobile and desktop scrolling */}
-      <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col h-auto md:h-full max-h-[40vh] md:max-h-full overflow-y-auto">
+        {/* Description Panel */}
+        
+      <div className="md:w-80 bg-black/80 p-4 md:p-8 flex flex-col max-h-[40vh] md:max-h-full overflow-y-auto">
+          {/* Content area */}
         <div className="text-white">
           <h3 className="text-xl font-medium mb-4">{selectedCollection.title}</h3>
+                    {/* Counter */}
+          <div className="pt-4 sticky bottom-0 bg-black/80 mt-2">
+            <p className="text-sm text-gray-400">
+              image {currentImageIndex + 1} of {selectedCollection.images.length}
+            </p>
+          </div>
           <p className="text-lg leading-relaxed">
               {selectedCollection.description}
-          </p>
-          <p className="text-sm mt-4 text-gray-400">
-              Image {currentImageIndex + 1} of {selectedCollection.images.length}
           </p>
         </div>
       </div>
