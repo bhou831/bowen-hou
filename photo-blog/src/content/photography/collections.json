@@ -1,6 +1,63 @@
 {
     "collections": [
       {
+        "id": "beacon-0301",
+        "title": "Dia Beacon",
+        "description": "I'm too superficial to appreciate art, especially modern art. Dia Beacon is an art museum in Beacon NY. The artworks are cool, but the most interesting part is the architecture itself - big windows with light blue curtains flowing freely like the skirts of wedding dresses, it was a truly dreamy moment.",
+        "coverImage": "/images/collections/beacon-0301/cover.jpg",
+        "images": [
+          "/images/collections/beacon-0301/beacon0301_16.jpg",
+          "/images/collections/beacon-0301/beacon0301_1.jpg",
+          "/images/collections/beacon-0301/beacon0301_10.jpg",
+          "/images/collections/beacon-0301/beacon0301_11.jpg",
+          "/images/collections/beacon-0301/beacon0301_12.jpg",
+          "/images/collections/beacon-0301/beacon0301_13.jpg",
+          "/images/collections/beacon-0301/beacon0301_14.jpg",
+          "/images/collections/beacon-0301/beacon0301_15.jpg",
+          "/images/collections/beacon-0301/beacon0301_2.jpg",
+          "/images/collections/beacon-0301/beacon0301_3.jpg",
+          "/images/collections/beacon-0301/beacon0301_4.jpg",
+          "/images/collections/beacon-0301/beacon0301_5.jpg",
+          "/images/collections/beacon-0301/beacon0301_6.jpg",
+          "/images/collections/beacon-0301/beacon0301_7.jpg",
+          "/images/collections/beacon-0301/beacon0301_8.jpg",
+          "/images/collections/beacon-0301/beacon0301_9.jpg"
+        ]
+      },
+      {
+        "id": "expl-0227",
+        "title": "Exchange Place 02.28.25",
+        "description": "Photos taken before stepping onto the PATH train. The sun had set and the remnants of glow painted the sky pink, just the right time to propose in front of the beautiful Downtown Manhattan skyline.",
+        "coverImage": "/images/collections/expl-0227/cover.jpg",
+        "images": [
+          "/images/collections/expl-0227/expl0227_3.jpg",
+          "/images/collections/expl-0227/expl0227_2.jpg",
+          "/images/collections/expl-0227/expl0227_1.jpg",
+          "/images/collections/expl-0227/expl0227_4.jpg",
+          "/images/collections/expl-0227/expl0227_5.jpg",
+          "/images/collections/expl-0227/expl0227_6.jpg",
+          "/images/collections/expl-0227/expl0227_7.jpg",
+          "/images/collections/expl-0227/expl0227_8.jpg"
+        ]
+      },
+      {
+        "id": "bk-0223",
+        "title": "Brooklyn Heights 02.23.25",
+        "description": "Photos taken in Brooklyn Heights. Art Deco high rises are repurposed into residential buildings, alongside some well-maintained brownstones, tenements, and scattered abandoned factory buildings. It is a quiet but diverse neighborhood, a blend of history and modernity.",
+        "coverImage": "/images/collections/bk-0223/cover.jpg",
+        "images": [
+          "/images/collections/bk-0223/bk0223_5.jpg",
+          "/images/collections/bk-0223/bk0223_2.jpg",
+          "/images/collections/bk-0223/bk0223_3.jpg",
+          "/images/collections/bk-0223/bk0223_4.jpg",
+          "/images/collections/bk-0223/bk0223_1.jpg",
+          "/images/collections/bk-0223/bk0223_6.jpg",
+          "/images/collections/bk-0223/bk0223_7.jpg",
+          "/images/collections/bk-0223/bk0223_8.jpg",
+          "/images/collections/bk-0223/bk0223_9.jpg"
+        ]
+      },
+      {
         "id": "kunming",
         "title": "Kunming in a Nutshell",
         "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
