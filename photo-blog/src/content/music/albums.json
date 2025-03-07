@@ -1,5 +1,17 @@
 {
     "albums": [
+    {
+      "id": "album-03-06-25",
+      "title": "Sunlight",
+      "artist": "Herbie Hancock",
+      "coverImage": "/images/albums/hh-sunlight/cover.jpg",
+      "description": "Herbie Hancock is a legendary and prolific jazz/fusion artist, and one of my personal favorites. He used to play the keys for the Miles Davis Quintet, and you might already know his iconic albums 'Head Hunters' and 'Maiden Voyage'. But 'Sunlight' deserves just as much recognition. I Thought It Was You, features Herbie’s own vocals processed with a vocoder, adding a futuristic touch. The album’s rhythms, basslines, and synth work were ahead of their time, influencing modern music works such as Daft Punk’s 'Random Access Memories'. The songs are around 8 minutes on average, but they're worth enjoying until the very last bit.",
+      "links": {
+        "youtube": "https://youtu.be/_bRRSHx6rk0?si=rtMy2PcYsUelWvi_",
+        "appleMusic": "https://music.apple.com/ar/album/sunlight/278866052",
+        "spotify": "https://open.spotify.com/album/67PT7U66Ql5HXNf5hP5zzC"
+      }
+    },
       {
         "id": "album-02-19-25-02",
         "title": "Get Up",

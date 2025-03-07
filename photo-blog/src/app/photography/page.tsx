@@ -51,7 +51,7 @@ export default function Photography() {
                 fill className="object-cover" quality={100}
               />
 </div>
-<h3 className="mt-2 text-center text-lg text-gray-700 dark:text-gray-200">
+<h3 className="mt-1.5 text-center text-lg text-gray-700 dark:text-gray-200">
               {collection.title}
       </h3>
     </div>
