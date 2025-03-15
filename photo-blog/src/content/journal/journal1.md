@@ -38,7 +38,7 @@ Plastic pollution remains a significant issue. When plastic is not properly disp
 
 ### On the Bright Side
 
-We shouldn’t worry too much about plastic waste if it is properly disposed of. For example, if all the world’s plastic waste were collected and stored in a landfill, it would occupy an area roughly the size of London ([How Much Space Would We Need to Store the World’s Plastic in Landfills?](https://www.sustainabilitybynumbers.com/p/landfill-plastic-area)). Modern landfills are efficient facilities ,they are covered and layered like cakes, sealed tight, and even capable of capturing decomposed gases for electricity generation. The key is responsible disposal and maintaining hygiene standards. While plastic’s negative impacts are often exaggerated in media and public discourse, proper waste management can mitigate its environmental footprint.
+We shouldn’t worry too much about plastic waste if it is properly disposed of. For example, if all the world’s plastic waste were collected and stored in a landfill, it would occupy an area roughly the size of London ([How Much Space Would We Need to Store the World’s Plastic in Landfills?](https://www.sustainabilitybynumbers.com/p/landfill-plastic-area)). Modern landfills are efficient facilities, they are covered and layered like cakes, sealed tight, and even capable of capturing decomposed gases for electricity generation. The key is responsible disposal and maintaining hygiene standards. While plastic’s negative impacts are often exaggerated in media and public discourse, proper waste management can mitigate its environmental footprint.
 
 ---
 
