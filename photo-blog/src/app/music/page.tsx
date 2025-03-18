@@ -42,7 +42,7 @@ export default function Music() {
                 src={album.coverImage}
                 alt={`${album.title} by ${album.artist}`}
                 fill
-                className="object-cover transition-transform duration-200 hover:scale-105"
+                className="object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
             <div className="mt-3 text-left">

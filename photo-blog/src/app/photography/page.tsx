@@ -38,31 +38,40 @@ export default function Photography() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
-      {/* Responsive grid container */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+      {/* Artistic Minimalist Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 p-2">
         {collections.map((collection) => (
           <div
             key={collection.id}
-            className="cursor-pointer group mx-auto w-full max-w-lg"
+            className="cursor-pointer group mx-auto w-full transition-all duration-500 ease-in-out"
             onClick={() => handleCollectionClick(collection)}
           >
-            <div className="relative w-full aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-300 rounded-md overflow-hidden">
-              <Image
-                src={collection.coverImage}
-                alt={collection.title}
-                fill
-                className="object-cover"
-                quality={100}
-              />
+            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
+              <div className="absolute inset-0">
+                <Image
+                  src={collection.coverImage}
+                  alt={collection.title}
+                  fill
+                  className="object-cover"
+                  quality={90}
+                />
+              </div>
+
+              {/* Artistic overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-            <h3 className="mt-1.5 text-left text-md text-gray-700 dark:text-gray-200">
-              {collection.title}
-            </h3>
+
+            {/* Title with artistic underline effect */}
+            <div className="mt-3 relative">
+              <h3 className="text-left text-md text-gray-700 dark:text-gray-200 font-light tracking-wide">
+                {collection.title}
+              </h3>
+              <div className="h-px w-0 bg-gray-400 dark:bg-gray-500 group-hover:w-1/3 transition-all duration-500 mt-1"></div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox */}
       {/* Lightbox */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
         {selectedCollection && (

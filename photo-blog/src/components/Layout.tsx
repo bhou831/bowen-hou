@@ -60,9 +60,9 @@ export default function Layout({ children }: LayoutProps) {
             className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 ml-2 md:ml-0"
           >
             {theme === 'dark' ? (
-              <Sun className="w-5 h-5" />
+              <Sun className="w-4 h-4" />
             ) : (
-              <Moon className="w-5 h-5" />
+              <Moon className="w-4 h-4" />
             )}
           </button>
         </div>
