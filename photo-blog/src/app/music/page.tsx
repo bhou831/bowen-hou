@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Dialog, DialogContent, DialogTitle, DialogHeader } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogHeader,
+} from '@/components/ui/dialog';
 import albums from '@/content/music/albums.json';
 
 interface Album {
@@ -26,7 +31,7 @@ export default function Music() {
       {/* Responsive grid container */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
         {albums.albums.map((album) => (
-          <div 
+          <div
             key={album.id}
             className="w-full cursor-pointer mx-auto max-w-[250px]"
             onClick={() => setSelectedAlbum(album)}
@@ -53,7 +58,10 @@ export default function Music() {
       </div>
 
       {/* Modal */}
-      <Dialog open={!!selectedAlbum} onOpenChange={() => setSelectedAlbum(null)}>
+      <Dialog
+        open={!!selectedAlbum}
+        onOpenChange={() => setSelectedAlbum(null)}
+      >
         {selectedAlbum && (
           <DialogContent className="max-w-2xl bg-white dark:bg-gray-900 max-h-[90vh] overflow-hidden">
             <DialogHeader>
@@ -64,7 +72,7 @@ export default function Music() {
                 {selectedAlbum.artist}
               </p>
             </DialogHeader>
-            
+
             <div className="overflow-y-auto max-h-[calc(90vh-8rem)] pr-2">
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Album Cover */}

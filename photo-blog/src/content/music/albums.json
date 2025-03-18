@@ -1,5 +1,5 @@
 {
-    "albums": [
+  "albums": [
     {
       "id": "album-03-06-25",
       "title": "Sunlight",
@@ -12,87 +12,87 @@
         "spotify": "https://open.spotify.com/album/67PT7U66Ql5HXNf5hP5zzC"
       }
     },
-      {
-        "id": "album-02-19-25-02",
-        "title": "Get Up",
-        "artist": "NewJeans",
-        "coverImage": "/images/albums/njs/cover.jpg",
-        "description": "NewJeans is the first and only K-pop group I’ve really listened to. I’ve never had a K-pop album before because, to me, the culture seems to place a huge emphasis on music videos—like the music is meant to be enjopyed alongside the visuals. I am ignorant and don’t know much about Korean albums, but something about NewJeans feels different.\n Their popular tracks like Ditto, ETA, and Hype Boy are simply great. They are short, sweet, with iconic Jersey club beats, garage vibes, and crystal-clear melodies. I can’t quite explain it, but these songs immediately take me back to my middle school Art Festival (藝術節) in 2012, just sitting with friends and watching people dance on stage. It just feels good listening to NewJeans with nothing in my head.",
-        "links": {
-          "youtube": "https://youtu.be/Krr2u8BUtLw?si=9KdNH3L40jP3bkYk",
-          "appleMusic": "https://music.apple.com/us/album/newjeans-2nd-ep-get-up/1695951888",
-          "spotify": "https://open.spotify.com/album/4N1fROq2oeyLGAlQ1C1j18"
-        }
-      },
-      {
-        "id": "album-02-19-25",
-        "title": "You Will Never Know Why",
-        "artist": "Sweet Trip",
-        "coverImage": "/images/albums/st-ywnkw/cover.jpg",
-        "description": "You Will Never Know Why is a dreamy, upbeat album. With distant vocals and clear melody lines, it’s everything you’d expect from dream pop or synth pop. It literally takes me on a sweet trip, immersing myself in a beautifully crafted soundscape. It’s been almost four years since my first listen, yet this album remains in my regular rotation. There are so many favorite tracks, like 'Acting', 'Darkness, 'Air Supply', and 'Pretending', to name a few.",
-        "links": {
-          "youtube": "https://youtube.com/playlist?list=OLAK5uy_luQpEG_NkTi7-z57k9qVGX95vghXAqrCI&si=nCUstVfSzkTMAL4B",
-          "appleMusic": "https://music.apple.com/us/album/you-will-never-know-why/329455551",
-          "spotify": "https://open.spotify.com/album/78lIjVFQSSRqO47Pvw1b9M"
-        }
-      },
-      {
-        "id": "album-02-18-25",
-        "title": "David Tao",
-        "artist": "David Tao/陶喆",
-        "coverImage": "/images/albums/david-tao/cover.jpg",
-        "description": "David Tao’s self-titled debut album is, hands down, one of my favorite Chinese albums of all time. It’s the very definition of a perfect R&B album, it has beautiful vocals, melodies, and guitar, all in their purest form. While David Tao has released several great albums like I’m OK and 黑色柳丁, this one stands out in how seamlessly it flows. From the moment Airport Takeoff starts playing, you’re fully immersed in his world. Tracks like Blue Moon, Our Love, and Everything’s Gone are the holy grail of Chinese R&B—timeless, soulful, and flawless. Every time I replay this album, I feel an overwhelming nostalgia for an era I never belonged to, back when music was made simply to sound good.",
-        "links": {
-          "youtube": "https://youtube.com/playlist?list=OLAK5uy_nFLa8xrrQX8BusOoD-2cUcTnhMjn-L4ZQ&si=fc6mmikAscWONc6i",
-          "appleMusic": "https://music.apple.com/gh/album/%E9%99%B6%E5%96%86%E5%90%8C%E5%90%8D%E5%B0%88%E8%BC%AF/1416149926",
-          "spotify": "https://open.spotify.com/album/433Xh8UtsKASBYCt0QNk4Q"
-        }
-      },
-      {
-        "id": "album-02-14-25",
-        "title": "Avantdale Bowling Club",
-        "artist": "Avantdale Bowling Club",
-        "coverImage": "/images/albums/abc/cover.jpg",
-        "description": "This is the debut, self-titled jazz rap/hip-hop album by Avantdale Bowling Club (Tom Scott), a New Zealand-based artist. I never expected such a chill and quiet place like New Zealand to produce a hip-hop album this good. The composition is clean yet capricious, and the production has a smooth, rhythm-rich feel, much like the works by D'Angelo and Kendrick. Songs like 'Years Gone By' and 'Old Dogs' feel like listening to a jazz quartet with a storyteller at the mic, while 'F(R)Iends' leans more toward a full jazz orchestra in the background. Overall, it’s a very good album, best enjoyed from start to finish.",
-        "links": {
-          "youtube": "https://youtu.be/gSYv7_8ZJ7k?si=gj0EZ54vtndd5jo-",
-          "appleMusic": "https://music.apple.com/id/album/avantdale-bowling-club/1774437546",
-          "spotify": "https://open.spotify.com/album/4rJTVX98bAnFAMfcHmZURM"
-        }
-      },
-      {
-        "id": "album-02-13-25",
-        "title": "加爾基 精液 栗ノ花",
-        "artist": "Sheena Ringo/椎名林檎",
-        "coverImage": "/images/albums/karuki-zahmen/cover.jpg",
-        "description": "Without a doubt, this is the best work from Sheena Ringo (椎名林檎). Compared to her previous two albums ('Winning Strip' and 'Innocence Moratorium'), this one is far more diverse and playful. From the moment the first song ('Religion') starts, I get goosebumps, it’s that good. \nIn this album, Sheena masters the dynamics of an album, striking a perfect balance between serenity and chaos, simplicity and complexity. She also blends traditional Japanese melodies and instruments with modern production and composition, perfectly demonstrated in 'Stem' and 'Rush Job'. I don’t want to say too much because this album speaks for itself — freedom within order.",
-        "links": {
-          "youtube": "https://youtu.be/pKQqsJGJKfU?si=BDKy4xg_iKy94afR",
-          "appleMusic": "https://music.apple.com/us/album/karuki-zahmen-kuri-no-hana-kalk-samen-chestnut-flower/1385320232",
-          "spotify": "https://open.spotify.com/album/2i4fy6a51XTaZOYA8rIdRK"
-        }
-      },
-      {
-        "id": "album-02-08-25",
-        "title": "Freak Smile",
-        "artist": "Spank Happy",
-        "coverImage": "/images/albums/sh-freaksmile/cover.jpg",
-        "description": "One of the best shibuya-kei (渋谷系) albums from the 90s. Unfortunately, it's not available on most music streaming platforms. The album expertly blends Japanese Jazz Fusion, orchestral elements, electronics, R&B, and even touches of new age and experimental sounds, carefully layered together. It somehow reminds me of Sheena Ringo's 'Kalk Samen Chesnut Flower' - sharing the same level of richness and complexity, but choreographed in a beautiful way.",
-        "links": {
-          "youtube": "https://youtu.be/IkldzmILY48?si=QevxulggdMCjS-2X"
-        }
-      },
-      {
-        "id": "album-02-10-25",
-        "title": "Beta",
-        "artist": "Peter Cat Recording Co.",
-        "coverImage": "/images/albums/ppc-beta/cover.jpg",
-        "description": "I stumbled upon this album while casually browsing Rate Your Music, but it really clicked with me on my second listen, a couple of months after the first. It’s a rich, indie, and playful album, blending R&B chords with deep synth bass. Lots of surprises when I played it all the way through. It is similar to some of Honne’s early songs, just good vibes and great melodies. My favorite tracks are People Never Change, 21C, Black and White, and Control Room.",
-        "links": {
-          "youtube": "https://youtu.be/b6r4AP4TKtQ?si=hqf7VOJECLFRtRgV",
-          "appleMusic": "https://music.apple.com/us/album/beta/1750922465",
-          "spotify": "https://open.spotify.com/album/5RyDQJIkTOl0QMeFZz8UGe"
-        }
+    {
+      "id": "album-02-19-25-02",
+      "title": "Get Up",
+      "artist": "NewJeans",
+      "coverImage": "/images/albums/njs/cover.jpg",
+      "description": "NewJeans is the first and only K-pop group I’ve really listened to. I’ve never had a K-pop album before because, to me, the culture seems to place a huge emphasis on music videos—like the music is meant to be enjopyed alongside the visuals. I am ignorant and don’t know much about Korean albums, but something about NewJeans feels different.\n Their popular tracks like Ditto, ETA, and Hype Boy are simply great. They are short, sweet, with iconic Jersey club beats, garage vibes, and crystal-clear melodies. I can’t quite explain it, but these songs immediately take me back to my middle school Art Festival (藝術節) in 2012, just sitting with friends and watching people dance on stage. It just feels good listening to NewJeans with nothing in my head.",
+      "links": {
+        "youtube": "https://youtu.be/Krr2u8BUtLw?si=9KdNH3L40jP3bkYk",
+        "appleMusic": "https://music.apple.com/us/album/newjeans-2nd-ep-get-up/1695951888",
+        "spotify": "https://open.spotify.com/album/4N1fROq2oeyLGAlQ1C1j18"
       }
-    ]
-  }
+    },
+    {
+      "id": "album-02-19-25",
+      "title": "You Will Never Know Why",
+      "artist": "Sweet Trip",
+      "coverImage": "/images/albums/st-ywnkw/cover.jpg",
+      "description": "You Will Never Know Why is a dreamy, upbeat album. With distant vocals and clear melody lines, it’s everything you’d expect from dream pop or synth pop. It literally takes me on a sweet trip, immersing myself in a beautifully crafted soundscape. It’s been almost four years since my first listen, yet this album remains in my regular rotation. There are so many favorite tracks, like 'Acting', 'Darkness, 'Air Supply', and 'Pretending', to name a few.",
+      "links": {
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_luQpEG_NkTi7-z57k9qVGX95vghXAqrCI&si=nCUstVfSzkTMAL4B",
+        "appleMusic": "https://music.apple.com/us/album/you-will-never-know-why/329455551",
+        "spotify": "https://open.spotify.com/album/78lIjVFQSSRqO47Pvw1b9M"
+      }
+    },
+    {
+      "id": "album-02-18-25",
+      "title": "David Tao",
+      "artist": "David Tao/陶喆",
+      "coverImage": "/images/albums/david-tao/cover.jpg",
+      "description": "David Tao’s self-titled debut album is, hands down, one of my favorite Chinese albums of all time. It’s the very definition of a perfect R&B album, it has beautiful vocals, melodies, and guitar, all in their purest form. While David Tao has released several great albums like I’m OK and 黑色柳丁, this one stands out in how seamlessly it flows. From the moment Airport Takeoff starts playing, you’re fully immersed in his world. Tracks like Blue Moon, Our Love, and Everything’s Gone are the holy grail of Chinese R&B—timeless, soulful, and flawless. Every time I replay this album, I feel an overwhelming nostalgia for an era I never belonged to, back when music was made simply to sound good.",
+      "links": {
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_nFLa8xrrQX8BusOoD-2cUcTnhMjn-L4ZQ&si=fc6mmikAscWONc6i",
+        "appleMusic": "https://music.apple.com/gh/album/%E9%99%B6%E5%96%86%E5%90%8C%E5%90%8D%E5%B0%88%E8%BC%AF/1416149926",
+        "spotify": "https://open.spotify.com/album/433Xh8UtsKASBYCt0QNk4Q"
+      }
+    },
+    {
+      "id": "album-02-14-25",
+      "title": "Avantdale Bowling Club",
+      "artist": "Avantdale Bowling Club",
+      "coverImage": "/images/albums/abc/cover.jpg",
+      "description": "This is the debut, self-titled jazz rap/hip-hop album by Avantdale Bowling Club (Tom Scott), a New Zealand-based artist. I never expected such a chill and quiet place like New Zealand to produce a hip-hop album this good. The composition is clean yet capricious, and the production has a smooth, rhythm-rich feel, much like the works by D'Angelo and Kendrick. Songs like 'Years Gone By' and 'Old Dogs' feel like listening to a jazz quartet with a storyteller at the mic, while 'F(R)Iends' leans more toward a full jazz orchestra in the background. Overall, it’s a very good album, best enjoyed from start to finish.",
+      "links": {
+        "youtube": "https://youtu.be/gSYv7_8ZJ7k?si=gj0EZ54vtndd5jo-",
+        "appleMusic": "https://music.apple.com/id/album/avantdale-bowling-club/1774437546",
+        "spotify": "https://open.spotify.com/album/4rJTVX98bAnFAMfcHmZURM"
+      }
+    },
+    {
+      "id": "album-02-13-25",
+      "title": "加爾基 精液 栗ノ花",
+      "artist": "Sheena Ringo/椎名林檎",
+      "coverImage": "/images/albums/karuki-zahmen/cover.jpg",
+      "description": "Without a doubt, this is the best work from Sheena Ringo (椎名林檎). Compared to her previous two albums ('Winning Strip' and 'Innocence Moratorium'), this one is far more diverse and playful. From the moment the first song ('Religion') starts, I get goosebumps, it’s that good. \nIn this album, Sheena masters the dynamics of an album, striking a perfect balance between serenity and chaos, simplicity and complexity. She also blends traditional Japanese melodies and instruments with modern production and composition, perfectly demonstrated in 'Stem' and 'Rush Job'. I don’t want to say too much because this album speaks for itself — freedom within order.",
+      "links": {
+        "youtube": "https://youtu.be/pKQqsJGJKfU?si=BDKy4xg_iKy94afR",
+        "appleMusic": "https://music.apple.com/us/album/karuki-zahmen-kuri-no-hana-kalk-samen-chestnut-flower/1385320232",
+        "spotify": "https://open.spotify.com/album/2i4fy6a51XTaZOYA8rIdRK"
+      }
+    },
+    {
+      "id": "album-02-08-25",
+      "title": "Freak Smile",
+      "artist": "Spank Happy",
+      "coverImage": "/images/albums/sh-freaksmile/cover.jpg",
+      "description": "One of the best shibuya-kei (渋谷系) albums from the 90s. Unfortunately, it's not available on most music streaming platforms. The album expertly blends Japanese Jazz Fusion, orchestral elements, electronics, R&B, and even touches of new age and experimental sounds, carefully layered together. It somehow reminds me of Sheena Ringo's 'Kalk Samen Chesnut Flower' - sharing the same level of richness and complexity, but choreographed in a beautiful way.",
+      "links": {
+        "youtube": "https://youtu.be/IkldzmILY48?si=QevxulggdMCjS-2X"
+      }
+    },
+    {
+      "id": "album-02-10-25",
+      "title": "Beta",
+      "artist": "Peter Cat Recording Co.",
+      "coverImage": "/images/albums/ppc-beta/cover.jpg",
+      "description": "I stumbled upon this album while casually browsing Rate Your Music, but it really clicked with me on my second listen, a couple of months after the first. It’s a rich, indie, and playful album, blending R&B chords with deep synth bass. Lots of surprises when I played it all the way through. It is similar to some of Honne’s early songs, just good vibes and great melodies. My favorite tracks are People Never Change, 21C, Black and White, and Control Room.",
+      "links": {
+        "youtube": "https://youtu.be/b6r4AP4TKtQ?si=hqf7VOJECLFRtRgV",
+        "appleMusic": "https://music.apple.com/us/album/beta/1750922465",
+        "spotify": "https://open.spotify.com/album/5RyDQJIkTOl0QMeFZz8UGe"
+      }
+    }
+  ]
+}

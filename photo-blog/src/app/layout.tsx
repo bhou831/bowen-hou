@@ -15,7 +15,7 @@ const spectral = Spectral({
 export const metadata: Metadata = {
   title: 'Bowen Hou',
   description: 'Bowen Hou’s bio page and an archive of his photos',
-  metadataBase: new URL('https://bowen-hou.com'), 
+  metadataBase: new URL('https://bowen-hou.com'),
   openGraph: {
     title: 'Bowen Hou',
     description: 'Bio page of Bowen Hou (侯博文) and an archive of his photos',

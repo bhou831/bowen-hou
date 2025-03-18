@@ -28,16 +28,28 @@ export default function Layout({ children }: LayoutProps) {
         <div className="pl-4 pr-4 md:pl-8 md:pr-8 flex justify-between items-center h-16 max-w-full">
           {/* Left-aligned navigation items */}
           <div className="flex space-x-4 md:space-x-5">
-            <Link href="/" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
+            <Link
+              href="/"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
               Home
             </Link>
-            <Link href="/photography" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
+            <Link
+              href="/photography"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
               Photograph
             </Link>
-            <Link href="/music" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
+            <Link
+              href="/music"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
               Music
             </Link>
-            <Link href="/journal" className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400">
+            <Link
+              href="/journal"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            >
               Journal
             </Link>
           </div>
@@ -47,15 +59,17 @@ export default function Layout({ children }: LayoutProps) {
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 ml-2 md:ml-0"
           >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {theme === 'dark' ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
           </button>
         </div>
       </nav>
 
       {/* Main content */}
-      <main className="w-full pl-4 pr-4 md:pl-8 md:pr-8 py-8">
-        {children}
-      </main>
+      <main className="w-full pl-4 pr-4 md:pl-8 md:pr-8 py-8">{children}</main>
     </div>
   );
 }

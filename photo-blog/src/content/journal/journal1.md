@@ -6,7 +6,7 @@ excerpt: Environment, Sustainability
 
 ## Background
 
-I always feel guilty using any plastic products because they have been labeled as non-decomposable and harmful to the environment and marine life. To reduce this guilt of leaving a permanent mark on our beautiful planet, I tried to avoid using plastic as much as possible. For example, at the grocery store, instead of putting fruits and veggies into plastic bags, I just place them directly into my basket and then into the fridge. This extreme approach reduced my plastic consumption but also made my food having less "fridge-life." My fruits and veggies started going bad faster in the fridge, which actually created more food waste. I started to think while plastic is often criticized for being single use and environmentally damaging, it is also an energy efficient packaging material that I seem to rely on. After reading the book *"Not the End of the World"* by Hannah Ritchie, I decided to re-examine my views on plastic in light of some thought-provoking facts.
+I always feel guilty using any plastic products because they have been labeled as non-decomposable and harmful to the environment and marine life. To reduce this guilt of leaving a permanent mark on our beautiful planet, I tried to avoid using plastic as much as possible. For example, at the grocery store, instead of putting fruits and veggies into plastic bags, I just place them directly into my basket and then into the fridge. This extreme approach reduced my plastic consumption but also made my food having less "fridge-life." My fruits and veggies started going bad faster in the fridge, which actually created more food waste. I started to think while plastic is often criticized for being single use and environmentally damaging, it is also an energy efficient packaging material that I seem to rely on. After reading the book _"Not the End of the World"_ by Hannah Ritchie, I decided to re-examine my views on plastic in light of some thought-provoking facts.
 
 ---
 
@@ -49,6 +49,7 @@ I’ve always been curious about where trash and recycled materials go and have 
 ---
 
 ### External References
+
 - [How Many Times Can Cardboard Be Recycled - Boxycle](https://boxycle.org/2021/05/11/how-many-times-can-cardboard-be-recycled/)
 - [How Much Space Would We Need to Store the World’s Plastic in Landfills? - Our World in Data](https://www.sustainabilitybynumbers.com/p/landfill-plastic-area)
 - [What Is Recycling Contamination? - RoadRunner Waste Services](https://www.roadrunnerwm.com/blog/what-is-recycling-contamination)

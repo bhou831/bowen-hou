@@ -13,9 +13,9 @@ export interface Post {
 export async function getJournalPosts(): Promise<Post[]> {
   const postsDirectory = path.join(process.cwd(), 'src/content/journal');
   const fileNames = fs.readdirSync(postsDirectory);
-  
+
   const posts = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
+    .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName): Post => {
       const slug = fileName.replace(/\.md$/, '');
       const fullPath = path.join(postsDirectory, fileName);
@@ -31,14 +31,18 @@ export async function getJournalPosts(): Promise<Post[]> {
       };
     });
 
-  return posts.sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
+  return posts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
-    const fullPath = path.join(process.cwd(), 'src/content/journal', `${slug}.md`);
+    const fullPath = path.join(
+      process.cwd(),
+      'src/content/journal',
+      `${slug}.md`,
+    );
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 

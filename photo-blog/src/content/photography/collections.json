@@ -1,688 +1,688 @@
 {
-    "collections": [
-      {
-        "id": "bradleybeach25",
-        "title": "Bradley Beach",
-        "description": "Foggy days are rarer than sunny days. We spent the night at Bradley Beach on the Jersey Shore. The beach houses there are well maintained, and the fog added an extra layer of mystery and elegance to the scene.",
-        "coverImage": "/images/collections/bradleybeach25/cover.jpg",
-        "images": [
-          "/images/collections/bradleybeach25/bradley25_1.jpg",
-          "/images/collections/bradleybeach25/bradley25_10.jpg",
-          "/images/collections/bradleybeach25/bradley25_11.jpg",
-          "/images/collections/bradleybeach25/bradley25_12.jpg",
-          "/images/collections/bradleybeach25/bradley25_13.jpg",
-          "/images/collections/bradleybeach25/bradley25_14.jpg",
-          "/images/collections/bradleybeach25/bradley25_15.jpg",
-          "/images/collections/bradleybeach25/bradley25_2.jpg",
-          "/images/collections/bradleybeach25/bradley25_3.jpg",
-          "/images/collections/bradleybeach25/bradley25_4.jpg",
-          "/images/collections/bradleybeach25/bradley25_5.jpg",
-          "/images/collections/bradleybeach25/bradley25_6.jpg",
-          "/images/collections/bradleybeach25/bradley25_7.jpg",
-          "/images/collections/bradleybeach25/bradley25_8.jpg",
-          "/images/collections/bradleybeach25/bradley25_9.jpg"
-        ]
-      },
-      {
-        "id": "beacon-0301",
-        "title": "Dia Beacon",
-        "description": "I'm too superficial to appreciate art, especially modern art. Dia Beacon is an art museum in Beacon NY. The artworks are cool, but the most interesting part is the architecture itself - big windows with light blue curtains flowing freely like the skirts of wedding dresses, it was a truly dreamy moment.",
-        "coverImage": "/images/collections/beacon-0301/cover.jpg",
-        "images": [
-          "/images/collections/beacon-0301/beacon0301_16.jpg",
-          "/images/collections/beacon-0301/beacon0301_1.jpg",
-          "/images/collections/beacon-0301/beacon0301_10.jpg",
-          "/images/collections/beacon-0301/beacon0301_11.jpg",
-          "/images/collections/beacon-0301/beacon0301_12.jpg",
-          "/images/collections/beacon-0301/beacon0301_13.jpg",
-          "/images/collections/beacon-0301/beacon0301_14.jpg",
-          "/images/collections/beacon-0301/beacon0301_15.jpg",
-          "/images/collections/beacon-0301/beacon0301_2.jpg",
-          "/images/collections/beacon-0301/beacon0301_3.jpg",
-          "/images/collections/beacon-0301/beacon0301_4.jpg",
-          "/images/collections/beacon-0301/beacon0301_5.jpg",
-          "/images/collections/beacon-0301/beacon0301_6.jpg",
-          "/images/collections/beacon-0301/beacon0301_7.jpg",
-          "/images/collections/beacon-0301/beacon0301_8.jpg",
-          "/images/collections/beacon-0301/beacon0301_9.jpg"
-        ]
-      },
-      {
-        "id": "expl-0227",
-        "title": "Exchange Place 02.28.25",
-        "description": "Photos taken before stepping onto the PATH train. The sun had set and the remnants of glow painted the sky pink, just the right time to propose in front of the beautiful Downtown Manhattan skyline.",
-        "coverImage": "/images/collections/expl-0227/cover.jpg",
-        "images": [
-          "/images/collections/expl-0227/expl0227_3.jpg",
-          "/images/collections/expl-0227/expl0227_2.jpg",
-          "/images/collections/expl-0227/expl0227_1.jpg",
-          "/images/collections/expl-0227/expl0227_4.jpg",
-          "/images/collections/expl-0227/expl0227_5.jpg",
-          "/images/collections/expl-0227/expl0227_6.jpg",
-          "/images/collections/expl-0227/expl0227_7.jpg",
-          "/images/collections/expl-0227/expl0227_8.jpg"
-        ]
-      },
-      {
-        "id": "bk-0223",
-        "title": "Brooklyn Heights 02.23.25",
-        "description": "Photos taken in Brooklyn Heights. Art Deco high rises are repurposed into residential buildings, alongside some well-maintained brownstones, tenements, and scattered abandoned factory buildings. It is a quiet but diverse neighborhood, a blend of history and modernity.",
-        "coverImage": "/images/collections/bk-0223/cover.jpg",
-        "images": [
-          "/images/collections/bk-0223/bk0223_5.jpg",
-          "/images/collections/bk-0223/bk0223_2.jpg",
-          "/images/collections/bk-0223/bk0223_3.jpg",
-          "/images/collections/bk-0223/bk0223_4.jpg",
-          "/images/collections/bk-0223/bk0223_1.jpg",
-          "/images/collections/bk-0223/bk0223_6.jpg",
-          "/images/collections/bk-0223/bk0223_7.jpg",
-          "/images/collections/bk-0223/bk0223_8.jpg",
-          "/images/collections/bk-0223/bk0223_9.jpg"
-        ]
-      },
-      {
-        "id": "kunming",
-        "title": "Kunming in a Nutshell",
-        "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
-        "coverImage": "/images/collections/kunming/cover.jpg",
-        "images": [
-          "/images/collections/kunming/km_2025_10.JPG",
-          "/images/collections/kunming/km_2025_1.JPG",
-          "/images/collections/kunming/km_2025_2.JPG",
-          "/images/collections/kunming/km_2025_11.JPG",
-          "/images/collections/kunming/km_2025_3.JPG",
-          "/images/collections/kunming/km_2025_4.JPG",
-          "/images/collections/kunming/km_2025_5.JPG",
-          "/images/collections/kunming/km_2025_6.JPG",
-          "/images/collections/kunming/km_2025_7.JPG",
-          "/images/collections/kunming/km_2025_8.JPG",
-          "/images/collections/kunming/km_2025_9.JPG"
-        ]
-      },
-      {
-        "id": "tre_cime",
-        "title": "Enter the Tre Cime",
-        "description": "Hands down the best hike of 2024. Even though the trail was completely covered in snow, we enjoyed every moment of it. The Dolomites are truly one of the most stunning parts of the Alps.",
-        "coverImage": "/images/collections/tre_cime/cover.jpg",
-        "images": [
-          "/images/collections/tre_cime/tre_cime_11.JPG",
-          "/images/collections/tre_cime/tre_cime_10.JPG",
-          "/images/collections/tre_cime/tre_cime_1.JPG",
-          "/images/collections/tre_cime/tre_cime_13.JPG",
-          "/images/collections/tre_cime/tre_cime_14.JPG",
-          "/images/collections/tre_cime/tre_cime_15.JPG",
-          "/images/collections/tre_cime/tre_cime_16.JPG",
-          "/images/collections/tre_cime/tre_cime_17.JPG",
-          "/images/collections/tre_cime/tre_cime_18.JPG",
-          "/images/collections/tre_cime/tre_cime_19.JPG",
-          "/images/collections/tre_cime/tre_cime_2.JPG",
-          "/images/collections/tre_cime/tre_cime_3.JPG",
-          "/images/collections/tre_cime/tre_cime_4.JPG",
-          "/images/collections/tre_cime/tre_cime_5.JPG",
-          "/images/collections/tre_cime/tre_cime_6.JPG",
-          "/images/collections/tre_cime/tre_cime_7.JPG",
-          "/images/collections/tre_cime/tre_cime_8.JPG",
-          "/images/collections/tre_cime/tre_cime_9.JPG"
-        ]
-      },
-      {
-        "id": "summer-vibes-in-dec",
-        "title": "Summer Vibes in December",
-        "description": "I’ve been working on this project for a month. It’s easy to take summer-like photos during the actual summer season, but December is the farthest month from summer especially in the Northeast, where Christmas lights and cold air strip away any remaining traces of warmth. How challenging is it to find summer elements during this time of year? \nIn this series, I tried to create photos with a summer vibe in the cold month of December, and make them indistinguishable from actual summer scenes, without any context. I hope you enjoy this collection.",
-        "coverImage": "/images/collections/svid/cover.jpg",
-        "images": [
-          "/images/collections/svid/svidec_4.JPG",
-          "/images/collections/svid/svidec_1.JPG",
-          "/images/collections/svid/svidec_3.JPG",
-          "/images/collections/svid/svidec_2.JPG",
-          "/images/collections/svid/svidec_5.JPG",
-          "/images/collections/svid/svidec_6.JPG",
-          "/images/collections/svid/svidec_7.JPG",
-          "/images/collections/svid/svidec_8.JPG",
-          "/images/collections/svid/svidec_9.JPG",
-          "/images/collections/svid/svidec_10.JPG",
-          "/images/collections/svid/svidec_11.JPG"
-        ]
-      },
-      {
-        "id": "hk2025",
-        "title": "Urbanism of Hong Kong Pt.2",
-        "description": "Jan 2024 Another layover day in Hong Kong—spent about five hours between flights, took a brief walk through Central (中環). Despite recent economic hiccups and political changes, HK remains incredibly walkable, clean, diverse, and well-organized.",
-        "coverImage": "/images/collections/hk2025/cover.jpg",
-        "images": [
-          "/images/collections/hk2025/hk_2025_1.JPG",
-          "/images/collections/hk2025/hk_2025_10.JPG",
-          "/images/collections/hk2025/hk_2025_11.JPG",
-          "/images/collections/hk2025/hk_2025_2.JPG",
-          "/images/collections/hk2025/hk_2025_3.JPG",
-          "/images/collections/hk2025/hk_2025_4.JPG",
-          "/images/collections/hk2025/hk_2025_5.JPG",
-          "/images/collections/hk2025/hk_2025_6.JPG",
-          "/images/collections/hk2025/hk_2025_7.JPG",
-          "/images/collections/hk2025/hk_2025_8.JPG",
-          "/images/collections/hk2025/hk_2025_9.JPG"
-        ]
-      },
-      {
-        "id": "hk2022",
-        "title": "Urbanism of HongKong Pt.1",
-        "description": "Dec 2022. First time back home after three years of COVID travel restrictions. Because of the jetlag, I woke up early, had a feast at the hotel buffet, and took a walk around North Point (北角) on Hong Kong Island. Most of my photos were taken at North Point Ferry Pier—a quiet, almost anime-like spot with layers of beams and walls creating beautiful natural frames for the ocean view.",
-        "coverImage": "/images/collections/hk2022/cover.jpg",
-        "images": [
-          "/images/collections/hk2022/hk_2022_3.JPG",
-          "/images/collections/hk2022/hk_2022_10.JPG",
-          "/images/collections/hk2022/hk_2022_11.JPG",
-          "/images/collections/hk2022/hk_2022_12.JPG",
-          "/images/collections/hk2022/hk_2022_13.JPG",
-          "/images/collections/hk2022/hk_2022_14.JPG",
-          "/images/collections/hk2022/hk_2022_15.JPG",
-          "/images/collections/hk2022/hk_2022_16.JPG",
-          "/images/collections/hk2022/hk_2022_2.JPG",
-          "/images/collections/hk2022/hk_2022_1.JPG",
-          "/images/collections/hk2022/hk_2022_4.JPG",
-          "/images/collections/hk2022/hk_2022_5.JPG",
-          "/images/collections/hk2022/hk_2022_6.JPG",
-          "/images/collections/hk2022/hk_2022_7.JPG",
-          "/images/collections/hk2022/hk_2022_8.JPG",
-          "/images/collections/hk2022/hk_2022_9.JPG"
-        ]
-      },
-      {
-        "id": "siusi2024",
-        "title": "Seis am Schlern",
-        "description": "This is a more relaxed part of the Dolomites, where everything is easily accessible by cable car. The mountain weather is unpredictable, much like what I experienced in Yunnan. I hiked the mountain behind the hotel in the morning, and it was completely fogged up for hours. But at the last moment, the sun came out, shining the entire Siusi Valley.",
-        "coverImage": "/images/collections/siusi2024/cover.jpg",
-        "images": [
-          "/images/collections/siusi2024/siusi_1.JPG",
-          "/images/collections/siusi2024/siusi_10.JPG",
-          "/images/collections/siusi2024/siusi_2.JPG",
-          "/images/collections/siusi2024/siusi_7.JPG",
-          "/images/collections/siusi2024/siusi_3.JPG",
-          "/images/collections/siusi2024/siusi_4.JPG",
-          "/images/collections/siusi2024/siusi_5.JPG",
-          "/images/collections/siusi2024/siusi_6.JPG",
-          "/images/collections/siusi2024/siusi_8.JPG",
-          "/images/collections/siusi2024/siusi_9.JPG"
-        ]
-      },
-      {
-        "id": "mohonk2024",
-        "title": "Mohonk Mountain 2024",
-        "description": "Heading upstate or deep into New Jersey to see the fall foliage has been a must since day one. These photos were taken along the Lemon Squeeze trail at Mohonk Mountain.",
-        "coverImage": "/images/collections/mohonk2024/cover.jpg",
-        "images": [
-          "/images/collections/mohonk2024/mohonk_2024_10.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_1.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_2.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_3.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_4.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_5.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_6.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_7.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_8.JPG",
-          "/images/collections/mohonk2024/mohonk_2024_9.JPG"
-        ]
-      },
-      {
-        "id": "tasa2024",
-        "title": "Tasa Village 2024",
-        "description": "This is a Hani(哈尼族) owned village deep in Yunnan. The white ceramic tiles and green shaded windows reflect 80s Chinese architecture. Not the best looking, but they gave me a childhood flashback.",
-        "coverImage": "/images/collections/tasa2024/cover.jpg",
-        "images": [
-          "/images/collections/tasa2024/tasa_2024_1.JPG",
-          "/images/collections/tasa2024/tasa_2024_10.JPG",
-          "/images/collections/tasa2024/tasa_2024_11.JPG",
-          "/images/collections/tasa2024/tasa_2024_12.JPG",
-          "/images/collections/tasa2024/tasa_2024_13.JPG",
-          "/images/collections/tasa2024/tasa_2024_2.JPG",
-          "/images/collections/tasa2024/tasa_2024_3.JPG",
-          "/images/collections/tasa2024/tasa_2024_4.JPG",
-          "/images/collections/tasa2024/tasa_2024_5.JPG",
-          "/images/collections/tasa2024/tasa_2024_6.JPG",
-          "/images/collections/tasa2024/tasa_2024_7.JPG",
-          "/images/collections/tasa2024/tasa_2024_8.JPG",
-          "/images/collections/tasa2024/tasa_2024_9.JPG"
-        ]
-      },
-      {
-        "id": "como2024",
-        "title": "Lake Como 2024",
-        "description": "Lake Como in rain",
-        "coverImage": "/images/collections/como2024/cover.jpg",
-        "images": [
-          "/images/collections/como2024/lake_como_4.JPG",
-          "/images/collections/como2024/lake_como_10.JPG",
-          "/images/collections/como2024/lake_como_11.JPG",
-          "/images/collections/como2024/lake_como_12.JPG",
-          "/images/collections/como2024/lake_como_13.JPG",
-          "/images/collections/como2024/lake_como_14.JPG",
-          "/images/collections/como2024/lake_como_15.JPG",
-          "/images/collections/como2024/lake_como_16.JPG",
-          "/images/collections/como2024/lake_como_17.JPG",
-          "/images/collections/como2024/lake_como_2.JPG",
-          "/images/collections/como2024/lake_como_3.JPG",
-          "/images/collections/como2024/lake_como_1.JPG",
-          "/images/collections/como2024/lake_como_5.JPG",
-          "/images/collections/como2024/lake_como_6.JPG",
-          "/images/collections/como2024/lake_como_7.JPG",
-          "/images/collections/como2024/lake_como_8.JPG",
-          "/images/collections/como2024/lake_como_9.JPG"
-        ]
-      },
-      {
-        "id": "firenze",
-        "title": "Florence 2024",
-        "description": "Firenze (翡冷翠), a touristy town, but surprisingly home to some reasonably priced restaurants. After a late-night steak, I was walking back to the hotel when I looked up at the Florence Cathedral and suddenly found myself in tears. Later, I learned that this overwhelming excitement wasn’t unusual, it’s called Stendhal Syndrome, and fittingly, it originated right here in Florence.",
-        "coverImage": "/images/collections/firenze/cover.jpg",
-        "images": [
-          "/images/collections/firenze/firenze_11.JPG",
-          "/images/collections/firenze/firenze_10.JPG",
-          "/images/collections/firenze/firenze_1.JPG",
-          "/images/collections/firenze/firenze_12.JPG",
-          "/images/collections/firenze/firenze_13.JPG",
-          "/images/collections/firenze/firenze_2.JPG",
-          "/images/collections/firenze/firenze_4.JPG",
-          "/images/collections/firenze/firenze_5.JPG",
-          "/images/collections/firenze/firenze_6.JPG",
-          "/images/collections/firenze/firenze_7.JPG",
-          "/images/collections/firenze/firenze_8.JPG",
-          "/images/collections/firenze/firenze_9.JPG"
-        ]
-      },
-      {
-        "id": "yiliang-railway",
-        "title": "Yiliang Railway Station 2025",
-        "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
-        "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
-        "images": [
-          "/images/collections/yiliang_01_25/yiliang0125_7.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_2.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_3.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_4.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_5.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_6.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_1.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_8.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_9.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_10.JPG",
-          "/images/collections/yiliang_01_25/yiliang0125_11.JPG"
-        ]
-      },
-      {
-        "id": "xpj2024",
-        "title": "Construction in Progress 2024",
-        "description": "A typical asphalt processing facility near my home.",
-        "coverImage": "/images/collections/xpj2024/cover.jpg",
-        "images": [
-          "/images/collections/xpj2024/xpj_2024_8.JPG",
-          "/images/collections/xpj2024/xpj_2024_10.JPG",
-          "/images/collections/xpj2024/xpj_2024_11.JPG",
-          "/images/collections/xpj2024/xpj_2024_12.JPG",
-          "/images/collections/xpj2024/xpj_2024_13.JPG",
-          "/images/collections/xpj2024/xpj_2024_2.JPG",
-          "/images/collections/xpj2024/xpj_2024_3.JPG",
-          "/images/collections/xpj2024/xpj_2024_4.JPG",
-          "/images/collections/xpj2024/xpj_2024_5.JPG",
-          "/images/collections/xpj2024/xpj_2024_6.JPG",
-          "/images/collections/xpj2024/xpj_2024_7.JPG",
-          "/images/collections/xpj2024/xpj_2024_1.JPG",
-          "/images/collections/xpj2024/xpj_2024_9.JPG"
-        ]
-      },
-      {
-        "id": "asbury-park",
-        "title": "Sunrise in Asbury Park 2025",
-        "description": "Sunrise with snow-covered beach",
-        "coverImage": "/images/collections/asbury_park/cover.jpg",
-        "images": [
-          "/images/collections/asbury_park/asbury_park_2.JPG",
-          "/images/collections/asbury_park/asbury_park_1.JPG",
-          "/images/collections/asbury_park/asbury_park_3.JPG",
-          "/images/collections/asbury_park/asbury_park_4.JPG",
-          "/images/collections/asbury_park/asbury_park_5.JPG",
-          "/images/collections/asbury_park/asbury_park_6.JPG",
-          "/images/collections/asbury_park/asbury_park_7.JPG",
-          "/images/collections/asbury_park/asbury_park_8.JPG",
-          "/images/collections/asbury_park/asbury_park_9.JPG"
-        ]
-      },
-      {
-        "id": "zhima-wedding",
-        "title": "Wedding in Zhima 2024",
-        "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
-        "coverImage": "/images/collections/zhima_2025/cover.jpg",
-        "images": [
-          "/images/collections/zhima_2025/zhima25_10.JPG",
-          "/images/collections/zhima_2025/zhima25_2.JPG",
-          "/images/collections/zhima_2025/zhima25_3.JPG",
-          "/images/collections/zhima_2025/zhima25_4.JPG",
-          "/images/collections/zhima_2025/zhima25_5.JPG",
-          "/images/collections/zhima_2025/zhima25_6.JPG",
-          "/images/collections/zhima_2025/zhima25_7.JPG",
-          "/images/collections/zhima_2025/zhima25_8.JPG",
-          "/images/collections/zhima_2025/zhima25_9.JPG",
-          "/images/collections/zhima_2025/zhima25_13.JPG",
-          "/images/collections/zhima_2025/zhima25_11.JPG",
-          "/images/collections/zhima_2025/zhima25_12.JPG",
-          "/images/collections/zhima_2025/zhima25_1.JPG",
-          "/images/collections/zhima_2025/zhima25_14.JPG"
-        ]
-      },
-      {
-        "id": "jc2024",
-        "title": "Jsrsey City Sunset 2024",
-        "description": "A short sunset walk after work",
-        "coverImage": "/images/collections/jc2024/cover.jpg",
-        "images": [
-          "/images/collections/jc2024/jc_2024_5.JPG",
-          "/images/collections/jc2024/jc_2024_2.JPG",
-          "/images/collections/jc2024/jc_2024_3.JPG",
-          "/images/collections/jc2024/jc_2024_4.JPG",
-          "/images/collections/jc2024/jc_2024_1.JPG",
-          "/images/collections/jc2024/jc_2024_6.JPG",
-          "/images/collections/jc2024/jc_2024_7.JPG"
-        ]
-      },
-      {
-        "id": "cascade24",
-        "title": "Cascade NP 2024",
-        "description": "Cascade National Park 2024",
-        "coverImage": "/images/collections/cascade24/cover.jpg",
-        "images": [
-          "/images/collections/cascade24/cascade_24_2.JPG",
-          "/images/collections/cascade24/cascade_24_1.JPG",
-          "/images/collections/cascade24/cascade_24_3.JPG",
-          "/images/collections/cascade24/cascade_24_4.JPG",
-          "/images/collections/cascade24/cascade_24_5.JPG",
-          "/images/collections/cascade24/cascade_24_6.JPG",
-          "/images/collections/cascade24/cascade_24_7.JPG",
-          "/images/collections/cascade24/cascade_24_8.JPG",
-          "/images/collections/cascade24/cascade_24_9.JPG"
-        ]
-      },
-      {
-        "id": "rainier24",
-        "title": "Mt. Rainier NP 2024",
-        "description": "Mount Rainier National Park, Skyline Trail",
-        "coverImage": "/images/collections/rainier24/cover.jpg",
-        "images": [
-          "/images/collections/rainier24/rainier_24_4.JPG",
-          "/images/collections/rainier24/rainier_24_10.JPG",
-          "/images/collections/rainier24/rainier_24_2.JPG",
-          "/images/collections/rainier24/rainier_24_3.JPG",
-          "/images/collections/rainier24/rainier_24_1.JPG",
-          "/images/collections/rainier24/rainier_24_5.JPG",
-          "/images/collections/rainier24/rainier_24_6.JPG",
-          "/images/collections/rainier24/rainier_24_7.JPG",
-          "/images/collections/rainier24/rainier_24_8.JPG",
-          "/images/collections/rainier24/rainier_24_9.JPG"
-        ]
-      },
-      {
-        "id": "cali24",
-        "title": "Monterey and US Route 1",
-        "description": "US Route 1, from San Francisco to the Julia Pfeiffer",
-        "coverImage": "/images/collections/cali24/cover.jpg",
-        "images": [
-          "/images/collections/cali24/cali_24_10.JPG",
-          "/images/collections/cali24/cali_24_1.JPG",
-          "/images/collections/cali24/cali_24_11.JPG",
-          "/images/collections/cali24/cali_24_2.JPG",
-          "/images/collections/cali24/cali_24_3.JPG",
-          "/images/collections/cali24/cali_24_4.JPG",
-          "/images/collections/cali24/cali_24_5.JPG",
-          "/images/collections/cali24/cali_24_6.JPG",
-          "/images/collections/cali24/cali_24_7.JPG",
-          "/images/collections/cali24/cali_24_8.JPG",
-          "/images/collections/cali24/cali_24_9.JPG"
-        ]
-      },
-      {
-        "id": "grandcanyon23",
-        "title": "Grand Canyon NP 2023",
-        "description": "Grand Canyon National Park",
-        "coverImage": "/images/collections/grandcanyon23/cover.jpg",
-        "images": [
-          "/images/collections/grandcanyon23/gc_23_6.JPG",
-          "/images/collections/grandcanyon23/gc_23_10.JPG",
-          "/images/collections/grandcanyon23/gc_23_11.JPG",
-          "/images/collections/grandcanyon23/gc_23_2.JPG",
-          "/images/collections/grandcanyon23/gc_23_3.JPG",
-          "/images/collections/grandcanyon23/gc_23_4.JPG",
-          "/images/collections/grandcanyon23/gc_23_5.JPG",
-          "/images/collections/grandcanyon23/gc_23_1.JPG",
-          "/images/collections/grandcanyon23/gc_23_7.JPG",
-          "/images/collections/grandcanyon23/gc_23_8.JPG",
-          "/images/collections/grandcanyon23/gc_23_9.JPG"
-        ]
-      },
-      {
-        "id": "monument23",
-        "title": "Monument Valley 2023",
-        "description": "Monument Valley, stayed at the View Hotel",
-        "coverImage": "/images/collections/monument23/cover.jpg",
-        "images": [
-          "/images/collections/monument23/monument_23_6.JPG",
-          "/images/collections/monument23/monument_23_10.JPG",
-          "/images/collections/monument23/monument_23_2.JPG",
-          "/images/collections/monument23/monument_23_3.JPG",
-          "/images/collections/monument23/monument_23_4.JPG",
-          "/images/collections/monument23/monument_23_5.JPG",
-          "/images/collections/monument23/monument_23_1.JPG",
-          "/images/collections/monument23/monument_23_7.JPG",
-          "/images/collections/monument23/monument_23_8.JPG",
-          "/images/collections/monument23/monument_23_9.JPG"
-        ]
-      },
-      {
-        "id": "page23",
-        "title": "American Wilderness",
-        "description": "Photos taken in Page, AZ",
-        "coverImage": "/images/collections/page23/cover.jpg",
-        "images": [
-          "/images/collections/page23/page_23_2.JPG",
-          "/images/collections/page23/page_23_1.JPG",
-          "/images/collections/page23/page_23_3.JPG",
-          "/images/collections/page23/page_23_4.JPG",
-          "/images/collections/page23/page_23_5.JPG"
-        ]
-      },
-      {
-        "id": "minnewaska23",
-        "title": "Lake Minnewaska SP 2023",
-        "description": "Lake Minnewaska in upstate NY, also the filmset of Severance S2E4",
-        "coverImage": "/images/collections/minnewaska23/cover.jpg",
-        "images": [
-          "/images/collections/minnewaska23/minnewaska_23_2.JPG",
-          "/images/collections/minnewaska23/minnewaska_23_1.JPG",
-          "/images/collections/minnewaska23/minnewaska_23_3.JPG",
-          "/images/collections/minnewaska23/minnewaska_23_4.JPG",
-          "/images/collections/minnewaska23/minnewaska_23_5.JPG",
-          "/images/collections/minnewaska23/minnewaska_23_6.JPG"
-        ]
-      },
-      {
-        "id": "yellowstone23",
-        "title": "Yellowstone NP 2023",
-        "description": "Yellowstone National Park",
-        "coverImage": "/images/collections/yellowstone23/cover.jpg",
-        "images": [
-          "/images/collections/yellowstone23/ys_23_6.JPG",
-          "/images/collections/yellowstone23/ys_23_10.JPG",
-          "/images/collections/yellowstone23/ys_23_11.JPG",
-          "/images/collections/yellowstone23/ys_23_2.JPG",
-          "/images/collections/yellowstone23/ys_23_3.JPG",
-          "/images/collections/yellowstone23/ys_23_4.JPG",
-          "/images/collections/yellowstone23/ys_23_5.JPG",
-          "/images/collections/yellowstone23/ys_23_1.JPG",
-          "/images/collections/yellowstone23/ys_23_7.JPG",
-          "/images/collections/yellowstone23/ys_23_8.JPG",
-          "/images/collections/yellowstone23/ys_23_9.JPG"
-        ]
-      },
-      {
-        "id": "teton23",
-        "title": "Grand Teton NP 2023",
-        "description": "The best part of the Rockies",
-        "coverImage": "/images/collections/teton23/cover.jpg",
-        "images": [
-          "/images/collections/teton23/teton_23_5.JPG",
-          "/images/collections/teton23/teton_23_2.JPG",
-          "/images/collections/teton23/teton_23_3.JPG",
-          "/images/collections/teton23/teton_23_4.JPG",
-          "/images/collections/teton23/teton_23_1.JPG",
-          "/images/collections/teton23/teton_23_6.JPG",
-          "/images/collections/teton23/teton_23_7.JPG"
-        ]
-      },
-      {
-        "id": "death_valley23",
-        "title": "Death Valley NP 2023",
-        "description": "Death Valley National Park",
-        "coverImage": "/images/collections/death_valley23/cover.jpg",
-        "images": [
-          "/images/collections/death_valley23/dv_23_4.JPG",
-          "/images/collections/death_valley23/dv_23_2.JPG",
-          "/images/collections/death_valley23/dv_23_3.JPG",
-          "/images/collections/death_valley23/dv_23_1.JPG",
-          "/images/collections/death_valley23/dv_23_5.JPG",
-          "/images/collections/death_valley23/dv_23_6.JPG"
-        ]
-      },
-      {
-        "id": "joshua23",
-        "title": "Joshua Tree NP 2023",
-        "description": "Joshua Tree National Park",
-        "coverImage": "/images/collections/joshua23/cover.jpg",
-        "images": [
-          "/images/collections/joshua23/joshua_23_1.JPG",
-          "/images/collections/joshua23/joshua_23_2.JPG",
-          "/images/collections/joshua23/joshua_23_3.JPG",
-          "/images/collections/joshua23/joshua_23_4.JPG",
-          "/images/collections/joshua23/joshua_23_5.JPG",
-          "/images/collections/joshua23/joshua_23_6.JPG",
-          "/images/collections/joshua23/joshua_23_7.JPG"
-        ]
-      },
-      {
-        "id": "banff22",
-        "title": "Banff NP 2023",
-        "description": "Banff National Park and Yoho National Park in Alberta",
-        "coverImage": "/images/collections/banff22/cover.jpg",
-        "images": [
-          "/images/collections/banff22/banff_22_2.JPG",
-          "/images/collections/banff22/banff_22_10.JPG",
-          "/images/collections/banff22/banff_22_1.JPG",
-          "/images/collections/banff22/banff_22_3.JPG",
-          "/images/collections/banff22/banff_22_4.JPG",
-          "/images/collections/banff22/banff_22_5.JPG",
-          "/images/collections/banff22/banff_22_6.JPG",
-          "/images/collections/banff22/banff_22_7.JPG",
-          "/images/collections/banff22/banff_22_8.JPG",
-          "/images/collections/banff22/banff_22_9.JPG"
-        ]
-      },
-      {
-        "id": "rocky22",
-        "title": "Rocky Mt NP 2022",
-        "description": "Rocky Mountain National Park, photos were taken during my two visits in 2022",
-        "coverImage": "/images/collections/rocky22/cover.jpg",
-        "images": [
-          "/images/collections/rocky22/rocky_22_8.JPG",
-          "/images/collections/rocky22/rocky_22_2.JPG",
-          "/images/collections/rocky22/rocky_22_3.JPG",
-          "/images/collections/rocky22/rocky_22_4.JPG",
-          "/images/collections/rocky22/rocky_22_5.JPG",
-          "/images/collections/rocky22/rocky_22_6.JPG",
-          "/images/collections/rocky22/rocky_22_7.JPG",
-          "/images/collections/rocky22/rocky_22_1.jpg",
-          "/images/collections/rocky22/rocky_22_9.JPG"
-        ]
-      },
-      {
-        "id": "sand_dune22",
-        "title": "Great Sand Dunes NP 2022",
-        "description": "The great sand dunes national park in Colorado",
-        "coverImage": "/images/collections/sand_dune22/cover.jpg",
-        "images": [
-          "/images/collections/sand_dune22/sand_dune_6.JPG",
-          "/images/collections/sand_dune22/sand_dune_2.JPG",
-          "/images/collections/sand_dune22/sand_dune_3.JPG",
-          "/images/collections/sand_dune22/sand_dune_4.JPG",
-          "/images/collections/sand_dune22/sand_dune_5.JPG",
-          "/images/collections/sand_dune22/sand_dune_1.JPG"
-        ]
-      },
-      {
-        "id": "maui22",
-        "title": "Haleakalā NP 2022",
-        "description": "Haleakalā National Park and scenery from Maui Island",
-        "coverImage": "/images/collections/maui22/cover.jpg",
-        "images": [
-          "/images/collections/maui22/maui_22_1.JPG",
-          "/images/collections/maui22/maui_22_2.JPG",
-          "/images/collections/maui22/maui_22_3.JPG",
-          "/images/collections/maui22/maui_22_4.JPG",
-          "/images/collections/maui22/maui_22_5.JPG",
-          "/images/collections/maui22/maui_22_6.JPG"
-        ]
-      },
-      {
-        "id": "half_moon22",
-        "title": "Half Moon Bay 2022",
-        "description": "Half Moon Bay, CA",
-        "coverImage": "/images/collections/half_moon22/cover.jpg",
-        "images": [
-          "/images/collections/half_moon22/half_moon_22_1.JPG",
-          "/images/collections/half_moon22/half_moon_22_2.JPG",
-          "/images/collections/half_moon22/half_moon_22_3.JPG",
-          "/images/collections/half_moon22/half_moon_22_4.JPG"
-        ]
-      },
-      {
-        "id": "crater22",
-        "title": "Crater Lake NP 2022",
-        "description": "The crater lake national park, Oregon",
-        "coverImage": "/images/collections/crater22/cover.jpg",
-        "images": [
-          "/images/collections/crater22/crater_lake_2.JPG",
-          "/images/collections/crater22/crater_lake_1.JPG",
-          "/images/collections/crater22/crater_lake_3.JPG",
-          "/images/collections/crater22/crater_lake_4.JPG",
-          "/images/collections/crater22/crater_lake_5.JPG",
-          "/images/collections/crater22/crater_lake_6.JPG",
-          "/images/collections/crater22/crater_lake_7.JPG",
-          "/images/collections/crater22/crater_lake_8.JPG"
-        ]
-      },
-      {
-        "id": "olympic21",
-        "title": "Olympic NP 2021",
-        "description": "Olympic covered in snow, WA",
-        "coverImage": "/images/collections/olympic21/cover.jpg",
-        "images": [
-          "/images/collections/olympic21/olympic_21_4.JPG",
-          "/images/collections/olympic21/olympic_21_2.JPG",
-          "/images/collections/olympic21/olympic_21_3.JPG",
-          "/images/collections/olympic21/olympic_21_1.JPG",
-          "/images/collections/olympic21/olympic_21_5.JPG",
-          "/images/collections/olympic21/olympic_21_6.JPG",
-          "/images/collections/olympic21/olympic_21_7.JPG"
-        ]
-      },
-      {
-        "id": "bigbend20",
-        "title": "Big Bend NP 2020",
-        "description": "The big bend national park, TX. First time using my A7Riii camera, the dynamic range was just amazing.",
-        "coverImage": "/images/collections/bigbend20/cover.jpg",
-        "images": [
-          "/images/collections/bigbend20/bigbend_6.JPG",
-          "/images/collections/bigbend20/bigbend_2.JPG",
-          "/images/collections/bigbend20/bigbend_3.JPG",
-          "/images/collections/bigbend20/bigbend_4.JPG",
-          "/images/collections/bigbend20/bigbend_5.JPG",
-          "/images/collections/bigbend20/bigbend_1.jpg"
-        ]
-      }
-    ]
-  }
+  "collections": [
+    {
+      "id": "bradleybeach25",
+      "title": "Bradley Beach",
+      "description": "Foggy days are rarer than sunny days. We spent the night at Bradley Beach on the Jersey Shore. The beach houses there are well maintained, and the fog added an extra layer of mystery and elegance to the scene.",
+      "coverImage": "/images/collections/bradleybeach25/cover.jpg",
+      "images": [
+        "/images/collections/bradleybeach25/bradley25_1.jpg",
+        "/images/collections/bradleybeach25/bradley25_10.jpg",
+        "/images/collections/bradleybeach25/bradley25_11.jpg",
+        "/images/collections/bradleybeach25/bradley25_12.jpg",
+        "/images/collections/bradleybeach25/bradley25_13.jpg",
+        "/images/collections/bradleybeach25/bradley25_14.jpg",
+        "/images/collections/bradleybeach25/bradley25_15.jpg",
+        "/images/collections/bradleybeach25/bradley25_2.jpg",
+        "/images/collections/bradleybeach25/bradley25_3.jpg",
+        "/images/collections/bradleybeach25/bradley25_4.jpg",
+        "/images/collections/bradleybeach25/bradley25_5.jpg",
+        "/images/collections/bradleybeach25/bradley25_6.jpg",
+        "/images/collections/bradleybeach25/bradley25_7.jpg",
+        "/images/collections/bradleybeach25/bradley25_8.jpg",
+        "/images/collections/bradleybeach25/bradley25_9.jpg"
+      ]
+    },
+    {
+      "id": "beacon-0301",
+      "title": "Dia Beacon",
+      "description": "I'm too superficial to appreciate art, especially modern art. Dia Beacon is an art museum in Beacon NY. The artworks are cool, but the most interesting part is the architecture itself - big windows with light blue curtains flowing freely like the skirts of wedding dresses, it was a truly dreamy moment.",
+      "coverImage": "/images/collections/beacon-0301/cover.jpg",
+      "images": [
+        "/images/collections/beacon-0301/beacon0301_16.jpg",
+        "/images/collections/beacon-0301/beacon0301_1.jpg",
+        "/images/collections/beacon-0301/beacon0301_10.jpg",
+        "/images/collections/beacon-0301/beacon0301_11.jpg",
+        "/images/collections/beacon-0301/beacon0301_12.jpg",
+        "/images/collections/beacon-0301/beacon0301_13.jpg",
+        "/images/collections/beacon-0301/beacon0301_14.jpg",
+        "/images/collections/beacon-0301/beacon0301_15.jpg",
+        "/images/collections/beacon-0301/beacon0301_2.jpg",
+        "/images/collections/beacon-0301/beacon0301_3.jpg",
+        "/images/collections/beacon-0301/beacon0301_4.jpg",
+        "/images/collections/beacon-0301/beacon0301_5.jpg",
+        "/images/collections/beacon-0301/beacon0301_6.jpg",
+        "/images/collections/beacon-0301/beacon0301_7.jpg",
+        "/images/collections/beacon-0301/beacon0301_8.jpg",
+        "/images/collections/beacon-0301/beacon0301_9.jpg"
+      ]
+    },
+    {
+      "id": "expl-0227",
+      "title": "Exchange Place 02.28.25",
+      "description": "Photos taken before stepping onto the PATH train. The sun had set and the remnants of glow painted the sky pink, just the right time to propose in front of the beautiful Downtown Manhattan skyline.",
+      "coverImage": "/images/collections/expl-0227/cover.jpg",
+      "images": [
+        "/images/collections/expl-0227/expl0227_3.jpg",
+        "/images/collections/expl-0227/expl0227_2.jpg",
+        "/images/collections/expl-0227/expl0227_1.jpg",
+        "/images/collections/expl-0227/expl0227_4.jpg",
+        "/images/collections/expl-0227/expl0227_5.jpg",
+        "/images/collections/expl-0227/expl0227_6.jpg",
+        "/images/collections/expl-0227/expl0227_7.jpg",
+        "/images/collections/expl-0227/expl0227_8.jpg"
+      ]
+    },
+    {
+      "id": "bk-0223",
+      "title": "Brooklyn Heights 02.23.25",
+      "description": "Photos taken in Brooklyn Heights. Art Deco high rises are repurposed into residential buildings, alongside some well-maintained brownstones, tenements, and scattered abandoned factory buildings. It is a quiet but diverse neighborhood, a blend of history and modernity.",
+      "coverImage": "/images/collections/bk-0223/cover.jpg",
+      "images": [
+        "/images/collections/bk-0223/bk0223_5.jpg",
+        "/images/collections/bk-0223/bk0223_2.jpg",
+        "/images/collections/bk-0223/bk0223_3.jpg",
+        "/images/collections/bk-0223/bk0223_4.jpg",
+        "/images/collections/bk-0223/bk0223_1.jpg",
+        "/images/collections/bk-0223/bk0223_6.jpg",
+        "/images/collections/bk-0223/bk0223_7.jpg",
+        "/images/collections/bk-0223/bk0223_8.jpg",
+        "/images/collections/bk-0223/bk0223_9.jpg"
+      ]
+    },
+    {
+      "id": "kunming",
+      "title": "Kunming in a Nutshell",
+      "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
+      "coverImage": "/images/collections/kunming/cover.jpg",
+      "images": [
+        "/images/collections/kunming/km_2025_10.JPG",
+        "/images/collections/kunming/km_2025_1.JPG",
+        "/images/collections/kunming/km_2025_2.JPG",
+        "/images/collections/kunming/km_2025_11.JPG",
+        "/images/collections/kunming/km_2025_3.JPG",
+        "/images/collections/kunming/km_2025_4.JPG",
+        "/images/collections/kunming/km_2025_5.JPG",
+        "/images/collections/kunming/km_2025_6.JPG",
+        "/images/collections/kunming/km_2025_7.JPG",
+        "/images/collections/kunming/km_2025_8.JPG",
+        "/images/collections/kunming/km_2025_9.JPG"
+      ]
+    },
+    {
+      "id": "tre_cime",
+      "title": "Enter the Tre Cime",
+      "description": "Hands down the best hike of 2024. Even though the trail was completely covered in snow, we enjoyed every moment of it. The Dolomites are truly one of the most stunning parts of the Alps.",
+      "coverImage": "/images/collections/tre_cime/cover.jpg",
+      "images": [
+        "/images/collections/tre_cime/tre_cime_11.JPG",
+        "/images/collections/tre_cime/tre_cime_10.JPG",
+        "/images/collections/tre_cime/tre_cime_1.JPG",
+        "/images/collections/tre_cime/tre_cime_13.JPG",
+        "/images/collections/tre_cime/tre_cime_14.JPG",
+        "/images/collections/tre_cime/tre_cime_15.JPG",
+        "/images/collections/tre_cime/tre_cime_16.JPG",
+        "/images/collections/tre_cime/tre_cime_17.JPG",
+        "/images/collections/tre_cime/tre_cime_18.JPG",
+        "/images/collections/tre_cime/tre_cime_19.JPG",
+        "/images/collections/tre_cime/tre_cime_2.JPG",
+        "/images/collections/tre_cime/tre_cime_3.JPG",
+        "/images/collections/tre_cime/tre_cime_4.JPG",
+        "/images/collections/tre_cime/tre_cime_5.JPG",
+        "/images/collections/tre_cime/tre_cime_6.JPG",
+        "/images/collections/tre_cime/tre_cime_7.JPG",
+        "/images/collections/tre_cime/tre_cime_8.JPG",
+        "/images/collections/tre_cime/tre_cime_9.JPG"
+      ]
+    },
+    {
+      "id": "summer-vibes-in-dec",
+      "title": "Summer Vibes in December",
+      "description": "I’ve been working on this project for a month. It’s easy to take summer-like photos during the actual summer season, but December is the farthest month from summer especially in the Northeast, where Christmas lights and cold air strip away any remaining traces of warmth. How challenging is it to find summer elements during this time of year? \nIn this series, I tried to create photos with a summer vibe in the cold month of December, and make them indistinguishable from actual summer scenes, without any context. I hope you enjoy this collection.",
+      "coverImage": "/images/collections/svid/cover.jpg",
+      "images": [
+        "/images/collections/svid/svidec_4.JPG",
+        "/images/collections/svid/svidec_1.JPG",
+        "/images/collections/svid/svidec_3.JPG",
+        "/images/collections/svid/svidec_2.JPG",
+        "/images/collections/svid/svidec_5.JPG",
+        "/images/collections/svid/svidec_6.JPG",
+        "/images/collections/svid/svidec_7.JPG",
+        "/images/collections/svid/svidec_8.JPG",
+        "/images/collections/svid/svidec_9.JPG",
+        "/images/collections/svid/svidec_10.JPG",
+        "/images/collections/svid/svidec_11.JPG"
+      ]
+    },
+    {
+      "id": "hk2025",
+      "title": "Urbanism of Hong Kong Pt.2",
+      "description": "Jan 2024 Another layover day in Hong Kong—spent about five hours between flights, took a brief walk through Central (中環). Despite recent economic hiccups and political changes, HK remains incredibly walkable, clean, diverse, and well-organized.",
+      "coverImage": "/images/collections/hk2025/cover.jpg",
+      "images": [
+        "/images/collections/hk2025/hk_2025_1.JPG",
+        "/images/collections/hk2025/hk_2025_10.JPG",
+        "/images/collections/hk2025/hk_2025_11.JPG",
+        "/images/collections/hk2025/hk_2025_2.JPG",
+        "/images/collections/hk2025/hk_2025_3.JPG",
+        "/images/collections/hk2025/hk_2025_4.JPG",
+        "/images/collections/hk2025/hk_2025_5.JPG",
+        "/images/collections/hk2025/hk_2025_6.JPG",
+        "/images/collections/hk2025/hk_2025_7.JPG",
+        "/images/collections/hk2025/hk_2025_8.JPG",
+        "/images/collections/hk2025/hk_2025_9.JPG"
+      ]
+    },
+    {
+      "id": "hk2022",
+      "title": "Urbanism of HongKong Pt.1",
+      "description": "Dec 2022. First time back home after three years of COVID travel restrictions. Because of the jetlag, I woke up early, had a feast at the hotel buffet, and took a walk around North Point (北角) on Hong Kong Island. Most of my photos were taken at North Point Ferry Pier—a quiet, almost anime-like spot with layers of beams and walls creating beautiful natural frames for the ocean view.",
+      "coverImage": "/images/collections/hk2022/cover.jpg",
+      "images": [
+        "/images/collections/hk2022/hk_2022_3.JPG",
+        "/images/collections/hk2022/hk_2022_10.JPG",
+        "/images/collections/hk2022/hk_2022_11.JPG",
+        "/images/collections/hk2022/hk_2022_12.JPG",
+        "/images/collections/hk2022/hk_2022_13.JPG",
+        "/images/collections/hk2022/hk_2022_14.JPG",
+        "/images/collections/hk2022/hk_2022_15.JPG",
+        "/images/collections/hk2022/hk_2022_16.JPG",
+        "/images/collections/hk2022/hk_2022_2.JPG",
+        "/images/collections/hk2022/hk_2022_1.JPG",
+        "/images/collections/hk2022/hk_2022_4.JPG",
+        "/images/collections/hk2022/hk_2022_5.JPG",
+        "/images/collections/hk2022/hk_2022_6.JPG",
+        "/images/collections/hk2022/hk_2022_7.JPG",
+        "/images/collections/hk2022/hk_2022_8.JPG",
+        "/images/collections/hk2022/hk_2022_9.JPG"
+      ]
+    },
+    {
+      "id": "siusi2024",
+      "title": "Seis am Schlern",
+      "description": "This is a more relaxed part of the Dolomites, where everything is easily accessible by cable car. The mountain weather is unpredictable, much like what I experienced in Yunnan. I hiked the mountain behind the hotel in the morning, and it was completely fogged up for hours. But at the last moment, the sun came out, shining the entire Siusi Valley.",
+      "coverImage": "/images/collections/siusi2024/cover.jpg",
+      "images": [
+        "/images/collections/siusi2024/siusi_1.JPG",
+        "/images/collections/siusi2024/siusi_10.JPG",
+        "/images/collections/siusi2024/siusi_2.JPG",
+        "/images/collections/siusi2024/siusi_7.JPG",
+        "/images/collections/siusi2024/siusi_3.JPG",
+        "/images/collections/siusi2024/siusi_4.JPG",
+        "/images/collections/siusi2024/siusi_5.JPG",
+        "/images/collections/siusi2024/siusi_6.JPG",
+        "/images/collections/siusi2024/siusi_8.JPG",
+        "/images/collections/siusi2024/siusi_9.JPG"
+      ]
+    },
+    {
+      "id": "mohonk2024",
+      "title": "Mohonk Mountain 2024",
+      "description": "Heading upstate or deep into New Jersey to see the fall foliage has been a must since day one. These photos were taken along the Lemon Squeeze trail at Mohonk Mountain.",
+      "coverImage": "/images/collections/mohonk2024/cover.jpg",
+      "images": [
+        "/images/collections/mohonk2024/mohonk_2024_10.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_1.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_2.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_3.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_4.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_5.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_6.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_7.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_8.JPG",
+        "/images/collections/mohonk2024/mohonk_2024_9.JPG"
+      ]
+    },
+    {
+      "id": "tasa2024",
+      "title": "Tasa Village 2024",
+      "description": "This is a Hani(哈尼族) owned village deep in Yunnan. The white ceramic tiles and green shaded windows reflect 80s Chinese architecture. Not the best looking, but they gave me a childhood flashback.",
+      "coverImage": "/images/collections/tasa2024/cover.jpg",
+      "images": [
+        "/images/collections/tasa2024/tasa_2024_1.JPG",
+        "/images/collections/tasa2024/tasa_2024_10.JPG",
+        "/images/collections/tasa2024/tasa_2024_11.JPG",
+        "/images/collections/tasa2024/tasa_2024_12.JPG",
+        "/images/collections/tasa2024/tasa_2024_13.JPG",
+        "/images/collections/tasa2024/tasa_2024_2.JPG",
+        "/images/collections/tasa2024/tasa_2024_3.JPG",
+        "/images/collections/tasa2024/tasa_2024_4.JPG",
+        "/images/collections/tasa2024/tasa_2024_5.JPG",
+        "/images/collections/tasa2024/tasa_2024_6.JPG",
+        "/images/collections/tasa2024/tasa_2024_7.JPG",
+        "/images/collections/tasa2024/tasa_2024_8.JPG",
+        "/images/collections/tasa2024/tasa_2024_9.JPG"
+      ]
+    },
+    {
+      "id": "como2024",
+      "title": "Lake Como 2024",
+      "description": "Lake Como in rain",
+      "coverImage": "/images/collections/como2024/cover.jpg",
+      "images": [
+        "/images/collections/como2024/lake_como_4.JPG",
+        "/images/collections/como2024/lake_como_10.JPG",
+        "/images/collections/como2024/lake_como_11.JPG",
+        "/images/collections/como2024/lake_como_12.JPG",
+        "/images/collections/como2024/lake_como_13.JPG",
+        "/images/collections/como2024/lake_como_14.JPG",
+        "/images/collections/como2024/lake_como_15.JPG",
+        "/images/collections/como2024/lake_como_16.JPG",
+        "/images/collections/como2024/lake_como_17.JPG",
+        "/images/collections/como2024/lake_como_2.JPG",
+        "/images/collections/como2024/lake_como_3.JPG",
+        "/images/collections/como2024/lake_como_1.JPG",
+        "/images/collections/como2024/lake_como_5.JPG",
+        "/images/collections/como2024/lake_como_6.JPG",
+        "/images/collections/como2024/lake_como_7.JPG",
+        "/images/collections/como2024/lake_como_8.JPG",
+        "/images/collections/como2024/lake_como_9.JPG"
+      ]
+    },
+    {
+      "id": "firenze",
+      "title": "Florence 2024",
+      "description": "Firenze (翡冷翠), a touristy town, but surprisingly home to some reasonably priced restaurants. After a late-night steak, I was walking back to the hotel when I looked up at the Florence Cathedral and suddenly found myself in tears. Later, I learned that this overwhelming excitement wasn’t unusual, it’s called Stendhal Syndrome, and fittingly, it originated right here in Florence.",
+      "coverImage": "/images/collections/firenze/cover.jpg",
+      "images": [
+        "/images/collections/firenze/firenze_11.JPG",
+        "/images/collections/firenze/firenze_10.JPG",
+        "/images/collections/firenze/firenze_1.JPG",
+        "/images/collections/firenze/firenze_12.JPG",
+        "/images/collections/firenze/firenze_13.JPG",
+        "/images/collections/firenze/firenze_2.JPG",
+        "/images/collections/firenze/firenze_4.JPG",
+        "/images/collections/firenze/firenze_5.JPG",
+        "/images/collections/firenze/firenze_6.JPG",
+        "/images/collections/firenze/firenze_7.JPG",
+        "/images/collections/firenze/firenze_8.JPG",
+        "/images/collections/firenze/firenze_9.JPG"
+      ]
+    },
+    {
+      "id": "yiliang-railway",
+      "title": "Yiliang Railway Station 2025",
+      "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
+      "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
+      "images": [
+        "/images/collections/yiliang_01_25/yiliang0125_7.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_2.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_3.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_4.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_5.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_6.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_1.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_8.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_9.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_10.JPG",
+        "/images/collections/yiliang_01_25/yiliang0125_11.JPG"
+      ]
+    },
+    {
+      "id": "xpj2024",
+      "title": "Construction in Progress 2024",
+      "description": "A typical asphalt processing facility near my home.",
+      "coverImage": "/images/collections/xpj2024/cover.jpg",
+      "images": [
+        "/images/collections/xpj2024/xpj_2024_8.JPG",
+        "/images/collections/xpj2024/xpj_2024_10.JPG",
+        "/images/collections/xpj2024/xpj_2024_11.JPG",
+        "/images/collections/xpj2024/xpj_2024_12.JPG",
+        "/images/collections/xpj2024/xpj_2024_13.JPG",
+        "/images/collections/xpj2024/xpj_2024_2.JPG",
+        "/images/collections/xpj2024/xpj_2024_3.JPG",
+        "/images/collections/xpj2024/xpj_2024_4.JPG",
+        "/images/collections/xpj2024/xpj_2024_5.JPG",
+        "/images/collections/xpj2024/xpj_2024_6.JPG",
+        "/images/collections/xpj2024/xpj_2024_7.JPG",
+        "/images/collections/xpj2024/xpj_2024_1.JPG",
+        "/images/collections/xpj2024/xpj_2024_9.JPG"
+      ]
+    },
+    {
+      "id": "asbury-park",
+      "title": "Sunrise in Asbury Park 2025",
+      "description": "Sunrise with snow-covered beach",
+      "coverImage": "/images/collections/asbury_park/cover.jpg",
+      "images": [
+        "/images/collections/asbury_park/asbury_park_2.JPG",
+        "/images/collections/asbury_park/asbury_park_1.JPG",
+        "/images/collections/asbury_park/asbury_park_3.JPG",
+        "/images/collections/asbury_park/asbury_park_4.JPG",
+        "/images/collections/asbury_park/asbury_park_5.JPG",
+        "/images/collections/asbury_park/asbury_park_6.JPG",
+        "/images/collections/asbury_park/asbury_park_7.JPG",
+        "/images/collections/asbury_park/asbury_park_8.JPG",
+        "/images/collections/asbury_park/asbury_park_9.JPG"
+      ]
+    },
+    {
+      "id": "zhima-wedding",
+      "title": "Wedding in Zhima 2024",
+      "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
+      "coverImage": "/images/collections/zhima_2025/cover.jpg",
+      "images": [
+        "/images/collections/zhima_2025/zhima25_10.JPG",
+        "/images/collections/zhima_2025/zhima25_2.JPG",
+        "/images/collections/zhima_2025/zhima25_3.JPG",
+        "/images/collections/zhima_2025/zhima25_4.JPG",
+        "/images/collections/zhima_2025/zhima25_5.JPG",
+        "/images/collections/zhima_2025/zhima25_6.JPG",
+        "/images/collections/zhima_2025/zhima25_7.JPG",
+        "/images/collections/zhima_2025/zhima25_8.JPG",
+        "/images/collections/zhima_2025/zhima25_9.JPG",
+        "/images/collections/zhima_2025/zhima25_13.JPG",
+        "/images/collections/zhima_2025/zhima25_11.JPG",
+        "/images/collections/zhima_2025/zhima25_12.JPG",
+        "/images/collections/zhima_2025/zhima25_1.JPG",
+        "/images/collections/zhima_2025/zhima25_14.JPG"
+      ]
+    },
+    {
+      "id": "jc2024",
+      "title": "Jsrsey City Sunset 2024",
+      "description": "A short sunset walk after work",
+      "coverImage": "/images/collections/jc2024/cover.jpg",
+      "images": [
+        "/images/collections/jc2024/jc_2024_5.JPG",
+        "/images/collections/jc2024/jc_2024_2.JPG",
+        "/images/collections/jc2024/jc_2024_3.JPG",
+        "/images/collections/jc2024/jc_2024_4.JPG",
+        "/images/collections/jc2024/jc_2024_1.JPG",
+        "/images/collections/jc2024/jc_2024_6.JPG",
+        "/images/collections/jc2024/jc_2024_7.JPG"
+      ]
+    },
+    {
+      "id": "cascade24",
+      "title": "Cascade NP 2024",
+      "description": "Cascade National Park 2024",
+      "coverImage": "/images/collections/cascade24/cover.jpg",
+      "images": [
+        "/images/collections/cascade24/cascade_24_2.JPG",
+        "/images/collections/cascade24/cascade_24_1.JPG",
+        "/images/collections/cascade24/cascade_24_3.JPG",
+        "/images/collections/cascade24/cascade_24_4.JPG",
+        "/images/collections/cascade24/cascade_24_5.JPG",
+        "/images/collections/cascade24/cascade_24_6.JPG",
+        "/images/collections/cascade24/cascade_24_7.JPG",
+        "/images/collections/cascade24/cascade_24_8.JPG",
+        "/images/collections/cascade24/cascade_24_9.JPG"
+      ]
+    },
+    {
+      "id": "rainier24",
+      "title": "Mt. Rainier NP 2024",
+      "description": "Mount Rainier National Park, Skyline Trail",
+      "coverImage": "/images/collections/rainier24/cover.jpg",
+      "images": [
+        "/images/collections/rainier24/rainier_24_4.JPG",
+        "/images/collections/rainier24/rainier_24_10.JPG",
+        "/images/collections/rainier24/rainier_24_2.JPG",
+        "/images/collections/rainier24/rainier_24_3.JPG",
+        "/images/collections/rainier24/rainier_24_1.JPG",
+        "/images/collections/rainier24/rainier_24_5.JPG",
+        "/images/collections/rainier24/rainier_24_6.JPG",
+        "/images/collections/rainier24/rainier_24_7.JPG",
+        "/images/collections/rainier24/rainier_24_8.JPG",
+        "/images/collections/rainier24/rainier_24_9.JPG"
+      ]
+    },
+    {
+      "id": "cali24",
+      "title": "Monterey and US Route 1",
+      "description": "US Route 1, from San Francisco to the Julia Pfeiffer",
+      "coverImage": "/images/collections/cali24/cover.jpg",
+      "images": [
+        "/images/collections/cali24/cali_24_10.JPG",
+        "/images/collections/cali24/cali_24_1.JPG",
+        "/images/collections/cali24/cali_24_11.JPG",
+        "/images/collections/cali24/cali_24_2.JPG",
+        "/images/collections/cali24/cali_24_3.JPG",
+        "/images/collections/cali24/cali_24_4.JPG",
+        "/images/collections/cali24/cali_24_5.JPG",
+        "/images/collections/cali24/cali_24_6.JPG",
+        "/images/collections/cali24/cali_24_7.JPG",
+        "/images/collections/cali24/cali_24_8.JPG",
+        "/images/collections/cali24/cali_24_9.JPG"
+      ]
+    },
+    {
+      "id": "grandcanyon23",
+      "title": "Grand Canyon NP 2023",
+      "description": "Grand Canyon National Park",
+      "coverImage": "/images/collections/grandcanyon23/cover.jpg",
+      "images": [
+        "/images/collections/grandcanyon23/gc_23_6.JPG",
+        "/images/collections/grandcanyon23/gc_23_10.JPG",
+        "/images/collections/grandcanyon23/gc_23_11.JPG",
+        "/images/collections/grandcanyon23/gc_23_2.JPG",
+        "/images/collections/grandcanyon23/gc_23_3.JPG",
+        "/images/collections/grandcanyon23/gc_23_4.JPG",
+        "/images/collections/grandcanyon23/gc_23_5.JPG",
+        "/images/collections/grandcanyon23/gc_23_1.JPG",
+        "/images/collections/grandcanyon23/gc_23_7.JPG",
+        "/images/collections/grandcanyon23/gc_23_8.JPG",
+        "/images/collections/grandcanyon23/gc_23_9.JPG"
+      ]
+    },
+    {
+      "id": "monument23",
+      "title": "Monument Valley 2023",
+      "description": "Monument Valley, stayed at the View Hotel",
+      "coverImage": "/images/collections/monument23/cover.jpg",
+      "images": [
+        "/images/collections/monument23/monument_23_6.JPG",
+        "/images/collections/monument23/monument_23_10.JPG",
+        "/images/collections/monument23/monument_23_2.JPG",
+        "/images/collections/monument23/monument_23_3.JPG",
+        "/images/collections/monument23/monument_23_4.JPG",
+        "/images/collections/monument23/monument_23_5.JPG",
+        "/images/collections/monument23/monument_23_1.JPG",
+        "/images/collections/monument23/monument_23_7.JPG",
+        "/images/collections/monument23/monument_23_8.JPG",
+        "/images/collections/monument23/monument_23_9.JPG"
+      ]
+    },
+    {
+      "id": "page23",
+      "title": "American Wilderness",
+      "description": "Photos taken in Page, AZ",
+      "coverImage": "/images/collections/page23/cover.jpg",
+      "images": [
+        "/images/collections/page23/page_23_2.JPG",
+        "/images/collections/page23/page_23_1.JPG",
+        "/images/collections/page23/page_23_3.JPG",
+        "/images/collections/page23/page_23_4.JPG",
+        "/images/collections/page23/page_23_5.JPG"
+      ]
+    },
+    {
+      "id": "minnewaska23",
+      "title": "Lake Minnewaska SP 2023",
+      "description": "Lake Minnewaska in upstate NY, also the filmset of Severance S2E4",
+      "coverImage": "/images/collections/minnewaska23/cover.jpg",
+      "images": [
+        "/images/collections/minnewaska23/minnewaska_23_2.JPG",
+        "/images/collections/minnewaska23/minnewaska_23_1.JPG",
+        "/images/collections/minnewaska23/minnewaska_23_3.JPG",
+        "/images/collections/minnewaska23/minnewaska_23_4.JPG",
+        "/images/collections/minnewaska23/minnewaska_23_5.JPG",
+        "/images/collections/minnewaska23/minnewaska_23_6.JPG"
+      ]
+    },
+    {
+      "id": "yellowstone23",
+      "title": "Yellowstone NP 2023",
+      "description": "Yellowstone National Park",
+      "coverImage": "/images/collections/yellowstone23/cover.jpg",
+      "images": [
+        "/images/collections/yellowstone23/ys_23_6.JPG",
+        "/images/collections/yellowstone23/ys_23_10.JPG",
+        "/images/collections/yellowstone23/ys_23_11.JPG",
+        "/images/collections/yellowstone23/ys_23_2.JPG",
+        "/images/collections/yellowstone23/ys_23_3.JPG",
+        "/images/collections/yellowstone23/ys_23_4.JPG",
+        "/images/collections/yellowstone23/ys_23_5.JPG",
+        "/images/collections/yellowstone23/ys_23_1.JPG",
+        "/images/collections/yellowstone23/ys_23_7.JPG",
+        "/images/collections/yellowstone23/ys_23_8.JPG",
+        "/images/collections/yellowstone23/ys_23_9.JPG"
+      ]
+    },
+    {
+      "id": "teton23",
+      "title": "Grand Teton NP 2023",
+      "description": "The best part of the Rockies",
+      "coverImage": "/images/collections/teton23/cover.jpg",
+      "images": [
+        "/images/collections/teton23/teton_23_5.JPG",
+        "/images/collections/teton23/teton_23_2.JPG",
+        "/images/collections/teton23/teton_23_3.JPG",
+        "/images/collections/teton23/teton_23_4.JPG",
+        "/images/collections/teton23/teton_23_1.JPG",
+        "/images/collections/teton23/teton_23_6.JPG",
+        "/images/collections/teton23/teton_23_7.JPG"
+      ]
+    },
+    {
+      "id": "death_valley23",
+      "title": "Death Valley NP 2023",
+      "description": "Death Valley National Park",
+      "coverImage": "/images/collections/death_valley23/cover.jpg",
+      "images": [
+        "/images/collections/death_valley23/dv_23_4.JPG",
+        "/images/collections/death_valley23/dv_23_2.JPG",
+        "/images/collections/death_valley23/dv_23_3.JPG",
+        "/images/collections/death_valley23/dv_23_1.JPG",
+        "/images/collections/death_valley23/dv_23_5.JPG",
+        "/images/collections/death_valley23/dv_23_6.JPG"
+      ]
+    },
+    {
+      "id": "joshua23",
+      "title": "Joshua Tree NP 2023",
+      "description": "Joshua Tree National Park",
+      "coverImage": "/images/collections/joshua23/cover.jpg",
+      "images": [
+        "/images/collections/joshua23/joshua_23_1.JPG",
+        "/images/collections/joshua23/joshua_23_2.JPG",
+        "/images/collections/joshua23/joshua_23_3.JPG",
+        "/images/collections/joshua23/joshua_23_4.JPG",
+        "/images/collections/joshua23/joshua_23_5.JPG",
+        "/images/collections/joshua23/joshua_23_6.JPG",
+        "/images/collections/joshua23/joshua_23_7.JPG"
+      ]
+    },
+    {
+      "id": "banff22",
+      "title": "Banff NP 2023",
+      "description": "Banff National Park and Yoho National Park in Alberta",
+      "coverImage": "/images/collections/banff22/cover.jpg",
+      "images": [
+        "/images/collections/banff22/banff_22_2.JPG",
+        "/images/collections/banff22/banff_22_10.JPG",
+        "/images/collections/banff22/banff_22_1.JPG",
+        "/images/collections/banff22/banff_22_3.JPG",
+        "/images/collections/banff22/banff_22_4.JPG",
+        "/images/collections/banff22/banff_22_5.JPG",
+        "/images/collections/banff22/banff_22_6.JPG",
+        "/images/collections/banff22/banff_22_7.JPG",
+        "/images/collections/banff22/banff_22_8.JPG",
+        "/images/collections/banff22/banff_22_9.JPG"
+      ]
+    },
+    {
+      "id": "rocky22",
+      "title": "Rocky Mt NP 2022",
+      "description": "Rocky Mountain National Park, photos were taken during my two visits in 2022",
+      "coverImage": "/images/collections/rocky22/cover.jpg",
+      "images": [
+        "/images/collections/rocky22/rocky_22_8.JPG",
+        "/images/collections/rocky22/rocky_22_2.JPG",
+        "/images/collections/rocky22/rocky_22_3.JPG",
+        "/images/collections/rocky22/rocky_22_4.JPG",
+        "/images/collections/rocky22/rocky_22_5.JPG",
+        "/images/collections/rocky22/rocky_22_6.JPG",
+        "/images/collections/rocky22/rocky_22_7.JPG",
+        "/images/collections/rocky22/rocky_22_1.jpg",
+        "/images/collections/rocky22/rocky_22_9.JPG"
+      ]
+    },
+    {
+      "id": "sand_dune22",
+      "title": "Great Sand Dunes NP 2022",
+      "description": "The great sand dunes national park in Colorado",
+      "coverImage": "/images/collections/sand_dune22/cover.jpg",
+      "images": [
+        "/images/collections/sand_dune22/sand_dune_6.JPG",
+        "/images/collections/sand_dune22/sand_dune_2.JPG",
+        "/images/collections/sand_dune22/sand_dune_3.JPG",
+        "/images/collections/sand_dune22/sand_dune_4.JPG",
+        "/images/collections/sand_dune22/sand_dune_5.JPG",
+        "/images/collections/sand_dune22/sand_dune_1.JPG"
+      ]
+    },
+    {
+      "id": "maui22",
+      "title": "Haleakalā NP 2022",
+      "description": "Haleakalā National Park and scenery from Maui Island",
+      "coverImage": "/images/collections/maui22/cover.jpg",
+      "images": [
+        "/images/collections/maui22/maui_22_1.JPG",
+        "/images/collections/maui22/maui_22_2.JPG",
+        "/images/collections/maui22/maui_22_3.JPG",
+        "/images/collections/maui22/maui_22_4.JPG",
+        "/images/collections/maui22/maui_22_5.JPG",
+        "/images/collections/maui22/maui_22_6.JPG"
+      ]
+    },
+    {
+      "id": "half_moon22",
+      "title": "Half Moon Bay 2022",
+      "description": "Half Moon Bay, CA",
+      "coverImage": "/images/collections/half_moon22/cover.jpg",
+      "images": [
+        "/images/collections/half_moon22/half_moon_22_1.JPG",
+        "/images/collections/half_moon22/half_moon_22_2.JPG",
+        "/images/collections/half_moon22/half_moon_22_3.JPG",
+        "/images/collections/half_moon22/half_moon_22_4.JPG"
+      ]
+    },
+    {
+      "id": "crater22",
+      "title": "Crater Lake NP 2022",
+      "description": "The crater lake national park, Oregon",
+      "coverImage": "/images/collections/crater22/cover.jpg",
+      "images": [
+        "/images/collections/crater22/crater_lake_2.JPG",
+        "/images/collections/crater22/crater_lake_1.JPG",
+        "/images/collections/crater22/crater_lake_3.JPG",
+        "/images/collections/crater22/crater_lake_4.JPG",
+        "/images/collections/crater22/crater_lake_5.JPG",
+        "/images/collections/crater22/crater_lake_6.JPG",
+        "/images/collections/crater22/crater_lake_7.JPG",
+        "/images/collections/crater22/crater_lake_8.JPG"
+      ]
+    },
+    {
+      "id": "olympic21",
+      "title": "Olympic NP 2021",
+      "description": "Olympic covered in snow, WA",
+      "coverImage": "/images/collections/olympic21/cover.jpg",
+      "images": [
+        "/images/collections/olympic21/olympic_21_4.JPG",
+        "/images/collections/olympic21/olympic_21_2.JPG",
+        "/images/collections/olympic21/olympic_21_3.JPG",
+        "/images/collections/olympic21/olympic_21_1.JPG",
+        "/images/collections/olympic21/olympic_21_5.JPG",
+        "/images/collections/olympic21/olympic_21_6.JPG",
+        "/images/collections/olympic21/olympic_21_7.JPG"
+      ]
+    },
+    {
+      "id": "bigbend20",
+      "title": "Big Bend NP 2020",
+      "description": "The big bend national park, TX. First time using my A7Riii camera, the dynamic range was just amazing.",
+      "coverImage": "/images/collections/bigbend20/cover.jpg",
+      "images": [
+        "/images/collections/bigbend20/bigbend_6.JPG",
+        "/images/collections/bigbend20/bigbend_2.JPG",
+        "/images/collections/bigbend20/bigbend_3.JPG",
+        "/images/collections/bigbend20/bigbend_4.JPG",
+        "/images/collections/bigbend20/bigbend_5.JPG",
+        "/images/collections/bigbend20/bigbend_1.jpg"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,8 @@
-import { S3Client, GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  GetObjectCommand,
+  ListObjectsV2Command,
+} from '@aws-sdk/client-s3';
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION || 'us-east-1',
@@ -40,7 +44,7 @@ export async function getAlbums(): Promise<Album[]> {
       try {
         const metadataResponse = await s3Client.send(metadataCommand);
         const metadata = await metadataResponse.Body?.transformToString();
-        
+
         if (metadata) {
           albums.push(JSON.parse(metadata));
         }
