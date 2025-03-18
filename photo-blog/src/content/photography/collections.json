@@ -1,6 +1,29 @@
 {
     "collections": [
       {
+        "id": "bradleybeach25",
+        "title": "Bradley Beach",
+        "description": "Foggy days are rarer than sunny days. We spent the night at Bradley Beach on the Jersey Shore. The beach houses there are well maintained, and the fog added an extra layer of mystery and elegance to the scene.",
+        "coverImage": "/images/collections/bradleybeach25/cover.jpg",
+        "images": [
+          "/images/collections/bradleybeach25/bradley25_1.jpg",
+          "/images/collections/bradleybeach25/bradley25_10.jpg",
+          "/images/collections/bradleybeach25/bradley25_11.jpg",
+          "/images/collections/bradleybeach25/bradley25_12.jpg",
+          "/images/collections/bradleybeach25/bradley25_13.jpg",
+          "/images/collections/bradleybeach25/bradley25_14.jpg",
+          "/images/collections/bradleybeach25/bradley25_15.jpg",
+          "/images/collections/bradleybeach25/bradley25_2.jpg",
+          "/images/collections/bradleybeach25/bradley25_3.jpg",
+          "/images/collections/bradleybeach25/bradley25_4.jpg",
+          "/images/collections/bradleybeach25/bradley25_5.jpg",
+          "/images/collections/bradleybeach25/bradley25_6.jpg",
+          "/images/collections/bradleybeach25/bradley25_7.jpg",
+          "/images/collections/bradleybeach25/bradley25_8.jpg",
+          "/images/collections/bradleybeach25/bradley25_9.jpg"
+        ]
+      },
+      {
         "id": "beacon-0301",
         "title": "Dia Beacon",
         "description": "I'm too superficial to appreciate art, especially modern art. Dia Beacon is an art museum in Beacon NY. The artworks are cool, but the most interesting part is the architecture itself - big windows with light blue curtains flowing freely like the skirts of wedding dresses, it was a truly dreamy moment.",
