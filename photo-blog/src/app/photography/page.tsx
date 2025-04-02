@@ -83,9 +83,9 @@ export default function Photography() {
 
             <button
               onClick={() => setIsLightboxOpen(false)}
-              className="fixed top-4 right-4 text-white z-50 hover:text-gray-300"
+              className="fixed top-4 left-4 text-white z-50 hover:text-gray-300"
             >
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
               <span className="sr-only">Close gallery</span>
             </button>
 

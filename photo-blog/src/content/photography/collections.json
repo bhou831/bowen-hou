@@ -1,6 +1,19 @@
 {
   "collections": [
     {
+      "id": "04-01-25-jerseyport",
+      "title": "NYC Postcard",
+      "description": "I found this spot on Google Maps where you can see iconic architectures—the Statue of Liberty, Empire State Building, and Freedom Towe all in the same frame. It's everything you would expect in a NYC postcard. The wind was strong, so I had to lower the tripod for more stability. Photos were taken at 200mm, but the images came out are as still very sharp.",
+      "coverImage": "/images/collections/04-01-25-jerseyport/cover.jpg",
+      "images": [
+        "/images/collections/04-01-25-jerseyport/jp25_5.jpg",
+        "/images/collections/04-01-25-jerseyport/jp25_1.jpg",
+        "/images/collections/04-01-25-jerseyport/jp25_2.jpg",
+        "/images/collections/04-01-25-jerseyport/jp25_3.jpg",
+        "/images/collections/04-01-25-jerseyport/jp25_4.jpg"
+      ]
+    },
+    {
       "id": "bradleybeach25",
       "title": "Bradley Beach",
       "description": "Foggy days are rarer than sunny days. We spent the night at Bradley Beach on the Jersey Shore. The beach houses there are well maintained, and the fog added an extra layer of mystery and elegance to the scene.",
