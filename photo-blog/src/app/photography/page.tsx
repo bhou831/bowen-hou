@@ -83,9 +83,9 @@ export default function Photography() {
 
             <button
               onClick={() => setIsLightboxOpen(false)}
-              className="fixed top-4 left-4 text-white z-50 hover:text-gray-300"
+              className="fixed top-2 right-2 text-white z-50 hover:text-gray-300"
             >
-              <X className="w-7 h-7" />
+              <X className="w-4 h-4" />
               <span className="sr-only">Close gallery</span>
             </button>
 
@@ -124,7 +124,7 @@ export default function Photography() {
               </div>
 
               {/* Description Panel - Column layout for mobile and iPad portrait */}
-              <div className="xl:w-80 bg-black/80 p-4 xl:p-8 flex flex-col xl:max-h-full overflow-y-auto">
+              <div className="xl:w-80 bg-black/80 p-4 xl:p-8 flex justify-center flex-col xl:max-h-full overflow-y-auto">
                 {/* Image counter moved to the top for mobile visibility */}
                 <div className="text-white">
                   <div className="flex justify-between items-center mb-2">
@@ -136,7 +136,7 @@ export default function Photography() {
                     </p>
                   </div>
 
-                  <p className="text-lg leading-relaxed py-2 pb-10 mb-4">
+                  <p className="text-md font-light leading-relaxed py-2 pb-10 mb-4">
                     {selectedCollection.description}
                   </p>
                 </div>
