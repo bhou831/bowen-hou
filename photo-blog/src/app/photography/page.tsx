@@ -39,7 +39,7 @@ export default function Photography() {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
       {/* Artistic Minimalist Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 p-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 p-1">
         {collections.map((collection) => (
           <div
             key={collection.id}
