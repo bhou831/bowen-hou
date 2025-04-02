@@ -75,19 +75,11 @@ export default function Photography() {
       {/* Lightbox */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
         {selectedCollection && (
-          <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/95 border-none p-0 overflow-hidden">
+          <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/75 border-none p-0 overflow-hidden dark:bg-black/75">
             <DialogTitle className="sr-only">
               {selectedCollection.title} - Image {currentImageIndex + 1} of{' '}
               {selectedCollection.images.length}
             </DialogTitle>
-
-            <button
-              onClick={() => setIsLightboxOpen(false)}
-              className="fixed top-2 right-2 text-white z-50 hover:text-gray-300"
-            >
-              <X className="w-4 h-4" />
-              <span className="sr-only">Close gallery</span>
-            </button>
 
             {/* Mobile-first approach with flex-col by default, flex-row only on desktop */}
             <div className="h-screen xl:min-h-0 xl:h-[95vh] flex flex-col xl:flex-row">
@@ -124,7 +116,7 @@ export default function Photography() {
               </div>
 
               {/* Description Panel - Column layout for mobile and iPad portrait */}
-              <div className="xl:w-80 bg-black/80 p-4 xl:p-8 flex justify-center flex-col xl:max-h-full overflow-y-auto">
+              <div className="xl:w-80 bg-black/75 p-4 xl:p-8 flex justify-center flex-col xl:max-h-full overflow-y-auto">
                 {/* Image counter moved to the top for mobile visibility */}
                 <div className="text-white">
                   <div className="flex justify-between items-center mb-2">
@@ -145,6 +137,11 @@ export default function Photography() {
           </DialogContent>
         )}
       </Dialog>
+      <style jsx global>{`
+        [type='button'].absolute.right-4.top-4 svg {
+          color: white !important;
+        }
+      `}</style>
     </div>
   );
 }
