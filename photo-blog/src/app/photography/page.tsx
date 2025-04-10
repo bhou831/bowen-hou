@@ -39,7 +39,7 @@ export default function Photography() {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
       {/* Artistic Minimalist Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 p-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 p-1">
         {collections.map((collection) => (
           <div
             key={collection.id}
@@ -62,11 +62,11 @@ export default function Photography() {
             </div>
 
             {/* Title with artistic underline effect */}
-            <div className="mt-3 relative">
-              <h3 className="text-left text-md text-gray-700 dark:text-gray-200 font-light tracking-wide">
+            <div className="mt-3 relative inline-block group">
+              <h3 className="text-left text-md text-gray-700 dark:text-gray-200 font-light tracking-wide inline-block">
                 {collection.title}
               </h3>
-              <div className="h-px w-0 bg-gray-400 dark:bg-gray-500 group-hover:w-1/3 transition-all duration-500 mt-1"></div>
+              <div className="h-px bg-gray-400 dark:bg-gray-500 mt-1 w-0 group-hover:w-full transition-all duration-500"></div>
             </div>
           </div>
         ))}

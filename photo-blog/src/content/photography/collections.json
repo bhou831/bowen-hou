@@ -1,6 +1,25 @@
 {
   "collections": [
     {
+      "id": "central_park_25",
+      "title": "Central Park in Bloom",
+      "description": "Cherry Hill at Central Park was pacaked, yet the trees along the path leading there are just as good, if not better.",
+      "coverImage": "/images/collections/central_park_25/cover.jpg",
+      "images": [
+        "/images/collections/central_park_25/central_park25_9.jpg",
+        "/images/collections/central_park_25/central_park25_10.jpg",
+        "/images/collections/central_park_25/central_park25_11.jpg",
+        "/images/collections/central_park_25/central_park25_2.jpg",
+        "/images/collections/central_park_25/central_park25_3.jpg",
+        "/images/collections/central_park_25/central_park25_4.jpg",
+        "/images/collections/central_park_25/central_park25_5.jpg",
+        "/images/collections/central_park_25/central_park25_6.jpg",
+        "/images/collections/central_park_25/central_park25_7.jpg",
+        "/images/collections/central_park_25/central_park25_8.jpg",
+        "/images/collections/central_park_25/central_park25_1.jpg"
+      ]
+    },
+    {
       "id": "04-01-25-jerseyport",
       "title": "NYC Postcard",
       "description": "I found this spot on Google Maps where you can see iconic architectures—the Statue of Liberty, Empire State Building, and Freedom Towe all in the same frame. It's everything you would expect in a NYC postcard. The wind was strong, so I had to lower the tripod for more stability. Photos were taken at 200mm, but the images came out are as still very sharp.",
@@ -204,7 +223,7 @@
     },
     {
       "id": "mohonk2024",
-      "title": "Mohonk Mountain 2024",
+      "title": "Mohonk Mountain",
       "description": "Heading upstate or deep into New Jersey to see the fall foliage has been a must since day one. These photos were taken along the Lemon Squeeze trail at Mohonk Mountain.",
       "coverImage": "/images/collections/mohonk2024/cover.jpg",
       "images": [
@@ -222,7 +241,7 @@
     },
     {
       "id": "tasa2024",
-      "title": "Tasa Village 2024",
+      "title": "Tasa Village",
       "description": "This is a Hani(哈尼族) owned village deep in Yunnan. The white ceramic tiles and green shaded windows reflect 80s Chinese architecture. Not the best looking, but they gave me a childhood flashback.",
       "coverImage": "/images/collections/tasa2024/cover.jpg",
       "images": [
@@ -243,7 +262,7 @@
     },
     {
       "id": "como2024",
-      "title": "Lake Como 2024",
+      "title": "Lake Como",
       "description": "Lake Como in rain",
       "coverImage": "/images/collections/como2024/cover.jpg",
       "images": [
@@ -268,7 +287,7 @@
     },
     {
       "id": "firenze",
-      "title": "Florence 2024",
+      "title": "Florence",
       "description": "Firenze (翡冷翠), a touristy town, but surprisingly home to some reasonably priced restaurants. After a late-night steak, I was walking back to the hotel when I looked up at the Florence Cathedral and suddenly found myself in tears. Later, I learned that this overwhelming excitement wasn’t unusual, it’s called Stendhal Syndrome, and fittingly, it originated right here in Florence.",
       "coverImage": "/images/collections/firenze/cover.jpg",
       "images": [
@@ -288,7 +307,7 @@
     },
     {
       "id": "yiliang-railway",
-      "title": "Yiliang Railway Station 2025",
+      "title": "Yiliang Railway Station",
       "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
       "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
       "images": [
@@ -307,7 +326,7 @@
     },
     {
       "id": "xpj2024",
-      "title": "Construction in Progress 2024",
+      "title": "Construction in Progress",
       "description": "A typical asphalt processing facility near my home.",
       "coverImage": "/images/collections/xpj2024/cover.jpg",
       "images": [
@@ -328,7 +347,7 @@
     },
     {
       "id": "asbury-park",
-      "title": "Sunrise in Asbury Park 2025",
+      "title": "Sunrise in Asbury Park",
       "description": "Sunrise with snow-covered beach",
       "coverImage": "/images/collections/asbury_park/cover.jpg",
       "images": [
@@ -345,7 +364,7 @@
     },
     {
       "id": "zhima-wedding",
-      "title": "Wedding in Zhima 2024",
+      "title": "Wedding in Zhima",
       "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
       "coverImage": "/images/collections/zhima_2025/cover.jpg",
       "images": [
@@ -367,7 +386,7 @@
     },
     {
       "id": "jc2024",
-      "title": "Jsrsey City Sunset 2024",
+      "title": "Jsrsey City Sunset",
       "description": "A short sunset walk after work",
       "coverImage": "/images/collections/jc2024/cover.jpg",
       "images": [
