@@ -71,7 +71,7 @@ export default function Home() {
       <div className="max-w-[1000px] mx-auto prose dark:prose-invert">
         <div className="mt-4 text-gray-800 dark:text-gray-200">
           <p>
-            I am an software engineer for{' '}
+            I am a software engineer for{' '}
             <a href="https://autodesk.com">Autodesk</a> and I work on data
             quality assurance. I had a masters degree in Civil Engineering and
             Engineering & Tech Management at{' '}
