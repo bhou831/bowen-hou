@@ -1,6 +1,18 @@
 {
   "albums": [
     {
+      "id": "album-04-24-25",
+      "title": "Forever Howlong",
+      "artist": "Black Country, New Road",
+      "coverImage": "/images/albums/bcnr-fh/cover.jpg",
+      "description": "Another red covered album - Forever Howlong is just a very surprising album out in 2025. I picked it up on my way to work, but starting from 'Besties,' its melodic yet baroque styled melody line and harmonic voicings kept me listening through and completely forgot about the crazy loud subway sound. And even setting aside BC,NR’s previous two albums, this one still holds up well on its own and is easy to enjoy independently.",
+      "links": {
+        "youtube": "https://www.youtube.com/watch?v=DZvV5ejmDVo&list=PLHTo__bpnlYUrffEidKmRve3-CIlUr_Ym",
+        "appleMusic": "https://music.apple.com/us/album/forever-howlong/1783713554",
+        "spotify": "https://open.spotify.com/album/5FjaEW3Hi8vD2aoJNWln4t"
+      }
+    },
+    {
       "id": "album-03-06-25",
       "title": "Sunlight",
       "artist": "Herbie Hancock",
