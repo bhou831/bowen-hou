@@ -1,6 +1,33 @@
 {
   "collections": [
     {
+      "id": "early_spring",
+      "title": "Spring, in general",
+      "description": "The spring vibe in the city is always immaculate with occasional rains, fresh greenery, and daily allergy spray. I took these photos at Brooklyn Botanic Garden, Hudson River Park, and Harsimus Cove.",
+      "coverImage": "/images/collections/early_spring/cover.jpg",
+      "images": [
+        "/images/collections/early_spring/early_spring_16.jpg",
+        "/images/collections/early_spring/early_spring_10.jpg",
+        "/images/collections/early_spring/early_spring_11.jpg",
+        "/images/collections/early_spring/early_spring_12.jpg",
+        "/images/collections/early_spring/early_spring_13.jpg",
+        "/images/collections/early_spring/early_spring_14.jpg",
+        "/images/collections/early_spring/early_spring_15.jpg",
+        "/images/collections/early_spring/early_spring_1.jpg",
+        "/images/collections/early_spring/early_spring_17.jpg",
+        "/images/collections/early_spring/early_spring_18.jpg",
+        "/images/collections/early_spring/early_spring_19.jpg",
+        "/images/collections/early_spring/early_spring_2.jpg",
+        "/images/collections/early_spring/early_spring_3.jpg",
+        "/images/collections/early_spring/early_spring_4.jpg",
+        "/images/collections/early_spring/early_spring_5.jpg",
+        "/images/collections/early_spring/early_spring_6.jpg",
+        "/images/collections/early_spring/early_spring_7.jpg",
+        "/images/collections/early_spring/early_spring_8.jpg",
+        "/images/collections/early_spring/early_spring_9.jpg"
+      ]
+    },
+    {
       "id": "central_park_25",
       "title": "Central Park in Bloom",
       "description": "Cherry Hill at Central Park was pacaked, yet the trees along the path leading there are just as good, if not better.",
