@@ -4,3 +4,7 @@ deploy:
     - rm -rf ./out            # Remove existing output directory
     - npm run build           # Build the project
     - aws s3 sync ./out/ s3://bowen-hou.com --delete   # Sync ./out/ to S3 bucket and delete removed files
+
+dev:
+    - npm run dev
+    - open http://localhost:3000/
