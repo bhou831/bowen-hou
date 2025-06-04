@@ -11,7 +11,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -20,6 +20,8 @@ export default function Layout({ children }: LayoutProps) {
   if (!mounted) {
     return null;
   }
+
+  const currentTheme = resolvedTheme || theme;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -56,10 +58,10 @@ export default function Layout({ children }: LayoutProps) {
 
           {/* Right-aligned theme toggle */}
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
             className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 ml-2 md:ml-0"
           >
-            {theme === 'dark' ? (
+            {currentTheme === 'dark' ? (
               <Sun className="w-4 h-4" />
             ) : (
               <Moon className="w-4 h-4" />
