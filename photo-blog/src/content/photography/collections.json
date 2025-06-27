@@ -1,6 +1,48 @@
 {
   "collections": [
     {
+      "id": "sf25",
+      "title": "Presidio",
+      "description": "Thanks to the jet lag, I woke up at 4:30 and headed straight to Twin Peaks. The city was chilly and completely covered in fog when I reached the Christmas Tree lookout, despite checking the webcam before stepping out. The driver joked that I wouldn't spend a minute there and took me downhill. I then caught another train to Presidio/Crissy Field, where the conditions were much better, with the soft morning light being just right.",
+      "coverImage": "/images/collections/sf25/cover.jpg",
+      "images": [
+        "/images/collections/sf25/sf25_3.JPG",
+        "/images/collections/sf25/sf25_10.JPG",
+        "/images/collections/sf25/sf25_2.JPG",
+        "/images/collections/sf25/sf25_1.JPG",
+        "/images/collections/sf25/sf25_4.JPG",
+        "/images/collections/sf25/sf25_5.JPG",
+        "/images/collections/sf25/sf25_6.JPG",
+        "/images/collections/sf25/sf25_7.JPG",
+        "/images/collections/sf25/sf25_8.JPG",
+        "/images/collections/sf25/sf25_9.JPG"
+      ]
+    },
+    {
+      "id": "paris25",
+      "title": "Urbanism of Paris",
+      "description": "Paris really feels like peak urbanism — a city and transit system designed for everyone, not just commuters. Even during off-peak hours and weekends, trains and buses run every 3–5 minutes. The layout is also insanely well-designed, thanks to Haussmann. Green spaces are everywhere, streets and aves interweave which is far more interesting to explore on foot/bike compared to cities on a grid. The buildings all share that iconic zinc roof, brings uniformly to the skyline.",
+      "coverImage": "/images/collections/paris25/cover.jpg",
+      "images": [
+        "/images/collections/paris25/paris25_5.JPG",
+        "/images/collections/paris25/paris25_10.JPG",
+        "/images/collections/paris25/paris25_11.JPG",
+        "/images/collections/paris25/paris25_12.JPG",
+        "/images/collections/paris25/paris25_13.JPG",
+        "/images/collections/paris25/paris25_14.JPG",
+        "/images/collections/paris25/paris25_15.JPG",
+        "/images/collections/paris25/paris25_16.JPG",
+        "/images/collections/paris25/paris25_2.JPG",
+        "/images/collections/paris25/paris25_3.JPG",
+        "/images/collections/paris25/paris25_4.JPG",
+        "/images/collections/paris25/paris25_1.JPG",
+        "/images/collections/paris25/paris25_6.JPG",
+        "/images/collections/paris25/paris25_7.JPG",
+        "/images/collections/paris25/paris25_8.JPG",
+        "/images/collections/paris25/paris25_9.JPG"
+      ]
+    },
+    {
       "id": "iceland-peninsula",
       "title": "Iceland - Snæfellsnes",
       "description": "This was our last stop in Iceland. Located near the Westfjords, we took a ferry directly here. This peninsula is another picturesque destination, stretching from east to west. Its north and south shores are divided by a central mountain range, with the south coast forming a vast flat plain that gives you unobstructed views from the mountains all the way to the sea.",
