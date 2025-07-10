@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     const imageList = Array.from({ length: 25 }, (_, i) => 
-      `images/slideshow/cover_page_${i + 1}.jpg`
+      `/images/slideshow/cover_page_${i + 1}.jpg`
     );
 
     // Shuffle the images on each page load
