@@ -4,22 +4,27 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    async function fetchImages() {
-      try {
-        const response = await fetch('/api/slideshow');
-        const data = await response.json();
-        setImages(data.images);
-      } catch (error) {
-        console.error('Error fetching slideshow images:', error);
-      }
-    }
+    const imageList = Array.from({ length: 25 }, (_, i) => 
+      `images/slideshow/cover_page_${i + 1}.jpg`
+    );
 
-    fetchImages();
+    // Shuffle the images on each page load
+    const shuffledImages = shuffleArray(imageList);
+    setImages(shuffledImages);
   }, []);
 
   useEffect(() => {
@@ -50,7 +55,7 @@ export default function Home() {
                 exit={{ opacity: 0 }}
                 transition={{
                   duration: 0.5,
-                  ease: [0.1, 0.3, 0.6, 1], // Custom easing for a more natural fade
+                  ease: [0.1, 0.3, 0.6, 1],
                 }}
                 className="absolute inset-0"
               >
