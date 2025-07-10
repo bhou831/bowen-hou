@@ -6,6 +6,15 @@ import path from 'path';
 export const dynamic = 'force-static';
 export const revalidate = false;
 
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export async function GET() {
   try {
     const slideshowDir = path.join(process.cwd(), 'public/images/slideshow');
@@ -16,11 +25,11 @@ export async function GET() {
       .filter((file) => {
         const ext = path.extname(file).toLowerCase();
         return ['.jpg', '.jpeg', '.png', '.webp'].includes(ext);
-      })
-      .sort();
+      });
 
-    // Convert to public URLs
-    const images = imageFiles.map((file) => `/images/slideshow/${file}`);
+    const shuffledImages = shuffleArray(imageFiles);
+
+    const images = shuffledImages.map((file) => `/images/slideshow/${file}`);
 
     return NextResponse.json({ images });
   } catch (error) {
