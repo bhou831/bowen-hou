@@ -1,6 +1,18 @@
 {
   "albums": [
     {
+      "id": "album-07-31-25",
+      "title": "COБAKA (Crouka)",
+      "artist": "Sunaga t Experience",
+      "coverImage": "/images/albums/ste-crouka/cover.jpg",
+      "description": "This album came out in 2021, but it feels way ahead of its time. The blend of synths, soundscapes, and jazzy instrumentation takes me back to the 70s and 80s, when imagination about outer space felt limitless. Give this one a full listen and let it take you on a space journey. Apple Music’s recommendations are just getting better",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/co%D0%B1aka-crouka/1436074105",
+        "spotify": "https://open.spotify.com/album/332beCXyVOlilO8uhkHpOv",
+        "youtube": "https://www.youtube.com/watch?v=847sCmNXVww"
+      }
+    },
+    {
       "id": "album-05-06-25",
       "title": "The Ocean Waves",
       "artist": "Shigeru Nagata/永田茂",
