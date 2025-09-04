@@ -1,6 +1,27 @@
 {
   "collections": [
     {
+      "id": "banff2025",
+      "title": "Banff NP 2025",
+      "description": "Revisited Banff over the Labour Day weekend. The park wasn’t as crowded as I expected. Popular scenic spots were busy as usual, but the hiking trails were surprisingly quiet. Sadly, with climate change, Alberta’s wildfire season has stretched into early September. Banff town was about 10 degrees above the historical average, and a light smog covered over the park. The scenery felt like only 60–70% of Banff’s full potential, but even so, it’s still one of the most beautiful parts of the Rockies.",
+      "coverImage": "/images/collections/banff2025/cover.jpg",
+      "images": [
+        "/images/collections/banff2025/banff2025_5.JPG",
+        "/images/collections/banff2025/banff2025_10.JPG",
+        "/images/collections/banff2025/banff2025_11.JPG",
+        "/images/collections/banff2025/banff2025_12.JPG",
+        "/images/collections/banff2025/banff2025_13.JPG",
+        "/images/collections/banff2025/banff2025_2.JPG",
+        "/images/collections/banff2025/banff2025_3.JPG",
+        "/images/collections/banff2025/banff2025_4.JPG",
+        "/images/collections/banff2025/banff2025_1.JPG",
+        "/images/collections/banff2025/banff2025_6.JPG",
+        "/images/collections/banff2025/banff2025_7.JPG",
+        "/images/collections/banff2025/banff2025_8.JPG",
+        "/images/collections/banff2025/banff2025_9.JPG"
+      ]
+    },
+    {
       "id": "sf25",
       "title": "Presidio",
       "description": "Thanks to the jet lag, I woke up at 4:30 and headed straight to Twin Peaks. The city was chilly and completely covered in fog when I reached the Christmas Tree lookout, despite checking the webcam before stepping out. The driver joked that I wouldn't spend a minute there and took me downhill. I then caught another train to Presidio/Crissy Field, where the conditions were much better, with the soft morning light being just right.",
@@ -771,7 +792,7 @@
     },
     {
       "id": "banff22",
-      "title": "Banff NP 2023",
+      "title": "Banff NP 2022",
       "description": "Banff National Park and Yoho National Park in Alberta",
       "coverImage": "/images/collections/banff22/cover.jpg",
       "images": [
