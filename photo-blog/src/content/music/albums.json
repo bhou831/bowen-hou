@@ -1,6 +1,30 @@
 {
   "albums": [
     {
+      "id": "album-10-13-25",
+      "title": "Go With The Flow",
+      "artist": "A-Yue Chang/張震嶽",
+      "coverImage": "/images/albums/go-with-flow/cover.jpg",
+      "description": "Ayue hasn’t changed at all, he’s still the guy who truly enjoys life and turns those little details into melodies. This album is simply straightforward—sounds great and vibes great.",
+      "links": {
+        "appleMusic": "https://music.apple.com/ca/album/%E8%B7%9F%E8%91%97%E6%84%9F%E8%A6%BA%E8%B5%B0/1827444887",
+        "spotify": "https://open.spotify.com/album/2evA9z2timYQLrCtfmsTe1",
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_nwYwEjA3W9BzezifoZS2FQQll5FKLXh4A&si=CtXKZq33fw69M-gD"
+      }
+    },
+    {
+      "id": "album-10-12-25",
+      "title": "HYPERYOUTH",
+      "artist": "Joey Valence & Brea",
+      "coverImage": "/images/albums/hyperyouth/cover.jpg",
+      "description": "The perfect running pair, JVB’s music delivers the energy you need like a supercharged engine, making you want to dance and boosting your adrenaline. I fully enjoyed the retro, techno, and eclectic vibes from the start to the end.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/hyperyouth/1824543248",
+        "spotify": "https://open.spotify.com/album/4QzLpl3oZx1P1BnhvkkAYW",
+        "youtube": "https://www.youtube.com/watch?v=B5ZbhblfsAo&list=OLAK5uy_mLmJ2OLNueoiGVCThF2MQc_Ohjooj2WQE"
+      }
+    },
+    {
       "id": "album-07-31-25",
       "title": "COБAKA (Crouka)",
       "artist": "Sunaga t Experience",
