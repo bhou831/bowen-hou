@@ -1,6 +1,26 @@
 {
   "collections": [
     {
+      "id": "fall2025",
+      "title": "Foliage Report 2025",
+      "description": "Fall 2025 — photos taken in the Adirondacks, Catskills, and Prospect Park. With the lack of rain, the foliage took on a quieter palette; instead of vibrant colors, the leaves dried and curled. Even so, we still got some great hikes.",
+      "coverImage": "/images/collections/fall2025/cover.jpg",
+      "images": [
+        "/images/collections/fall2025/fall2025_8.jpg",
+        "/images/collections/fall2025/fall2025_10.jpg",
+        "/images/collections/fall2025/fall2025_11.jpg",
+        "/images/collections/fall2025/fall2025_12.jpg",
+        "/images/collections/fall2025/fall2025_2.jpg",
+        "/images/collections/fall2025/fall2025_3.jpg",
+        "/images/collections/fall2025/fall2025_4.jpg",
+        "/images/collections/fall2025/fall2025_5.jpg",
+        "/images/collections/fall2025/fall2025_6.jpg",
+        "/images/collections/fall2025/fall2025_7.jpg",
+        "/images/collections/fall2025/fall2025_1.jpg",
+        "/images/collections/fall2025/fall2025_9.jpg"
+      ]
+    },
+    {
       "id": "banff2025",
       "title": "Banff NP 2025",
       "description": "Revisited Banff over the Labour Day weekend. The park wasn’t as crowded as I expected. Popular scenic spots were busy as usual, but the hiking trails were surprisingly quiet. Sadly, with climate change, Alberta’s wildfire season has stretched into early September. Banff town was about 10 degrees above the historical average, and a light smog covered over the park. The scenery felt like only 60–70% of Banff’s full potential, but even so, it’s still one of the most beautiful parts of the Rockies.",

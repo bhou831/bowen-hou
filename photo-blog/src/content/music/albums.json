@@ -1,6 +1,18 @@
 {
   "albums": [
     {
+      "id": "album-11-04-25",
+      "title": "Flying Beagle",
+      "artist": "Himiko Kikuchi/菊池ひみこ",
+      "coverImage": "/images/albums/flying-beagle/cover.jpg",
+      "description": "This album played on my recommended radio while I was riding my bike, and I immediately pulled over to add it to my favorites. I’ve always liked Japanese fusion, and Flying Beagle is such a perfect example. The instrumentation is so harmonious, and the piano flows so smoothly, it feels like driving down a newly paved asphalt road with no traffic. Hard to believe this came out 40 years ago.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/flying-beagle/1770715818",
+        "spotify": "https://open.spotify.com/album/3rtHKkpPLmiwHNiHA0Kr3d",
+        "youtube": "https://www.youtube.com/watch?v=MMQUilazdUI"
+      }
+    },
+    {
       "id": "album-10-13-25",
       "title": "Go With The Flow",
       "artist": "A-Yue Chang/張震嶽",
