@@ -1,6 +1,27 @@
 {
   "collections": [
     {
+      "id": "hawaii2025",
+      "title": "Kauai and Hawaii",
+      "description": "A recent trip to Kauai and the Big Island. Kauai felt rugged and understated; its raw, organic architecture matched the island’s peaceful, tropical rainforest vibe. The Big Island, on the other hand, felt young and volcanic, with more refined infrastructure. Along the sunny Kona coast, I saw many 60s–70s island-brutalism buildings with large open atriums, while just east of the mountains, the landscape shifts into jungle. Parts of the Big Island reminded me of Iceland; they all share the same volcanic island energy, but the Big Island was just lusher, warmer, and more relaxed.",
+      "coverImage": "/images/collections/hawaii2025/cover.jpg",
+      "images": [
+        "/images/collections/hawaii2025/hawaii2025_13.JPG",
+        "/images/collections/hawaii2025/hawaii2025_10.JPG",
+        "/images/collections/hawaii2025/hawaii2025_11.JPG",
+        "/images/collections/hawaii2025/hawaii2025_12.JPG",
+        "/images/collections/hawaii2025/hawaii2025_1.JPG",
+        "/images/collections/hawaii2025/hawaii2025_2.JPG",
+        "/images/collections/hawaii2025/hawaii2025_3.JPG",
+        "/images/collections/hawaii2025/hawaii2025_4.JPG",
+        "/images/collections/hawaii2025/hawaii2025_5.JPG",
+        "/images/collections/hawaii2025/hawaii2025_6.JPG",
+        "/images/collections/hawaii2025/hawaii2025_7.JPG",
+        "/images/collections/hawaii2025/hawaii2025_8.JPG",
+        "/images/collections/hawaii2025/hawaii2025_9.JPG"
+      ]
+    },
+    {
       "id": "fall2025",
       "title": "Foliage Report 2025",
       "description": "Fall 2025 — photos taken in the Adirondacks, Catskills, and Prospect Park. With the lack of rain, the foliage looked pale and muted; instead of changing colors, the leaves dried and crinkled. Even so, we still got some great hikes.",
