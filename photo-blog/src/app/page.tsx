@@ -65,7 +65,7 @@ export default function Home() {
             className="max-w-[1000px] mx-auto bg-gray-100 border border-gray-300 rounded-lg p-4 flex items-center justify-between gap-4"
           >
             <p className="text-sm text-gray-700 flex-1">
-              I've removed dark mode entirely on 11-22-25 as it simply did not look good on photographic content. Enjoy the site in light mode!
+              I&apos;ve removed dark mode entirely on Nov 22, 2025 as it simply did not look good on photographic content. Enjoy the site in light mode!
             </p>
             <button
               onClick={handleDismissBanner}
