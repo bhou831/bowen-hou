@@ -46,7 +46,7 @@ export default function Photography() {
             className="cursor-pointer group mx-auto w-full transition-all duration-500 ease-in-out"
             onClick={() => handleCollectionClick(collection)}
           >
-            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
+            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100">
               <div className="absolute inset-0">
                 <Image
                   src={collection.coverImage}
@@ -63,10 +63,10 @@ export default function Photography() {
 
             {/* Title with artistic underline effect */}
             <div className="mt-3 relative inline-block group">
-              <h3 className="text-left text-md text-gray-700 dark:text-gray-200 font-light tracking-wide inline-block">
+              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
                 {collection.title}
               </h3>
-              <div className="h-px bg-gray-400 dark:bg-gray-500 mt-1 w-0 group-hover:w-full transition-all duration-500"></div>
+              <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500"></div>
             </div>
           </div>
         ))}
@@ -75,7 +75,7 @@ export default function Photography() {
       {/* Lightbox */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
         {selectedCollection && (
-          <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/75 border-none p-0 overflow-hidden dark:bg-black/75">
+          <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/75 border-none p-0 overflow-hidden">
             <DialogTitle className="sr-only">
               {selectedCollection.title} - Image {currentImageIndex + 1} of{' '}
               {selectedCollection.images.length}

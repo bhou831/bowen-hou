@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
@@ -16,6 +17,7 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     const imageList = Array.from({ length: 25 }, (_, i) => 
@@ -25,6 +27,12 @@ export default function Home() {
     // Shuffle the images on each page load
     const shuffledImages = shuffleArray(imageList);
     setImages(shuffledImages);
+
+    // Check if banner has been dismissed
+    const bannerDismissed = localStorage.getItem('darkModeBannerDismissed');
+    if (!bannerDismissed) {
+      setShowBanner(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -39,13 +47,42 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [images.length]);
 
+  const handleDismissBanner = () => {
+    setShowBanner(false);
+    localStorage.setItem('darkModeBannerDismissed', 'true');
+  };
+
   return (
     <div className="px-2 sm:px-8 space-y-8">
-      <h1 className="text-2xl text-gray-900 dark:text-gray-100">Bowen Hou</h1>
+      {/* Dismissible Banner */}
+      <AnimatePresence>
+        {showBanner && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="max-w-[1000px] mx-auto bg-gray-100 border border-gray-300 rounded-lg p-4 flex items-center justify-between gap-4"
+          >
+            <p className="text-sm text-gray-700 flex-1">
+              I've removed dark mode entirely on 11-22-25 as it simply did not look good on photographic content. Enjoy the site in light mode!
+            </p>
+            <button
+              onClick={handleDismissBanner}
+              className="flex-shrink-0 p-1 rounded hover:bg-gray-200 transition-colors"
+              aria-label="Dismiss banner"
+            >
+              <X className="w-4 h-4 text-gray-600" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <h1 className="text-2xl text-gray-900">Bowen Hou</h1>
 
       {/* Slideshow container */}
       <div className="w-full max-w-[1000px] mx-auto">
-        <div className="relative aspect-[4/3] bg-gray-200 dark:bg-gray-800">
+        <div className="relative aspect-[4/3] bg-gray-200">
           <AnimatePresence mode="wait">
             {images.length > 0 && (
               <motion.div
@@ -73,8 +110,8 @@ export default function Home() {
       </div>
 
       {/* Bio section - aligned with the slideshow width */}
-      <div className="max-w-[1000px] mx-auto prose dark:prose-invert">
-        <div className="mt-4 text-gray-800 dark:text-gray-200">
+      <div className="max-w-[1000px] mx-auto prose">
+        <div className="mt-4 text-gray-800">
           <p>
             I am a senior software engineer for{' '}
             <a href="https://autodesk.com">Autodesk</a> working on data quality

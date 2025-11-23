@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Spectral } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
 import Layout from '@/components/Layout';
 
 const spectral = Spectral({
@@ -58,16 +57,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={spectral.variable}>
+    <html lang="en" className={spectral.variable}>
       <body className={spectral.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Layout>{children}</Layout>
-        </ThemeProvider>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

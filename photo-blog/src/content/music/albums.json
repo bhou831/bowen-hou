@@ -1,6 +1,30 @@
 {
   "albums": [
     {
+      "id": "album-11-22-26",
+      "title": "Chasing Moving Trains",
+      "artist": "Roy Blair",
+      "coverImage": "/images/albums/moving-trains/cover.jpg",
+      "description": "I liked blonded radio by Frank Ocean, not sure if it was discontinued, but it always had some interesting music. FANTAZIA was featured on blonded 10, and that led me to start listening to the Cat Heaven. Then this album, Chasing Moving Trains, came out quietly in 2024, it was so quiet that I didn't discover it until a year later, lol. But I'd been waiting for this pop-electronic sound from him for so long, and it really feels like a huge step forward from Cat Heaven. I love the melodic lines and how the atmosphere evolves as you play through, finally peaking with the last song, 'Garden.' This is definitely a belated review, but I'm so glad to have this album with us.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/chasing-moving-trains/1770781026",
+        "spotify": "https://open.spotify.com/album/50eGAFAREgtdDVmSl7gD1y",
+        "youtube": "https://youtube.com/playlist?list=PLxA687tYuMWh0OVs3Ld0O79ftkKt48JvK&si=m9Y7xmWwU46zqyPs"
+      }
+    },
+    {
+      "id": "album-11-22-25",
+      "title": "Smart?",
+      "artist": "Tension",
+      "coverImage": "/images/albums/smart/cover.jpg",
+      "description": "Tension was a Mandarin R&B band discovered by David Tao in LA. From start to end, it just feels as 20s Mandarin R&B as it gets, full of the good vibe and melody of the time I grew up with. This album was their debut, but it's equally complete and well-produced.",
+      "links": {
+        "spotify": "https://open.spotify.com/album/08LhoZggiEcjntoY0BW11F",
+        "appleMusic": "https://music.apple.com/ca/album/smart/905232798",
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_msZrRwmA75Pcv980sUw4a9ahJDEj1PqAo&si=MFbsfRzHTAL61Jcv"
+      }
+    },
+    {
       "id": "album-11-04-25",
       "title": "Flying Beagle",
       "artist": "Himiko Kikuchi/菊池ひみこ",

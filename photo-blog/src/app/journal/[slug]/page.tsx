@@ -45,10 +45,10 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
   return (
     <div className="w-full pl-8 pr-8 flex justify-center">
       <article className="w-full max-w-2xl">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-left">
+        <h1 className="text-3xl font-bold text-gray-900 text-left">
           {post.title}
         </h1>
-        <time className="text-sm text-gray-600 dark:text-gray-400 block mt-2 mb-8 text-left">
+        <time className="text-sm text-gray-600 block mt-2 mb-8 text-left">
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -56,7 +56,7 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
           })}
         </time>
         <div
-          className="prose dark:prose-invert"
+          className="prose"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
       </article>
