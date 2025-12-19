@@ -20,7 +20,7 @@ export default function Home() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const imageList = Array.from({ length: 25 }, (_, i) => 
+    const imageList = Array.from({ length: 26 }, (_, i) => 
       `/images/slideshow/cover_page_${i + 1}.JPG`
     );
 
