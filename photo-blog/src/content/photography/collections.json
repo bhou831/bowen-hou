@@ -1,6 +1,29 @@
 {
   "collections": [
     {
+      "id": "kunming2025",
+      "title": "Water, Bridges, and Kunming",
+      "description": "These photos were taken along the newly constructed elevated Green Lake walkway, the suspension pavilion at Dianchi, and various scenes around the Mile Temple. Kunming is still undergoing extensive redevelopment and new construction, gradually transforming from the quiet city I grew up in into a more touristy destination. I liked many of these renovations as they have created more spaces for walking and biking, and repurposed older buildings into tea houses, cafes, places to slow down and relax.",
+      "coverImage": "/images/collections/kunming2025/cover.jpg",
+      "images": [
+        "/images/collections/kunming2025/kunming2025_6.JPG",
+        "/images/collections/kunming2025/kunming2025_15.JPG",
+        "/images/collections/kunming2025/kunming2025_10.JPG",
+        "/images/collections/kunming2025/kunming2025_11.JPG",
+        "/images/collections/kunming2025/kunming2025_12.JPG",
+        "/images/collections/kunming2025/kunming2025_13.JPG",
+        "/images/collections/kunming2025/kunming2025_14.JPG",
+        "/images/collections/kunming2025/kunming2025_2.JPG",
+        "/images/collections/kunming2025/kunming2025_3.JPG",
+        "/images/collections/kunming2025/kunming2025_4.JPG",
+        "/images/collections/kunming2025/kunming2025_5.JPG",
+        "/images/collections/kunming2025/kunming2025_1.JPG",
+        "/images/collections/kunming2025/kunming2025_7.JPG",
+        "/images/collections/kunming2025/kunming2025_8.JPG",
+        "/images/collections/kunming2025/kunming2025_9.JPG"
+      ]
+    },
+    {
       "id": "Tokyo2025",
       "title": "Tokyo 2025",
       "description": "Tokyo is by far my favorite city as a transit and urban design enthusiast. It offers an incredibly extensive public transportation network with monorails, JR lines, subways, and the Shinkansen. They all running with amazing punctuality and frequency. Rush hours can be overwhelming, especially at major transfer hubs along the Yamanote Line, but traveling off-peak is simply a pleasure. I took short walks through neighborhoods like Daiba, Marunouchi, Jiyugaoka, and Nakameguro, and it’s impossible to pick a favorite. Each area feels equally vibrant, with walkable streets and thoughtfully mixed-use buildings that make the city feel so alive.",
