@@ -101,11 +101,20 @@ export default function Home() {
                   alt={`Slideshow image ${currentImageIndex + 1}`}
                   fill
                   className="object-cover"
-                  priority
+                  priority={currentImageIndex === 0}
+                  loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
                 />
               </motion.div>
             )}
           </AnimatePresence>
+          {/* Preload next few images in the background */}
+          {images.length > 0 && currentImageIndex < images.length - 1 && (
+            <link
+              rel="preload"
+              as="image"
+              href={images[currentImageIndex + 1]}
+            />
+          )}
         </div>
       </div>
 
