@@ -3,11 +3,10 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import { formatDate } from '@/lib/blog-utils';
 
-// Define params type as a Promise
 type ParamsType = Promise<{ slug: string }>;
 
-// Function to get a single post
 async function getPost(fileName: string) {
   const fullPath = path.join(
     process.cwd(),
@@ -17,18 +16,19 @@ async function getPost(fileName: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  // Convert markdown to HTML string
   const processedContent = await remark().use(html).process(content);
   const contentHtml = processedContent.toString();
+
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
 
   return {
     title: data.title,
     date: data.date,
     contentHtml,
+    readingTime: Math.max(1, Math.ceil(wordCount / 200)),
   };
 }
 
-// Generate static params for pre-rendering
 export async function generateStaticParams() {
   const postsDirectory = path.join(process.cwd(), 'src/content/journal');
   const fileNames = fs.readdirSync(postsDirectory);
@@ -48,13 +48,9 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
         <h1 className="text-3xl font-bold text-gray-900 text-left">
           {post.title}
         </h1>
-        <time className="text-sm text-gray-600 block mt-2 mb-8 text-left">
-          {new Date(post.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
+        <p className="text-sm text-gray-500 mt-2 mb-8">
+          {formatDate(post.date)} · {post.readingTime} min read
+        </p>
         <div
           className="prose"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}

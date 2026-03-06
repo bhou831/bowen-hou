@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,13 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -19,10 +27,12 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation bar with items aligned left */}
-      <nav className="w-full border-b border-gray-200">
+      <nav
+        className={`w-full border-b border-gray-200 sticky top-0 z-40 bg-gray-50 transition-shadow duration-200 ${
+          scrolled ? 'shadow-sm' : ''
+        }`}
+      >
         <div className="pl-4 pr-4 md:pl-8 md:pr-8 flex justify-between items-center h-16 max-w-full">
-          {/* Left-aligned navigation items */}
           <div className="flex space-x-4 md:space-x-5">
             <Link
               href="/"
@@ -68,7 +78,6 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
 
-      {/* Main content */}
       <main className="w-full pl-4 pr-4 md:pl-8 md:pr-8 py-8">{children}</main>
     </div>
   );

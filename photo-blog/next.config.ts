@@ -5,6 +5,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  watchOptions: {
+    ignored: ['**/public/images/**'],
+  },
 }
 
 module.exports = nextConfig

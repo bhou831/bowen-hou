@@ -1,16 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Collection, getCollections } from '@/lib/photo-utils';
+
+function triggerHaptic() {
+  if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+    navigator.vibrate(10);
+  }
+}
 
 export default function Photography() {
   const [selectedCollection, setSelectedCollection] =
     useState<Collection | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const collections = getCollections();
 
@@ -22,6 +29,7 @@ export default function Photography() {
 
   const nextImage = () => {
     if (selectedCollection) {
+      triggerHaptic();
       setCurrentImageIndex((prev) =>
         prev === selectedCollection.images.length - 1 ? 0 : prev + 1,
       );
@@ -30,10 +38,45 @@ export default function Photography() {
 
   const previousImage = () => {
     if (selectedCollection) {
+      triggerHaptic();
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedCollection.images.length - 1 : prev - 1,
       );
     }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isLightboxOpen || !selectedCollection) return;
+
+    const len = selectedCollection.images.length;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        triggerHaptic();
+        setCurrentImageIndex((prev) => (prev === len - 1 ? 0 : prev + 1));
+      } else if (e.key === 'ArrowLeft') {
+        triggerHaptic();
+        setCurrentImageIndex((prev) => (prev === 0 ? len - 1 : prev - 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isLightboxOpen, selectedCollection]);
+
+  // Touch swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextImage();
+      else previousImage();
+    }
+    touchStartX.current = null;
   };
 
   return (
@@ -81,10 +124,13 @@ export default function Photography() {
               {selectedCollection.images.length}
             </DialogTitle>
 
-            {/* Mobile-first approach with flex-col by default, flex-row only on desktop */}
             <div className="h-screen xl:min-h-0 xl:h-[95vh] flex flex-col xl:flex-row">
               {/* Main Image Section */}
-              <div className="flex-1 relative flex items-center justify-center min-h-[50vh] xl:min-h-0 py-6 xl:py-0">
+              <div
+                className="flex-1 relative flex items-center justify-center min-h-[50vh] xl:min-h-0 py-6 xl:py-0"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
                 <button
                   onClick={previousImage}
                   className="absolute left-4 text-white hover:text-gray-300 z-10"
@@ -115,20 +161,24 @@ export default function Photography() {
                 </button>
               </div>
 
-              {/* Description Panel - Column layout for mobile and iPad portrait */}
+              {/* Description Panel */}
               <div className="xl:w-80 bg-black/75 p-4 xl:p-8 flex justify-center flex-col xl:max-h-full overflow-y-auto">
-                {/* Image counter moved to the top for mobile visibility */}
                 <div className="text-white">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-xl font-medium">
-                      {selectedCollection.title}
-                    </h3>
-                    <p className="text-sm text-gray-400">
-                      {currentImageIndex + 1}/{selectedCollection.images.length}
-                    </p>
+                  <h3 className="text-xl font-medium mb-3">
+                    {selectedCollection.title}
+                  </h3>
+
+                  {/* Progress bar */}
+                  <div className="w-full h-px bg-white/20">
+                    <div
+                      className="h-px bg-white/60 transition-all duration-300 ease-out"
+                      style={{
+                        width: `${((currentImageIndex + 1) / selectedCollection.images.length) * 100}%`,
+                      }}
+                    />
                   </div>
 
-                  <p className="text-md font-light leading-relaxed py-2 pb-10 mb-4">
+                  <p className="text-md font-light leading-relaxed py-2 pb-10 mb-4 mt-4">
                     {selectedCollection.description}
                   </p>
                 </div>
