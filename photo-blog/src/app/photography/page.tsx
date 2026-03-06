@@ -6,6 +6,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Collection, getCollections } from '@/lib/photo-utils';
 
+const COLUMN_STEPS = [1, 2, 3, 4, 6];
+
 function triggerHaptic() {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     navigator.vibrate(10);
@@ -17,9 +19,74 @@ export default function Photography() {
     useState<Collection | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [columnStepIndex, setColumnStepIndex] = useState(3); // default: 4 cols
+
   const touchStartX = useRef<number | null>(null);
+  const wheelAccum = useRef(0);
+  const pinchStartDist = useRef<number | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const collections = getCollections();
+
+  // Set initial column count based on viewport
+  useEffect(() => {
+    if (window.innerWidth < 640) setColumnStepIndex(0);
+    else if (window.innerWidth < 1024) setColumnStepIndex(1);
+    else setColumnStepIndex(3);
+  }, []);
+
+  // Non-passive wheel listener for trackpad pinch (ctrlKey + scroll)
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      wheelAccum.current += e.deltaY;
+      if (wheelAccum.current > 50) {
+        setColumnStepIndex((prev) => Math.min(prev + 1, COLUMN_STEPS.length - 1));
+        wheelAccum.current = 0;
+      } else if (wheelAccum.current < -50) {
+        setColumnStepIndex((prev) => Math.max(prev - 1, 0));
+        wheelAccum.current = 0;
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, []);
+
+  // Grid touch pinch handlers
+  const handleGridTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      pinchStartDist.current = Math.hypot(dx, dy);
+    }
+  };
+
+  const handleGridTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length !== 2 || pinchStartDist.current === null) return;
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.hypot(dx, dy);
+    const diff = dist - pinchStartDist.current;
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) {
+        // spreading fingers = zoom in = fewer columns
+        setColumnStepIndex((prev) => Math.max(prev - 1, 0));
+      } else {
+        // pinching in = zoom out = more columns
+        setColumnStepIndex((prev) => Math.min(prev + 1, COLUMN_STEPS.length - 1));
+      }
+      pinchStartDist.current = dist;
+    }
+  };
+
+  const handleGridTouchEnd = () => {
+    pinchStartDist.current = null;
+  };
 
   const handleCollectionClick = (collection: Collection) => {
     setSelectedCollection(collection);
@@ -45,10 +112,9 @@ export default function Photography() {
     }
   };
 
-  // Keyboard navigation
+  // Keyboard navigation in lightbox
   useEffect(() => {
     if (!isLightboxOpen || !selectedCollection) return;
-
     const len = selectedCollection.images.length;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
@@ -59,14 +125,13 @@ export default function Photography() {
         setCurrentImageIndex((prev) => (prev === 0 ? len - 1 : prev - 1));
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isLightboxOpen, selectedCollection]);
 
-  // Touch swipe handlers
+  // Lightbox touch swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+    if (e.touches.length === 1) touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -79,14 +144,23 @@ export default function Photography() {
     touchStartX.current = null;
   };
 
+  const cols = COLUMN_STEPS[columnStepIndex];
+  const gap = cols <= 2 ? 'gap-8' : cols <= 4 ? 'gap-6' : 'gap-4';
+
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
-      {/* Artistic Minimalist Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 p-1">
+      <div
+        ref={gridRef}
+        className={`grid ${gap} p-1 transition-[gap] duration-300`}
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+        onTouchStart={handleGridTouchStart}
+        onTouchMove={handleGridTouchMove}
+        onTouchEnd={handleGridTouchEnd}
+      >
         {collections.map((collection) => (
           <div
             key={collection.id}
-            className="cursor-pointer group mx-auto w-full transition-all duration-500 ease-in-out"
+            className="cursor-pointer group mx-auto w-full transition-all duration-300 ease-in-out"
             onClick={() => handleCollectionClick(collection)}
           >
             <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100">
@@ -99,18 +173,17 @@ export default function Photography() {
                   quality={90}
                 />
               </div>
-
-              {/* Artistic overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
-            {/* Title with artistic underline effect */}
-            <div className="mt-3 relative inline-block group">
-              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
-                {collection.title}
-              </h3>
-              <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500"></div>
-            </div>
+            {cols <= 4 && (
+              <div className="mt-3 relative inline-block group">
+                <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
+                  {collection.title}
+                </h3>
+                <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500" />
+              </div>
+            )}
           </div>
         ))}
       </div>

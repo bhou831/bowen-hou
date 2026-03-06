@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
@@ -17,22 +16,12 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
-  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const imageList = Array.from({ length: 26 }, (_, i) => 
+    const imageList = Array.from({ length: 26 }, (_, i) =>
       `/images/slideshow/cover_page_${i + 1}.JPG`
     );
-
-    // Shuffle the images on each page load
-    const shuffledImages = shuffleArray(imageList);
-    setImages(shuffledImages);
-
-    // Check if banner has been dismissed
-    const bannerDismissed = localStorage.getItem('darkModeBannerDismissed');
-    if (!bannerDismissed) {
-      setShowBanner(true);
-    }
+    setImages(shuffleArray(imageList));
   }, []);
 
   useEffect(() => {
@@ -47,37 +36,8 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [images.length]);
 
-  const handleDismissBanner = () => {
-    setShowBanner(false);
-    localStorage.setItem('darkModeBannerDismissed', 'true');
-  };
-
   return (
     <div className="px-2 sm:px-8 space-y-8">
-      {/* Dismissible Banner */}
-      <AnimatePresence>
-        {showBanner && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="max-w-[1000px] mx-auto bg-gray-100 border border-gray-300 rounded-lg p-4 flex items-center justify-between gap-4"
-          >
-            <p className="text-sm text-gray-700 flex-1">
-              I&apos;ve removed dark mode entirely on Nov 22, 2025 as it simply did not look good on photographic content. Enjoy the site in light mode!
-            </p>
-            <button
-              onClick={handleDismissBanner}
-              className="flex-shrink-0 p-1 rounded hover:bg-gray-200 transition-colors"
-              aria-label="Dismiss banner"
-            >
-              <X className="w-4 h-4 text-gray-600" />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <h1 className="text-2xl text-gray-900">Bowen Hou</h1>
 
       {/* Slideshow container */}
@@ -107,7 +67,8 @@ export default function Home() {
               </motion.div>
             )}
           </AnimatePresence>
-          {/* Preload next few images in the background */}
+
+          {/* Preload next image */}
           {images.length > 0 && currentImageIndex < images.length - 1 && (
             <link
               rel="preload"
@@ -116,9 +77,20 @@ export default function Home() {
             />
           )}
         </div>
+
+        {/* Progress bar — below the image, always visible */}
+        {images.length > 0 && (
+          <div className="w-full h-px bg-gray-200 mt-2">
+            <div
+              key={currentImageIndex}
+              className="h-px bg-gray-400"
+              style={{ animation: 'slideshow-progress 8s linear forwards' }}
+            />
+          </div>
+        )}
       </div>
 
-      {/* Bio section - aligned with the slideshow width */}
+      {/* Bio section */}
       <div className="max-w-[1000px] mx-auto prose">
         <div className="mt-4 text-gray-800">
           <p>

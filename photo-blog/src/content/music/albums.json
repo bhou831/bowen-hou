@@ -1,7 +1,19 @@
 {
   "albums": [
     {
-      "id": "album-03-06-26",
+      "id": "album-03-06-26-2",
+      "title": "卡拉OK.台北.我",
+      "artist": "Tom Chang/張雨生",
+      "coverImage": "/images/albums/taipei/cover.jpg",
+      "description": "This album never had the greatest sales, but it is Tom Chang's most avant-garde work. It has aged like fine spirits, one sip pulls you straight to Taipei in the '90s, with everything so alive. No explanation is necessary, just hit play.",
+      "links": {
+        "spotify": "https://open.spotify.com/album/07eHPCtwW09AjZd7Cp8KN0",
+        "appleMusic": "https://music.apple.com/us/album/%E5%8D%A1%E6%8B%89ok-%E5%8F%B0%E5%8C%97-%E6%88%91/299637728?l=zh-Hant-TW",
+        "youtube": "https://youtube.com/playlist?list=PLB3G-KmFeyzMas-bAIpX729so5QfyfzU5&si=-Ywg44mu-KHssKuG"
+      }
+    },
+    {
+      "id": "d",
       "title": "Swing Swang Swung",
       "artist": "Swing",
       "coverImage": "/images/albums/swing-swang-swung/cover.jpg",

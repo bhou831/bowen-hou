@@ -10,3 +10,8 @@
     --radius: 0.5rem;
   }
 }
+
+@keyframes slideshow-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
