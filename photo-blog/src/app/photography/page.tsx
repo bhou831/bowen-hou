@@ -9,8 +9,21 @@ import { Collection, getCollections } from '@/lib/photo-utils';
 const COLUMN_STEPS = [1, 2, 3, 4, 6];
 
 function triggerHaptic() {
+  // Android / Chrome: Web Vibration API
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     navigator.vibrate(10);
+    return;
+  }
+  // iOS Safari 17.4+: hidden checkbox switch trick
+  if (typeof document !== 'undefined') {
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.setAttribute('switch', '');
+    input.style.cssText =
+      'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(input);
+    input.click();
+    requestAnimationFrame(() => input.remove());
   }
 }
 
