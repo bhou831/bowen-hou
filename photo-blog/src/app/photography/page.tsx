@@ -45,7 +45,9 @@ export default function Photography() {
       e.preventDefault();
       wheelAccum.current += e.deltaY;
       if (wheelAccum.current > 50) {
-        setColumnStepIndex((prev) => Math.min(prev + 1, COLUMN_STEPS.length - 1));
+        setColumnStepIndex((prev) =>
+          Math.min(prev + 1, COLUMN_STEPS.length - 1),
+        );
         wheelAccum.current = 0;
       } else if (wheelAccum.current < -50) {
         setColumnStepIndex((prev) => Math.max(prev - 1, 0));
@@ -78,7 +80,9 @@ export default function Photography() {
         setColumnStepIndex((prev) => Math.max(prev - 1, 0));
       } else {
         // pinching in = zoom out = more columns
-        setColumnStepIndex((prev) => Math.min(prev + 1, COLUMN_STEPS.length - 1));
+        setColumnStepIndex((prev) =>
+          Math.min(prev + 1, COLUMN_STEPS.length - 1),
+        );
       }
       pinchStartDist.current = dist;
     }

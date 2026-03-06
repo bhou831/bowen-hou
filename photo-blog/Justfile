@@ -1,11 +1,29 @@
 # Justfile for deploying a photo blog to AWS S3
 
+dev:
+    - npm run dev
+    - open http://localhost:3000/
+
 deploy:
-    - export NODE_OPTIONS=--no-experimental-fetch 
+    - export NODE_OPTIONS=--no-experimental-fetch
     - rm -rf ./out            # Remove existing output directory
     - npm run build           # Build the project
     - aws s3 sync ./out/ s3://bowen-hou.com --delete   # Sync ./out/ to S3 bucket and delete removed files
 
-dev:
-    - npm run dev
-    - open http://localhost:3000/
+# Remove Turbopack build cache (speeds up next dev if cache is stale)
+clean-cache:
+    rm -rf .next/cache
+    @echo "Cache cleared"
+
+# Full clean — removes all build artifacts including the cache
+clean:
+    rm -rf .next out
+    @echo "Build artifacts cleared"
+
+# Install dependencies
+install:
+    npm install
+
+# Format source files with prettier
+format:
+    npm run format

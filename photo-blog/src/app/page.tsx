@@ -18,8 +18,9 @@ export default function Home() {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    const imageList = Array.from({ length: 26 }, (_, i) =>
-      `/images/slideshow/cover_page_${i + 1}.JPG`
+    const imageList = Array.from(
+      { length: 26 },
+      (_, i) => `/images/slideshow/cover_page_${i + 1}.JPG`,
     );
     setImages(shuffleArray(imageList));
   }, []);
