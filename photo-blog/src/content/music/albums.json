@@ -1,7 +1,19 @@
 {
   "albums": [
     {
-      "id": "album-11-22-26",
+      "id": "album-03-06-26",
+      "title": "Swing Swang Swung",
+      "artist": "Swing",
+      "coverImage": "/images/albums/swing-swang-swung/cover.jpg",
+      "description": "Swing is such an understated duo. They are true legends of Chinese R&B. When you listen to the album all the way through, you will definitely wonder how they were making music like this back in the 2000s. While the production and mixing may not sound as polished as modern studio albums, the lyrics, progressions, and melodies were far ahead of their time. As always, this is a compilation album, enjoy it from start to finish. On a side note, Swing was originally called Snowman before they changed their name. If you find yourself wanting more, be sure to check out their earliest album under the name Snowman.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/swing-swang-swung/544132715",
+        "spotify": "https://open.spotify.com/album/2oQA8IWm6EdRefNsRVezYP",
+        "youtube": "https://youtube.com/playlist?list=PL_FbCULu5DXIo0tKHN3gO-aIWuT5fAMg7&si=a8gw0qFASmhDDFOF"
+      }
+    },
+    {
+      "id": "album-11-22-25",
       "title": "Chasing Moving Trains",
       "artist": "Roy Blair",
       "coverImage": "/images/albums/moving-trains/cover.jpg",
