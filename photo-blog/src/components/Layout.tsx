@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { mountHaptic, triggerHaptic } from '@/lib/haptics';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,12 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    mountHaptic();
+    document.addEventListener('click', triggerHaptic);
+    return () => document.removeEventListener('click', triggerHaptic);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);

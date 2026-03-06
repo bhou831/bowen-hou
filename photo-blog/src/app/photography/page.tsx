@@ -5,40 +5,9 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Collection, getCollections } from '@/lib/photo-utils';
+import { triggerHaptic } from '@/lib/haptics';
 
 const COLUMN_STEPS = [1, 2, 3, 4, 6];
-
-// Mounted once, reused on every haptic call
-let hapticLabel: HTMLLabelElement | null = null;
-
-function mountHaptic() {
-  if (typeof window === 'undefined' || hapticLabel) return;
-  const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (!isIOS) return;
-
-  const input = document.createElement('input');
-  input.type = 'checkbox';
-  input.id = '___haptic___';
-  input.setAttribute('switch', '');
-  input.style.display = 'none';
-  document.body.appendChild(input);
-
-  hapticLabel = document.createElement('label');
-  hapticLabel.htmlFor = '___haptic___';
-  hapticLabel.style.display = 'none';
-  document.body.appendChild(hapticLabel);
-}
-
-function triggerHaptic() {
-  if (!globalThis?.document) return;
-  if (hapticLabel) {
-    hapticLabel.click();
-  } else if (navigator?.vibrate) {
-    navigator.vibrate(10);
-  }
-}
 
 export default function Photography() {
   const [selectedCollection, setSelectedCollection] =
@@ -54,12 +23,11 @@ export default function Photography() {
 
   const collections = getCollections();
 
-  // Set initial column count based on viewport + mount haptic elements
+  // Set initial column count based on viewport
   useEffect(() => {
     if (window.innerWidth < 640) setColumnStepIndex(0);
     else if (window.innerWidth < 1024) setColumnStepIndex(1);
     else setColumnStepIndex(3);
-    mountHaptic();
   }, []);
 
   // Non-passive wheel listener for trackpad pinch (ctrlKey + scroll)
@@ -127,7 +95,6 @@ export default function Photography() {
 
   const nextImage = () => {
     if (selectedCollection) {
-      triggerHaptic();
       setCurrentImageIndex((prev) =>
         prev === selectedCollection.images.length - 1 ? 0 : prev + 1,
       );
@@ -136,7 +103,6 @@ export default function Photography() {
 
   const previousImage = () => {
     if (selectedCollection) {
-      triggerHaptic();
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedCollection.images.length - 1 : prev - 1,
       );
