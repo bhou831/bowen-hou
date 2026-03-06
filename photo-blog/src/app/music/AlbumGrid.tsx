@@ -124,28 +124,10 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
             </div>
             {cols <= 4 && (
               <div className="mt-3">
-                <h3
-                  className={`text-center font-medium text-gray-900 transition-all duration-300 ${
-                    cols === 1
-                      ? 'text-xl'
-                      : cols === 2
-                        ? 'text-lg'
-                        : cols === 3
-                          ? 'text-base'
-                          : 'text-sm'
-                  }`}
-                >
+                <h3 className="text-base text-center font-medium text-gray-900">
                   {album.title}
                 </h3>
-                <p
-                  className={`text-center text-gray-600 transition-all duration-300 ${
-                    cols === 1
-                      ? 'text-base'
-                      : cols === 2
-                        ? 'text-sm'
-                        : 'text-xs'
-                  }`}
-                >
+                <p className="text-sm text-center text-gray-600">
                   {album.artist}
                 </p>
               </div>
