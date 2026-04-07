@@ -11,7 +11,16 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-spectral)'],
-      }
+      },
+      keyframes: {
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.2s ease-out',
+      },
     },
   },
   plugins: [

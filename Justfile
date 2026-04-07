@@ -12,9 +12,13 @@ dev:
 
 deploy:
     - export NODE_OPTIONS=--no-experimental-fetch
-    - rm -rf ./out            # Remove existing output directory
-    - npm run build           # Build the project
-    - aws s3 sync ./out/ s3://bowen-hou.com --delete   # Sync ./out/ to S3 bucket and delete removed files
+    - rm -rf ./out
+    - npm run build
+    - aws s3 sync ./out/ s3://bowen-hou.com --delete --exclude "images/*"
+
+# Sync images to S3 — run once after just add-album
+sync-images:
+    aws s3 sync ./public/images/ s3://bowen-hou.com/images/ --delete
 
 # Remove Turbopack build cache (speeds up next dev if cache is stale)
 clean-cache:
