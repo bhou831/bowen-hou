@@ -1,5 +1,11 @@
 # Justfile for deploying a photo blog to AWS S3
 
+# Add a new photo collection
+# Usage: just add-album --path <folder_name> --cover <filename.jpg> [--name <album_id>]
+# Example: just add-album --path tokyo2025 --cover 1.jpg
+add-album *args:
+    ./scripts/add-album.sh {{args}}
+
 dev:
     - npm run dev
     - open http://localhost:3000/
