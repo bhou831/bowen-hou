@@ -203,10 +203,10 @@ export default function Photography() {
               >
                 <button
                   onClick={previousImage}
-                  className="absolute left-4 text-white hover:text-gray-300 z-10"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 z-10 bg-black/40 rounded-full p-1.5 backdrop-blur-sm"
                   aria-label="Previous image"
                 >
-                  <ChevronLeft className="w-8 h-8" />
+                  <ChevronLeft className="w-6 h-6" />
                 </button>
 
                 <div className="relative w-full h-full flex items-center justify-center">
@@ -224,15 +224,15 @@ export default function Photography() {
 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 text-white hover:text-gray-300"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 z-10 bg-black/40 rounded-full p-1.5 backdrop-blur-sm"
                   aria-label="Next image"
                 >
-                  <ChevronRight className="w-8 h-8" />
+                  <ChevronRight className="w-6 h-6" />
                 </button>
               </div>
 
               {/* Description Panel */}
-              <div className="xl:w-80 bg-black/75 p-4 xl:p-8 flex justify-center flex-col xl:max-h-full overflow-y-auto">
+              <div className="xl:w-80 bg-black/75 p-4 xl:p-8 flex flex-col justify-start xl:justify-center xl:max-h-full overflow-y-auto">
                 <div className="text-white">
                   <h3 className="text-xl font-medium mb-3">
                     {selectedCollection.title}

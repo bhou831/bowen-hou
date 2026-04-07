@@ -1,6 +1,70 @@
 {
   "collections": [
     {
+      "id": "fitzroy2026",
+      "title": "Mount Fitz Roy",
+      "description": "I’ve been dreaming of this place for years. Fitz Roy’s jagged silhouette is also the logo of the Patagonia brand. We waited two days for the Patagonian wind to calm down, and on Friday we hiked into the valley. The fall foliage and snow-capped peaks made it even more beautiful. In this moment, I’m not sure I’ve ever seen a more beautiful mountain in the world.",
+      "coverImage": "/images/collections/fitzroy2026/cover.jpg",
+      "images": [
+        "/images/collections/fitzroy2026/fitzroy2026_1.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_2.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_3.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_4.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_5.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_6.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_7.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_8.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_9.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_10.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_11.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_12.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_13.JPG",
+        "/images/collections/fitzroy2026/fitzroy2026_14.JPG"
+      ]
+    },
+    {
+      "id": "glacier2026",
+      "title": "Los Glaciares NP",
+      "description": "Only from the sky could we truly understand how Los Glaciares National Park got its name. Glaciers of every size merge and weave together before rushing into alpine lakes from the Patagonian highlands. This is just one of the most famous Moreno Glacier. We hiked the trail with two new friends we met along the way, and the whole experience felt magical.",
+      "coverImage": "/images/collections/glacier2026/cover.jpg",
+      "images": [
+        "/images/collections/glacier2026/glacier2026_1.JPG",
+        "/images/collections/glacier2026/glacier2026_2.JPG",
+        "/images/collections/glacier2026/glacier2026_3.JPG",
+        "/images/collections/glacier2026/glacier2026_4.JPG",
+        "/images/collections/glacier2026/glacier2026_5.JPG",
+        "/images/collections/glacier2026/glacier2026_6.JPG",
+        "/images/collections/glacier2026/glacier2026_7.JPG",
+        "/images/collections/glacier2026/glacier2026_8.JPG",
+        "/images/collections/glacier2026/glacier2026_9.JPG",
+        "/images/collections/glacier2026/glacier2026_10.JPG",
+        "/images/collections/glacier2026/glacier2026_11.JPG",
+        "/images/collections/glacier2026/glacier2026_12.JPG"
+      ]
+    },
+    {
+      "id": "tdp2026",
+      "title": "Torres Del Paine NP",
+      "description": "Torres del Paine sits in southern Chilean Patagonia. The roads were rough and unpaved, but the restrooms, stores, and lodges were exceptionally well maintained. The weather changed constantly and could be harsh, but the landscape was both majestic and peaceful. We couldn’t hike the famous W or O trek due to winter closures, so we drove around the instead to enjoy its beauty from different angles.",
+      "coverImage": "/images/collections/tdp2026/cover.jpg",
+      "images": [
+        "/images/collections/tdp2026/tdp2026_1.JPG",
+        "/images/collections/tdp2026/tdp2026_2.JPG",
+        "/images/collections/tdp2026/tdp2026_3.JPG",
+        "/images/collections/tdp2026/tdp2026_4.JPG",
+        "/images/collections/tdp2026/tdp2026_5.JPG",
+        "/images/collections/tdp2026/tdp2026_6.JPG",
+        "/images/collections/tdp2026/tdp2026_7.JPG",
+        "/images/collections/tdp2026/tdp2026_8.JPG",
+        "/images/collections/tdp2026/tdp2026_9.JPG",
+        "/images/collections/tdp2026/tdp2026_10.JPG",
+        "/images/collections/tdp2026/tdp2026_11.JPG",
+        "/images/collections/tdp2026/tdp2026_12.JPG",
+        "/images/collections/tdp2026/tdp2026_13.JPG",
+        "/images/collections/tdp2026/tdp2026_14.JPG"
+      ]
+    },
+    {
       "id": "kunming2025",
       "title": "Water, Bridges, and Kunming",
       "description": "These photos were taken along the newly constructed elevated Green Lake walkway, the suspension pavilion at Dianchi, and various scenes around the Mile Temple. Kunming is still undergoing extensive redevelopment and new construction, gradually transforming from the quiet city I grew up in into a more touristy destination. I liked many of these renovations as they have created more spaces for walking and biking, and repurposed older buildings into tea houses, cafes, places to slow down and relax.",
