@@ -1,6 +1,30 @@
 {
   "albums": [
     {
+      "id": "album-06-24-26",
+      "title": "Brasilian Skies",
+      "artist": "Masayoshi Takanaka",
+      "coverImage": "/images/albums/brasilian-skies/cover.jpg",
+      "description": "I knew Brazil has a big Japanese community, and this album popped up while I was searching for good MPB music. I listened through it assuming it was a Brazilian album. Only after finishing (or not even fully finishing it) did I realize it was actually made by a Japanese artist who traveled to Rio de Janeiro to record it, blending samba and bossa nova with Japanese pop and synth. It’s just an absolutely amazing piece of work.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/brasilian-skies/1444076539",
+        "spotify": "https://open.spotify.com/album/0zXeZw0oFC2Db99RqlfHur",
+        "youtube": "https://www.youtube.com/watch?v=k0ynTKJZirg"
+      }
+    },
+    {
+      "id": "album-06-24-26-2",
+      "title": "Her Abiding Memory",
+      "artist": "Pitcher56",
+      "coverImage": "/images/albums/pitcher56/cover.jpg",
+      "description": "I’m all for Shibuyakei albums, but most of them are fast paced, cosmopolitan, and ornamental. Think of works from Pizzicato Five or FPM. My Abiding Memory sits on the other end of that spectrum. It was recorded on a budget, so the drum programming is simple, the acoustic guitars are crisp but unpolished, and the mix feels intimate. But the quality is no less amazing. It is more melodic, soft, and slow-paced. I’ve been listening to it for over three months and still haven’t tired of it.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/her-abiding-memory-2026-revised-edition/1865319023",
+        "spotify": "https://open.spotify.com/album/5Ce4YT4OqDJYetWlxtXpLR",
+        "youtube": "https://www.youtube.com/watch?v=9N1udhFWNGk"
+      }
+    },
+    {
       "id": "album-05-07-26-2",
       "title": "Absolute Ego",
       "artist": "ACO",
