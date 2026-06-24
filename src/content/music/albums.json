@@ -1,6 +1,30 @@
 {
   "albums": [
     {
+      "id": "album-05-07-26-2",
+      "title": "Absolute Ego",
+      "artist": "ACO",
+      "coverImage": "/images/albums/absolute-ego/cover.jpg",
+      "description": "I realized I might have recommended too many Japanese albums, but this is yet another smooth and dreamy trip hop record. It is so good that I bought the entire album on iTunes just to get the two tracks missing from Apple Music. Please enjoy this one alone.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/absolute-ego/1536941422",
+        "spotify": "https://open.spotify.com/album/0msEpSJSzhUAy9BS9RFeHc",
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_nmJyF6hnIUvtGADNAIolQZmRMR6Hpqric&si=UOW7xczWbndLmTjN"
+      }
+    },
+    {
+      "id": "album-05-07-26",
+      "title": "Clube da Esquina",
+      "artist": "Milton Nascimento",
+      "coverImage": "/images/albums/clube-esquina/cover.jpg",
+      "description": "2026 is only four months in, but I had not found many albums that really excited me, so I gave '70s MPB (Brazilian pop) a try. When the guitar riff from 'Tudo o que voce podia ser' came in, I froze and listened all the way through; every second was pure enjoyment. This album is diverse and influential far beyond LATAM. It is not the typical Brazilian bossa nova ocean breeze vibe you might think of. As the name suggests, the Corner Club feels like two friends making music for fun at their usual spot, casual, but still curated and controlled. It also pushed me to explore more from Milton and Lo Borges.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/clube-da-esquina/1473446573",
+        "spotify": "https://open.spotify.com/album/5risYG7klZCSLMNxB9dZhf",
+        "youtube": "https://youtube.com/playlist?list=PLQSGKwfvWpEGqdKb2J9lfKG_0Dadqj3Uk&si=I6Gda3-AH3IZooLm"
+      }
+    },
+    {
       "id": "album-03-06-26-2",
       "title": "卡拉OK.台北.我",
       "artist": "Tom Chang/張雨生",

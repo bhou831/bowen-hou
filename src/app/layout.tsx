@@ -57,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={spectral.variable}>
-      <body className={spectral.className}>
+    <html lang="en" className={spectral.variable} suppressHydrationWarning>
+      <body className={spectral.className} suppressHydrationWarning>
         <Layout>{children}</Layout>
       </body>
     </html>

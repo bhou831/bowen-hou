@@ -1,6 +1,99 @@
 {
   "collections": [
     {
+      "id": "Alsace",
+      "title": "The Alsace",
+      "description": "Strasbourg and Colmar are as Alsatian as it gets. I liked Strasbourg a lot—it basically runs on German hardware and French software. The tram is efficient, making it easy to get from the train station to downtown. The historic neighborhoods are just across the river from the newer developments, so like many European cities, you get to enjoy both. Colmar was so beautiful and curated that it almost feels like Disneyland, with surreal buildings, crowds of tourists, overpriced souvenirs, and generic shops.",
+      "coverImage": "/images/collections/Alsace/cover.jpg",
+      "images": [
+        "/images/collections/Alsace/Alsace_1.JPG",
+        "/images/collections/Alsace/Alsace_2.JPG",
+        "/images/collections/Alsace/Alsace_3.JPG",
+        "/images/collections/Alsace/Alsace_4.JPG",
+        "/images/collections/Alsace/Alsace_5.JPG",
+        "/images/collections/Alsace/Alsace_6.JPG",
+        "/images/collections/Alsace/Alsace_7.JPG",
+        "/images/collections/Alsace/Alsace_8.JPG",
+        "/images/collections/Alsace/Alsace_9.JPG",
+        "/images/collections/Alsace/Alsace_10.JPG",
+        "/images/collections/Alsace/Alsace_11.JPG",
+        "/images/collections/Alsace/Alsace_12.JPG"
+      ]
+    },
+    {
+      "id": "Catalonia",
+      "title": "Catalonia",
+      "description": "Quick 4-day trip to Barcelona and coastal Catalonia with my mom. Thanks to the cool breeze from the Mediterranean, the weather was great, while regions outside the Iberian Peninsula were experiencing a record heat wave. I explored Eixample in depth and were really amazed by how Barcelonans designed the city to be optimized for walking and public transit. A typical 4-lane road has been repurposed into two dedicated bus lanes, with wide sidewalks and seating in the middle. This pattern is ubiquitous. Buses run straight, diagonal, and vertical routes, moving through the city without needing to turn much—almost like a shuttle network.",
+      "coverImage": "/images/collections/Catalonia/cover.jpg",
+      "images": [
+        "/images/collections/Catalonia/Catalonia_1.JPG",
+        "/images/collections/Catalonia/Catalonia_2.jpg",
+        "/images/collections/Catalonia/Catalonia_3.JPG",
+        "/images/collections/Catalonia/Catalonia_4.JPG",
+        "/images/collections/Catalonia/Catalonia_5.JPG",
+        "/images/collections/Catalonia/Catalonia_6.JPG",
+        "/images/collections/Catalonia/Catalonia_7.JPG",
+        "/images/collections/Catalonia/Catalonia_8.JPG",
+        "/images/collections/Catalonia/Catalonia_9.JPG",
+        "/images/collections/Catalonia/Catalonia_10.JPG",
+        "/images/collections/Catalonia/Catalonia_11.JPG",
+        "/images/collections/Catalonia/Catalonia_12.JPG",
+        "/images/collections/Catalonia/Catalonia_13.JPG",
+        "/images/collections/Catalonia/Catalonia_14.JPG",
+        "/images/collections/Catalonia/Catalonia_15.JPG",
+        "/images/collections/Catalonia/Catalonia_16.JPG",
+        "/images/collections/Catalonia/Catalonia_17.JPG"
+      ]
+    },
+    {
+      "id": "Paris26",
+      "title": "Paris Pt.2",
+      "description": "Third time in Paris, still one of my favorite cities. The buildings feel more decorative and curated than Barcelona. I sat along the Seine at midnight with my friend Tavish, who ended up talking with strangers from Colombia in Spanish and somehow made them cry. People just felt sincere, and emotions felt real in Paris.",
+      "coverImage": "/images/collections/Paris26/cover.jpg",
+      "images": [
+        "/images/collections/Paris26/Paris26_1.JPG",
+        "/images/collections/Paris26/Paris26_2.JPG",
+        "/images/collections/Paris26/Paris26_3.JPG",
+        "/images/collections/Paris26/Paris26_4.JPG",
+        "/images/collections/Paris26/Paris26_5.JPG",
+        "/images/collections/Paris26/Paris26_6.JPG",
+        "/images/collections/Paris26/Paris26_7.JPG",
+        "/images/collections/Paris26/Paris26_8.JPG",
+        "/images/collections/Paris26/Paris26_9.JPG",
+        "/images/collections/Paris26/Paris26_10.JPG",
+        "/images/collections/Paris26/Paris26_11.JPG",
+        "/images/collections/Paris26/Paris26_12.JPG",
+        "/images/collections/Paris26/Paris26_13.JPG",
+        "/images/collections/Paris26/Paris26_14.JPG",
+        "/images/collections/Paris26/Paris26_15.JPG",
+        "/images/collections/Paris26/Paris26_16.JPG"
+      ]
+    },
+    {
+      "id": "annecy",
+      "title": "Annecy",
+      "description": "Quick detour from Geneva, Annecy was just a 1 hour train ride away. One of the most beautiful lakes in France, maybe even in all of Europe. Before going, I was afraid the town would be as touristy as Colmar, but thanks to the lake and its more developed urban infrastructure, it didn’t feel that way. The old town was crowded and busy, but the real highlight was along the lake. That’s where it truly shines. People biking, swimming, playing volleyball, and hanging out with friends until dark. It felt so relaxed that life there almost seemed unreal.",
+      "coverImage": "/images/collections/annecy/cover.jpg",
+      "images": [
+        "/images/collections/annecy/annecy_1.JPG",
+        "/images/collections/annecy/annecy_2.JPG",
+        "/images/collections/annecy/annecy_3.JPG",
+        "/images/collections/annecy/annecy_4.JPG",
+        "/images/collections/annecy/annecy_5.JPG",
+        "/images/collections/annecy/annecy_6.JPG",
+        "/images/collections/annecy/annecy_7.JPG",
+        "/images/collections/annecy/annecy_8.JPG",
+        "/images/collections/annecy/annecy_9.JPG",
+        "/images/collections/annecy/annecy_10.JPG",
+        "/images/collections/annecy/annecy_11.JPG",
+        "/images/collections/annecy/annecy_12.JPG",
+        "/images/collections/annecy/annecy_13.JPG",
+        "/images/collections/annecy/annecy_14.JPG",
+        "/images/collections/annecy/annecy_15.JPG",
+        "/images/collections/annecy/annecy_16.JPG"
+      ]
+    },
+    {
       "id": "fitzroy2026",
       "title": "Mount Fitz Roy",
       "description": "I’ve been dreaming of this place for years. Fitz Roy’s jagged silhouette is also the logo of the Patagonia brand. We waited two days for the Patagonian wind to calm down, and on Friday we hiked into the valley. The fall foliage and snow-capped peaks made it even more beautiful. In this moment, I’m not sure I’ve ever seen a more beautiful mountain in the world.",
