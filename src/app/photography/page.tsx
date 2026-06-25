@@ -14,11 +14,13 @@ export default function Photography() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isRotateHintVisible, setIsRotateHintVisible] = useState(false);
+  const [isSwipeCueVisible, setIsSwipeCueVisible] = useState(false);
 
   const touchStartX = useRef<number | null>(null);
   const sheetTouchStartY = useRef<number | null>(null);
   const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
   const hasShownRotateHint = useRef(false);
+  const hasShownSwipeCue = useRef(false);
 
   const collections = getCollections();
 
@@ -28,7 +30,9 @@ export default function Photography() {
     setCurrentImageIndex(0);
     setIsDescriptionOpen(false);
     setIsRotateHintVisible(false);
+    setIsSwipeCueVisible(false);
     hasShownRotateHint.current = false;
+    hasShownSwipeCue.current = false;
     setIsLightboxOpen(true);
   };
 
@@ -38,6 +42,7 @@ export default function Photography() {
       setIsLightboxOpen(false);
       setIsDescriptionOpen(false);
       setIsRotateHintVisible(false);
+      setIsSwipeCueVisible(false);
     } else {
       setIsLightboxOpen(true);
     }
@@ -48,6 +53,7 @@ export default function Photography() {
       triggerHaptic();
       setIsDescriptionOpen(false);
       setIsRotateHintVisible(false);
+      setIsSwipeCueVisible(false);
       setCurrentImageIndex((prev) =>
         prev === selectedCollection.images.length - 1 ? 0 : prev + 1,
       );
@@ -59,6 +65,7 @@ export default function Photography() {
       triggerHaptic();
       setIsDescriptionOpen(false);
       setIsRotateHintVisible(false);
+      setIsSwipeCueVisible(false);
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedCollection.images.length - 1 : prev - 1,
       );
@@ -104,6 +111,30 @@ export default function Photography() {
     }
   }, [isDescriptionOpen]);
 
+  useEffect(() => {
+    if (
+      !isLightboxOpen ||
+      !selectedCollection ||
+      selectedCollection.images.length < 2 ||
+      hasShownSwipeCue.current
+    ) {
+      return;
+    }
+
+    const isSubDesktop = window.matchMedia('(max-width: 1279px)').matches;
+    if (!isSubDesktop) return;
+
+    hasShownSwipeCue.current = true;
+    const startTimeoutId = setTimeout(() => setIsSwipeCueVisible(true), 550);
+    const endTimeoutId = setTimeout(() => setIsSwipeCueVisible(false), 1750);
+
+    return () => {
+      clearTimeout(startTimeoutId);
+      clearTimeout(endTimeoutId);
+      setIsSwipeCueVisible(false);
+    };
+  }, [isLightboxOpen, selectedCollection]);
+
   // Keyboard navigation in lightbox
   useEffect(() => {
     if (!isLightboxOpen || !selectedCollection) return;
@@ -113,11 +144,13 @@ export default function Photography() {
         triggerHaptic();
         setIsDescriptionOpen(false);
         setIsRotateHintVisible(false);
+        setIsSwipeCueVisible(false);
         setCurrentImageIndex((prev) => (prev === len - 1 ? 0 : prev + 1));
       } else if (e.key === 'ArrowLeft') {
         triggerHaptic();
         setIsDescriptionOpen(false);
         setIsRotateHintVisible(false);
+        setIsSwipeCueVisible(false);
         setCurrentImageIndex((prev) => (prev === 0 ? len - 1 : prev - 1));
       }
     };
@@ -127,7 +160,10 @@ export default function Photography() {
 
   // Lightbox touch swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) touchStartX.current = e.touches[0].clientX;
+    if (e.touches.length === 1) {
+      setIsSwipeCueVisible(false);
+      touchStartX.current = e.touches[0].clientX;
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -208,14 +244,18 @@ export default function Photography() {
               >
                 <button
                   onClick={previousImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 z-10 bg-black/40 rounded-full p-1.5 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:block"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
 
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-full h-full max-w-[100vw] xl:max-w-none max-h-none">
+                <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                  <div
+                    className={`relative w-full h-full max-w-[100vw] xl:max-w-none max-h-none ${
+                      isSwipeCueVisible ? 'animate-swipe-cue' : ''
+                    }`}
+                  >
                     <Image
                       src={selectedCollection.images[currentImageIndex]}
                       alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
@@ -268,7 +308,7 @@ export default function Photography() {
 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 z-10 bg-black/40 rounded-full p-1.5 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:block"
                   aria-label="Next image"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -361,6 +401,24 @@ export default function Photography() {
           </DialogContent>
         )}
       </Dialog>
+      <style jsx global>{`
+        @keyframes swipe-cue {
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          38% {
+            transform: translateX(-18px);
+          }
+          70% {
+            transform: translateX(6px);
+          }
+        }
+
+        .animate-swipe-cue {
+          animation: swipe-cue 1.15s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 }
