@@ -40,7 +40,7 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-6 xl:gap-4">
+      <div className="music-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-6 xl:gap-4">
         {albums.map((album) => (
           <button
             type="button"
@@ -158,6 +158,14 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
           </DialogContent>
         )}
       </Dialog>
+      <style jsx>{`
+        @media (orientation: landscape) and (max-width: 767px) {
+          .music-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }
