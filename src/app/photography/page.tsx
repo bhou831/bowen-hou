@@ -2,99 +2,39 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Info, Smartphone, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Collection, getCollections } from '@/lib/photo-utils';
 import { triggerHaptic } from '@/lib/haptics';
-
-const COLUMN_STEPS = [1, 2, 3, 4, 6];
 
 export default function Photography() {
   const [selectedCollection, setSelectedCollection] =
     useState<Collection | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [columnStepIndex, setColumnStepIndex] = useState(3); // default: 4 cols
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [isRotateHintVisible, setIsRotateHintVisible] = useState(false);
 
   const touchStartX = useRef<number | null>(null);
-  const wheelAccum = useRef(0);
-  const pinchStartDist = useRef<number | null>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const sheetTouchStartY = useRef<number | null>(null);
+  const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
+  const hasShownRotateHint = useRef(false);
 
   const collections = getCollections();
-
-  // Set initial column count based on viewport
-  useEffect(() => {
-    if (window.innerWidth < 640) setColumnStepIndex(0);
-    else if (window.innerWidth < 1024) setColumnStepIndex(1);
-    else setColumnStepIndex(3);
-  }, []);
-
-  // Non-passive wheel listener for trackpad pinch (ctrlKey + scroll)
-  useEffect(() => {
-    const el = gridRef.current;
-    if (!el) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey) return;
-      e.preventDefault();
-      wheelAccum.current += e.deltaY;
-      if (wheelAccum.current > 50) {
-        setColumnStepIndex((prev) =>
-          Math.min(prev + 1, COLUMN_STEPS.length - 1),
-        );
-        wheelAccum.current = 0;
-      } else if (wheelAccum.current < -50) {
-        setColumnStepIndex((prev) => Math.max(prev - 1, 0));
-        wheelAccum.current = 0;
-      }
-    };
-
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, []);
-
-  // Grid touch pinch handlers
-  const handleGridTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 2) {
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      pinchStartDist.current = Math.hypot(dx, dy);
-    }
-  };
-
-  const handleGridTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length !== 2 || pinchStartDist.current === null) return;
-    const dx = e.touches[0].clientX - e.touches[1].clientX;
-    const dy = e.touches[0].clientY - e.touches[1].clientY;
-    const dist = Math.hypot(dx, dy);
-    const diff = dist - pinchStartDist.current;
-    if (Math.abs(diff) > 60) {
-      if (diff > 0) {
-        // spreading fingers = zoom in = fewer columns
-        setColumnStepIndex((prev) => Math.max(prev - 1, 0));
-      } else {
-        // pinching in = zoom out = more columns
-        setColumnStepIndex((prev) =>
-          Math.min(prev + 1, COLUMN_STEPS.length - 1),
-        );
-      }
-      pinchStartDist.current = dist;
-    }
-  };
-
-  const handleGridTouchEnd = () => {
-    pinchStartDist.current = null;
-  };
 
   const handleCollectionClick = (collection: Collection) => {
     setSelectedCollection(collection);
     setCurrentImageIndex(0);
+    setIsDescriptionOpen(false);
+    setIsRotateHintVisible(false);
+    hasShownRotateHint.current = false;
     setIsLightboxOpen(true);
   };
 
   const nextImage = () => {
     if (selectedCollection) {
+      setIsDescriptionOpen(false);
+      setIsRotateHintVisible(false);
       setCurrentImageIndex((prev) =>
         prev === selectedCollection.images.length - 1 ? 0 : prev + 1,
       );
@@ -103,11 +43,52 @@ export default function Photography() {
 
   const previousImage = () => {
     if (selectedCollection) {
+      setIsDescriptionOpen(false);
+      setIsRotateHintVisible(false);
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedCollection.images.length - 1 : prev - 1,
       );
     }
   };
+
+  useEffect(() => {
+    if (!isLightboxOpen || !selectedCollection || hasShownRotateHint.current) {
+      return;
+    }
+
+    const currentImage = selectedCollection.images[currentImageIndex];
+    const image = new window.Image();
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const showHintIfHelpful = () => {
+      const isSubDesktop = window.matchMedia('(max-width: 1279px)').matches;
+      const isPortraitViewport = window.matchMedia(
+        '(orientation: portrait)',
+      ).matches;
+      const isLandscapePhoto = image.naturalWidth > image.naturalHeight;
+
+      if (isSubDesktop && isPortraitViewport && isLandscapePhoto) {
+        hasShownRotateHint.current = true;
+        setIsRotateHintVisible(true);
+        timeoutId = setTimeout(() => setIsRotateHintVisible(false), 3500);
+      }
+    };
+
+    image.onload = showHintIfHelpful;
+    image.src = currentImage;
+
+    return () => {
+      image.onload = null;
+      setIsRotateHintVisible(false);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [currentImageIndex, isLightboxOpen, selectedCollection]);
+
+  useEffect(() => {
+    if (isDescriptionOpen) {
+      descriptionCloseButtonRef.current?.focus({ preventScroll: true });
+    }
+  }, [isDescriptionOpen]);
 
   // Keyboard navigation in lightbox
   useEffect(() => {
@@ -116,9 +97,13 @@ export default function Photography() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
         triggerHaptic();
+        setIsDescriptionOpen(false);
+        setIsRotateHintVisible(false);
         setCurrentImageIndex((prev) => (prev === len - 1 ? 0 : prev + 1));
       } else if (e.key === 'ArrowLeft') {
         triggerHaptic();
+        setIsDescriptionOpen(false);
+        setIsRotateHintVisible(false);
         setCurrentImageIndex((prev) => (prev === 0 ? len - 1 : prev - 1));
       }
     };
@@ -141,23 +126,24 @@ export default function Photography() {
     touchStartX.current = null;
   };
 
-  const cols = COLUMN_STEPS[columnStepIndex];
-  const gap = cols <= 2 ? 'gap-8' : cols <= 4 ? 'gap-6' : 'gap-4';
+  const handleSheetTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) sheetTouchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleSheetTouchEnd = (e: React.TouchEvent) => {
+    if (sheetTouchStartY.current === null) return;
+    const diff = e.changedTouches[0].clientY - sheetTouchStartY.current;
+    if (diff > 50) setIsDescriptionOpen(false);
+    sheetTouchStartY.current = null;
+  };
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
-      <div
-        ref={gridRef}
-        className={`grid ${gap} p-1 transition-[gap] duration-300`}
-        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
-        onTouchStart={handleGridTouchStart}
-        onTouchMove={handleGridTouchMove}
-        onTouchEnd={handleGridTouchEnd}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-6 p-1">
         {collections.map((collection) => (
           <div
             key={collection.id}
-            className="cursor-pointer group mx-auto w-full transition-all duration-300 ease-in-out"
+            className="cursor-pointer group mx-auto w-full"
             onClick={() => handleCollectionClick(collection)}
           >
             <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100">
@@ -173,14 +159,12 @@ export default function Photography() {
               <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
-            {cols <= 4 && (
-              <div className="mt-3 relative inline-block group">
-                <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
-                  {collection.title}
-                </h3>
-                <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500" />
-              </div>
-            )}
+            <div className="mt-3 relative inline-block group">
+              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
+                {collection.title}
+              </h3>
+              <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500" />
+            </div>
           </div>
         ))}
       </div>
@@ -188,16 +172,16 @@ export default function Photography() {
       {/* Lightbox */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
         {selectedCollection && (
-          <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full bg-black/75 border-none p-0 overflow-hidden">
+          <DialogContent className="max-w-none max-h-none w-screen h-[100dvh] rounded-none sm:rounded-none xl:max-w-[95vw] xl:max-h-[95vh] xl:w-full xl:h-full xl:rounded-lg bg-black/75 border-none p-0 overflow-hidden">
             <DialogTitle className="sr-only">
               {selectedCollection.title} - Image {currentImageIndex + 1} of{' '}
               {selectedCollection.images.length}
             </DialogTitle>
 
-            <div className="h-screen xl:min-h-0 xl:h-[95vh] flex flex-col xl:flex-row">
+            <div className="h-full min-h-0 flex flex-col xl:flex-row">
               {/* Main Image Section */}
               <div
-                className="flex-1 relative flex items-center justify-center min-h-[50vh] xl:min-h-0 py-6 xl:py-0"
+                className="flex-1 relative flex items-center justify-center min-h-0 p-3 xl:p-0"
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
               >
@@ -210,7 +194,7 @@ export default function Photography() {
                 </button>
 
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative w-full h-full max-w-[90vw] xl:max-w-none max-h-[60vh] xl:max-h-none">
+                  <div className="relative w-full h-full max-w-[100vw] xl:max-w-none max-h-none">
                     <Image
                       src={selectedCollection.images[currentImageIndex]}
                       alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
@@ -222,6 +206,42 @@ export default function Photography() {
                   </div>
                 </div>
 
+                <div
+                  className={`xl:hidden pointer-events-none absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-sm font-light text-white backdrop-blur-sm transition-opacity duration-300 ${
+                    isRotateHintVisible ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  aria-hidden={!isRotateHintVisible}
+                >
+                  <Smartphone className="h-4 w-4" />
+                  <span>Rotate for a larger view</span>
+                </div>
+
+                <button
+                  onClick={() => setIsDescriptionOpen(true)}
+                  className="xl:hidden absolute bottom-[calc(env(safe-area-inset-bottom)+2.25rem)] left-1/2 z-10 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-white backdrop-blur-sm hover:bg-black/55"
+                  aria-label="Show image description"
+                  aria-expanded={isDescriptionOpen}
+                >
+                  <span className="min-w-0 truncate text-sm font-light">
+                    {selectedCollection.title}
+                  </span>
+                  <Info className="h-4 w-4 shrink-0" />
+                </button>
+
+                <div
+                  className={`xl:hidden pointer-events-none absolute inset-x-6 bottom-[calc(env(safe-area-inset-bottom)+0.875rem)] z-10 h-px bg-white/15 transition-opacity duration-300 ${
+                    isDescriptionOpen ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  aria-hidden="true"
+                >
+                  <div
+                    className="h-px bg-white/55 transition-all duration-300 ease-out"
+                    style={{
+                      width: `${((currentImageIndex + 1) / selectedCollection.images.length) * 100}%`,
+                    }}
+                  />
+                </div>
+
                 <button
                   onClick={nextImage}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 z-10 bg-black/40 rounded-full p-1.5 backdrop-blur-sm"
@@ -231,8 +251,8 @@ export default function Photography() {
                 </button>
               </div>
 
-              {/* Description Panel */}
-              <div className="xl:w-80 bg-black/75 p-4 xl:p-8 flex flex-col justify-start xl:justify-center xl:max-h-full overflow-y-auto">
+              {/* Desktop Description Panel */}
+              <div className="hidden xl:flex xl:w-80 bg-black/75 p-8 flex-col justify-center xl:max-h-full overflow-y-auto">
                 <div className="text-white">
                   <h3 className="text-xl font-medium mb-3">
                     {selectedCollection.title}
@@ -252,6 +272,60 @@ export default function Photography() {
                     {selectedCollection.description}
                   </p>
                 </div>
+              </div>
+
+              {isDescriptionOpen && (
+                <button
+                  className="xl:hidden absolute inset-0 z-10 cursor-default bg-transparent"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  onClick={() => setIsDescriptionOpen(false)}
+                />
+              )}
+
+              {/* Mobile/Tablet Description Sheet */}
+              <div
+                className={`xl:hidden absolute inset-x-0 bottom-0 z-20 max-h-[55vh] overflow-y-auto bg-black/85 p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] text-white backdrop-blur-sm transition-transform duration-300 ease-out ${
+                  isDescriptionOpen ? 'translate-y-0' : 'translate-y-full'
+                }`}
+                role="region"
+                aria-label={`${selectedCollection.title} description`}
+              >
+                <div
+                  className="mx-auto mb-4 h-5 w-16 touch-none pt-2"
+                  onTouchStart={handleSheetTouchStart}
+                  onTouchEnd={handleSheetTouchEnd}
+                  aria-hidden="true"
+                >
+                  <div className="mx-auto h-1 w-10 rounded-full bg-white/30" />
+                </div>
+
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <h3 className="text-xl font-medium">
+                    {selectedCollection.title}
+                  </h3>
+                  <button
+                    ref={descriptionCloseButtonRef}
+                    onClick={() => setIsDescriptionOpen(false)}
+                    className="shrink-0 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20"
+                    aria-label="Hide image description"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                <div className="w-full h-px bg-white/20">
+                  <div
+                    className="h-px bg-white/60 transition-all duration-300 ease-out"
+                    style={{
+                      width: `${((currentImageIndex + 1) / selectedCollection.images.length) * 100}%`,
+                    }}
+                  />
+                </div>
+
+                <p className="text-md font-light leading-relaxed py-4 pb-2">
+                  {selectedCollection.description}
+                </p>
               </div>
             </div>
           </DialogContent>
