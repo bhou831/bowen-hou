@@ -292,7 +292,7 @@ export default function Photography() {
                     />
                   </div>
 
-                  <p className="text-md font-light leading-relaxed py-2 pb-10 mb-4 mt-4">
+                  <p className="text-md whitespace-pre-line font-light leading-relaxed py-2 pb-10 mb-4 mt-4">
                     {selectedCollection.description}
                   </p>
                 </div>
@@ -353,7 +353,7 @@ export default function Photography() {
                   />
                 </div>
 
-                <p className="text-md font-light leading-relaxed py-4 pb-2">
+                <p className="text-md whitespace-pre-line font-light leading-relaxed py-4 pb-2">
                   {selectedCollection.description}
                 </p>
               </div>

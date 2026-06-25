@@ -94,7 +94,9 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
 
                 {/* Album Details */}
                 <div className="flex flex-col w-full md:w-1/2">
-                  <p className="text-gray-700">{selectedAlbum.description}</p>
+                  <p className="whitespace-pre-line text-gray-700">
+                    {selectedAlbum.description}
+                  </p>
 
                   {/* Streaming Links */}
                   <div className="flex gap-3 mt-6">

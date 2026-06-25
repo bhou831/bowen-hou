@@ -3,7 +3,7 @@
     {
       "id": "Alsace",
       "title": "The Alsace",
-      "description": "Strasbourg and Colmar are as Alsatian as it gets. I liked Strasbourg a lot—it basically runs on German hardware and French software. The tram is efficient, making it easy to get from the train station to downtown. The historic neighborhoods are just across the river from the newer developments, so like many European cities, you get to enjoy both. Colmar was so beautiful and curated that it almost feels like Disneyland, with surreal buildings, crowds of tourists, overpriced souvenirs, and generic shops.",
+      "description": "Strasbourg and Colmar are as Alsatian as it gets. I liked Strasbourg a lot—it basically runs on German hardware and French software. The tram is efficient, making it easy to get from the train station to downtown.\n\nThe historic neighborhoods are just across the river from the newer developments, so like many European cities, you get to enjoy both.\n\nColmar was so beautiful and curated that it almost feels like Disneyland, with surreal buildings, crowds of tourists, overpriced souvenirs, and generic shops.",
       "coverImage": "/images/collections/Alsace/cover.jpg",
       "images": [
         "/images/collections/Alsace/Alsace_1.JPG",
@@ -23,7 +23,7 @@
     {
       "id": "Catalonia",
       "title": "Catalonia",
-      "description": "Quick 4-day trip to Barcelona and coastal Catalonia with my mom. Thanks to the cool breeze from the Mediterranean, the weather was great, while regions outside the Iberian Peninsula were experiencing a record heat wave. I explored Eixample in depth and were really amazed by how Barcelonans designed the city to be optimized for walking and public transit. A typical 4-lane road has been repurposed into two dedicated bus lanes, with wide sidewalks and seating in the middle. This pattern is ubiquitous. Buses run straight, diagonal, and vertical routes, moving through the city without needing to turn much—almost like a shuttle network.",
+      "description": "Quick 4-day trip to Barcelona and coastal Catalonia with my mom. Thanks to the cool breeze from the Mediterranean, the weather was great, while regions outside the Iberian Peninsula were experiencing a record heat wave.\n\nI explored Eixample in depth and were really amazed by how Barcelonans designed the city to be optimized for walking and public transit. A typical 4-lane road has been repurposed into two dedicated bus lanes, with wide sidewalks and seating in the middle.\n\nThis pattern is ubiquitous. Buses run straight, diagonal, and vertical routes, moving through the city without needing to turn much—almost like a shuttle network.",
       "coverImage": "/images/collections/Catalonia/cover.jpg",
       "images": [
         "/images/collections/Catalonia/Catalonia_1.JPG",
@@ -48,7 +48,7 @@
     {
       "id": "Paris26",
       "title": "Paris Pt.2",
-      "description": "Third time in Paris, still one of my favorite cities. The buildings feel more decorative and curated than Barcelona. I sat along the Seine at midnight with my friend Tavish, who ended up talking with strangers from Colombia in Spanish and somehow made them cry. People just felt sincere, and emotions felt real in Paris.",
+      "description": "Third time in Paris, still one of my favorite cities. The buildings feel more decorative and curated than Barcelona.\n\nI sat along the Seine at midnight with my friend Tavish, who ended up talking with strangers from Colombia in Spanish and somehow made them cry. People just felt sincere, and emotions felt real in Paris.",
       "coverImage": "/images/collections/Paris26/cover.jpg",
       "images": [
         "/images/collections/Paris26/Paris26_1.JPG",
@@ -72,7 +72,7 @@
     {
       "id": "annecy",
       "title": "Annecy",
-      "description": "Quick detour from Geneva, Annecy was just a 1 hour train ride away. One of the most beautiful lakes in France, maybe even in all of Europe. Before going, I was afraid the town would be as touristy as Colmar, but thanks to the lake and its more developed urban infrastructure, it didn’t feel that way. The old town was crowded and busy, but the real highlight was along the lake. That’s where it truly shines. People biking, swimming, playing volleyball, and hanging out with friends until dark. It felt so relaxed that life there almost seemed unreal.",
+      "description": "Quick detour from Geneva, Annecy was just a 1 hour train ride away. One of the most beautiful lakes in France, maybe even in all of Europe.\n\nBefore going, I was afraid the town would be as touristy as Colmar, but thanks to the lake and its more developed urban infrastructure, it didn’t feel that way. The old town was crowded and busy, but the real highlight was along the lake.\n\nThat’s where it truly shines. People biking, swimming, playing volleyball, and hanging out with friends until dark. It felt so relaxed that life there almost seemed unreal.",
       "coverImage": "/images/collections/annecy/cover.jpg",
       "images": [
         "/images/collections/annecy/annecy_1.JPG",
@@ -96,7 +96,7 @@
     {
       "id": "fitzroy2026",
       "title": "Mount Fitz Roy",
-      "description": "I’ve been dreaming of this place for years. Fitz Roy’s jagged silhouette is also the logo of the Patagonia brand. We waited two days for the Patagonian wind to calm down, and on Friday we hiked into the valley. The fall foliage and snow-capped peaks made it even more beautiful. In this moment, I’m not sure I’ve ever seen a more beautiful mountain in the world.",
+      "description": "I’ve been dreaming of this place for years. Fitz Roy’s jagged silhouette is also the logo of the Patagonia brand. We waited two days for the Patagonian wind to calm down, and on Friday we hiked into the valley.\n\nThe fall foliage and snow-capped peaks made it even more beautiful. In this moment, I’m not sure I’ve ever seen a more beautiful mountain in the world.",
       "coverImage": "/images/collections/fitzroy2026/cover.jpg",
       "images": [
         "/images/collections/fitzroy2026/fitzroy2026_1.JPG",
@@ -118,7 +118,7 @@
     {
       "id": "glacier2026",
       "title": "Los Glaciares NP",
-      "description": "Only from the sky could we truly understand how Los Glaciares National Park got its name. Glaciers of every size merge and weave together before rushing into alpine lakes from the Patagonian highlands. This is just one of the most famous Moreno Glacier. We hiked the trail with two new friends we met along the way, and the whole experience felt magical.",
+      "description": "Only from the sky could we truly understand how Los Glaciares National Park got its name. Glaciers of every size merge and weave together before rushing into alpine lakes from the Patagonian highlands. This is just one of the most famous Moreno Glacier.\n\nWe hiked the trail with two new friends we met along the way, and the whole experience felt magical.",
       "coverImage": "/images/collections/glacier2026/cover.jpg",
       "images": [
         "/images/collections/glacier2026/glacier2026_1.JPG",
@@ -138,7 +138,7 @@
     {
       "id": "tdp2026",
       "title": "Torres Del Paine NP",
-      "description": "Torres del Paine sits in southern Chilean Patagonia. The roads were rough and unpaved, but the restrooms, stores, and lodges were exceptionally well maintained. The weather changed constantly and could be harsh, but the landscape was both majestic and peaceful. We couldn’t hike the famous W or O trek due to winter closures, so we drove around the instead to enjoy its beauty from different angles.",
+      "description": "Torres del Paine sits in southern Chilean Patagonia. The roads were rough and unpaved, but the restrooms, stores, and lodges were exceptionally well maintained.\n\nThe weather changed constantly and could be harsh, but the landscape was both majestic and peaceful. We couldn’t hike the famous W or O trek due to winter closures, so we drove around the instead to enjoy its beauty from different angles.",
       "coverImage": "/images/collections/tdp2026/cover.jpg",
       "images": [
         "/images/collections/tdp2026/tdp2026_1.JPG",
@@ -183,7 +183,7 @@
     {
       "id": "Tokyo2025",
       "title": "Tokyo 2025",
-      "description": "Tokyo is by far my favorite city as a transit and urban design enthusiast. It offers an incredibly extensive public transportation network with monorails, JR lines, subways, and the Shinkansen. They all running with amazing punctuality and frequency. Rush hours can be overwhelming, especially at major transfer hubs along the Yamanote Line, but traveling off-peak is simply a pleasure. I took short walks through neighborhoods like Daiba, Marunouchi, Jiyugaoka, and Nakameguro, and it’s impossible to pick a favorite. Each area feels equally vibrant, with walkable streets and thoughtfully mixed-use buildings that make the city feel so alive.",
+      "description": "Tokyo is by far my favorite city as a transit and urban design enthusiast. It offers an incredibly extensive public transportation network with monorails, JR lines, subways, and the Shinkansen. They all running with amazing punctuality and frequency.\n\nRush hours can be overwhelming, especially at major transfer hubs along the Yamanote Line, but traveling off-peak is simply a pleasure.\n\nI took short walks through neighborhoods like Daiba, Marunouchi, Jiyugaoka, and Nakameguro, and it’s impossible to pick a favorite. Each area feels equally vibrant, with walkable streets and thoughtfully mixed-use buildings that make the city feel so alive.",
       "coverImage": "/images/collections/Tokyo2025/cover.jpg",
       "images": [
         "/images/collections/Tokyo2025/Tokyo2025_19.jpg",
@@ -211,7 +211,7 @@
     {
       "id": "Shizuoka2025",
       "title": "Shizuoka 2025",
-      "description": "I traveled to Fujikawa and Shimizu to view Mt. Fuji, and passed by the Shimizu/Shizuoka area. It was the home to one of Japan’s most important deep-water ports, Shimizu serves as a major hub for exports such as frozen tuna, paper products, and industrial goods, with ships, trucks, and logistics moving in a steady rhythm throughout the day. Despite the constant flow of freight, the infrastructure is immaculate: streets are clean, rivers are lined with pedestrian walkways, and the city functions with quiet efficiency. Many buildings here date back to the 1970s and 80s, and as people gravitate toward Tokyo, the remaining shops and restaurants feel quieter, with owners sitting outside waiting for customers, leaving me unsure whether I arrived during an off-peak hour or it's just how the city now lives day to day.",
+      "description": "I traveled to Fujikawa and Shimizu to view Mt. Fuji, and passed by the Shimizu/Shizuoka area.\n\nIt was the home to one of Japan’s most important deep-water ports, Shimizu serves as a major hub for exports such as frozen tuna, paper products, and industrial goods, with ships, trucks, and logistics moving in a steady rhythm throughout the day.\n\nDespite the constant flow of freight, the infrastructure is immaculate: streets are clean, rivers are lined with pedestrian walkways, and the city functions with quiet efficiency.\n\nMany buildings here date back to the 1970s and 80s, and as people gravitate toward Tokyo, the remaining shops and restaurants feel quieter, with owners sitting outside waiting for customers, leaving me unsure whether I arrived during an off-peak hour or it's just how the city now lives day to day.",
       "coverImage": "/images/collections/Shizuoka2025/cover.jpg",
       "images": [
         "/images/collections/Shizuoka2025/Shizuoka2025_3.jpg",
@@ -228,7 +228,7 @@
     {
       "id": "hawaii2025",
       "title": "Kauai and Hawaii",
-      "description": "A recent trip to Kauai and the Big Island. Kauai felt rugged and understated; its raw, organic architecture matched the island’s peaceful, tropical rainforest vibe. The Big Island, on the other hand, felt young and volcanic, with more refined infrastructure. Along the sunny Kona coast, I saw many 60s–70s island-brutalism buildings with large open atriums, while just east of the mountains, the landscape shifts into jungle. Parts of the Big Island reminded me of Iceland; they all share the same volcanic island energy, but the Big Island was just lusher, warmer, and more relaxed.",
+      "description": "A recent trip to Kauai and the Big Island. Kauai felt rugged and understated; its raw, organic architecture matched the island’s peaceful, tropical rainforest vibe. The Big Island, on the other hand, felt young and volcanic, with more refined infrastructure.\n\nAlong the sunny Kona coast, I saw many 60s–70s island-brutalism buildings with large open atriums, while just east of the mountains, the landscape shifts into jungle.\n\nParts of the Big Island reminded me of Iceland; they all share the same volcanic island energy, but the Big Island was just lusher, warmer, and more relaxed.",
       "coverImage": "/images/collections/hawaii2025/cover.jpg",
       "images": [
         "/images/collections/hawaii2025/hawaii2025_13.JPG",
@@ -269,7 +269,7 @@
     {
       "id": "banff2025",
       "title": "Banff NP 2025",
-      "description": "Revisited Banff over the Labour Day weekend. The park wasn’t as crowded as I expected. Popular scenic spots were busy as usual, but the hiking trails were surprisingly quiet. Sadly, with climate change, Alberta’s wildfire season has stretched into early September. Banff town was about 10 degrees above the historical average, and a light smog covered over the park. The scenery felt like only 60–70% of Banff’s full potential, but even so, it’s still one of the most beautiful parts of the Rockies.",
+      "description": "Revisited Banff over the Labour Day weekend. The park wasn’t as crowded as I expected. Popular scenic spots were busy as usual, but the hiking trails were surprisingly quiet.\n\nSadly, with climate change, Alberta’s wildfire season has stretched into early September. Banff town was about 10 degrees above the historical average, and a light smog covered over the park.\n\nThe scenery felt like only 60–70% of Banff’s full potential, but even so, it’s still one of the most beautiful parts of the Rockies.",
       "coverImage": "/images/collections/banff2025/cover.jpg",
       "images": [
         "/images/collections/banff2025/banff2025_5.JPG",
@@ -290,7 +290,7 @@
     {
       "id": "sf25",
       "title": "Presidio",
-      "description": "Thanks to the jet lag, I woke up at 4:30 and headed straight to Twin Peaks. The city was chilly and completely covered in fog when I reached the Christmas Tree lookout, despite checking the webcam before stepping out. The driver joked that I wouldn't spend a minute there and took me downhill. I then caught another train to Presidio/Crissy Field, where the conditions were much better, with the soft morning light being just right.",
+      "description": "Thanks to the jet lag, I woke up at 4:30 and headed straight to Twin Peaks. The city was chilly and completely covered in fog when I reached the Christmas Tree lookout, despite checking the webcam before stepping out.\n\nThe driver joked that I wouldn't spend a minute there and took me downhill. I then caught another train to Presidio/Crissy Field, where the conditions were much better, with the soft morning light being just right.",
       "coverImage": "/images/collections/sf25/cover.jpg",
       "images": [
         "/images/collections/sf25/sf25_3.JPG",
@@ -308,7 +308,7 @@
     {
       "id": "paris25",
       "title": "Urbanism of Paris",
-      "description": "Paris really feels like peak urbanism — a city and transit system designed for everyone, not just commuters. Even during off-peak hours and weekends, trains and buses run every 3–5 minutes. The layout is also insanely well-designed, thanks to Haussmann. Green spaces are everywhere, streets and aves interweave which is far more interesting to explore on foot/bike compared to cities on a grid. The buildings all share that iconic zinc roof, brings uniformly to the skyline.",
+      "description": "Paris really feels like peak urbanism — a city and transit system designed for everyone, not just commuters. Even during off-peak hours and weekends, trains and buses run every 3–5 minutes. The layout is also insanely well-designed, thanks to Haussmann.\n\nGreen spaces are everywhere, streets and aves interweave which is far more interesting to explore on foot/bike compared to cities on a grid. The buildings all share that iconic zinc roof, brings uniformly to the skyline.",
       "coverImage": "/images/collections/paris25/cover.jpg",
       "images": [
         "/images/collections/paris25/paris25_5.JPG",
@@ -332,7 +332,7 @@
     {
       "id": "iceland-peninsula",
       "title": "Iceland - Snæfellsnes",
-      "description": "This was our last stop in Iceland. Located near the Westfjords, we took a ferry directly here. This peninsula is another picturesque destination, stretching from east to west. Its north and south shores are divided by a central mountain range, with the south coast forming a vast flat plain that gives you unobstructed views from the mountains all the way to the sea.",
+      "description": "This was our last stop in Iceland. Located near the Westfjords, we took a ferry directly here. This peninsula is another picturesque destination, stretching from east to west.\n\nIts north and south shores are divided by a central mountain range, with the south coast forming a vast flat plain that gives you unobstructed views from the mountains all the way to the sea.",
       "coverImage": "/images/collections/iceland-peninsula/cover.jpg",
       "images": [
         "/images/collections/iceland-peninsula/iceland-peninsula_4.JPG",
@@ -355,7 +355,7 @@
     {
       "id": "iceland-west",
       "title": "Iceland – Westfjords",
-      "description": "Absolutely the cream of the crop in Iceland. The Westfjords feel like their own little country within Iceland. This region is geologically older than the “mainland” and deserves a dedicated tour, even though some roads are gravel. The Westfjords combine nearly every type of scenery Iceland is known for snow capped peaks alongside with bare rocky mountains, waterfalls, beaches, and ocean views all bundled together. Thanks to this unique geography, the Westfjords are known for their microclimates, much like coastal California. You don’t even have to be lucky to see rainbows, they seem to grow right out of the landscape.",
+      "description": "Absolutely the cream of the crop in Iceland. The Westfjords feel like their own little country within Iceland. This region is geologically older than the “mainland” and deserves a dedicated tour, even though some roads are gravel.\n\nThe Westfjords combine nearly every type of scenery Iceland is known for snow capped peaks alongside with bare rocky mountains, waterfalls, beaches, and ocean views all bundled together.\n\nThanks to this unique geography, the Westfjords are known for their microclimates, much like coastal California. You don’t even have to be lucky to see rainbows, they seem to grow right out of the landscape.",
       "coverImage": "/images/collections/iceland-west/cover.jpg",
       "images": [
         "/images/collections/iceland-west/iceland-west_28.JPG",
@@ -392,7 +392,7 @@
     {
       "id": "iceland-north",
       "title": "Iceland – North Iceland",
-      "description": "The drive from Egilsstaðir to Akureyri feels like shuttling through different worlds in minutes. You might see endless lava fields, and in the blink of an eye, they turn into lush green grasslands, only to be surrounded moments later by snow-capped mountains. It was fickle and magical. From Akureyri to Búðardalur, the landscape becomes more predictable, with endless fenced farmlands and scattered villages. This area has some of the most fertile land in Iceland. Although the fields are fenced and look empty, they’re often growing wheat-one of Iceland’s most common crops, mainly used to feed livestock like sheep and horses—taking advantage of the long summer daylight.",
+      "description": "The drive from Egilsstaðir to Akureyri feels like shuttling through different worlds in minutes. You might see endless lava fields, and in the blink of an eye, they turn into lush green grasslands, only to be surrounded moments later by snow-capped mountains.\n\nIt was fickle and magical. From Akureyri to Búðardalur, the landscape becomes more predictable, with endless fenced farmlands and scattered villages. This area has some of the most fertile land in Iceland.\n\nAlthough the fields are fenced and look empty, they’re often growing wheat-one of Iceland’s most common crops, mainly used to feed livestock like sheep and horses—taking advantage of the long summer daylight.",
       "coverImage": "/images/collections/iceland-north/cover.jpg",
       "images": [
         "/images/collections/iceland-north/iceland-north_1.JPG",
@@ -410,7 +410,7 @@
     {
       "id": "iceland-east",
       "title": "Iceland – East Fjords",
-      "description": "The Ring Road along the East Fjords is one of the most scenic drives on the island. The town of Djúpivogur serves as the gateway to the fjords. Beyond this point lies an endless series of drives in and out of various fjords, covered in moss or bare rock, drop straight into the ocean. Sometimes, waterfalls rush from the cliffs directly into the sea, it was absolutely jaw dropping. Each fjord is geographically close, but the landscapes vary drastically.",
+      "description": "The Ring Road along the East Fjords is one of the most scenic drives on the island. The town of Djúpivogur serves as the gateway to the fjords.\n\nBeyond this point lies an endless series of drives in and out of various fjords, covered in moss or bare rock, drop straight into the ocean. Sometimes, waterfalls rush from the cliffs directly into the sea, it was absolutely jaw dropping.\n\nEach fjord is geographically close, but the landscapes vary drastically.",
       "coverImage": "/images/collections/iceland-east/cover.jpg",
       "images": [
         "/images/collections/iceland-east/iceland-east_11.JPG",
@@ -498,7 +498,7 @@
     {
       "id": "04-01-25-jerseyport",
       "title": "NYC Postcard",
-      "description": "I found this spot on Google Maps where you can see iconic architectures—the Statue of Liberty, Empire State Building, and Freedom Towe all in the same frame. It's everything you would expect in a NYC postcard. The wind was strong, so I had to lower the tripod for more stability. Photos were taken at 200mm, but the images came out are as still very sharp.",
+      "description": "I found this spot on Google Maps where you can see iconic architectures—the Statue of Liberty, Empire State Building, and Freedom Towe all in the same frame. It's everything you would expect in a NYC postcard.\n\nThe wind was strong, so I had to lower the tripod for more stability. Photos were taken at 200mm, but the images came out are as still very sharp.",
       "coverImage": "/images/collections/04-01-25-jerseyport/cover.jpg",
       "images": [
         "/images/collections/04-01-25-jerseyport/jp25_5.jpg",
@@ -575,7 +575,7 @@
     {
       "id": "kunming",
       "title": "Kunming in a Nutshell",
-      "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
+      "description": "This collection features photos from XunJin Street in my hometown, one of the latest developments in Kunming, filled with coffee shops seamlessly blending into a historical neighborhood. You can see people relaxing by the street, basking in Kunming’s iconic winter sunlight. This street is also a nutshell version of Kunming itself, it is slow-paced, with good weather, and people always on the lookout for drinks (tea, coffee, or anything but plain water). \n\nI also revisited my primary school (picture 3), which has been repurposed into a hotpot complex. I sneaked in through the public restroom, and the stairs still look just like they did back in the 2000s. But the playground has been turned into an outdoor food plaza with four subway exits shoulder to shoulder—one of the most ridiculous land redevelopments I’ve ever seen.",
       "coverImage": "/images/collections/kunming/cover.jpg",
       "images": [
         "/images/collections/kunming/km_2025_10.JPG",
@@ -620,7 +620,7 @@
     {
       "id": "summer-vibes-in-dec",
       "title": "Summer Vibes in December",
-      "description": "I’ve been working on this project for a month. It’s easy to take summer-like photos during the actual summer season, but December is the farthest month from summer especially in the Northeast, where Christmas lights and cold air strip away any remaining traces of warmth. How challenging is it to find summer elements during this time of year? \nIn this series, I tried to create photos with a summer vibe in the cold month of December, and make them indistinguishable from actual summer scenes, without any context. I hope you enjoy this collection.",
+      "description": "I’ve been working on this project for a month. It’s easy to take summer-like photos during the actual summer season, but December is the farthest month from summer especially in the Northeast, where Christmas lights and cold air strip away any remaining traces of warmth. How challenging is it to find summer elements during this time of year? \n\nIn this series, I tried to create photos with a summer vibe in the cold month of December, and make them indistinguishable from actual summer scenes, without any context. I hope you enjoy this collection.",
       "coverImage": "/images/collections/svid/cover.jpg",
       "images": [
         "/images/collections/svid/svidec_4.JPG",
@@ -658,7 +658,7 @@
     {
       "id": "hk2022",
       "title": "Urbanism of HongKong Pt.1",
-      "description": "Dec 2022. First time back home after three years of COVID travel restrictions. Because of the jetlag, I woke up early, had a feast at the hotel buffet, and took a walk around North Point (北角) on Hong Kong Island. Most of my photos were taken at North Point Ferry Pier—a quiet, almost anime-like spot with layers of beams and walls creating beautiful natural frames for the ocean view.",
+      "description": "Dec 2022. First time back home after three years of COVID travel restrictions. Because of the jetlag, I woke up early, had a feast at the hotel buffet, and took a walk around North Point (北角) on Hong Kong Island.\n\nMost of my photos were taken at North Point Ferry Pier—a quiet, almost anime-like spot with layers of beams and walls creating beautiful natural frames for the ocean view.",
       "coverImage": "/images/collections/hk2022/cover.jpg",
       "images": [
         "/images/collections/hk2022/hk_2022_3.JPG",
@@ -682,7 +682,7 @@
     {
       "id": "siusi2024",
       "title": "Seis am Schlern",
-      "description": "This is a more relaxed part of the Dolomites, where everything is easily accessible by cable car. The mountain weather is unpredictable, much like what I experienced in Yunnan. I hiked the mountain behind the hotel in the morning, and it was completely fogged up for hours. But at the last moment, the sun came out, shining the entire Siusi Valley.",
+      "description": "This is a more relaxed part of the Dolomites, where everything is easily accessible by cable car. The mountain weather is unpredictable, much like what I experienced in Yunnan.\n\nI hiked the mountain behind the hotel in the morning, and it was completely fogged up for hours. But at the last moment, the sun came out, shining the entire Siusi Valley.",
       "coverImage": "/images/collections/siusi2024/cover.jpg",
       "images": [
         "/images/collections/siusi2024/siusi_1.JPG",
@@ -784,7 +784,7 @@
     {
       "id": "yiliang-railway",
       "title": "Yiliang Railway Station",
-      "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set. My mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
+      "description": "My grandparents live in Yiliang. Before the Kunming-Shiling Highway was completed, we used to take trains to visit them. The station is now completely abandoned, with lots of tourists taking pictures because it was once used as a film set.\n\nMy mom took me there on the first day of 2025 to walk around and take pictures. Lots of good memories here.",
       "coverImage": "/images/collections/yiliang_01_25/cover.jpg",
       "images": [
         "/images/collections/yiliang_01_25/yiliang0125_7.JPG",
@@ -841,7 +841,7 @@
     {
       "id": "zhima-wedding",
       "title": "Wedding in Zhima",
-      "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village. Before college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most. This year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
+      "description": "Zhima is a typical countryside village in Yunnan, with abundant farmland for vegetables and organically raised livestock. My grandma was born and raised here, so most of her siblings still live in the village.\n\nBefore college, Zhima was our default place to spend the Spring Festival, who wouldn’t want to celebrate one of the most important holidays with the whole family gang? I used to stay for several weeks at most.\n\nThis year, I made a day trip for a wedding, still the same fresh vegetables, hot dishes, and lively, chatty atmosphere everywhere. It was such a big contrast from where I live and work in Jersey.",
       "coverImage": "/images/collections/zhima_2025/cover.jpg",
       "images": [
         "/images/collections/zhima_2025/zhima25_10.JPG",
