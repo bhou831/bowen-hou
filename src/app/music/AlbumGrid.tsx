@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogHeader,
 } from '@/components/ui/dialog';
+import { triggerHaptic } from '@/lib/haptics';
 
 interface Album {
   id: string;
@@ -25,14 +26,27 @@ interface Album {
 export default function AlbumGrid({ albums }: { albums: Album[] }) {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
 
+  const handleAlbumOpen = (album: Album) => {
+    triggerHaptic();
+    setSelectedAlbum(album);
+  };
+
+  const handleAlbumOpenChange = (open: boolean) => {
+    if (!open) {
+      triggerHaptic();
+      setSelectedAlbum(null);
+    }
+  };
+
   return (
-    <div className="w-full pl-8 pr-8">
+    <div className="w-full">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-6 xl:gap-4">
         {albums.map((album) => (
-          <div
+          <button
+            type="button"
             key={album.id}
-            className="w-full cursor-pointer"
-            onClick={() => setSelectedAlbum(album)}
+            className="group w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
+            onClick={() => handleAlbumOpen(album)}
           >
             <div className="relative aspect-square bg-white rounded-lg overflow-hidden shadow-lg">
               <Image
@@ -42,23 +56,20 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
                 className="object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
-            <div className="mt-3 xl:hidden">
-              <h3 className="text-base text-center font-medium text-gray-900">
+            <div className="mt-3">
+              <h3 className="truncate text-center text-sm font-medium text-gray-900 md:text-base">
                 {album.title}
               </h3>
-              <p className="text-sm text-center text-gray-600">
+              <p className="truncate text-center text-xs text-gray-600 md:text-sm">
                 {album.artist}
               </p>
             </div>
-          </div>
+          </button>
         ))}
       </div>
 
       {/* Modal */}
-      <Dialog
-        open={!!selectedAlbum}
-        onOpenChange={() => setSelectedAlbum(null)}
-      >
+      <Dialog open={!!selectedAlbum} onOpenChange={handleAlbumOpenChange}>
         {selectedAlbum && (
           <DialogContent className="max-w-2xl bg-white max-h-[90vh] overflow-hidden">
             <DialogHeader>
@@ -92,7 +103,8 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
                         href={selectedAlbum.links.spotify}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center"
+                        onClick={triggerHaptic}
+                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
                       >
                         <Image
                           src="/images/icons/spotify.png"
@@ -108,7 +120,8 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
                         href={selectedAlbum.links.appleMusic}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center"
+                        onClick={triggerHaptic}
+                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
                       >
                         <Image
                           src="/images/icons/apple-music.png"
@@ -124,7 +137,8 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
                         href={selectedAlbum.links.youtube}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center"
+                        onClick={triggerHaptic}
+                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
                       >
                         <Image
                           src="/images/icons/youtube.png"

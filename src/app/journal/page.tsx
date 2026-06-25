@@ -5,7 +5,7 @@ export default async function Journal() {
   const posts = await getJournalPosts();
 
   return (
-    <div className="pl-8 pr-8">
+    <div>
       <div className="w-full max-w-3xl">
         <h1 className="text-3xl font-bold mb-8 text-gray-900">Journal</h1>
         <div className="space-y-8">

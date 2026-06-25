@@ -15,8 +15,6 @@ export default function Layout({ children }: LayoutProps) {
 
   useEffect(() => {
     mountHaptic();
-    document.addEventListener('click', triggerHaptic);
-    return () => document.removeEventListener('click', triggerHaptic);
   }, []);
 
   useEffect(() => {
@@ -32,6 +30,13 @@ export default function Layout({ children }: LayoutProps) {
     return pathname.startsWith(path);
   };
 
+  const navLinkClassName = (path: string) =>
+    `pb-1 border-b-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50 ${
+      isActive(path)
+        ? 'text-gray-900 border-gray-900'
+        : 'text-gray-800 border-transparent hover:text-gray-600'
+    }`;
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav
@@ -43,41 +48,29 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex space-x-4 md:space-x-5">
             <Link
               href="/"
-              className={`pb-1 border-b-2 transition-colors ${
-                isActive('/')
-                  ? 'text-gray-900 border-gray-900'
-                  : 'text-gray-800 border-transparent hover:text-gray-600'
-              }`}
+              onClick={triggerHaptic}
+              className={navLinkClassName('/')}
             >
               Home
             </Link>
             <Link
               href="/photography"
-              className={`pb-1 border-b-2 transition-colors ${
-                isActive('/photography')
-                  ? 'text-gray-900 border-gray-900'
-                  : 'text-gray-800 border-transparent hover:text-gray-600'
-              }`}
+              onClick={triggerHaptic}
+              className={navLinkClassName('/photography')}
             >
               Photograph
             </Link>
             <Link
               href="/music"
-              className={`pb-1 border-b-2 transition-colors ${
-                isActive('/music')
-                  ? 'text-gray-900 border-gray-900'
-                  : 'text-gray-800 border-transparent hover:text-gray-600'
-              }`}
+              onClick={triggerHaptic}
+              className={navLinkClassName('/music')}
             >
               Music
             </Link>
             <Link
               href="/journal"
-              className={`pb-1 border-b-2 transition-colors ${
-                isActive('/journal')
-                  ? 'text-gray-900 border-gray-900'
-                  : 'text-gray-800 border-transparent hover:text-gray-600'
-              }`}
+              onClick={triggerHaptic}
+              className={navLinkClassName('/journal')}
             >
               Journal
             </Link>

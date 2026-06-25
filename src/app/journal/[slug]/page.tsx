@@ -43,7 +43,7 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
   const post = await getPost(slug);
 
   return (
-    <div className="w-full pl-8 pr-8 flex justify-center">
+    <div className="w-full flex justify-center">
       <article className="w-full max-w-2xl">
         <h1 className="text-3xl font-bold text-gray-900 text-left">
           {post.title}
