@@ -39,7 +39,9 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl text-gray-900">Bowen Hou</h1>
+      <div className="w-full max-w-[1000px] mx-auto">
+        <h1 className="text-2xl text-gray-900">Bowen Hou</h1>
+      </div>
 
       {/* Slideshow container */}
       <div className="w-full max-w-[1000px] mx-auto">
