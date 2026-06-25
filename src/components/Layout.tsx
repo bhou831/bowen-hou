@@ -38,9 +38,17 @@ export default function Layout({ children }: LayoutProps) {
     }`;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 bg-white"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(to_right,rgba(17,24,39,0.022)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.022)_1px,transparent_1px)] bg-[size:5rem_4rem]"
+      />
       <nav
-        className={`w-full border-b border-gray-200 sticky top-0 z-40 bg-gray-50 transition-shadow duration-200 ${
+        className={`w-full border-b border-gray-200 sticky top-0 z-40 bg-white/90 backdrop-blur-sm transition-shadow duration-200 ${
           scrolled ? 'shadow-sm' : ''
         }`}
       >

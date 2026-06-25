@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   Dialog,
@@ -21,6 +21,57 @@ interface Album {
     appleMusic?: string;
     youtube?: string;
   };
+}
+
+function AlbumCoverTilt({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse') return;
+
+    const wrap = wrapRef.current;
+    const card = cardRef.current;
+    if (!wrap || !card) return;
+
+    const rect = wrap.getBoundingClientRect();
+    const px = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+    const max = 40;
+
+    card.classList.add('is-tilting');
+    card.style.setProperty('--album-tilt-ry', `${((px - 0.5) * max).toFixed(2)}deg`);
+    card.style.setProperty('--album-tilt-rx', `${((0.5 - py) * max).toFixed(2)}deg`);
+  };
+
+  const resetTilt = () => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    card.classList.remove('is-tilting');
+    card.style.setProperty('--album-tilt-rx', '0deg');
+    card.style.setProperty('--album-tilt-ry', '0deg');
+  };
+
+  return (
+    <div
+      ref={wrapRef}
+      className="album-tilt"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+    >
+      <div
+        ref={cardRef}
+        className="album-tilt-card relative aspect-square overflow-hidden rounded-lg bg-white shadow-lg"
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
 
 export default function AlbumGrid({ albums }: { albums: Album[] }) {
@@ -48,14 +99,14 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
             className="group w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
             onClick={() => handleAlbumOpen(album)}
           >
-            <div className="relative aspect-square bg-white rounded-lg overflow-hidden shadow-lg">
+            <AlbumCoverTilt>
               <Image
                 src={album.coverImage}
                 alt={`${album.title} by ${album.artist}`}
                 fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
+                className="object-cover"
               />
-            </div>
+            </AlbumCoverTilt>
             <div className="mt-3">
               <h3 className="truncate text-center text-sm font-medium text-gray-900 md:text-base">
                 {album.title}
@@ -158,7 +209,36 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
           </DialogContent>
         )}
       </Dialog>
-      <style jsx>{`
+      <style jsx global>{`
+        .album-tilt {
+          perspective: 900px;
+        }
+
+        .album-tilt-card {
+          transform: rotateX(var(--album-tilt-rx, 0deg))
+            rotateY(var(--album-tilt-ry, 0deg));
+          transform-style: preserve-3d;
+          transition:
+            transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 300ms ease;
+          will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          .album-tilt-card.is-tilting {
+            transition:
+              transform 160ms ease-out,
+              box-shadow 300ms ease;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .album-tilt-card {
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+
         @media (orientation: landscape) and (max-width: 767px) {
           .music-grid {
             grid-template-columns: repeat(4, minmax(0, 1fr));

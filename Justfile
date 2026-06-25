@@ -22,12 +22,12 @@ sync-images:
 
 # Remove Turbopack build cache (speeds up next dev if cache is stale)
 clean-cache:
-    rm -rf .next/cache
+    rm -rf .next/cache .next-dev/cache
     @echo "Cache cleared"
 
 # Full clean — removes all build artifacts including the cache
 clean:
-    rm -rf .next out
+    rm -rf .next .next-dev out
     @echo "Build artifacts cleared"
 
 # Install dependencies
