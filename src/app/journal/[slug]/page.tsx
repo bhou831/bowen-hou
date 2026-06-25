@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import type { Metadata } from 'next';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
@@ -24,8 +25,36 @@ async function getPost(fileName: string) {
   return {
     title: data.title,
     date: data.date,
+    excerpt: data.excerpt,
     contentHtml,
     readingTime: Math.max(1, Math.ceil(wordCount / 200)),
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: ParamsType;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  const description = post.excerpt || `A journal post by Bowen Hou.`;
+  const url = `/journal/${slug}/`;
+
+  return {
+    title: `${post.title} | Bowen Hou Journal`,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${post.title} | Bowen Hou Journal`,
+      description,
+      url: `https://bowen-hou.com${url}`,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Bowen Hou'],
+    },
   };
 }
 

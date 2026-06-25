@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
+const collections = require('../src/content/photography/collections.json');
 
 async function generateSitemap() {
   // Get all markdown files from the journal directory
@@ -12,6 +13,10 @@ async function generateSitemap() {
     return `/journal/${filename}/`;  // Note the trailing slash
   });
 
+  const photographySlugs = collections.collections.map(collection => {
+    return `/photography/${collection.id}/`;
+  });
+
   // Your other routes (with trailing slashes for trailingSlash: true config)
   const staticRoutes = [
     '/',
@@ -21,7 +26,7 @@ async function generateSitemap() {
   ];
 
   // Combine all routes
-  const allRoutes = [...staticRoutes, ...journalSlugs];
+  const allRoutes = [...staticRoutes, ...journalSlugs, ...photographySlugs];
   
   // Create sitemap content
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>

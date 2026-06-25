@@ -11,3 +11,7 @@ export interface Collection {
 export function getCollections(): Collection[] {
   return collections.collections;
 }
+
+export function getCollectionById(id: string): Collection | undefined {
+  return getCollections().find((collection) => collection.id === id);
+}

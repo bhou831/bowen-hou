@@ -12,12 +12,20 @@ const spectral = Spectral({
 });
 
 export const metadata: Metadata = {
-  title: 'Bowen Hou',
-  description: 'Bowen Hou’s bio page and an archive of his photos',
+  title: {
+    default: 'Bowen Hou',
+    template: '%s | Bowen Hou',
+  },
+  description:
+    'Bowen Hou (侯博文) is a software engineer and photographer. This is his personal website, photo archive, journal, and music collection.',
   metadataBase: new URL('https://bowen-hou.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Bowen Hou',
-    description: 'Bio page of Bowen Hou (侯博文) and an archive of his photos',
+    description:
+      'Personal website of Bowen Hou (侯博文), software engineer and photographer.',
     url: 'https://bowen-hou.com',
     siteName: 'Bowen Hou',
     images: [
@@ -51,6 +59,40 @@ export const metadata: Metadata = {
   },
 };
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Bowen Hou',
+  alternateName: '侯博文',
+  url: 'https://bowen-hou.com/',
+  jobTitle: 'Senior Software Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Autodesk',
+    url: 'https://www.autodesk.com/',
+  },
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Carnegie Mellon University',
+      url: 'https://www.cmu.edu/',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Lafayette College',
+      url: 'https://www.lafayette.edu/',
+    },
+  ],
+  knowsAbout: [
+    'Software engineering',
+    'Data quality assurance',
+    'Photography',
+    'Civil engineering',
+    'Urbanism',
+  ],
+  sameAs: ['https://x.com/HarveyHBB'],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -59,6 +101,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={spectral.variable} suppressHydrationWarning>
       <body className={spectral.className} suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Layout>{children}</Layout>
       </body>
     </html>
