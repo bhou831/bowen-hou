@@ -214,7 +214,7 @@ export default function Photography() {
             </div>
 
             <div className="mt-3 relative inline-block group">
-              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block">
+              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block transition-[font-weight,color] duration-200 group-hover:font-medium group-hover:text-gray-900 group-focus-visible:font-medium group-focus-visible:text-gray-900">
                 {collection.title}
               </h3>
               <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500" />

@@ -180,7 +180,7 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
               />
             </AlbumCoverTilt>
             <div className="mt-3">
-              <h3 className="truncate text-center text-sm font-medium text-gray-900 md:text-base">
+              <h3 className="truncate text-center text-sm font-normal text-gray-900 transition-[font-weight] duration-200 group-hover:font-medium group-focus-visible:font-medium md:text-base">
                 {album.title}
               </h3>
               <p className="truncate text-center text-xs text-gray-600 md:text-sm">
