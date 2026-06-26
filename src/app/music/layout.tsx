@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Music',
-  description:
-    'Music recommendations and album notes from Bowen Hou.',
+  description: 'Music recommendations and album notes from Bowen Hou.',
   alternates: {
     canonical: '/music/',
   },
@@ -15,6 +14,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MusicLayout({ children }: { children: React.ReactNode }) {
+export default function MusicLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return children;
 }

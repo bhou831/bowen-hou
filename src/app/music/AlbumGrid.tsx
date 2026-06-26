@@ -23,11 +23,7 @@ interface Album {
   };
 }
 
-function AlbumCoverTilt({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function AlbumCoverTilt({ children }: { children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,13 +35,25 @@ function AlbumCoverTilt({
     if (!wrap || !card) return;
 
     const rect = wrap.getBoundingClientRect();
-    const px = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-    const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+    const px = Math.min(
+      1,
+      Math.max(0, (event.clientX - rect.left) / rect.width),
+    );
+    const py = Math.min(
+      1,
+      Math.max(0, (event.clientY - rect.top) / rect.height),
+    );
     const max = 40;
 
     card.classList.add('is-tilting');
-    card.style.setProperty('--album-tilt-ry', `${((px - 0.5) * max).toFixed(2)}deg`);
-    card.style.setProperty('--album-tilt-rx', `${((0.5 - py) * max).toFixed(2)}deg`);
+    card.style.setProperty(
+      '--album-tilt-ry',
+      `${((px - 0.5) * max).toFixed(2)}deg`,
+    );
+    card.style.setProperty(
+      '--album-tilt-rx',
+      `${((0.5 - py) * max).toFixed(2)}deg`,
+    );
   };
 
   const resetTilt = () => {
@@ -70,6 +78,70 @@ function AlbumCoverTilt({
       >
         {children}
       </div>
+    </div>
+  );
+}
+
+function StreamingLinks({
+  links,
+  className = '',
+}: {
+  links: Album['links'];
+  className?: string;
+}) {
+  return (
+    <div className={`flex gap-3 ${className}`}>
+      {links.spotify && (
+        <a
+          href={links.spotify}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={triggerHaptic}
+          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+        >
+          <Image
+            src="/images/icons/spotify.png"
+            alt="Listen on Spotify"
+            width={32}
+            height={32}
+            className="transition-opacity hover:opacity-80"
+          />
+        </a>
+      )}
+      {links.appleMusic && (
+        <a
+          href={links.appleMusic}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={triggerHaptic}
+          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+        >
+          <Image
+            src="/images/icons/apple-music.png"
+            alt="Listen on Apple Music"
+            width={32}
+            height={32}
+            className="transition-opacity hover:opacity-80"
+          />
+        </a>
+      )}
+      {links.youtube && (
+        <a
+          href={links.youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={triggerHaptic}
+          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+        >
+          <Image
+            src="/images/icons/youtube.png"
+            alt="Watch on YouTube"
+            width={32}
+            height={32}
+            className="transition-opacity hover:opacity-80"
+          />
+        </a>
+      )}
     </div>
   );
 }
@@ -122,18 +194,41 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
       {/* Modal */}
       <Dialog open={!!selectedAlbum} onOpenChange={handleAlbumOpenChange}>
         {selectedAlbum && (
-          <DialogContent className="max-w-2xl bg-white max-h-[90vh] overflow-hidden">
-            <DialogHeader>
+          <DialogContent className="flex max-h-[90dvh] max-w-2xl flex-col overflow-hidden bg-white">
+            <DialogHeader className="shrink-0">
               <DialogTitle className="text-2xl font-bold text-gray-900">
                 {selectedAlbum.title}
               </DialogTitle>
               <p className="text-lg text-gray-600">{selectedAlbum.artist}</p>
             </DialogHeader>
 
-            <div className="overflow-y-auto max-h-[calc(90vh-8rem)] pr-2">
-              <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex min-h-0 flex-1 flex-col gap-4 md:hidden">
+              <div className="relative mx-auto h-[min(58vw,36dvh,240px)] w-[min(58vw,36dvh,240px)] shrink-0">
+                <Image
+                  src={selectedAlbum.coverImage}
+                  alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
+                  fill
+                  sizes="240px"
+                  className="rounded-lg object-cover"
+                />
+              </div>
+
+              <StreamingLinks
+                links={selectedAlbum.links}
+                className="shrink-0 justify-center"
+              />
+
+              <div className="min-h-0 flex-1 overflow-y-auto pr-2">
+                <p className="whitespace-pre-line text-gray-700">
+                  {selectedAlbum.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="hidden min-h-0 flex-1 overflow-y-auto pr-2 md:block">
+              <div className="flex gap-6">
                 {/* Album Cover */}
-                <div className="relative w-full md:w-[300px] md:h-[300px] md:flex-[0_0_300px] aspect-square">
+                <div className="relative h-[300px] w-[300px] flex-[0_0_300px]">
                   <Image
                     src={selectedAlbum.coverImage}
                     alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
@@ -150,59 +245,10 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
                   </p>
 
                   {/* Streaming Links */}
-                  <div className="flex gap-3 mt-6">
-                    {selectedAlbum.links.spotify && (
-                      <a
-                        href={selectedAlbum.links.spotify}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={triggerHaptic}
-                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
-                      >
-                        <Image
-                          src="/images/icons/spotify.png"
-                          alt="Listen on Spotify"
-                          width={32}
-                          height={32}
-                          className="transition-opacity hover:opacity-80"
-                        />
-                      </a>
-                    )}
-                    {selectedAlbum.links.appleMusic && (
-                      <a
-                        href={selectedAlbum.links.appleMusic}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={triggerHaptic}
-                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
-                      >
-                        <Image
-                          src="/images/icons/apple-music.png"
-                          alt="Listen on Apple Music"
-                          width={32}
-                          height={32}
-                          className="transition-opacity hover:opacity-80"
-                        />
-                      </a>
-                    )}
-                    {selectedAlbum.links.youtube && (
-                      <a
-                        href={selectedAlbum.links.youtube}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={triggerHaptic}
-                        className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
-                      >
-                        <Image
-                          src="/images/icons/youtube.png"
-                          alt="Watch on YouTube"
-                          width={32}
-                          height={32}
-                          className="transition-opacity hover:opacity-80"
-                        />
-                      </a>
-                    )}
-                  </div>
+                  <StreamingLinks
+                    links={selectedAlbum.links}
+                    className="mt-6"
+                  />
                 </div>
               </div>
             </div>
