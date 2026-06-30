@@ -83,7 +83,7 @@ COVER_EXT="${COVER_FILE##*.}"
 # Compress cover photo first → becomes {albumId}_1
 ffmpeg -loglevel error \
     -i "$COVER_FILE" \
-    -vf "scale=4000:-1" \
+    -vf "scale='min(4000,iw)':'min(4000,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2" \
     -q:v 3 \
     -y \
     "${ALBUM_ID}_1.${COVER_EXT}"
@@ -108,7 +108,7 @@ for file in *.jpg *.jpeg *.JPG *.JPEG; do
 
     ffmpeg -loglevel error \
         -i "$file" \
-        -vf "scale=4000:-1" \
+        -vf "scale='min(4000,iw)':'min(4000,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2" \
         -q:v 3 \
         -y \
         "$new_filename"

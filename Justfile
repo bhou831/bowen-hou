@@ -6,6 +6,10 @@
 add-album *args:
     ./scripts/add-album.sh {{args}}
 
+# Find existing photos over 4000px; pass --apply to resize them in place
+cap-photo-edge *args:
+    ./scripts/cap-photo-edge.sh {{args}}
+
 dev:
     - npm run dev
     - open http://localhost:3000/

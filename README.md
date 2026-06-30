@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bowen Hou
 
-## Getting Started
+Source for [bowen-hou.com](https://bowen-hou.com), a personal photography archive, music journal, and occasional blog.
 
-First, run the development server:
+The site is built with Next.js, React, Tailwind CSS, and the Spectral typeface. It is exported as static files and deployed to AWS S3.
 
-```bash
+## Requirements
+
+- Node.js and npm
+- `ffmpeg` for importing photography collections
+- [Just](https://github.com/casey/just) for the convenience commands below
+- AWS CLI configured for the production bucket when deploying
+
+## Local development
+
+Install dependencies and start the development server:
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site is available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Useful checks:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run lint
+npm run build
+npm run format
+```
 
-## Learn More
+`npm run build` creates the static site in `out/` and generates `sitemap.xml` and `robots.txt`.
 
-To learn more about Next.js, take a look at the following resources:
+## Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Photography metadata: `src/content/photography/collections.json`
+- Music recommendations: `src/content/music/albums.json`
+- Journal posts: `src/content/journal/*.md`
+- Local media: `public/images/`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Add a photography collection
 
-## Deploy on Vercel
+Place the source folder on the Desktop, then run:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+just add-album --path <folder-name> --cover <filename.jpg> [--name <album-id>]
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The import script generates a smaller cover image, resizes and renames the collection photos, moves the collection into `public/images/collections/`, and adds an entry to `collections.json`. Fill in the new collection's title and description after the script finishes.
+
+The script moves the source folder and removes the original files as it processes them, so retain a separate backup of the originals.
+
+To audit previously imported photos whose longest edge exceeds 4000px, run:
+
+```sh
+just cap-photo-edge
+```
+
+Review the reported files, retain a backup, and then resize them in place with:
+
+```sh
+just cap-photo-edge --apply
+```
+
+## Deployment
+
+Deploy the generated site files:
+
+```sh
+just deploy
+```
+
+Images are excluded from the regular deployment. Sync them separately after adding or removing media:
+
+```sh
+just sync-images
+```

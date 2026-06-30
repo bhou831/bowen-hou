@@ -18,7 +18,9 @@ export default function Photography() {
 
   const touchStartX = useRef<number | null>(null);
   const sheetTouchStartY = useRef<number | null>(null);
+  const descriptionOpenButtonRef = useRef<HTMLButtonElement>(null);
   const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
+  const wasDescriptionOpen = useRef(false);
   const hasShownRotateHint = useRef(false);
   const hasShownSwipeCue = useRef(false);
 
@@ -108,8 +110,12 @@ export default function Photography() {
   useEffect(() => {
     if (isDescriptionOpen) {
       descriptionCloseButtonRef.current?.focus({ preventScroll: true });
+    } else if (wasDescriptionOpen.current && isLightboxOpen) {
+      descriptionOpenButtonRef.current?.focus({ preventScroll: true });
     }
-  }, [isDescriptionOpen]);
+
+    wasDescriptionOpen.current = isDescriptionOpen;
+  }, [isDescriptionOpen, isLightboxOpen]);
 
   useEffect(() => {
     if (
@@ -285,6 +291,7 @@ export default function Photography() {
                 </div>
 
                 <button
+                  ref={descriptionOpenButtonRef}
                   onClick={() => {
                     triggerHaptic();
                     setIsDescriptionOpen(true);
@@ -292,6 +299,7 @@ export default function Photography() {
                   className="xl:hidden absolute bottom-[calc(env(safe-area-inset-bottom)+2.25rem)] left-1/2 z-10 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-white backdrop-blur-sm hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   aria-label="Show image description"
                   aria-expanded={isDescriptionOpen}
+                  aria-controls="photo-description-sheet"
                 >
                   <span className="min-w-0 truncate text-sm font-light">
                     {selectedCollection.title}
@@ -359,11 +367,16 @@ export default function Photography() {
 
               {/* Mobile/Tablet Description Sheet */}
               <div
+                id="photo-description-sheet"
                 className={`xl:hidden absolute inset-x-0 bottom-0 z-20 max-h-[55vh] overflow-y-auto bg-black/85 p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] text-white backdrop-blur-sm transition-transform duration-300 ease-out ${
-                  isDescriptionOpen ? 'translate-y-0' : 'translate-y-full'
+                  isDescriptionOpen
+                    ? 'translate-y-0'
+                    : 'pointer-events-none translate-y-full'
                 }`}
                 role="region"
                 aria-label={`${selectedCollection.title} description`}
+                aria-hidden={!isDescriptionOpen}
+                inert={!isDescriptionOpen}
               >
                 <div
                   className="mx-auto mb-4 h-5 w-16 touch-none pt-2"
