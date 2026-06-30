@@ -213,11 +213,18 @@ export default function Photography() {
               <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
-            <div className="mt-3 relative inline-block group">
-              <h3 className="text-left text-md text-gray-700 font-light tracking-wide inline-block transition-[font-weight,color] duration-200 group-hover:font-medium group-hover:text-gray-900 group-focus-visible:font-medium group-focus-visible:text-gray-900">
-                {collection.title}
+            <div className="mt-3 relative inline-block">
+              <h3 className="relative inline-block text-left text-md font-light tracking-wide text-gray-700">
+                <span>{collection.title}</span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 whitespace-nowrap font-light text-gray-900 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0_0_0_0)] group-focus-visible:[clip-path:inset(0_0_0_0)]"
+                  style={{ WebkitTextStroke: '0.25px currentColor' }}
+                >
+                  {collection.title}
+                </span>
               </h3>
-              <div className="h-px bg-gray-400 mt-1 w-0 group-hover:w-full transition-all duration-500" />
+              <div className="mt-1 h-px w-0 bg-gray-400 transition-[width] duration-500 ease-out group-hover:w-full group-focus-visible:w-full" />
             </div>
           </button>
         ))}
