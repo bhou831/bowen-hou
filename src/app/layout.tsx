@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from 'next';
 import { Spectral } from 'next/font/google';
 import './globals.css';
@@ -101,6 +102,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={spectral.variable} suppressHydrationWarning>
       <body className={spectral.className} suppressHydrationWarning>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/syabro/neat-annotations/neat-annotations.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

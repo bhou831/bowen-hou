@@ -101,9 +101,14 @@ export default function Home() {
             <a href="https://autodesk.com">Autodesk</a> working on data quality
             assurance. I have a master’s degree in Civil Engineering and
             Engineering & Technology Management from{' '}
-            <a href="https://cmu.edu">Carnegie Mellon</a> and a bachelor’s
-            degree in Civil Engineering from{' '}
-            <a href="https://ce.lafayette.edu">Lafayette College</a>.
+            <span className="ann ann-s ann-blue" data-note="The Steel City">
+              <a href="https://cmu.edu">Carnegie Mellon</a>
+            </span>{' '}
+            and a bachelor’s degree in Civil Engineering from{' '}
+            <span className="ann ann-sw ann-amber" data-note="Lehigh Valley">
+              <a href="https://ce.lafayette.edu">Lafayette College</a>
+            </span>
+            .
           </p>
           <p>
             This site serves as an archive of my photos and music
@@ -117,10 +122,12 @@ export default function Home() {
               grid design update
             </a>{' '}
             and shift toward engagement-based recommendations made me think it
-            is no longer a serious platform for photo sharing. Other platforms
-            like <a href="https://500px.com/">500px</a> still do not provide the
-            level of creator control I want over content layout and arrangement.
-            I hope you enjoy this page and become a regular visitor.
+            is no longer a serious platform for photo sharing. The level
+            of creator control I want over content layout and arrangement is
+            still missing from{' '}
+            <span className="ann ann-nw ann-red" data-note="500px, VSCO, etc.">
+              other platforms
+            </span>. I hope you enjoy this page and become a regular visitor. 
           </p>
         </div>
       </div>
