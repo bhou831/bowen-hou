@@ -43,7 +43,7 @@ function AlbumCoverTilt({ children }: { children: React.ReactNode }) {
       1,
       Math.max(0, (event.clientY - rect.top) / rect.height),
     );
-    const max =30;
+    const max = 30;
 
     card.classList.add('is-tilting');
     card.style.setProperty(
