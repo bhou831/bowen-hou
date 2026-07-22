@@ -35,3 +35,18 @@
   --ann-arrow-scale: 0.95;
   --ann-text-y: 1px;
 }
+
+/* Use an inward annotation on phone portraits and a top annotation on larger screens. */
+.ann.ann-desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ann.ann-mobile-only {
+    display: none;
+  }
+
+  .ann.ann-desktop-only {
+    display: inline-block;
+  }
+}

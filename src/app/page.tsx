@@ -107,7 +107,16 @@ export default function Home() {
               <a href="https://cmu.edu">Carnegie Mellon</a>
             </span>{' '}
             and{' '}
-            <span className="ann ann-sw ann-amber" data-note="Lehigh Valley">
+            <span
+              className="ann ann-nw ann-amber ann-short-arrow ann-mobile-only"
+              data-note="Lehigh Valley"
+            >
+              <a href="https://ce.lafayette.edu">Lafayette College</a>
+            </span>
+            <span
+              className="ann ann-s ann-amber ann-desktop-only"
+              data-note="Lehigh Valley"
+            >
               <a href="https://ce.lafayette.edu">Lafayette College</a>
             </span>
             .
@@ -128,7 +137,7 @@ export default function Home() {
             of creator control I want over content layout and arrangement is
             still missing from{' '}
             <span
-              className="ann ann-nw ann-red ann-short-arrow ann-medium-arrow"
+              className="ann ann-nw ann-red ann-medium-arrow"
               data-note="500px, VSCO, etc."
             >
               other platforms
