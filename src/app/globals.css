@@ -32,6 +32,6 @@
 }
 
 .ann.ann-short-arrow.ann-nw.ann-medium-arrow {
-  --ann-arrow-scale: 0.8;
-  --ann-text-y: -1px;
+  --ann-arrow-scale: 0.95;
+  --ann-text-y: 1px;
 }
