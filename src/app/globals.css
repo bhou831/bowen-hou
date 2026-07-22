@@ -19,3 +19,19 @@
     width: 100%;
   }
 }
+
+/* Compact northwest annotations without changing their note placement. */
+.ann.ann-short-arrow.ann-nw::before {
+  transform: translateX(10%) scale(var(--ann-arrow-scale));
+  transform-origin: left top;
+}
+
+.ann.ann-short-arrow.ann-nw {
+  --ann-arrow-scale: 0.6;
+  --ann-text-y: -10px;
+}
+
+.ann.ann-short-arrow.ann-nw.ann-medium-arrow {
+  --ann-arrow-scale: 0.8;
+  --ann-text-y: -1px;
+}

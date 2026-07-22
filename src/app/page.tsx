@@ -97,14 +97,16 @@ export default function Home() {
       <div className="max-w-[1000px] mx-auto prose">
         <div className="mt-4 text-gray-800">
           <p>
-            I am a senior software engineer for{' '}
-            <a href="https://autodesk.com">Autodesk</a> working on data quality
-            assurance. I have a master’s degree in Civil Engineering and
-            Engineering & Technology Management from{' '}
-            <span className="ann ann-s ann-blue" data-note="The Steel City">
+            I’m a senior software engineer at{' '}
+            <a href="https://autodesk.com">Autodesk</a>, where I work on data
+            quality assurance. Before that, I studied at{' '}
+            <span
+              className="ann ann-nw ann-blue ann-short-arrow"
+              data-note="The Steel City"
+            >
               <a href="https://cmu.edu">Carnegie Mellon</a>
             </span>{' '}
-            and a bachelor’s degree in Civil Engineering from{' '}
+            and{' '}
             <span className="ann ann-sw ann-amber" data-note="Lehigh Valley">
               <a href="https://ce.lafayette.edu">Lafayette College</a>
             </span>
@@ -125,7 +127,10 @@ export default function Home() {
             is no longer a serious platform for photo sharing. The level
             of creator control I want over content layout and arrangement is
             still missing from{' '}
-            <span className="ann ann-nw ann-red" data-note="500px, VSCO, etc.">
+            <span
+              className="ann ann-nw ann-red ann-short-arrow ann-medium-arrow"
+              data-note="500px, VSCO, etc."
+            >
               other platforms
             </span>. I hope you enjoy this page and become a regular visitor. 
           </p>
