@@ -63,6 +63,70 @@ Review the reported files, retain a backup, and then resize them in place with:
 just cap-photo-edge --apply
 ```
 
+### Add a music recommendation
+
+Add the album metadata to `src/content/music/albums.json`. Every album needs an
+ID, title, artist, cover image, description, and at least one streaming link:
+
+```json
+{
+  "id": "album-mm-dd-yy",
+  "title": "Album Title",
+  "artist": "Artist Name",
+  "coverImage": "/images/albums/album-folder/cover.jpg",
+  "description": "Why this album is worth hearing.",
+  "links": {
+    "appleMusic": "https://music.apple.com/us/album/album-name/123456789",
+    "spotify": "https://open.spotify.com/album/...",
+    "youtube": "https://www.youtube.com/..."
+  }
+}
+```
+
+Place the square cover image at the matching `coverImage` path. To add a
+30-second preview, copy the numeric album ID from the end of the Apple Music URL
+and list the album's previewable tracks:
+
+```sh
+curl -sS \
+  'https://itunes.apple.com/lookup?id=123456789&entity=song&limit=200' |
+  jq -r '.results[]
+    | select(.wrapperType == "track" and .previewUrl)
+    | [.trackName, .previewUrl]
+    | @tsv'
+```
+
+Choose the track that best represents the recommendation—prefer a track
+mentioned in the description—and add its Apple-hosted preview URL:
+
+```json
+"preview": {
+  "source": "apple",
+  "trackTitle": "Track Title",
+  "url": "https://audio-ssl.itunes.apple.com/itunes-assets/..."
+}
+```
+
+If lookup returns no tracks, search the album's storefront instead:
+
+```sh
+curl -sS -G 'https://itunes.apple.com/search' \
+  --data-urlencode 'term=Album Title Artist Name' \
+  --data 'media=music' \
+  --data 'entity=song' \
+  --data 'country=US' \
+  --data 'limit=50' |
+  jq -r '.results[]
+    | select(.previewUrl)
+    | [.collectionName, .trackName, .previewUrl]
+    | @tsv'
+```
+
+Change `country=US` to the storefront in the Apple Music URL when necessary.
+If Apple does not provide a preview, omit `preview`; the album modal will show
+“Preview unavailable.” Run `npm run build` after adding the album to validate
+the content and static export.
+
 ## Deployment
 
 Deploy the generated site files:

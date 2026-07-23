@@ -1,16 +1,19 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Pause, Play } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
+  DialogDescription,
   DialogHeader,
+  DialogTitle,
 } from '@/components/ui/dialog';
 import { triggerHaptic } from '@/lib/haptics';
 
-interface Album {
+export interface Album {
   id: string;
   title: string;
   artist: string;
@@ -21,7 +24,14 @@ interface Album {
     appleMusic?: string;
     youtube?: string;
   };
+  preview?: {
+    source: 'apple';
+    trackTitle: string;
+    url: string;
+  };
 }
+
+const PREVIEW_DURATION_SECONDS = 30;
 
 function AlbumCoverTilt({ children }: { children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -78,6 +88,221 @@ function AlbumCoverTilt({ children }: { children: React.ReactNode }) {
       >
         {children}
       </div>
+    </div>
+  );
+}
+
+function formatPreviewTime(seconds: number) {
+  return `0:${Math.floor(seconds).toString().padStart(2, '0')}`;
+}
+
+function VinylPreviewPlayer({ album }: { album: Album }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    setIsPlaying(false);
+    setProgress(0);
+    setPlaybackError(null);
+
+    return () => {
+      if (!audio) return;
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [album.id]);
+
+  const resetPlayback = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    setIsPlaying(false);
+    setProgress(0);
+  };
+
+  const handleTogglePlayback = async () => {
+    const audio = audioRef.current;
+    if (!audio || !album.preview) return;
+
+    if (isPlaying) {
+      audio.pause();
+      return;
+    }
+
+    if (audio.ended || audio.currentTime >= PREVIEW_DURATION_SECONDS - 0.05) {
+      audio.currentTime = 0;
+      setProgress(0);
+    }
+
+    setPlaybackError(null);
+
+    try {
+      await audio.play();
+    } catch {
+      setIsPlaying(false);
+      setPlaybackError('The preview could not be played. Please try again.');
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const currentTime = Math.min(audio.currentTime, PREVIEW_DURATION_SECONDS);
+    setProgress(currentTime);
+
+    if (audio.currentTime >= PREVIEW_DURATION_SECONDS) {
+      resetPlayback();
+    }
+  };
+
+  const previewProgress = Math.min(
+    100,
+    (progress / PREVIEW_DURATION_SECONDS) * 100,
+  );
+
+  return (
+    <div className="w-full">
+      <motion.div
+        initial={
+          prefersReducedMotion
+            ? false
+            : { borderRadius: '0.5rem', opacity: 0.65, scale: 0.94 }
+        }
+        animate={{ borderRadius: '9999px', opacity: 1, scale: 1 }}
+        transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+        className="relative aspect-square w-full"
+      >
+        <div
+          aria-hidden="true"
+          className={`vinyl-ambient ${isPlaying ? 'is-playing' : ''}`}
+        />
+
+        <div
+          className="vinyl-record-surface absolute inset-0 overflow-hidden rounded-full shadow-[0_18px_45px_rgba(0,0,0,0.28)]"
+          style={{
+            animationPlayState:
+              isPlaying && !prefersReducedMotion ? 'running' : 'paused',
+          }}
+        >
+          <motion.div
+            initial={
+              prefersReducedMotion
+                ? false
+                : { borderRadius: '0.5rem', inset: '0%' }
+            }
+            animate={{ borderRadius: '9999px', inset: '27%' }}
+            transition={{
+              delay: prefersReducedMotion ? 0 : 0.08,
+              duration: 0.58,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute z-10 overflow-hidden shadow-[0_0_0_2px_rgba(255,255,255,0.12)]"
+          >
+            <Image
+              src={album.coverImage}
+              alt=""
+              fill
+              sizes="160px"
+              className="object-cover"
+            />
+          </motion.div>
+        </div>
+
+        {album.preview ? (
+          <button
+            type="button"
+            onClick={handleTogglePlayback}
+            className="absolute left-1/2 top-1/2 z-20 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-white/90 text-gray-950 shadow-lg backdrop-blur-sm transition hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 active:scale-95"
+            aria-label={`${isPlaying ? 'Pause' : 'Play'} preview of ${album.preview.trackTitle} by ${album.artist}`}
+          >
+            {isPlaying ? (
+              <Pause className="h-6 w-6" fill="currentColor" />
+            ) : (
+              <Play className="ml-0.5 h-6 w-6" fill="currentColor" />
+            )}
+          </button>
+        ) : (
+          <div className="absolute left-1/2 top-1/2 z-20 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-gray-300 bg-gray-950 shadow" />
+        )}
+      </motion.div>
+
+      {album.preview ? (
+        <>
+          <audio
+            ref={audioRef}
+            src={album.preview.url}
+            preload="metadata"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onTimeUpdate={handleTimeUpdate}
+            onEnded={resetPlayback}
+            onError={() => {
+              resetPlayback();
+              setPlaybackError(
+                'This preview is temporarily unavailable. Try Apple Music instead.',
+              );
+            }}
+          />
+          <div className="mt-4 text-center">
+            <p className="truncate text-sm font-medium text-gray-900">
+              {album.preview.trackTitle}
+            </p>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="w-8 text-right text-[11px] tabular-nums text-gray-500">
+                {formatPreviewTime(progress)}
+              </span>
+              <div
+                className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-200"
+                role="progressbar"
+                aria-label="Preview progress"
+                aria-valuemin={0}
+                aria-valuemax={PREVIEW_DURATION_SECONDS}
+                aria-valuenow={Math.round(progress)}
+              >
+                <div
+                  className="h-full rounded-full bg-gray-900 transition-[width] duration-100"
+                  style={{ width: `${previewProgress}%` }}
+                />
+              </div>
+              <span className="w-8 text-[11px] tabular-nums text-gray-500">
+                0:30
+              </span>
+            </div>
+            {album.links.appleMusic && (
+              <a
+                href={album.links.appleMusic}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={triggerHaptic}
+                className="mt-2 inline-block text-[11px] text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors hover:text-gray-900 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+              >
+                Preview provided courtesy of iTunes
+              </a>
+            )}
+            {playbackError && (
+              <p
+                className="mt-2 text-xs text-red-600"
+                role="status"
+                aria-live="polite"
+              >
+                {playbackError}
+              </p>
+            )}
+          </div>
+        </>
+      ) : (
+        <p className="mt-4 text-center text-sm text-gray-500">
+          Preview unavailable
+        </p>
+      )}
     </div>
   );
 }
@@ -168,7 +393,7 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
           <button
             type="button"
             key={album.id}
-            className="group w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
+            className="group w-full cursor-pointer text-left transition-transform duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
             onClick={() => handleAlbumOpen(album)}
           >
             <AlbumCoverTilt>
@@ -199,18 +424,14 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
               <DialogTitle className="text-2xl font-bold text-gray-900">
                 {selectedAlbum.title}
               </DialogTitle>
-              <p className="text-lg text-gray-600">{selectedAlbum.artist}</p>
+              <DialogDescription className="text-lg text-gray-600">
+                {selectedAlbum.artist}
+              </DialogDescription>
             </DialogHeader>
 
             <div className="flex min-h-0 flex-1 flex-col gap-4 md:hidden">
-              <div className="relative mx-auto h-[min(58vw,36dvh,240px)] w-[min(58vw,36dvh,240px)] shrink-0">
-                <Image
-                  src={selectedAlbum.coverImage}
-                  alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
-                  fill
-                  sizes="240px"
-                  className="rounded-lg object-cover"
-                />
+              <div className="mx-auto w-[min(52vw,31dvh,220px)] shrink-0">
+                <VinylPreviewPlayer album={selectedAlbum} />
               </div>
 
               <StreamingLinks
@@ -227,15 +448,9 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
 
             <div className="hidden min-h-0 flex-1 overflow-y-auto pr-2 md:block">
               <div className="flex gap-6">
-                {/* Album Cover */}
-                <div className="relative h-[300px] w-[300px] flex-[0_0_300px]">
-                  <Image
-                    src={selectedAlbum.coverImage}
-                    alt={`${selectedAlbum.title} by ${selectedAlbum.artist}`}
-                    fill
-                    sizes="300px"
-                    className="object-cover rounded-lg"
-                  />
+                {/* Vinyl Preview */}
+                <div className="w-[300px] flex-[0_0_300px]">
+                  <VinylPreviewPlayer album={selectedAlbum} />
                 </div>
 
                 {/* Album Details */}
@@ -283,6 +498,105 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
             transform: none !important;
             transition: none !important;
           }
+
+          .vinyl-record-surface,
+          .vinyl-ambient {
+            animation: none !important;
+          }
+
+          .vinyl-ambient {
+            transition: none !important;
+          }
+        }
+
+        @keyframes vinyl-ambient-dance {
+          0%,
+          100% {
+            transform: rotate(-3deg) scale(0.96);
+          }
+          35% {
+            transform: rotate(3deg) scale(1.035);
+          }
+          68% {
+            transform: rotate(-1deg) scale(0.99);
+          }
+        }
+
+        @keyframes vinyl-spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .vinyl-ambient {
+          position: absolute;
+          inset: -7%;
+          border-radius: 9999px;
+          background:
+            radial-gradient(
+              circle at 28% 28%,
+              rgba(244, 173, 72, 0.42),
+              transparent 34%
+            ),
+            radial-gradient(
+              circle at 72% 32%,
+              rgba(89, 136, 171, 0.34),
+              transparent 38%
+            ),
+            radial-gradient(
+              circle at 54% 76%,
+              rgba(182, 91, 96, 0.3),
+              transparent 36%
+            );
+          filter: blur(20px);
+          opacity: 0;
+          transform: scale(0.92);
+          transition:
+            opacity 500ms ease,
+            transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+        }
+
+        .vinyl-ambient.is-playing {
+          animation: vinyl-ambient-dance 4.6s ease-in-out infinite;
+          opacity: 0.58;
+        }
+
+        .vinyl-record-surface {
+          animation: vinyl-spin 3.2s linear infinite;
+          background:
+            radial-gradient(
+              circle at center,
+              transparent 0 8%,
+              rgba(255, 255, 255, 0.08) 8.2% 8.7%,
+              transparent 8.9% 17%
+            ),
+            repeating-radial-gradient(
+              circle at center,
+              #080808 0,
+              #080808 2px,
+              #191919 3px,
+              #050505 4px
+            );
+          will-change: transform;
+        }
+
+        .vinyl-record-surface::before {
+          position: absolute;
+          z-index: 1;
+          inset: 0;
+          border-radius: 9999px;
+          background: conic-gradient(
+            from 35deg,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.13) 24deg,
+            transparent 60deg,
+            transparent 180deg,
+            rgba(255, 255, 255, 0.08) 210deg,
+            transparent 246deg
+          );
+          content: '';
+          pointer-events: none;
         }
 
         @media (orientation: landscape) and (max-width: 767px) {
