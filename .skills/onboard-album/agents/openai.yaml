@@ -1,0 +1,7 @@
+interface:
+  display_name: "Onboard Album"
+  short_description: "Add album metadata, artwork, and previews"
+  default_prompt: "Use $onboard-album to add this album to the site music collection."
+
+policy:
+  allow_implicit_invocation: true
