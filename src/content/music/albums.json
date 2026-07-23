@@ -1,6 +1,57 @@
 {
   "albums": [
     {
+      "id": "album-07-23-26-3",
+      "title": "Elis & Tom",
+      "artist": "Elis Regina & Antônio Carlos Jobim",
+      "coverImage": "/images/albums/elis-and-tom/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "Águas de março",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d8/2f/43/d82f43ba-bba5-bbb9-9214-96eadbb6548b/mzaf_4824649733933844350.plus.aac.ep.m4a"
+      },
+      "description": "One of the best MPB and bossa nova albums ever released, and the first track also happens to be my all time favorite. I have tried different versions of Águas de março (Waters of March), including Jobim's original ver, Sogumm and Chawool's cover, and Cibo Matto's, but Elis' rhythm and vocal are hard to beat.\n\nA funny story from the production: a clash over modern instrumentation nearly caused a fiery 28-year-old Elis Regina to abandon the project in a rage. But the moment she and Tom Jobim began to play, the sheer magic of their musical chemistry melted away the hostility and forged a legendary collaboration.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/elis-tom/1438430508",
+        "spotify": "https://open.spotify.com/album/3SE9n6EaVOJ81KA1KPLUWS",
+        "youtube": "https://youtube.com/playlist?list=PLrt7VbxNS8rcaHppOqrezMOWHwSmvti7t&si=SnE_LEykzfotT5j_"
+      }
+    },
+    {
+      "id": "album-07-23-26",
+      "title": "淑樺的台灣歌",
+      "artist": "Sarah Chen/陳淑樺",
+      "coverImage": "/images/albums/shukara-taiwanese-songs/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "思想起 Recalling",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/12/2a/2c122a34-7caf-41ea-dd5c-e36458890b99/mzaf_11493964628026720363.plus.aac.p.m4a"
+      },
+      "description": "I fell in love with the album cover first. This album is entirely in Hokkien, which I do not understand, but the production by one of my favorite artists, Jonathan Lee, alongside Japanese jazz artists Ken Shima and Asahi Jun, makes the lyrics almost beside the point. Just forget about the words and enjoy the synths, jazz fusion, and classic Taiwanese melodies.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/%E6%B7%91%E6%A8%BA%E7%9A%84%E5%8F%B0%E7%81%A3%E6%AD%8C/158104039",
+        "spotify": "https://open.spotify.com/album/3rfpdPJeblkfCNQ5gaq0Y3?si=xKpOTfn0RdyNfxTdrdm1Og&nd=1&dlsi=e7375bba3b4e40c4",
+        "youtube": "https://youtube.com/playlist?list=PL9IsBEU6SHCOn9BuPRfqpQJOC_8tUkqrq&si=czXhLBzQQW8p2SIU"
+      }
+    },
+    {
+      "id": "album-07-23-26-2",
+      "title": "VESTA",
+      "artist": "平岩英子",
+      "coverImage": "/images/albums/vesta/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "Ameno Story",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview114/v4/00/55/f9/0055f968-5484-bcd0-c72d-56cf26a26d6c/mzaf_18068567620604179568.plus.aac.p.m4a"
+      },
+      "description": "Recorded and produced in New York City, VESTA has a cosmopolitan skin and a Japanese soul. Eiko's voice feels born for this setting. The tracks are controlled, the instrumentation is smooth, and every part is choreographed to pair with the vocal. Everything is compacted into 30 minutes.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/vesta/1537117613",
+        "spotify": "https://open.spotify.com/album/2VwJVengHmk3Rd8Knnodbk",
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_lU6B4IhKHlXUTUNXFEKHu2EbarHV49ZqA&si=5IO7BA4U0Xh1GrBC"
+      }
+    },
+    {
       "id": "album-06-24-26",
       "title": "Brasilian Skies",
       "artist": "Masayoshi Takanaka",
