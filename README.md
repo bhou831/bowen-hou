@@ -25,7 +25,10 @@ The site is available at [http://localhost:3000](http://localhost:3000).
 Useful checks:
 
 ```sh
+npm run check
 npm run lint
+npm run typecheck
+npm run validate-content
 npm run build
 npm run format
 ```
@@ -47,9 +50,9 @@ Place the source folder on the Desktop, then run:
 just add-album --path <folder-name> --cover <filename.jpg> [--name <album-id>]
 ```
 
-The import script generates a smaller cover image, resizes and renames the collection photos, moves the collection into `public/images/collections/`, and adds an entry to `collections.json`. Fill in the new collection's title and description after the script finishes.
+The import script generates a smaller cover image, resizes and renames copies of the collection photos in a temporary staging directory, installs the completed collection into `public/images/collections/`, and adds an entry to `collections.json`. Fill in the new collection's title and description after the script finishes.
 
-The script moves the source folder and removes the original files as it processes them, so retain a separate backup of the originals.
+The source folder and original photos remain unchanged. If any processing or metadata step fails, the script removes the staged output instead of installing a partial collection.
 
 To audit previously imported photos whose longest edge exceeds 4000px, run:
 

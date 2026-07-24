@@ -22,7 +22,7 @@ export default function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/photography', label: 'Photograph' },
+    { href: '/photography', label: 'Photography' },
     { href: '/music', label: 'Music' },
     { href: '/journal', label: 'Journal' },
   ];
@@ -79,7 +79,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [updateActivePill]);
 
   const navLinkClassName = (path: string) =>
-    `relative z-10 inline-flex h-8 items-center justify-center rounded-full px-3 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-white md:px-3.5 md:text-base ${
+    `relative z-10 inline-flex h-11 items-center justify-center rounded-full px-2.5 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:px-3.5 md:text-base ${
       isActive(path)
         ? 'font-medium text-gray-950'
         : 'text-gray-700 hover:text-gray-950'
@@ -87,6 +87,12 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">
+      <a
+        href="#main-content"
+        className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-md bg-gray-950 px-4 py-2 text-sm text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 -z-10 bg-white"
@@ -96,6 +102,7 @@ export default function Layout({ children }: LayoutProps) {
         className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(to_right,rgba(17,24,39,0.022)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.022)_1px,transparent_1px)] bg-[size:5rem_4rem]"
       />
       <nav
+        aria-label="Primary"
         className={`w-full border-b border-gray-200 sticky top-0 z-40 bg-white/90 backdrop-blur-sm transition-shadow duration-200 ${
           scrolled ? 'shadow-sm' : ''
         }`}
@@ -135,7 +142,13 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </nav>
 
-      <main className="w-full pl-4 pr-4 md:pl-8 md:pr-8 py-8">{children}</main>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="w-full pl-4 pr-4 py-8 focus:outline-none md:pl-8 md:pr-8"
+      >
+        {children}
+      </main>
     </div>
   );
 }

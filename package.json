@@ -4,27 +4,28 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_DIST_DIR=.next-dev next dev --turbopack",
+    "prebuild": "npm run validate-content",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write src/",
+    "lint": "eslint .",
+    "format": "prettier --write src/ scripts/generate-sitemap.js scripts/validate-content.js package.json README.md eslint.config.mjs next.config.ts postcss.config.mjs tailwind.config.ts",
+    "format:check": "prettier --check src/ scripts/generate-sitemap.js scripts/validate-content.js package.json README.md eslint.config.mjs next.config.ts postcss.config.mjs tailwind.config.ts",
+    "typecheck": "tsc --noEmit",
+    "validate-content": "node scripts/validate-content.js",
+    "check": "npm run validate-content && npm run format:check && npm run lint && npm run typecheck && npm run build",
     "postbuild": "node scripts/generate-sitemap.js && cp public/sitemap.xml public/robots.txt out/"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.1.0",
-    "@mdx-js/react": "^3.1.0",
     "@radix-ui/react-dialog": "^1.1.5",
     "@tailwindcss/typography": "^0.5.16",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
-    "next-mdx-remote": "^5.0.0",
+    "next": "15.5.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
-    "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1",
     "tailwind-merge": "^3.0.1"
   },
@@ -34,15 +35,28 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.22.0",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "15.5.21",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
     "glob": "^13.0.6",
-    "postcss": "^8",
+    "postcss": "^8.5.12",
     "prettier": "^3.5.3",
     "tailwindcss": "^3.4.1",
     "typescript": "5.7.3"
+  },
+  "overrides": {
+    "brace-expansion@<1.1.16": "1.1.16",
+    "brace-expansion@>=5.0.0 <5.0.7": "5.0.8",
+    "flatted@<3.4.2": "3.4.3",
+    "js-yaml@<3.15.0": "3.15.0",
+    "js-yaml@>=4.0.0 <4.3.0": "4.3.0",
+    "next": {
+      "sharp": "0.35.3"
+    },
+    "postcss": "$postcss",
+    "picomatch@<2.3.2": "2.3.2",
+    "picomatch@>=4.0.0 <4.0.4": "4.0.5"
   }
 }

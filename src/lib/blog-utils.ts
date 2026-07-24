@@ -49,26 +49,25 @@ export async function getJournalPosts(): Promise<Post[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  try {
-    const fullPath = path.join(
-      process.cwd(),
-      'src/content/journal',
-      `${slug}.md`,
-    );
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-    const wordCount = content.split(/\s+/).filter(Boolean).length;
-
-    return {
-      slug,
-      title: data.title,
-      date: data.date,
-      content,
-      excerpt: data.excerpt,
-      readingTime: Math.max(1, Math.ceil(wordCount / 200)),
-    };
-  } catch (error) {
-    console.error(`Error fetching post with slug ${slug}:`, error);
+  const fullPath = path.join(
+    process.cwd(),
+    'src/content/journal',
+    `${slug}.md`,
+  );
+  if (!fs.existsSync(fullPath)) {
     return null;
   }
+
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
+
+  return {
+    slug,
+    title: data.title,
+    date: data.date,
+    content,
+    excerpt: data.excerpt,
+    readingTime: Math.max(1, Math.ceil(wordCount / 200)),
+  };
 }

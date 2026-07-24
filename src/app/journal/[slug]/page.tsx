@@ -1,35 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
-import matter from 'gray-matter';
+import { notFound } from 'next/navigation';
 import { remark } from 'remark';
 import html from 'remark-html';
-import { formatDate } from '@/lib/blog-utils';
+import { formatDate, getPostBySlug } from '@/lib/blog-utils';
 
 type ParamsType = Promise<{ slug: string }>;
-
-async function getPost(fileName: string) {
-  const fullPath = path.join(
-    process.cwd(),
-    'src/content/journal',
-    `${fileName}.md`,
-  );
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  const processedContent = await remark().use(html).process(content);
-  const contentHtml = processedContent.toString();
-
-  const wordCount = content.split(/\s+/).filter(Boolean).length;
-
-  return {
-    title: data.title,
-    date: data.date,
-    excerpt: data.excerpt,
-    contentHtml,
-    readingTime: Math.max(1, Math.ceil(wordCount / 200)),
-  };
-}
 
 export async function generateMetadata({
   params,
@@ -37,7 +14,9 @@ export async function generateMetadata({
   params: ParamsType;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPostBySlug(slug);
+  if (!post) return {};
+
   const description = post.excerpt || `A journal post by Bowen Hou.`;
   const url = `/journal/${slug}/`;
 
@@ -69,7 +48,11 @@ export async function generateStaticParams() {
 
 export default async function JournalPost({ params }: { params: ParamsType }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
+
+  const processedContent = await remark().use(html).process(post.content);
+  const contentHtml = processedContent.toString();
 
   return (
     <div className="w-full flex justify-center">
@@ -82,7 +65,7 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
         </p>
         <div
           className="prose"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
       </article>
     </div>

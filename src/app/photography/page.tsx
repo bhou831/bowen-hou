@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Info, Smartphone, X } from 'lucide-react';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Collection, getCollections } from '@/lib/photo-utils';
 import { triggerHaptic } from '@/lib/haptics';
 
@@ -20,14 +25,19 @@ export default function Photography() {
   const sheetTouchStartY = useRef<number | null>(null);
   const descriptionOpenButtonRef = useRef<HTMLButtonElement>(null);
   const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
+  const lightboxTriggerRef = useRef<HTMLButtonElement | null>(null);
   const wasDescriptionOpen = useRef(false);
   const hasShownRotateHint = useRef(false);
   const hasShownSwipeCue = useRef(false);
 
   const collections = getCollections();
 
-  const handleCollectionClick = (collection: Collection) => {
+  const handleCollectionClick = (
+    collection: Collection,
+    trigger: HTMLButtonElement,
+  ) => {
     triggerHaptic();
+    lightboxTriggerRef.current = trigger;
     setSelectedCollection(collection);
     setCurrentImageIndex(0);
     setIsDescriptionOpen(false);
@@ -198,22 +208,26 @@ export default function Photography() {
 
   return (
     <div className="w-full">
+      <h1 className="sr-only">Photography</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-6 p-1">
-        {collections.map((collection) => (
+        {collections.map((collection, index) => (
           <button
             type="button"
             key={collection.id}
             className="group mx-auto w-full cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
-            onClick={() => handleCollectionClick(collection)}
+            onClick={(event) =>
+              handleCollectionClick(collection, event.currentTarget)
+            }
           >
             <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-100">
               <div className="absolute inset-0">
                 <Image
                   src={collection.coverImage}
-                  alt={collection.title}
+                  alt=""
                   fill
                   className="object-cover"
                   quality={90}
+                  priority={index < 4}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -241,12 +255,19 @@ export default function Photography() {
         {selectedCollection && (
           <DialogContent
             className="max-w-none max-h-none w-screen h-[100dvh] gap-0 rounded-none sm:rounded-none xl:max-w-[95vw] xl:max-h-[95vh] xl:w-full xl:h-full xl:rounded-lg bg-black/75 border-none p-0 overflow-hidden"
-            closeButtonClassName="z-30 rounded-full bg-black/40 p-1.5 text-white opacity-100 ring-offset-black backdrop-blur-sm hover:bg-black/55 hover:text-white focus:ring-white data-[state=open]:bg-black/40 data-[state=open]:text-white"
+            closeButtonClassName="right-[calc(env(safe-area-inset-right)+0.75rem)] top-[calc(env(safe-area-inset-top)+0.75rem)] z-30 rounded-full bg-black/40 text-white opacity-100 ring-offset-black backdrop-blur-sm hover:bg-black/55 hover:text-white focus:ring-white data-[state=open]:bg-black/40 data-[state=open]:text-white"
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              lightboxTriggerRef.current?.focus({ preventScroll: true });
+            }}
           >
             <DialogTitle className="sr-only">
               {selectedCollection.title} - Image {currentImageIndex + 1} of{' '}
               {selectedCollection.images.length}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              {selectedCollection.description}
+            </DialogDescription>
 
             <div className="h-full min-h-0 flex flex-col xl:flex-row">
               {/* Main Image Section */}
@@ -257,7 +278,7 @@ export default function Photography() {
               >
                 <button
                   onClick={previousImage}
-                  className="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:block"
+                  className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:grid"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -275,13 +296,13 @@ export default function Photography() {
                       fill
                       className="object-contain"
                       quality={100}
-                      loading="lazy"
+                      priority
                     />
                   </div>
                 </div>
 
                 <div
-                  className={`xl:hidden pointer-events-none absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-sm font-light text-white backdrop-blur-sm transition-opacity duration-300 ${
+                  className={`xl:hidden pointer-events-none absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-sm font-light text-white backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none ${
                     isRotateHintVisible ? 'opacity-100' : 'opacity-0'
                   }`}
                   aria-hidden={!isRotateHintVisible}
@@ -296,7 +317,7 @@ export default function Photography() {
                     triggerHaptic();
                     setIsDescriptionOpen(true);
                   }}
-                  className="xl:hidden absolute bottom-[calc(env(safe-area-inset-bottom)+2.25rem)] left-1/2 z-10 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-3 py-2 text-white backdrop-blur-sm hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="xl:hidden absolute bottom-[calc(env(safe-area-inset-bottom)+2.25rem)] left-1/2 z-10 flex min-h-11 max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-4 py-2 text-white backdrop-blur-sm hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   aria-label="Show image description"
                   aria-expanded={isDescriptionOpen}
                   aria-controls="photo-description-sheet"
@@ -323,7 +344,7 @@ export default function Photography() {
 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:block"
+                  className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black xl:grid"
                   aria-label="Next image"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -368,7 +389,7 @@ export default function Photography() {
               {/* Mobile/Tablet Description Sheet */}
               <div
                 id="photo-description-sheet"
-                className={`xl:hidden absolute inset-x-0 bottom-0 z-20 max-h-[55vh] overflow-y-auto bg-black/85 p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] text-white backdrop-blur-sm transition-transform duration-300 ease-out ${
+                className={`xl:hidden absolute inset-x-0 bottom-0 z-20 max-h-[55vh] overflow-y-auto bg-black/85 p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] text-white backdrop-blur-sm transition-transform duration-300 ease-out motion-reduce:transition-none ${
                   isDescriptionOpen
                     ? 'translate-y-0'
                     : 'pointer-events-none translate-y-full'
@@ -397,7 +418,7 @@ export default function Photography() {
                       triggerHaptic();
                       setIsDescriptionOpen(false);
                     }}
-                    className="shrink-0 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     aria-label="Hide image description"
                   >
                     <X className="h-5 w-5" />
@@ -437,6 +458,12 @@ export default function Photography() {
 
         .animate-swipe-cue {
           animation: swipe-cue 1.15s ease-in-out;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-swipe-cue {
+            animation: none;
+          }
         }
       `}</style>
     </div>

@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+
+const SLIDESHOW_IMAGES = Array.from(
+  { length: 26 },
+  (_, i) => `/images/slideshow/cover_page_${i + 1}.JPG`,
+);
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
@@ -16,17 +21,14 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const imageList = Array.from(
-      { length: 26 },
-      (_, i) => `/images/slideshow/cover_page_${i + 1}.JPG`,
-    );
-    setImages(shuffleArray(imageList));
+    setImages(shuffleArray(SLIDESHOW_IMAGES));
   }, []);
 
   useEffect(() => {
-    if (images.length === 0) return;
+    if (images.length === 0 || prefersReducedMotion) return;
 
     const timer = setInterval(() => {
       setCurrentImageIndex((current) =>
@@ -35,7 +37,7 @@ export default function Home() {
     }, 8000);
 
     return () => clearInterval(timer);
-  }, [images.length]);
+  }, [images.length, prefersReducedMotion]);
 
   return (
     <div className="space-y-8">
@@ -50,18 +52,18 @@ export default function Home() {
             {images.length > 0 && (
               <motion.div
                 key={currentImageIndex}
-                initial={{ opacity: 0 }}
+                initial={prefersReducedMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{
-                  duration: 0.5,
+                  duration: prefersReducedMotion ? 0 : 0.5,
                   ease: [0.1, 0.3, 0.6, 1],
                 }}
                 className="absolute inset-0"
               >
                 <Image
                   src={images[currentImageIndex]}
-                  alt={`Slideshow image ${currentImageIndex + 1}`}
+                  alt="Featured photograph by Bowen Hou"
                   fill
                   className="object-cover"
                   priority={currentImageIndex === 0}
@@ -86,8 +88,12 @@ export default function Home() {
           <div className="w-full h-px bg-gray-200 mt-2">
             <div
               key={currentImageIndex}
-              className="h-px bg-gray-400"
-              style={{ animation: 'slideshow-progress 8s linear forwards' }}
+              className="slideshow-progress h-px bg-gray-400"
+              style={{
+                animation: prefersReducedMotion
+                  ? 'none'
+                  : 'slideshow-progress 8s linear forwards',
+              }}
             />
           </div>
         )}

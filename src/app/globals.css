@@ -50,3 +50,9 @@
     display: inline-block;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow-progress {
+    animation: none !important;
+  }
+}

@@ -282,7 +282,7 @@ function VinylPreviewPlayer({ album }: { album: Album }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={triggerHaptic}
-                className="mt-2 inline-block text-[11px] text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors hover:text-gray-900 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                className="mt-1 inline-flex min-h-11 items-center text-[11px] text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors hover:text-gray-900 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
               >
                 Preview provided courtesy of iTunes
               </a>
@@ -322,7 +322,7 @@ function StreamingLinks({
           target="_blank"
           rel="noopener noreferrer"
           onClick={triggerHaptic}
-          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+          className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
         >
           <Image
             src="/images/icons/spotify.png"
@@ -339,7 +339,7 @@ function StreamingLinks({
           target="_blank"
           rel="noopener noreferrer"
           onClick={triggerHaptic}
-          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+          className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
         >
           <Image
             src="/images/icons/apple-music.png"
@@ -356,7 +356,7 @@ function StreamingLinks({
           target="_blank"
           rel="noopener noreferrer"
           onClick={triggerHaptic}
-          className="flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4"
+          className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
         >
           <Image
             src="/images/icons/youtube.png"
@@ -373,9 +373,11 @@ function StreamingLinks({
 
 export default function AlbumGrid({ albums }: { albums: Album[] }) {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
+  const albumTriggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleAlbumOpen = (album: Album) => {
+  const handleAlbumOpen = (album: Album, trigger: HTMLButtonElement) => {
     triggerHaptic();
+    albumTriggerRef.current = trigger;
     setSelectedAlbum(album);
   };
 
@@ -388,18 +390,19 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
 
   return (
     <div className="w-full">
+      <h1 className="sr-only">Music recommendations</h1>
       <div className="music-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-6 xl:gap-4">
         {albums.map((album) => (
           <button
             type="button"
             key={album.id}
             className="group w-full cursor-pointer text-left transition-transform duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-50"
-            onClick={() => handleAlbumOpen(album)}
+            onClick={(event) => handleAlbumOpen(album, event.currentTarget)}
           >
             <AlbumCoverTilt>
               <Image
                 src={album.coverImage}
-                alt={`${album.title} by ${album.artist}`}
+                alt=""
                 fill
                 className="object-cover"
               />
@@ -419,7 +422,13 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
       {/* Modal */}
       <Dialog open={!!selectedAlbum} onOpenChange={handleAlbumOpenChange}>
         {selectedAlbum && (
-          <DialogContent className="flex max-h-[90dvh] max-w-2xl flex-col overflow-hidden bg-white">
+          <DialogContent
+            className="flex max-h-[90dvh] max-w-2xl flex-col overflow-hidden bg-white"
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              albumTriggerRef.current?.focus({ preventScroll: true });
+            }}
+          >
             <DialogHeader className="shrink-0">
               <DialogTitle className="text-2xl font-bold text-gray-900">
                 {selectedAlbum.title}
