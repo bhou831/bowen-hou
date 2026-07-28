@@ -111,7 +111,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="relative inline-flex items-center gap-1 rounded-full p-1">
             <span
               aria-hidden="true"
-              className="absolute bottom-1 top-1 z-0 overflow-hidden rounded-full border border-white/75 bg-white/30 shadow-[0_1px_16px_rgba(15,23,42,0.13),inset_0_0_1px_1px_rgba(255,255,255,0.55),inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-1px_0_rgba(15,23,42,0.05)] backdrop-blur-2xl transition-[transform,width,opacity] duration-200 ease-out before:absolute before:inset-0 before:scale-[1.65] before:bg-[radial-gradient(circle_at_30%_15%,rgba(255,255,255,0.96),rgba(255,255,255,0.34)_34%,rgba(209,213,219,0.32)_68%,rgba(255,255,255,0.58))] before:opacity-85 before:blur-[16px] before:content-[''] motion-reduce:transition-none"
+              className="absolute bottom-2 top-2 z-0 overflow-hidden rounded-full border border-white/75 bg-white/35 shadow-[0_1px_8px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(15,23,42,0.04)] backdrop-blur-2xl transition-[transform,width,opacity] duration-200 ease-out before:absolute before:inset-0 before:bg-[linear-gradient(110deg,rgba(255,255,255,0.72),rgba(255,255,255,0.22)_46%,rgba(226,232,240,0.3))] before:opacity-80 before:content-[''] motion-reduce:transition-none"
               style={{
                 opacity: activePill.ready ? 1 : 0,
                 transform: `translateX(${activePill.left}px)`,
