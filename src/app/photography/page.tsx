@@ -27,6 +27,7 @@ export default function Photography() {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const isHorizontalSwipe = useRef<boolean | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const swipeAnimationTimeout = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
@@ -95,7 +96,9 @@ export default function Photography() {
     setIsSwipeCueVisible(false);
     setIsDraggingImage(false);
     setIsSwipeAnimating(true);
-    setDragOffset(direction * -window.innerWidth);
+    setDragOffset(
+      direction * -(carouselRef.current?.clientWidth ?? window.innerWidth),
+    );
 
     swipeAnimationTimeout.current = setTimeout(() => {
       setCurrentImageIndex((prev) =>
@@ -254,8 +257,10 @@ export default function Photography() {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const carouselWidth =
+      carouselRef.current?.clientWidth ?? window.innerWidth;
     const shouldChangeImage =
-      isHorizontalSwipe.current && Math.abs(deltaX) > window.innerWidth * 0.16;
+      isHorizontalSwipe.current && Math.abs(deltaX) > carouselWidth * 0.16;
 
     if (shouldChangeImage) {
       completeSwipe(deltaX < 0 ? 1 : -1);
@@ -364,7 +369,10 @@ export default function Photography() {
                   <ChevronLeft className="w-6 h-6" />
                 </button>
 
-                <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <div
+                  ref={carouselRef}
+                  className="relative w-full h-full flex items-center justify-center overflow-hidden"
+                >
                   {[-1, 0, 1].map((offset) => {
                     const imageIndex = getImageIndex(offset);
                     const isCurrentImage = offset === 0;
