@@ -372,11 +372,7 @@ export default function Photography() {
                     return (
                       <div
                         key={selectedCollection.images[imageIndex]}
-                        className={`absolute inset-0 max-w-[100vw] xl:max-w-none ${
-                          isCurrentImage && isSwipeCueVisible
-                            ? 'animate-swipe-cue'
-                            : ''
-                        }`}
+                        className="absolute inset-0 max-w-[100vw] xl:max-w-none"
                         style={{
                           transform: `translateX(calc(${offset * 100}% + ${dragOffset}px))`,
                           transition: isDraggingImage
@@ -384,16 +380,26 @@ export default function Photography() {
                             : 'transform 240ms cubic-bezier(0.22, 1, 0.36, 1)',
                         }}
                       >
-                        <Image
-                          src={selectedCollection.images[imageIndex]}
-                          alt={`${selectedCollection.title} - Image ${imageIndex + 1}`}
-                          fill
-                          className="object-contain"
-                          quality={100}
-                          loading="eager"
-                          priority={isCurrentImage}
-                          sizes="100vw"
-                        />
+                        <div
+                          className={`relative h-full w-full ${
+                            isCurrentImage &&
+                            currentImageIndex === 0 &&
+                            isSwipeCueVisible
+                              ? 'animate-swipe-cue'
+                              : ''
+                          }`}
+                        >
+                          <Image
+                            src={selectedCollection.images[imageIndex]}
+                            alt={`${selectedCollection.title} - Image ${imageIndex + 1}`}
+                            fill
+                            className="object-contain"
+                            quality={100}
+                            loading="eager"
+                            priority={isCurrentImage}
+                            sizes="100vw"
+                          />
+                        </div>
                       </div>
                     );
                   })}
