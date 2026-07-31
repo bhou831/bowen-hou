@@ -20,8 +20,16 @@ export default function Photography() {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isRotateHintVisible, setIsRotateHintVisible] = useState(false);
   const [isSwipeCueVisible, setIsSwipeCueVisible] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDraggingImage, setIsDraggingImage] = useState(false);
+  const [isSwipeAnimating, setIsSwipeAnimating] = useState(false);
 
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
+  const swipeAnimationTimeout = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const sheetTouchStartY = useRef<number | null>(null);
   const descriptionOpenButtonRef = useRef<HTMLButtonElement>(null);
   const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
@@ -70,6 +78,34 @@ export default function Photography() {
         prev === selectedCollection.images.length - 1 ? 0 : prev + 1,
       );
     }
+  };
+
+  const getImageIndex = (offset: number) => {
+    if (!selectedCollection) return 0;
+    const { length } = selectedCollection.images;
+    return (currentImageIndex + offset + length) % length;
+  };
+
+  const completeSwipe = (direction: 1 | -1) => {
+    if (!selectedCollection || isSwipeAnimating) return;
+
+    triggerHaptic();
+    setIsDescriptionOpen(false);
+    setIsRotateHintVisible(false);
+    setIsSwipeCueVisible(false);
+    setIsDraggingImage(false);
+    setIsSwipeAnimating(true);
+    setDragOffset(direction * -window.innerWidth);
+
+    swipeAnimationTimeout.current = setTimeout(() => {
+      setCurrentImageIndex((prev) =>
+        (prev + direction + selectedCollection.images.length) %
+        selectedCollection.images.length,
+      );
+      setDragOffset(0);
+      setIsSwipeAnimating(false);
+      swipeAnimationTimeout.current = null;
+    }, 240);
   };
 
   const previousImage = () => {
@@ -151,6 +187,14 @@ export default function Photography() {
     };
   }, [isLightboxOpen, selectedCollection]);
 
+  useEffect(() => {
+    return () => {
+      if (swipeAnimationTimeout.current) {
+        clearTimeout(swipeAnimationTimeout.current);
+      }
+    };
+  }, []);
+
   // Keyboard navigation in lightbox
   useEffect(() => {
     if (!isLightboxOpen || !selectedCollection) return;
@@ -176,20 +220,53 @@ export default function Photography() {
 
   // Lightbox touch swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
+    if (e.touches.length === 1 && !isSwipeAnimating) {
       setIsSwipeCueVisible(false);
       touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+      isHorizontalSwipe.current = null;
+      setIsDraggingImage(true);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (
+      touchStartX.current === null ||
+      touchStartY.current === null ||
+      isSwipeAnimating
+    ) {
+      return;
+    }
+
+    const deltaX = e.touches[0].clientX - touchStartX.current;
+    const deltaY = e.touches[0].clientY - touchStartY.current;
+
+    if (isHorizontalSwipe.current === null) {
+      if (Math.abs(deltaX) < 6 && Math.abs(deltaY) < 6) return;
+      isHorizontalSwipe.current = Math.abs(deltaX) > Math.abs(deltaY);
+    }
+
+    if (isHorizontalSwipe.current) {
+      setDragOffset(deltaX);
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextImage();
-      else previousImage();
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const shouldChangeImage =
+      isHorizontalSwipe.current && Math.abs(deltaX) > window.innerWidth * 0.16;
+
+    if (shouldChangeImage) {
+      completeSwipe(deltaX < 0 ? 1 : -1);
+    } else {
+      setIsDraggingImage(false);
+      setDragOffset(0);
     }
+
     touchStartX.current = null;
+    touchStartY.current = null;
+    isHorizontalSwipe.current = null;
   };
 
   const handleSheetTouchStart = (e: React.TouchEvent) => {
@@ -274,7 +351,10 @@ export default function Photography() {
               <div
                 className="flex-1 relative flex items-center justify-center min-h-0 p-3 xl:p-0"
                 onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchEnd}
+                style={{ touchAction: 'pan-y' }}
               >
                 <button
                   onClick={previousImage}
@@ -285,20 +365,38 @@ export default function Photography() {
                 </button>
 
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                  <div
-                    className={`relative w-full h-full max-w-[100vw] xl:max-w-none max-h-none ${
-                      isSwipeCueVisible ? 'animate-swipe-cue' : ''
-                    }`}
-                  >
-                    <Image
-                      src={selectedCollection.images[currentImageIndex]}
-                      alt={`${selectedCollection.title} - Image ${currentImageIndex + 1}`}
-                      fill
-                      className="object-contain"
-                      quality={100}
-                      priority
-                    />
-                  </div>
+                  {[-1, 0, 1].map((offset) => {
+                    const imageIndex = getImageIndex(offset);
+                    const isCurrentImage = offset === 0;
+
+                    return (
+                      <div
+                        key={selectedCollection.images[imageIndex]}
+                        className={`absolute inset-0 max-w-[100vw] xl:max-w-none ${
+                          isCurrentImage && isSwipeCueVisible
+                            ? 'animate-swipe-cue'
+                            : ''
+                        }`}
+                        style={{
+                          transform: `translateX(calc(${offset * 100}% + ${dragOffset}px))`,
+                          transition: isDraggingImage
+                            ? 'none'
+                            : 'transform 240ms cubic-bezier(0.22, 1, 0.36, 1)',
+                        }}
+                      >
+                        <Image
+                          src={selectedCollection.images[imageIndex]}
+                          alt={`${selectedCollection.title} - Image ${imageIndex + 1}`}
+                          fill
+                          className="object-contain"
+                          quality={100}
+                          loading="eager"
+                          priority={isCurrentImage}
+                          sizes="100vw"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div

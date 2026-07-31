@@ -1,6 +1,23 @@
 {
   "albums": [
     {
+      "id": "album-07-31-26",
+      "title": "Jordan: The Comeback",
+      "artist": "Prefab Sprout",
+      "coverImage": "/images/albums/jordan-the-comeback/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "Jesse James Bolero",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/30/9c/5c/309c5cb6-bc4d-8686-6cdb-f64e9d1394df/mzaf_16188503508654139891.plus.aac.p.m4a"
+      },
+      "description": "A cinematic masterpiece that blurs the boundaries of pop music. The orchestration is clean, the melodies punch with absolute precision.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/jordan-the-comeback/1476850266",
+        "spotify": "https://open.spotify.com/album/3em3CQi7ZdbyJ6GDvwJwp6",
+        "youtube": "https://youtu.be/Lt9MxTTZPGI?si=8BUy2RQbKX3Zms1t"
+      }
+    },
+    {
       "id": "album-07-23-26-3",
       "title": "Elis & Tom",
       "artist": "Elis Regina & Antônio Carlos Jobim",
