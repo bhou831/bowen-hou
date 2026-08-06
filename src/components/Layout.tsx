@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
 
     const isCompactNavigation = window.innerWidth < 640;
     if (isCompactNavigation) {
-      const compactPillPadding = 7;
+      const compactPillPadding = 8;
       setActivePill({
         left: labelLeft - compactPillPadding,
         width: labelRect.width + compactPillPadding * 2,
@@ -127,7 +127,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="flex h-16 max-w-full items-center justify-start px-4 md:px-8">
           <div
             ref={navTrackRef}
-            className="relative inline-flex max-w-full items-center gap-[0.28rem] rounded-full p-1"
+            className="relative inline-flex max-w-full items-center gap-[0.5rem] rounded-full p-1"
           >
             <span
               aria-hidden="true"
