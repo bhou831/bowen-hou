@@ -4,7 +4,7 @@ import Image from 'next/image';
 import type { Globe } from 'cobe';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Info, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   Dialog,
@@ -35,8 +35,6 @@ type ProjectedEntry = {
   visible: boolean;
   distanceFromCenter: number;
 };
-
-type DestinationStatus = MountainEntry['status'];
 
 type EntryCluster = { id: string; entries: ProjectedEntry[] };
 type AnchorStyle = React.CSSProperties & {
@@ -148,87 +146,74 @@ function groupNearbyEntries(
   width: number,
   zoom: number,
 ): EntryCluster[] {
-  const visible = points.filter((point) => point.visible);
+  const visible = [...points.filter((point) => point.visible)].sort((a, b) =>
+    a.entry.id.localeCompare(b.entry.id),
+  );
   if (zoom >= MAX_GLOBE_ZOOM - 0.1) {
     return visible.map((point) => ({ id: point.entry.id, entries: [point] }));
   }
-  const threshold = (width < 640 ? 74 : 104) / Math.max(1, zoom);
+  const threshold =
+    Math.min(120, Math.max(46, width * (width < 640 ? 0.13 : 0.15))) /
+    Math.max(1, zoom);
   const visited = new Set<string>();
   const clusters: EntryCluster[] = [];
 
-  for (const point of visible) {
-    if (visited.has(point.entry.id)) continue;
-    const queue = [point];
-    const members: ProjectedEntry[] = [];
-    visited.add(point.entry.id);
-
-    while (queue.length > 0) {
-      const current = queue.shift();
-      if (!current) continue;
-      members.push(current);
-      for (const candidate of visible) {
-        if (visited.has(candidate.entry.id)) continue;
-        const distance = Math.hypot(
-          (current.x - candidate.x) * width,
-          (current.y - candidate.y) * width,
-        );
-        if (distance <= threshold) {
-          visited.add(candidate.entry.id);
-          queue.push(candidate);
-        }
+  for (const seed of visible) {
+    if (visited.has(seed.entry.id)) continue;
+    visited.add(seed.entry.id);
+    // Leader clustering: only absorb points within `threshold` of the seed
+    // itself (no chaining), so a cluster can never span more than roughly
+    // 2x the threshold — unlike flood-fill, it can't stretch across a
+    // continent one hop at a time.
+    const members = [seed];
+    for (const candidate of visible) {
+      if (visited.has(candidate.entry.id)) continue;
+      const distance = Math.hypot(
+        (seed.x - candidate.x) * width,
+        (seed.y - candidate.y) * width,
+      );
+      if (distance <= threshold) {
+        visited.add(candidate.entry.id);
+        members.push(candidate);
       }
     }
+
+    // Anchor the cluster badge at the member closest to the group's visual
+    // centre, not an arbitrary member, so it doesn't render on top of
+    // whichever mountain happens to sort first.
+    const centerX =
+      members.reduce((sum, member) => sum + member.x, 0) / members.length;
+    const centerY =
+      members.reduce((sum, member) => sum + member.y, 0) / members.length;
+    const [medoid] = [...members].sort(
+      (a, b) =>
+        Math.hypot(a.x - centerX, a.y - centerY) -
+        Math.hypot(b.x - centerX, b.y - centerY),
+    );
+    const rest = members
+      .filter((member) => member.entry.id !== medoid.entry.id)
+      .sort((a, b) => a.entry.id.localeCompare(b.entry.id));
 
     clusters.push({
       id: members
         .map(({ entry }) => entry.id)
         .sort()
         .join('--'),
-      // Keep a cluster attached to the same physical mountain as the globe
-      // rotates instead of letting its representative change every frame.
-      entries: members.sort((a, b) => a.entry.id.localeCompare(b.entry.id)),
+      entries: [medoid, ...rest],
     });
   }
   return clusters;
 }
 
-function ContourPlaceholder({ compact = false }: { compact?: boolean }) {
+function EntryHeroPhoto({ entry }: { entry: MountainEntry }) {
   return (
-    <div
-      aria-hidden="true"
-      className={`mountain-contours relative overflow-hidden bg-stone-100 ${
-        compact ? 'h-full w-full' : 'aspect-[4/3] w-full'
-      }`}
-    >
-      <span className="absolute bottom-2 left-2 text-[10px] uppercase tracking-[0.18em] text-gray-500">
-        Dream destination
-      </span>
-    </div>
-  );
-}
-
-function EntryArtwork({
-  entry,
-  compact = false,
-  modal = false,
-}: {
-  entry: MountainEntry;
-  compact?: boolean;
-  modal?: boolean;
-}) {
-  if (!entry.image) return <ContourPlaceholder compact={compact || modal} />;
-  return (
-    <div
-      className={
-        compact || modal ? 'relative h-full w-full' : 'relative aspect-[4/3]'
-      }
-    >
+    <div className="relative aspect-[4/3] w-full">
       <Image
-        src={entry.image}
+        src={entry.image as string}
         alt={entry.imageAlt || ''}
         fill
-        priority={modal}
-        sizes={compact ? '180px' : '(max-width: 767px) 90vw, 640px'}
+        priority
+        sizes="(max-width: 767px) 90vw, 640px"
         className="object-cover"
       />
     </div>
@@ -292,6 +277,7 @@ export default function MountainsGlobe({
   const mobileFirstDestinationRef = useRef<HTMLButtonElement | null>(null);
   const modalCloseTimerRef = useRef<number | null>(null);
   const detailsOpenFrameRef = useRef<number | null>(null);
+  const mapSamplesTimerRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const [stageSize, setStageSize] = useState({ width: 800, height: 800 });
@@ -305,14 +291,6 @@ export default function MountainsGlobe({
   const [isInViewport, setIsInViewport] = useState(true);
   const [webglAvailable, setWebglAvailable] = useState(true);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [visibleStatuses, setVisibleStatuses] = useState<DestinationStatus[]>([
-    'visited',
-    'dream',
-  ]);
-  const visibleEntries = useMemo(
-    () => entries.filter((entry) => visibleStatuses.includes(entry.status)),
-    [entries, visibleStatuses],
-  );
   const clusters = useMemo(
     () => groupNearbyEntries(projectedEntries, stageSize.width, zoomLevel),
     [projectedEntries, stageSize.width, zoomLevel],
@@ -398,7 +376,7 @@ export default function MountainsGlobe({
           glowColor: [1, 1, 1],
           markerElevation: 0.02,
           scale: BASE_GLOBE_SCALE * zoomRef.current,
-          markers: visibleEntries.map((entry) => ({
+          markers: entries.map((entry) => ({
             id: entry.id,
             location: entry.location,
             // This exposes COBE's native CSS anchor without drawing a dot.
@@ -408,7 +386,7 @@ export default function MountainsGlobe({
         globeRef.current = globe;
         globe.update({ phi: phiRef.current, theta: thetaRef.current });
         setProjectedEntries(
-          visibleEntries.map((entry) =>
+          entries.map((entry) =>
             projectEntry(
               entry,
               phiRef.current,
@@ -430,7 +408,9 @@ export default function MountainsGlobe({
 
           if (!pauseRef.current || isPointerInteracting) {
             if (!pauseRef.current && time >= resumeAtRef.current) {
-              phiRef.current += AUTO_ROTATE_SPEED * elapsedFrames;
+              phiRef.current =
+                (phiRef.current + AUTO_ROTATE_SPEED * elapsedFrames) %
+                (Math.PI * 2);
             }
             globe.update({
               phi: phiRef.current,
@@ -441,7 +421,7 @@ export default function MountainsGlobe({
               projectionTimerRef.current = time;
               const currentSize = sizeRef.current;
               setProjectedEntries(
-                visibleEntries.map((entry) =>
+                entries.map((entry) =>
                   projectEntry(
                     entry,
                     phiRef.current,
@@ -471,7 +451,7 @@ export default function MountainsGlobe({
       globeRef.current?.destroy();
       globeRef.current = null;
     };
-  }, [visibleEntries]);
+  }, [entries]);
 
   const registerMarker = useCallback(
     (id: string, node: HTMLButtonElement | null) => {
@@ -512,6 +492,9 @@ export default function MountainsGlobe({
       }
       if (detailsOpenFrameRef.current) {
         window.cancelAnimationFrame(detailsOpenFrameRef.current);
+      }
+      if (mapSamplesTimerRef.current) {
+        window.clearTimeout(mapSamplesTimerRef.current);
       }
     },
     [],
@@ -593,25 +576,30 @@ export default function MountainsGlobe({
     '--mountain-top': `${entry.y * 100}%`,
     '--mountain-visible': `var(--cobe-visible-${entry.entry.id}, ${entry.visible ? 1 : 0})`,
   });
-  const toggleStatus = (status: DestinationStatus) => {
-    dismissTransientSelection(false);
-    setVisibleStatuses((current) =>
-      current.includes(status)
-        ? current.filter((item) => item !== status)
-        : [...current, status],
-    );
-  };
   const updateZoom = (nextZoom: number) => {
     zoomRef.current = nextZoom;
     setZoomLevel(nextZoom);
-    const isMobile = window.matchMedia('(max-width: 639px)').matches;
-    globeRef.current?.update({
-      scale: BASE_GLOBE_SCALE * nextZoom,
-      mapSamples: mapSamplesForZoom(isMobile, nextZoom),
-    });
+    // Scale applies every call so dragging/pinching feels immediate. Dot
+    // density (mapSamples) is expensive to regenerate, so it's debounced to
+    // settle ~120ms after the gesture stops moving instead of every frame.
+    globeRef.current?.update({ scale: BASE_GLOBE_SCALE * nextZoom });
+    if (mapSamplesTimerRef.current) {
+      window.clearTimeout(mapSamplesTimerRef.current);
+    }
+    mapSamplesTimerRef.current = window.setTimeout(() => {
+      mapSamplesTimerRef.current = null;
+      const isMobile = window.matchMedia('(max-width: 639px)').matches;
+      globeRef.current?.update({
+        mapSamples: mapSamplesForZoom(isMobile, zoomRef.current),
+      });
+    }, 120);
+    // While a pointer gesture is active, the rAF loop is already
+    // re-projecting on its own ~90ms throttle (see `animate` above), so
+    // re-projecting here too would just duplicate that work every move event.
+    if (activePointersRef.current.size > 0) return;
     const currentSize = sizeRef.current;
     setProjectedEntries(
-      visibleEntries.map((entry) =>
+      entries.map((entry) =>
         projectEntry(
           entry,
           phiRef.current,
@@ -760,7 +748,7 @@ export default function MountainsGlobe({
         every beautiful mountain I can reach.
       </p>
 
-      <div className="mountain-story-column pointer-events-none absolute left-4 right-16 top-4 z-30 md:bottom-8 md:left-8 md:right-auto md:top-8 md:flex md:w-[min(22vw,320px)] md:flex-col md:justify-between">
+      <div className="mountain-story-column pointer-events-none absolute left-4 right-4 top-4 z-30 md:bottom-8 md:left-8 md:right-auto md:top-8 md:flex md:w-[min(22vw,320px)] md:flex-col md:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
             A personal atlas
@@ -774,60 +762,6 @@ export default function MountainsGlobe({
           exploring every beautiful mountain I can reach.
         </p>
       </div>
-
-      <details className="mountain-info absolute right-4 top-4 z-40 md:right-8 md:top-6">
-        <summary
-          data-mountain-control
-          className="grid h-11 w-11 cursor-pointer list-none place-items-center rounded-full border border-gray-200 bg-white/90 text-gray-700 shadow-sm backdrop-blur-sm transition hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 [&::-webkit-details-marker]:hidden"
-          aria-label="About this mountains globe"
-        >
-          <Info className="h-4 w-4" />
-        </summary>
-        <div className="absolute right-0 mt-2 w-64 rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700 shadow-xl">
-          <p className="font-medium text-gray-950">Map key</p>
-          <fieldset className="mt-3 grid grid-cols-2 gap-2">
-            <legend className="sr-only">Filter destinations by status</legend>
-            {(['visited', 'dream'] as DestinationStatus[]).map((status) => {
-              const isVisited = status === 'visited';
-              const isSelected = visibleStatuses.includes(status);
-              const count = entries.filter(
-                (entry) => entry.status === status,
-              ).length;
-              return (
-                <button
-                  type="button"
-                  key={status}
-                  aria-pressed={isSelected}
-                  onClick={() => {
-                    triggerHaptic();
-                    toggleStatus(status);
-                  }}
-                  className={`flex min-h-11 flex-col items-start justify-center rounded-md px-3 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 ${
-                    isSelected
-                      ? 'bg-white text-gray-950 shadow-[0_3px_12px_rgba(15,23,42,0.12)] ring-1 ring-gray-200'
-                      : 'text-gray-400 hover:bg-gray-50 hover:text-gray-700'
-                  }`}
-                >
-                  <span className="text-xs font-medium">
-                    {isVisited ? 'Visited' : 'Dream'}
-                  </span>
-                  <span className="mt-0.5 text-[10px] text-gray-400">
-                    {count} places
-                  </span>
-                </button>
-              );
-            })}
-          </fieldset>
-          <a
-            href="https://cobe.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1 text-xs text-gray-500 underline decoration-gray-300 underline-offset-2 hover:text-gray-900"
-          >
-            Globe made with COBE <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
-      </details>
 
       <div className="absolute inset-x-0 bottom-0 top-40 grid place-items-center px-2 pb-2 sm:top-32 sm:px-6 sm:pb-4 md:inset-y-0 md:left-[min(24vw,352px)] md:top-0 md:pt-0">
         <div
@@ -861,6 +795,9 @@ export default function MountainsGlobe({
                 const isOpen =
                   selection.kind === 'cluster' &&
                   selection.cluster.id === cluster.id;
+                const isVisited = cluster.entries.some(
+                  ({ entry }) => entry.status === 'visited',
+                );
                 const horizontalPlacement =
                   anchor.x < 0.3
                     ? '-left-5'
@@ -900,7 +837,11 @@ export default function MountainsGlobe({
                       >
                         <span
                           aria-hidden="true"
-                          className="drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)]"
+                          className={`drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)] transition-[opacity,filter] ${
+                            isVisited
+                              ? ''
+                              : 'opacity-60 grayscale-[0.85] group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0'
+                          }`}
                         >
                           ⛰️
                         </span>
@@ -915,6 +856,7 @@ export default function MountainsGlobe({
                     <AnimatePresence>
                       {isOpen && !isMobileStage && (
                         <motion.div
+                          data-mountain-control
                           data-mountain-selection
                           role="dialog"
                           aria-label={`${cluster.entries.length} destinations in this area`}
@@ -1056,12 +998,16 @@ export default function MountainsGlobe({
                             prefersReducedMotion ? undefined : { scale: 0.94 }
                           }
                           transition={markerTransition}
-                          className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full text-[28px] leading-none transition-colors hover:bg-white/55 focus-visible:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white/80 md:text-[34px]"
+                          className="group pointer-events-auto grid h-11 w-11 place-items-center rounded-full text-[28px] leading-none transition-colors hover:bg-white/55 focus-visible:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white/80 md:text-[34px]"
                           aria-label={`Show ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
                         >
                           <span
                             aria-hidden="true"
-                            className="drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)]"
+                            className={`drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)] transition-[opacity,filter] ${
+                              entry.status === 'visited'
+                                ? ''
+                                : 'opacity-60 grayscale-[0.85] group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0'
+                            }`}
                           >
                             ⛰️
                           </span>
@@ -1081,7 +1027,7 @@ export default function MountainsGlobe({
                   destinations below instead.
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-4">
-                  {visibleEntries.map((entry) => (
+                  {entries.map((entry) => (
                     <FallbackDestinationButton
                       key={entry.id}
                       entry={entry}
@@ -1090,17 +1036,6 @@ export default function MountainsGlobe({
                   ))}
                 </div>
               </div>
-            </div>
-          )}
-
-          {visibleEntries.length === 0 && (
-            <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-64 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-gray-200 bg-white/90 px-5 py-4 text-center shadow-lg backdrop-blur-sm">
-              <p className="text-sm font-medium text-gray-900">
-                No destinations selected.
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                Turn on a status in the map key to explore the atlas.
-              </p>
             </div>
           )}
         </div>
@@ -1197,7 +1132,11 @@ export default function MountainsGlobe({
             forceMount
             onClose={closeEntry}
             overlayClassName="!z-[70] bg-gray-950/60 backdrop-blur-[2px]"
-            closeButtonClassName="!right-3 !top-3 !h-10 !w-10 border border-gray-200 bg-white/95 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.08)] hover:border-gray-300 hover:bg-gray-50 sm:!right-4 sm:!top-4"
+            closeButtonClassName={
+              selectedEntry.image
+                ? '!right-3 !top-3 !h-10 !w-10 border border-white/60 bg-white/85 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:bg-white'
+                : '!right-3 !top-3 !h-10 !w-10 border border-gray-200 bg-white/95 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.08)] hover:border-gray-300 hover:bg-gray-50 sm:!right-4 sm:!top-4'
+            }
             onEscapeKeyDown={(event) => {
               event.preventDefault();
               closeEntry();
@@ -1206,7 +1145,7 @@ export default function MountainsGlobe({
               event.preventDefault();
               closeEntry();
             }}
-            className={`mountain-modal !z-[80] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[25rem] flex-col overflow-hidden rounded-[1.5rem] border-gray-200/80 bg-white p-0 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none sm:rounded-[1.75rem] ${
+            className={`mountain-modal !z-[80] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[26rem] flex-col overflow-hidden rounded-[1.5rem] border-gray-200/80 bg-white p-0 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none sm:rounded-[1.75rem] ${
               isModalClosing ? 'is-closing' : ''
             }`}
             onCloseAutoFocus={(event) => {
@@ -1220,51 +1159,41 @@ export default function MountainsGlobe({
             }}
           >
             <div className="min-h-0 overflow-y-auto">
-              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16 sm:p-7 sm:pt-16">
-                <div className="mx-auto aspect-square w-[76%] overflow-hidden rounded-xl border border-gray-100 bg-stone-50 shadow-[0_10px_32px_rgba(15,23,42,0.06)] ring-1 ring-black/[0.02]">
-                  <EntryArtwork entry={selectedEntry} modal />
+              {selectedEntry.image ? (
+                <div className="border-b border-gray-100">
+                  <EntryHeroPhoto entry={selectedEntry} />
                 </div>
-                <div className="mt-5 min-w-0">
+              ) : (
+                <div className="flex items-center gap-2 border-b border-gray-100 px-5 pb-4 pt-6 sm:px-7">
+                  <span
+                    aria-hidden="true"
+                    className="h-8 w-1 shrink-0 rounded-full bg-gray-300"
+                  />
+                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
+                    Dream destination
+                  </p>
+                </div>
+              )}
+              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-7">
+                <div className="min-w-0">
                   <DialogHeader className="min-w-0 text-left">
-                    <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
-                      <span>{selectedEntry.type}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>
-                        {selectedEntry.status === 'visited'
-                          ? 'Visited'
-                          : 'Dream destination'}
+                    {selectedEntry.image && (
+                      <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
+                        <span>{selectedEntry.type}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>Visited</span>
+                      </div>
+                    )}
+                    <DialogTitle className="min-w-0 text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
+                      <span
+                        role="img"
+                        aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
+                        className="mr-2"
+                      >
+                        {countryFlag(selectedEntry.countryCode)}
                       </span>
-                    </div>
-                    <div className="flex min-w-0 items-center justify-between gap-4">
-                      <DialogTitle className="min-w-0 text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
-                        <span
-                          role="img"
-                          aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
-                          className="mr-2"
-                        >
-                          {countryFlag(selectedEntry.countryCode)}
-                        </span>
-                        {selectedEntry.name}
-                      </DialogTitle>
-                      {!selectedEntry.description && (
-                        <a
-                          href={selectedEntry.mapUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={triggerHaptic}
-                          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gray-200 bg-gray-50/80 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0"
-                          aria-label={`Open ${selectedEntry.name} in Google Maps`}
-                        >
-                          <Image
-                            src="/images/icons/pin.png"
-                            alt=""
-                            width={18}
-                            height={18}
-                            className="h-[18px] w-[18px] object-contain"
-                          />
-                        </a>
-                      )}
-                    </div>
+                      {selectedEntry.name}
+                    </DialogTitle>
                     {selectedEntry.description ? (
                       <DialogDescription className="whitespace-pre-line pt-2 text-[15px] leading-7 text-gray-600">
                         {selectedEntry.description}
@@ -1275,27 +1204,25 @@ export default function MountainsGlobe({
                       </DialogDescription>
                     )}
                   </DialogHeader>
-                  {selectedEntry.description && (
-                    <div className="mt-5 flex justify-start border-t border-gray-100 pt-4">
-                      <a
-                        href={selectedEntry.mapUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={triggerHaptic}
-                        className="inline-flex h-11 items-center gap-2 rounded-full border border-gray-200 bg-gray-50/80 px-4 text-sm text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-400 hover:bg-white hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0"
-                        aria-label={`Open ${selectedEntry.name} in Google Maps`}
-                      >
-                        <Image
-                          src="/images/icons/pin.png"
-                          alt=""
-                          width={18}
-                          height={18}
-                          className="h-[18px] w-[18px] object-contain"
-                        />
-                        <span>View on Google Maps</span>
-                      </a>
-                    </div>
-                  )}
+                  <div className="mt-5">
+                    <a
+                      href={selectedEntry.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={triggerHaptic}
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-50/80 text-sm text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-400 hover:bg-white hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0"
+                      aria-label={`Open ${selectedEntry.name} in Google Maps`}
+                    >
+                      <Image
+                        src="/images/icons/pin.png"
+                        alt=""
+                        width={18}
+                        height={18}
+                        className="h-[18px] w-[18px] object-contain"
+                      />
+                      <span>View on Google Maps</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
