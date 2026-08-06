@@ -29,6 +29,7 @@ export type MountainEntry = {
     | 'landform'
     | 'attraction';
   status: 'visited' | 'dream';
+  markerStyle: 'mountain' | 'snow' | 'fuji' | 'volcano';
   region: string;
   gatewayAirport: {
     name: string;
@@ -107,6 +108,23 @@ function countryFlag(countryCode: string) {
     .split('')
     .map((character) => String.fromCodePoint(127397 + character.charCodeAt(0)))
     .join('');
+}
+
+const MARKER_EMOJI: Record<MountainEntry['markerStyle'], string> = {
+  mountain: '⛰️',
+  snow: '🏔️',
+  fuji: '🗻',
+  volcano: '🌋',
+};
+
+function markerStyleForCluster(cluster: EntryCluster) {
+  const counts = { volcano: 0, snow: 0, mountain: 0 };
+  for (const { entry } of cluster.entries) {
+    if (entry.markerStyle !== 'fuji') counts[entry.markerStyle] += 1;
+  }
+  return (['volcano', 'snow', 'mountain'] as const).reduce((winner, style) =>
+    counts[style] > counts[winner] ? style : winner,
+  );
 }
 
 function toSphere([latitude, longitude]: MountainEntry['location']) {
@@ -253,7 +271,7 @@ function FallbackDestinationButton({
       className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-left text-xs text-gray-800 transition hover:border-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
     >
       <span aria-hidden="true" className="text-lg leading-none">
-        ⛰️
+        {MARKER_EMOJI[entry.markerStyle]}
       </span>
       <span>
         {entry.name} {countryFlag(entry.countryCode)}
@@ -779,7 +797,7 @@ export default function MountainsGlobe({
             />
           </div>
         </div>
-        <p className="mountain-story-copy mt-3 max-w-[34rem] text-sm leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
+        <p className="mountain-story-copy mt-3 max-w-[34rem] text-[13px] leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
           Born in Yunnan, one of the most mountainous regions in the world, I
           have always found a deep sense of serenity and belonging in the
           mountains. This is a map of the peaks I have visited and my dream of
@@ -822,6 +840,8 @@ export default function MountainsGlobe({
                 const isVisited = cluster.entries.some(
                   ({ entry }) => entry.status === 'visited',
                 );
+                const clusterMarker =
+                  MARKER_EMOJI[markerStyleForCluster(cluster)];
                 const horizontalPlacement =
                   anchor.x < 0.3
                     ? '-left-5'
@@ -881,7 +901,7 @@ export default function MountainsGlobe({
                               : 'opacity-60 grayscale-[0.85] group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0'
                           }`}
                         >
-                          ⛰️
+                          {clusterMarker}
                         </span>
                         <span
                           aria-hidden="true"
@@ -1064,7 +1084,7 @@ export default function MountainsGlobe({
                                 : 'opacity-60 grayscale-[0.85] group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0'
                             }`}
                           >
-                            ⛰️
+                            {MARKER_EMOJI[entry.markerStyle]}
                           </span>
                         </motion.button>
                       )}

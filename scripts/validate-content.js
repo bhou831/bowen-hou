@@ -193,6 +193,11 @@ if (!Array.isArray(mountainEntries)) {
     if (!['visited', 'dream'].includes(entry.status)) {
       addFailure(`${label} status must be visited or dream.`);
     }
+    if (!['mountain', 'snow', 'fuji', 'volcano'].includes(entry.markerStyle)) {
+      addFailure(
+        `${label} markerStyle must be mountain, snow, fuji, or volcano.`,
+      );
+    }
     if (
       !Array.isArray(entry.location) ||
       entry.location.length !== 2 ||

@@ -145,6 +145,7 @@ Add mountain, range, ridge, park, trail, pass, landform, and attraction entries 
   "location": [46.8523, -121.7603],
   "type": "mountain",
   "status": "visited",
+  "markerStyle": "snow",
   "region": "Cascade Range",
   "gatewayAirport": {
     "name": "Seattle",
@@ -163,10 +164,12 @@ Add mountain, range, ridge, park, trail, pass, landform, and attraction entries 
 or `attraction`;
 `status` must be `visited` or `dream`. Every entry needs a supported two-letter
 country code, geographic region, practical gateway airport with a three-letter
-code, and Google Maps URL. Airport connection notes, park or reserve names, and
-descriptions are optional. Any entry can omit photography and use the contour
-placeholder; when an image is present, descriptive alternative text is
-required.
+code, Google Maps URL, and a `markerStyle` of `mountain`, `snow`, `fuji`, or
+`volcano`. The marker style controls the globe emoji; `fuji` is reserved for
+Mount Fuji, while clustered destinations use their dominant non-Fuji style.
+Airport connection notes, park or reserve names, and descriptions are optional.
+Any entry can omit photography and use the contour placeholder; when an image
+is present, descriptive alternative text is required.
 
 Create an optimized atlas photograph from an existing source without changing
 the original:
