@@ -35,15 +35,27 @@ type ProjectedEntry = {
   distanceFromCenter: number;
 };
 
+type DestinationStatus = MountainEntry['status'];
+
 type EntryCluster = { id: string; entries: ProjectedEntry[] };
 type AnchorStyle = React.CSSProperties;
 
 const INITIAL_PHI = 0.25;
 const INITIAL_THETA = 0.16;
 const AUTO_ROTATE_SPEED = 0.00135;
+const BASE_GLOBE_SCALE = 0.98;
+const MAX_GLOBE_ZOOM = 3;
 const MAX_POLAROIDS = 6;
 const MAX_MOBILE_POLAROIDS = 3;
 const MODAL_CLOSE_DURATION = 150;
+
+function mapSamplesForZoom(isMobile: boolean, zoom: number) {
+  const baseSamples = isMobile ? 8000 : 16000;
+  const maximumSamples = isMobile ? 20000 : 40000;
+  return Math.round(
+    Math.min(maximumSamples, baseSamples * Math.pow(zoom, 0.75)),
+  );
+}
 
 const COUNTRY_NAMES: Record<string, string> = {
   AR: 'Argentina',
@@ -91,6 +103,7 @@ function projectEntry(
   theta: number,
   width: number,
   height: number,
+  zoom: number,
 ): ProjectedEntry {
   const [sphereX, sphereY, sphereZ] = toSphere(entry.location);
   const cosTheta = Math.cos(theta);
@@ -106,24 +119,31 @@ function projectEntry(
     -sinPhi * cosTheta * sphereX +
     sinTheta * sphereY +
     cosPhi * cosTheta * sphereZ;
-  const x = ((projectedX / (width / height)) * 0.98 + 1) / 2;
-  const y = (-projectedY * 0.98 + 1) / 2;
+  const scale = BASE_GLOBE_SCALE * zoom;
+  const x = ((projectedX / (width / height)) * scale + 1) / 2;
+  const y = (-projectedY * scale + 1) / 2;
+
+  const distanceFromCenter = Math.hypot(x - 0.5, y - 0.5);
 
   return {
     entry,
     x,
     y,
-    visible: depth >= -0.025,
-    distanceFromCenter: Math.hypot(x - 0.5, y - 0.5),
+    visible: depth > 0 && distanceFromCenter <= 0.49,
+    distanceFromCenter,
   };
 }
 
 function groupNearbyEntries(
   points: ProjectedEntry[],
   width: number,
+  zoom: number,
 ): EntryCluster[] {
   const visible = points.filter((point) => point.visible);
-  const threshold = width < 640 ? 74 : 104;
+  if (zoom >= MAX_GLOBE_ZOOM - 0.1) {
+    return visible.map((point) => ({ id: point.entry.id, entries: [point] }));
+  }
+  const threshold = (width < 640 ? 74 : 104) / Math.max(1, zoom);
   const visited = new Set<string>();
   const clusters: EntryCluster[] = [];
 
@@ -181,14 +201,18 @@ function ContourPlaceholder({ compact = false }: { compact?: boolean }) {
 function EntryArtwork({
   entry,
   compact = false,
+  modal = false,
 }: {
   entry: MountainEntry;
   compact?: boolean;
+  modal?: boolean;
 }) {
-  if (!entry.image) return <ContourPlaceholder compact={compact} />;
+  if (!entry.image) return <ContourPlaceholder compact={compact || modal} />;
   return (
     <div
-      className={compact ? 'relative h-full w-full' : 'relative aspect-[4/3]'}
+      className={
+        compact || modal ? 'relative h-full w-full' : 'relative aspect-[4/3]'
+      }
     >
       <Image
         src={entry.image}
@@ -198,6 +222,32 @@ function EntryArtwork({
         className="object-cover"
       />
     </div>
+  );
+}
+
+function FallbackDestinationButton({
+  entry,
+  onOpen,
+}: {
+  entry: MountainEntry;
+  onOpen: (entry: MountainEntry, trigger: HTMLButtonElement) => void;
+}) {
+  const isVisited = entry.status === 'visited';
+  return (
+    <button
+      type="button"
+      data-mountain-control
+      onClick={(event) => onOpen(entry, event.currentTarget)}
+      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-left text-xs text-gray-800 transition hover:border-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+    >
+      <span
+        aria-hidden="true"
+        className={`h-2.5 w-2.5 shrink-0 rounded-full ${
+          isVisited ? 'bg-gray-950' : 'border border-gray-700 bg-white'
+        }`}
+      />
+      <span>{entry.name}</span>
+    </button>
   );
 }
 
@@ -227,13 +277,6 @@ function PolaroidCard({
         <EntryArtwork entry={entry} compact />
       </div>
       <span className="mt-2 block truncate text-center text-xs text-gray-900 sm:text-sm">
-        <span
-          role="img"
-          aria-label={COUNTRY_NAMES[entry.countryCode]}
-          className="mr-1"
-        >
-          {countryFlag(entry.countryCode)}
-        </span>
         {entry.name}
       </span>
       <span className="mt-0.5 block text-center text-[9px] uppercase tracking-[0.16em] text-gray-500">
@@ -256,6 +299,7 @@ export default function MountainsGlobe({
   const lastFrameTimeRef = useRef<number | null>(null);
   const phiRef = useRef(INITIAL_PHI);
   const thetaRef = useRef(INITIAL_THETA);
+  const zoomRef = useRef(1);
   const pauseRef = useRef(false);
   const resumeAtRef = useRef(0);
   const sizeRef = useRef({ width: 800, height: 800 });
@@ -266,6 +310,8 @@ export default function MountainsGlobe({
     phi: number;
     theta: number;
   } | null>(null);
+  const activePointersRef = useRef(new Map<number, { x: number; y: number }>());
+  const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
   const modalTriggerRef = useRef<HTMLButtonElement | null>(null);
   const modalCloseTimerRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -286,14 +332,18 @@ export default function MountainsGlobe({
   const [isFocusWithin, setIsFocusWithin] = useState(false);
   const [isInViewport, setIsInViewport] = useState(true);
   const [webglAvailable, setWebglAvailable] = useState(true);
-  const entriesWithCover = useMemo(
-    () => entries.filter((entry) => Boolean(entry.image)),
-    [entries],
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [visibleStatuses, setVisibleStatuses] = useState<DestinationStatus[]>([
+    'visited',
+    'dream',
+  ]);
+  const visibleEntries = useMemo(
+    () => entries.filter((entry) => visibleStatuses.includes(entry.status)),
+    [entries, visibleStatuses],
   );
-
   const clusters = useMemo(
-    () => groupNearbyEntries(projectedEntries, stageSize.width),
-    [projectedEntries, stageSize.width],
+    () => groupNearbyEntries(projectedEntries, stageSize.width, zoomLevel),
+    [projectedEntries, stageSize.width, zoomLevel],
   );
   const expandedCluster = clusters.find(
     (cluster) => cluster.id === expandedClusterId,
@@ -303,6 +353,7 @@ export default function MountainsGlobe({
       .filter((cluster) => cluster.entries.length === 1)
       .map((cluster) => cluster.entries[0])
       .filter((point) => {
+        if (!point.entry.image) return false;
         const isMobileStage = stageSize.width < 640;
         const horizontalInset = isMobileStage ? 0.2 : 0.14;
         const topInset = isMobileStage ? 0.44 : 0.28;
@@ -313,13 +364,21 @@ export default function MountainsGlobe({
         );
       })
       .sort((a, b) => a.distanceFromCenter - b.distanceFromCenter)
-      .slice(0, stageSize.width < 640 ? MAX_MOBILE_POLAROIDS : MAX_POLAROIDS)
+      .slice(
+        0,
+        stageSize.width < 640
+          ? zoomLevel >= 2.5
+            ? MAX_POLAROIDS
+            : MAX_MOBILE_POLAROIDS
+          : MAX_POLAROIDS,
+      )
       .map(({ entry }) => entry.id),
   );
   const shouldPause =
     Boolean(prefersReducedMotion) ||
     isDragging ||
     isFocusWithin ||
+    zoomLevel > 1.05 ||
     Boolean(expandedClusterId) ||
     Boolean(selectedEntry) ||
     !isInViewport;
@@ -385,15 +444,15 @@ export default function MountainsGlobe({
           theta: thetaRef.current,
           dark: 0,
           diffuse: 1.25,
-          mapSamples: isMobile ? 8000 : 16000,
+          mapSamples: mapSamplesForZoom(isMobile, zoomRef.current),
           mapBrightness: 4.8,
           mapBaseBrightness: 0,
           baseColor: [0.97, 0.97, 0.97],
           markerColor: [0.08, 0.08, 0.08],
           glowColor: [1, 1, 1],
           markerElevation: 0.01,
-          scale: 0.98,
-          markers: entriesWithCover.map((entry) => ({
+          scale: BASE_GLOBE_SCALE * zoomRef.current,
+          markers: visibleEntries.map((entry) => ({
             id: entry.id,
             location: entry.location,
             size: entry.status === 'visited' ? 0.035 : 0.028,
@@ -406,13 +465,14 @@ export default function MountainsGlobe({
         globeRef.current = globe;
         globe.update({ phi: phiRef.current, theta: thetaRef.current });
         setProjectedEntries(
-          entriesWithCover.map((entry) =>
+          visibleEntries.map((entry) =>
             projectEntry(
               entry,
               phiRef.current,
               thetaRef.current,
               size.width,
               size.height,
+              zoomRef.current,
             ),
           ),
         );
@@ -423,24 +483,29 @@ export default function MountainsGlobe({
             ? Math.min((time - lastFrameTimeRef.current) / (1000 / 60), 2)
             : 1;
           lastFrameTimeRef.current = time;
-          const isPointerDragging = pointerRef.current !== null;
+          const isPointerInteracting = activePointersRef.current.size > 0;
 
-          if (!pauseRef.current || isPointerDragging) {
+          if (!pauseRef.current || isPointerInteracting) {
             if (!pauseRef.current && time >= resumeAtRef.current) {
               phiRef.current += AUTO_ROTATE_SPEED * elapsedFrames;
             }
-            globe.update({ phi: phiRef.current, theta: thetaRef.current });
+            globe.update({
+              phi: phiRef.current,
+              theta: thetaRef.current,
+              scale: BASE_GLOBE_SCALE * zoomRef.current,
+            });
             if (time - projectionTimerRef.current > 90) {
               projectionTimerRef.current = time;
               const currentSize = sizeRef.current;
               setProjectedEntries(
-                entriesWithCover.map((entry) =>
+                visibleEntries.map((entry) =>
                   projectEntry(
                     entry,
                     phiRef.current,
                     thetaRef.current,
                     currentSize.width,
                     currentSize.height,
+                    zoomRef.current,
                   ),
                 ),
               );
@@ -463,7 +528,7 @@ export default function MountainsGlobe({
       globeRef.current?.destroy();
       globeRef.current = null;
     };
-  }, [entriesWithCover]);
+  }, [visibleEntries]);
 
   useEffect(() => {
     if (expandedClusterId && !expandedCluster) setExpandedClusterId(null);
@@ -517,35 +582,126 @@ export default function MountainsGlobe({
     top: `${entry.y * 100}%`,
     opacity: entry.visible ? 1 : 0,
   });
+  const toggleStatus = (status: DestinationStatus) => {
+    setExpandedClusterId(null);
+    setVisibleStatuses((current) =>
+      current.includes(status)
+        ? current.filter((item) => item !== status)
+        : [...current, status],
+    );
+  };
+  const updateZoom = (nextZoom: number) => {
+    zoomRef.current = nextZoom;
+    setZoomLevel(nextZoom);
+    const isMobile = window.matchMedia('(max-width: 639px)').matches;
+    globeRef.current?.update({
+      scale: BASE_GLOBE_SCALE * nextZoom,
+      mapSamples: mapSamplesForZoom(isMobile, nextZoom),
+    });
+    const currentSize = sizeRef.current;
+    setProjectedEntries(
+      visibleEntries.map((entry) =>
+        projectEntry(
+          entry,
+          phiRef.current,
+          thetaRef.current,
+          currentSize.width,
+          currentSize.height,
+          nextZoom,
+        ),
+      ),
+    );
+  };
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const normalizedDelta =
+      event.deltaMode === 1
+        ? event.deltaY * 16
+        : event.deltaMode === 2
+          ? event.deltaY * stageSize.height
+          : event.deltaY;
+    const nextZoom = Math.max(
+      1,
+      Math.min(
+        MAX_GLOBE_ZOOM,
+        zoomRef.current * Math.exp(-normalizedDelta * 0.0015),
+      ),
+    );
+    if (Math.abs(nextZoom - zoomRef.current) < 0.001) return;
+    updateZoom(nextZoom);
+    resumeAtRef.current = performance.now() + 900;
+  };
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest('[data-mountain-control]'))
       return;
     setExpandedClusterId(null);
-    pointerRef.current = {
-      id: event.pointerId,
+    activePointersRef.current.set(event.pointerId, {
       x: event.clientX,
       y: event.clientY,
-      phi: phiRef.current,
-      theta: thetaRef.current,
-    };
+    });
+    if (activePointersRef.current.size === 1) {
+      pointerRef.current = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        phi: phiRef.current,
+        theta: thetaRef.current,
+      };
+    } else if (activePointersRef.current.size === 2) {
+      const [first, second] = Array.from(activePointersRef.current.values());
+      pinchRef.current = {
+        distance: Math.hypot(second.x - first.x, second.y - first.y),
+        zoom: zoomRef.current,
+      };
+      pointerRef.current = null;
+    }
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsDragging(true);
   };
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!activePointersRef.current.has(event.pointerId)) return;
+    activePointersRef.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+    if (activePointersRef.current.size >= 2) {
+      const [first, second] = Array.from(activePointersRef.current.values());
+      const gesture = pinchRef.current;
+      if (!gesture) return;
+      const distance = Math.hypot(second.x - first.x, second.y - first.y);
+      const nextZoom = Math.max(
+        1,
+        Math.min(MAX_GLOBE_ZOOM, gesture.zoom * (distance / gesture.distance)),
+      );
+      updateZoom(nextZoom);
+      return;
+    }
     const pointer = pointerRef.current;
     if (!pointer || pointer.id !== event.pointerId) return;
     phiRef.current = pointer.phi + (event.clientX - pointer.x) * 0.006;
     thetaRef.current = Math.max(
       -0.75,
-      Math.min(0.75, pointer.theta - (event.clientY - pointer.y) * 0.006),
+      Math.min(0.75, pointer.theta + (event.clientY - pointer.y) * 0.006),
     );
   };
   const handlePointerEnd = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (pointerRef.current?.id !== event.pointerId) return;
-    pointerRef.current = null;
-    setIsDragging(false);
-    resumeAtRef.current = performance.now() + 1200;
+    if (!activePointersRef.current.has(event.pointerId)) return;
+    activePointersRef.current.delete(event.pointerId);
+    pinchRef.current = null;
+    if (activePointersRef.current.size === 1) {
+      const [id, position] = Array.from(activePointersRef.current.entries())[0];
+      pointerRef.current = {
+        id,
+        x: position.x,
+        y: position.y,
+        phi: phiRef.current,
+        theta: thetaRef.current,
+      };
+    } else {
+      pointerRef.current = null;
+      setIsDragging(false);
+      resumeAtRef.current = performance.now() + 1200;
+    }
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -586,14 +742,39 @@ export default function MountainsGlobe({
         </summary>
         <div className="absolute right-0 mt-2 w-64 rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700 shadow-xl">
           <p className="font-medium text-gray-950">Map key</p>
-          <div className="mt-3 flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-gray-950" />
-            <span>Visited</span>
-          </div>
-          <div className="mt-2 flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full border border-gray-700 bg-white" />
-            <span>Dream destination</span>
-          </div>
+          <fieldset className="mt-3 grid grid-cols-2 gap-2">
+            <legend className="sr-only">Filter destinations by status</legend>
+            {(['visited', 'dream'] as DestinationStatus[]).map((status) => {
+              const isVisited = status === 'visited';
+              const isSelected = visibleStatuses.includes(status);
+              const count = entries.filter(
+                (entry) => entry.status === status,
+              ).length;
+              return (
+                <button
+                  type="button"
+                  key={status}
+                  aria-pressed={isSelected}
+                  onClick={() => {
+                    triggerHaptic();
+                    toggleStatus(status);
+                  }}
+                  className={`flex min-h-11 flex-col items-start justify-center rounded-md px-3 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 ${
+                    isSelected
+                      ? 'bg-white text-gray-950 shadow-[0_3px_12px_rgba(15,23,42,0.12)] ring-1 ring-gray-200'
+                      : 'text-gray-400 hover:bg-gray-50 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-xs font-medium">
+                    {isVisited ? 'Visited' : 'Dream'}
+                  </span>
+                  <span className="mt-0.5 text-[10px] text-gray-400">
+                    {count} places
+                  </span>
+                </button>
+              );
+            })}
+          </fieldset>
           <a
             href="https://cobe.vercel.app/"
             target="_blank"
@@ -615,6 +796,7 @@ export default function MountainsGlobe({
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerEnd}
           onPointerCancel={handlePointerEnd}
+          onWheel={handleWheel}
           onFocusCapture={() => setIsFocusWithin(true)}
           onBlurCapture={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -645,11 +827,25 @@ export default function MountainsGlobe({
                       data-mountain-control
                       onClick={() => {
                         triggerHaptic();
-                        setExpandedClusterId(isExpanded ? null : cluster.id);
+                        if (stageSize.width < 640) {
+                          const nextZoom = Math.min(
+                            MAX_GLOBE_ZOOM,
+                            Math.max(
+                              zoomRef.current + 0.65,
+                              zoomRef.current * 1.5,
+                            ),
+                          );
+                          updateZoom(nextZoom);
+                          setExpandedClusterId(null);
+                        } else {
+                          setExpandedClusterId(isExpanded ? null : cluster.id);
+                        }
                       }}
                       className="pointer-events-auto grid h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-gray-800 bg-white px-3 text-sm text-gray-950 shadow-lg"
-                      aria-expanded={isExpanded}
-                      aria-label={`${cluster.entries.length} nearby destinations`}
+                      aria-expanded={
+                        stageSize.width >= 640 ? isExpanded : undefined
+                      }
+                      aria-label={`${cluster.entries.length} nearby destinations${stageSize.width < 640 ? '. Pinch or tap to zoom in' : ''}`}
                     >
                       {cluster.entries.length}
                     </button>
@@ -716,11 +912,10 @@ export default function MountainsGlobe({
                   destinations below instead.
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-4">
-                  {entriesWithCover.map((entry) => (
-                    <PolaroidCard
+                  {visibleEntries.map((entry) => (
+                    <FallbackDestinationButton
                       key={entry.id}
                       entry={entry}
-                      compact
                       onOpen={openEntry}
                     />
                   ))}
@@ -729,30 +924,18 @@ export default function MountainsGlobe({
             </div>
           )}
 
-          {entriesWithCover.length === 0 && (
+          {visibleEntries.length === 0 && (
             <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-64 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-gray-200 bg-white/90 px-5 py-4 text-center shadow-lg backdrop-blur-sm">
               <p className="text-sm font-medium text-gray-900">
-                The atlas is ready.
+                No destinations selected.
               </p>
               <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                Add your first mountain, park, or trail to begin the journey.
+                Turn on a status in the map key to explore the atlas.
               </p>
             </div>
           )}
         </div>
       </div>
-
-      {expandedCluster && (
-        <div className="absolute inset-x-0 bottom-4 z-40 px-4 md:hidden">
-          <div className="flex snap-x gap-3 overflow-x-auto rounded-xl border border-gray-200 bg-white/95 p-3 shadow-xl backdrop-blur-sm">
-            {expandedCluster.entries.map(({ entry }) => (
-              <div key={entry.id} className="shrink-0 snap-center">
-                <PolaroidCard entry={entry} compact onOpen={openEntry} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       <Dialog
         open={isModalOpen}
@@ -766,6 +949,7 @@ export default function MountainsGlobe({
           <DialogContent
             forceMount
             onClose={closeEntry}
+            closeButtonClassName="!right-2 !top-2 !h-9 !w-9 bg-white/90 opacity-100 shadow-sm sm:!right-3 sm:!top-3"
             onEscapeKeyDown={(event) => {
               event.preventDefault();
               closeEntry();
@@ -774,7 +958,7 @@ export default function MountainsGlobe({
               event.preventDefault();
               closeEntry();
             }}
-            className={`mountain-modal flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl flex-col overflow-hidden bg-white p-0 ${
+            className={`mountain-modal flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm flex-col overflow-hidden bg-white p-0 ${
               isModalClosing ? 'is-closing' : ''
             }`}
             onCloseAutoFocus={(event) => {
@@ -782,56 +966,81 @@ export default function MountainsGlobe({
             }}
           >
             <div className="min-h-0 overflow-y-auto">
-              <EntryArtwork entry={selectedEntry} />
-              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 sm:p-6 sm:pt-5">
-                <DialogHeader className="pr-10 text-left">
-                  <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-gray-500">
-                    <span>{selectedEntry.type}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>
-                      {selectedEntry.status === 'visited'
-                        ? 'Visited'
-                        : 'Dream destination'}
-                    </span>
-                  </div>
-                  <DialogTitle className="text-2xl font-semibold text-gray-950 sm:text-3xl">
-                    <span
-                      role="img"
-                      aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
-                      className="mr-2"
-                    >
-                      {countryFlag(selectedEntry.countryCode)}
-                    </span>
-                    {selectedEntry.name}
-                  </DialogTitle>
-                  <DialogDescription
-                    className={
-                      selectedEntry.description
-                        ? 'whitespace-pre-line pt-2 text-base leading-relaxed text-gray-700'
-                        : 'sr-only'
-                    }
-                  >
-                    {selectedEntry.description ||
-                      `${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'dream destination'}.`}
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="mt-5 flex justify-center sm:justify-start">
-                  <a
-                    href={selectedEntry.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={triggerHaptic}
-                    className="grid h-11 w-11 place-items-center rounded-full border border-gray-300 transition hover:border-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
-                    aria-label={`Open ${selectedEntry.name} in Google Maps`}
-                  >
-                    <Image
-                      src="/images/icons/pin.png"
-                      alt=""
-                      width={30}
-                      height={30}
-                      className="h-[30px] w-[30px] object-contain"
-                    />
-                  </a>
+              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-20 sm:p-6 sm:pt-20">
+                <div className="mx-auto aspect-square w-[72%] overflow-hidden rounded-sm border border-gray-100 bg-stone-50">
+                  <EntryArtwork entry={selectedEntry} modal />
+                </div>
+                <div className="mt-4 min-w-0">
+                  <DialogHeader className="min-w-0 text-left">
+                    <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-gray-500">
+                      <span>{selectedEntry.type}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>
+                        {selectedEntry.status === 'visited'
+                          ? 'Visited'
+                          : 'Dream destination'}
+                      </span>
+                    </div>
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <DialogTitle className="min-w-0 text-xl font-semibold leading-tight text-gray-950 sm:text-2xl">
+                        <span
+                          role="img"
+                          aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
+                          className="mr-2"
+                        >
+                          {countryFlag(selectedEntry.countryCode)}
+                        </span>
+                        {selectedEntry.name}
+                      </DialogTitle>
+                      {!selectedEntry.description && (
+                        <a
+                          href={selectedEntry.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={triggerHaptic}
+                          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gray-300 transition hover:border-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                          aria-label={`Open ${selectedEntry.name} in Google Maps`}
+                        >
+                          <Image
+                            src="/images/icons/pin.png"
+                            alt=""
+                            width={18}
+                            height={18}
+                            className="h-[18px] w-[18px] object-contain"
+                          />
+                        </a>
+                      )}
+                    </div>
+                    {selectedEntry.description ? (
+                      <DialogDescription className="whitespace-pre-line pt-2 text-base leading-relaxed text-gray-700">
+                        {selectedEntry.description}
+                      </DialogDescription>
+                    ) : (
+                      <DialogDescription className="sr-only">
+                        {`${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'dream destination'}.`}
+                      </DialogDescription>
+                    )}
+                  </DialogHeader>
+                  {selectedEntry.description && (
+                    <div className="mt-4 flex justify-start">
+                      <a
+                        href={selectedEntry.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={triggerHaptic}
+                        className="grid h-11 w-11 place-items-center rounded-full border border-gray-300 transition hover:border-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                        aria-label={`Open ${selectedEntry.name} in Google Maps`}
+                      >
+                        <Image
+                          src="/images/icons/pin.png"
+                          alt=""
+                          width={18}
+                          height={18}
+                          className="h-[18px] w-[18px] object-contain"
+                        />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

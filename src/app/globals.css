@@ -89,6 +89,29 @@
   transition: opacity 180ms ease;
 }
 
+.mountain-stage::after {
+  position: absolute;
+  z-index: 5;
+  inset: -1px;
+  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(
+      to right,
+      #fff 0%,
+      rgba(255, 255, 255, 0) 9%,
+      rgba(255, 255, 255, 0) 91%,
+      #fff 100%
+    ),
+    linear-gradient(
+      to bottom,
+      #fff 0%,
+      rgba(255, 255, 255, 0) 9%,
+      rgba(255, 255, 255, 0) 91%,
+      #fff 100%
+    );
+}
+
 .mountain-modal[data-state='open'] {
   animation: mountain-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
