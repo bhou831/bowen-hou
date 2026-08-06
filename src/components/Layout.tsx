@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
 
     const isCompactNavigation = window.innerWidth < 640;
     if (isCompactNavigation) {
-      const compactPillPadding = 15;
+      const compactPillPadding = 7;
       setActivePill({
         left: labelLeft - compactPillPadding,
         width: labelRect.width + compactPillPadding * 2,
@@ -96,7 +96,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [updateActivePill]);
 
   const navLinkClassName = (path: string) =>
-    `relative z-10 inline-flex h-11 min-w-0 flex-none items-center justify-center rounded-full px-[3px] text-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:px-2.5 md:px-3.5 md:text-base ${
+    `relative z-10 inline-flex h-11 min-w-0 flex-none items-center justify-center rounded-full px-[3px] text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:px-2.5 md:px-3.5 md:text-base ${
       isActive(path)
         ? 'font-medium text-gray-950'
         : 'text-gray-700 hover:text-gray-950'
@@ -124,10 +124,10 @@ export default function Layout({ children }: LayoutProps) {
           scrolled ? 'shadow-sm' : ''
         }`}
       >
-        <div className="flex h-16 max-w-full items-center justify-start px-8">
+        <div className="flex h-16 max-w-full items-center justify-start px-4 md:px-8">
           <div
             ref={navTrackRef}
-            className="relative inline-flex max-w-full items-center gap-[1.35rem] rounded-full p-1"
+            className="relative inline-flex max-w-full items-center gap-[0.28rem] rounded-full p-1"
           >
             <span
               aria-hidden="true"
