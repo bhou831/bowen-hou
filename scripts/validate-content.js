@@ -149,13 +149,46 @@ if (!Array.isArray(mountainEntries)) {
     if (entry.description !== undefined) {
       requireText(entry.description, `${label} description`);
     }
+    requireText(entry.region, `${label} region`);
+    if (!entry.gatewayAirport || typeof entry.gatewayAirport !== 'object') {
+      addFailure(`${label} gatewayAirport must be an object.`);
+    } else {
+      requireText(entry.gatewayAirport.name, `${label} gateway airport name`);
+      if (
+        typeof entry.gatewayAirport.code !== 'string' ||
+        !/^[A-Z]{3}$/.test(entry.gatewayAirport.code)
+      ) {
+        addFailure(
+          `${label} gateway airport code must be a three-letter uppercase code.`,
+        );
+      }
+      if (entry.gatewayAirport.note !== undefined) {
+        requireText(entry.gatewayAirport.note, `${label} gateway airport note`);
+      }
+    }
+    if (entry.park !== undefined) {
+      requireText(entry.park, `${label} park or reserve`);
+    }
 
     if (!supportedCountryCodes.has(entry.countryCode)) {
       addFailure(`${label} countryCode must be a supported ISO country code.`);
     }
 
-    if (!['mountain', 'park', 'trail'].includes(entry.type)) {
-      addFailure(`${label} type must be mountain, park, or trail.`);
+    if (
+      ![
+        'mountain',
+        'range',
+        'ridge',
+        'park',
+        'trail',
+        'pass',
+        'landform',
+        'attraction',
+      ].includes(entry.type)
+    ) {
+      addFailure(
+        `${label} type must be mountain, range, ridge, park, trail, pass, landform, or attraction.`,
+      );
     }
     if (!['visited', 'dream'].includes(entry.status)) {
       addFailure(`${label} status must be visited or dream.`);
@@ -176,9 +209,6 @@ if (!Array.isArray(mountainEntries)) {
       }
     }
 
-    if (entry.status === 'visited' && !entry.image) {
-      addFailure(`${label} must include an image when status is visited.`);
-    }
     if (entry.image) {
       requireLocalAsset(entry.image, `${label} image`);
       requireText(entry.imageAlt, `${label} image alt text`);

@@ -133,8 +133,9 @@ the content and static export.
 
 ### Add a mountain destination
 
-Add mountain, park, and trail entries to `src/content/mountains/entries.json`.
-Local images belong in `public/images/mountains/`.
+Add mountain, range, ridge, park, trail, pass, landform, and attraction entries to
+`src/content/mountains/entries.json`. Local images belong in
+`public/images/mountains/`.
 
 ```json
 {
@@ -144,6 +145,13 @@ Local images belong in `public/images/mountains/`.
   "location": [46.8523, -121.7603],
   "type": "mountain",
   "status": "visited",
+  "region": "Cascade Range",
+  "gatewayAirport": {
+    "name": "Seattle",
+    "code": "SEA",
+    "note": "optional connection or charter detail"
+  },
+  "park": "Optional park or reserve",
   "mapUrl": "https://maps.app.goo.gl/example",
   "description": "An optional personal story.",
   "image": "/images/mountains/example.jpg",
@@ -151,23 +159,28 @@ Local images belong in `public/images/mountains/`.
 }
 ```
 
-`type` must be `mountain`, `park`, or `trail`; `status` must be `visited` or
-`dream`. Every entry needs a supported two-letter country code and a Google
-Maps URL. Descriptions are optional. Visited entries require a local image and
-alt text. Dream entries can omit both and will use the contour placeholder.
+`type` must be `mountain`, `range`, `ridge`, `park`, `trail`, `pass`, `landform`,
+or `attraction`;
+`status` must be `visited` or `dream`. Every entry needs a supported two-letter
+country code, geographic region, practical gateway airport with a three-letter
+code, and Google Maps URL. Airport connection notes, park or reserve names, and
+descriptions are optional. Any entry can omit photography and use the contour
+placeholder; when an image is present, descriptive alternative text is
+required.
 
 Create an optimized atlas photograph from an existing source without changing
 the original:
 
 ```sh
-just add-mountain-photo --id <entry-id> --source <path-to-image>
+just add-mountain-photo --id <entry-id> --source <path-to-image> [--replace]
 ```
 
 The helper corrects orientation, strips metadata, keeps the original aspect
-ratio, and writes a JPEG no larger than 2 megapixels or 1600px on its longest
+ratio, and writes a JPEG no larger than 1414px on its longest
 edge to `public/images/mountains/<entry-id>.jpg`. It will not upscale images or
-overwrite an existing atlas photograph. Run `npm run validate-content` after
-editing the atlas.
+overwrite an existing atlas photograph unless `--replace` is supplied. A
+replacement is encoded to a temporary file before the existing photograph is
+atomically replaced. Run `npm run validate-content` after editing the atlas.
 
 ## Deployment
 

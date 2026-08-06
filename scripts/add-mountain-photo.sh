@@ -3,11 +3,12 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 --id <entry-id> --source <image-path>" >&2
+  echo "Usage: $0 --id <entry-id> --source <image-path> [--replace]" >&2
 }
 
 entry_id=""
 source_path=""
+replace_existing=false
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -20,6 +21,10 @@ while [[ $# -gt 0 ]]; do
       [[ $# -ge 2 ]] || { usage; exit 1; }
       source_path="$2"
       shift 2
+      ;;
+    --replace)
+      replace_existing=true
+      shift
       ;;
     *)
       usage
@@ -54,7 +59,7 @@ output_directory="$project_root/public/images/mountains"
 output_path="$output_directory/$entry_id.jpg"
 
 mkdir -p "$output_directory"
-if [[ -e "$output_path" ]]; then
+if [[ -e "$output_path" && "$replace_existing" != true ]]; then
   echo "Refusing to overwrite existing photograph: $output_path" >&2
   exit 1
 fi

@@ -5,8 +5,10 @@
       "name": "The Remarkables",
       "countryCode": "NZ",
       "location": [-45.15201, 168.838398],
-      "type": "mountain",
+      "type": "range",
       "status": "dream",
+      "region": "Southern Alps",
+      "gatewayAirport": { "name": "Queenstown", "code": "ZQN" },
       "mapUrl": "https://maps.app.goo.gl/v8DgExKPv1EA6uCs9"
     },
     {
@@ -16,6 +18,9 @@
       "location": [-43.595405, 170.141661],
       "type": "mountain",
       "status": "dream",
+      "region": "Southern Alps",
+      "gatewayAirport": { "name": "Queenstown", "code": "ZQN" },
+      "park": "Aoraki / Mount Cook National Park",
       "mapUrl": "https://www.google.com/maps/search/?api=1&query=-43.595405%2C170.141661"
     },
     {
@@ -25,6 +30,9 @@
       "location": [-7.94292, 112.952935],
       "type": "mountain",
       "status": "dream",
+      "region": "East Java",
+      "gatewayAirport": { "name": "Surabaya", "code": "SUB" },
+      "park": "Bromo Tengger Semeru National Park",
       "mapUrl": "https://maps.app.goo.gl/xPUekyznTkXgkkvy8"
     },
     {
@@ -34,6 +42,13 @@
       "location": [27.861624, 86.860036],
       "type": "mountain",
       "status": "dream",
+      "region": "Himalayas",
+      "gatewayAirport": {
+        "name": "Lukla",
+        "code": "LUA",
+        "note": "via Kathmandu (KTM)"
+      },
+      "park": "Sagarmatha National Park",
       "mapUrl": "https://maps.app.goo.gl/Vj4aamR7LGQPv2Yp6"
     },
     {
@@ -43,6 +58,13 @@
       "location": [35.757081, 76.200453],
       "type": "mountain",
       "status": "dream",
+      "region": "Karakoram",
+      "gatewayAirport": {
+        "name": "Skardu",
+        "code": "KDU",
+        "note": "via Islamabad (ISB)"
+      },
+      "park": "Central Karakoram National Park",
       "mapUrl": "https://maps.app.goo.gl/Lc5Yvkw7S6GAkGH89"
     },
     {
@@ -52,6 +74,9 @@
       "location": [46.638232, 12.309206],
       "type": "mountain",
       "status": "visited",
+      "region": "Dolomites",
+      "gatewayAirport": { "name": "Venice", "code": "VCE" },
+      "park": "Tre Cime Natural Park",
       "mapUrl": "https://maps.app.goo.gl/gQLm8nhbpWSGTFwq9",
       "image": "/images/mountains/tre-cime.jpg",
       "imageAlt": "The three rocky towers of Tre Cime rising above the Dolomites"
@@ -61,8 +86,11 @@
       "name": "Cadini Group",
       "countryCode": "IT",
       "location": [46.578396, 12.288106],
-      "type": "mountain",
+      "type": "range",
       "status": "visited",
+      "region": "Dolomites",
+      "gatewayAirport": { "name": "Venice", "code": "VCE" },
+      "park": "Tre Cime Natural Park",
       "mapUrl": "https://maps.app.goo.gl/aAzKqvnX8tbpavbx5",
       "image": "/images/mountains/cadini-group.jpg",
       "imageAlt": "Jagged snow-dusted peaks of the Cadini Group in the Dolomites"
@@ -74,6 +102,8 @@
       "location": [45.976592, 7.657918],
       "type": "mountain",
       "status": "dream",
+      "region": "Swiss Alps",
+      "gatewayAirport": { "name": "Geneva", "code": "GVA" },
       "mapUrl": "https://maps.app.goo.gl/UQVXKf9sJQRNaVyJ8"
     },
     {
@@ -83,6 +113,8 @@
       "location": [68.164664, 16.592298],
       "type": "mountain",
       "status": "dream",
+      "region": "Scandinavian Mountains",
+      "gatewayAirport": { "name": "Harstad/Narvik", "code": "EVE" },
       "mapUrl": "https://maps.app.goo.gl/qCtEsowjd5qUvCjn6"
     },
     {
@@ -92,6 +124,9 @@
       "location": [43.203387, -4.817442],
       "type": "mountain",
       "status": "dream",
+      "region": "Picos de Europa",
+      "gatewayAirport": { "name": "Asturias", "code": "OVD" },
+      "park": "Picos de Europa National Park",
       "mapUrl": "https://maps.app.goo.gl/HFrAyVQ3XhLmjcR5A"
     },
     {
@@ -101,6 +136,9 @@
       "location": [43.74178, -110.805853],
       "type": "mountain",
       "status": "visited",
+      "region": "Teton Range",
+      "gatewayAirport": { "name": "Jackson Hole", "code": "JAC" },
+      "park": "Grand Teton National Park",
       "mapUrl": "https://maps.app.goo.gl/5uYf4rK2Q2HEPDJh9",
       "image": "/images/mountains/grand-teton.jpg",
       "imageAlt": "Grand Teton rising sharply above the surrounding mountain range"
@@ -112,6 +150,9 @@
       "location": [46.852287, -121.757564],
       "type": "mountain",
       "status": "visited",
+      "region": "Cascade Range",
+      "gatewayAirport": { "name": "Seattle", "code": "SEA" },
+      "park": "Mount Rainier National Park",
       "mapUrl": "https://maps.app.goo.gl/mYpnZUeashMGMbBt9",
       "image": "/images/mountains/mount-rainier.jpg",
       "imageAlt": "Snow-covered Mount Rainier above the surrounding landscape"
@@ -123,6 +164,9 @@
       "location": [50.868727, -115.65393],
       "type": "mountain",
       "status": "dream",
+      "region": "Canadian Rockies",
+      "gatewayAirport": { "name": "Calgary", "code": "YYC" },
+      "park": "Mount Assiniboine Provincial Park",
       "mapUrl": "https://maps.app.goo.gl/XYLdBEZTLbTp5BBi9"
     },
     {
@@ -132,6 +176,8 @@
       "location": [48.776912, -121.817261],
       "type": "mountain",
       "status": "dream",
+      "region": "North Cascades",
+      "gatewayAirport": { "name": "Seattle", "code": "SEA" },
       "mapUrl": "https://maps.app.goo.gl/FL5xtA73yUqkVmwD6"
     },
     {
@@ -141,6 +187,8 @@
       "location": [-49.27352, -73.043195],
       "type": "mountain",
       "status": "visited",
+      "region": "Patagonia",
+      "gatewayAirport": { "name": "El Calafate", "code": "FTE" },
       "mapUrl": "https://maps.app.goo.gl/SBXctZoQdTGZipsY7",
       "image": "/images/mountains/fitz-roy.jpg",
       "imageAlt": "The granite summit of Fitz Roy above the Patagonian landscape"
@@ -152,6 +200,9 @@
       "location": [-50.948486, -72.986632],
       "type": "mountain",
       "status": "visited",
+      "region": "Patagonia",
+      "gatewayAirport": { "name": "Puerto Natales", "code": "PNT" },
+      "park": "Torres del Paine National Park",
       "mapUrl": "https://maps.app.goo.gl/fts1mP3utwnex4cy7",
       "image": "/images/mountains/torres-del-paine.jpg",
       "imageAlt": "The granite towers of Torres del Paine silhouetted in Patagonia"
@@ -163,6 +214,9 @@
       "location": [-51.000578, -73.012032],
       "type": "mountain",
       "status": "visited",
+      "region": "Patagonia",
+      "gatewayAirport": { "name": "Puerto Natales", "code": "PNT" },
+      "park": "Torres del Paine National Park",
       "mapUrl": "https://maps.app.goo.gl/eib6Mna1xKo9hn5E6",
       "image": "/images/mountains/los-cuernos-del-paine.jpg",
       "imageAlt": "The distinctive horn-shaped peaks of Los Cuernos del Paine"
@@ -172,8 +226,11 @@
       "name": "Cordillera Huayhuash",
       "countryCode": "PE",
       "location": [-10.272336, -76.906196],
-      "type": "mountain",
+      "type": "range",
       "status": "dream",
+      "region": "Peruvian Andes",
+      "gatewayAirport": { "name": "Lima", "code": "LIM" },
+      "park": "Huayhuash Reserved Zone",
       "mapUrl": "https://maps.app.goo.gl/cP4eXBhNNgEiLUG66"
     },
     {
@@ -183,6 +240,12 @@
       "location": [28.438933, 98.682459],
       "type": "mountain",
       "status": "dream",
+      "region": "Hengduan Mountains",
+      "gatewayAirport": {
+        "name": "Shangri-La",
+        "code": "DIG",
+        "note": "via Kunming (KMG)"
+      },
       "mapUrl": "https://maps.app.goo.gl/HsfqYGXX5HyDiB6z8"
     },
     {
@@ -192,6 +255,9 @@
       "location": [-8.879139, -77.652464],
       "type": "mountain",
       "status": "dream",
+      "region": "Cordillera Blanca",
+      "gatewayAirport": { "name": "Lima", "code": "LIM" },
+      "park": "Huascarán National Park",
       "mapUrl": "https://maps.app.goo.gl/gWBf9VitW2t8WYUJ8"
     },
     {
@@ -201,6 +267,9 @@
       "location": [-8.950915, -77.632966],
       "type": "mountain",
       "status": "dream",
+      "region": "Cordillera Blanca",
+      "gatewayAirport": { "name": "Lima", "code": "LIM" },
+      "park": "Huascarán National Park",
       "mapUrl": "https://maps.app.goo.gl/gqjWkJf7yGQUJPWS6"
     },
     {
@@ -210,6 +279,9 @@
       "location": [35.363525, 138.729979],
       "type": "mountain",
       "status": "visited",
+      "region": "Chūbu / Fuji Region",
+      "gatewayAirport": { "name": "Tokyo Haneda", "code": "HND" },
+      "park": "Fuji-Hakone-Izu National Park",
       "mapUrl": "https://maps.app.goo.gl/pur59BP5kEsxfjio6",
       "image": "/images/mountains/mount-fuji.jpg",
       "imageAlt": "Mount Fuji framed by a street in Shizuoka"
@@ -221,6 +293,12 @@
       "location": [55.82804, 160.331099],
       "type": "mountain",
       "status": "dream",
+      "region": "Kamchatka Peninsula",
+      "gatewayAirport": {
+        "name": "Petropavlovsk-Kamchatsky",
+        "code": "PKC"
+      },
+      "park": "Klyuchevskoy Nature Park",
       "mapUrl": "https://maps.app.goo.gl/Nm2LdYtVcwqqnNG46"
     },
     {
@@ -230,6 +308,12 @@
       "location": [64.489579, -138.542756],
       "type": "park",
       "status": "dream",
+      "region": "Ogilvie Mountains",
+      "gatewayAirport": {
+        "name": "Dawson City",
+        "code": "YDA",
+        "note": "via Whitehorse (YXY)"
+      },
       "mapUrl": "https://maps.app.goo.gl/nX2Xen7zb4umsJzD8"
     },
     {
@@ -239,6 +323,9 @@
       "location": [63.059932, -151.034881],
       "type": "mountain",
       "status": "dream",
+      "region": "Alaska Range",
+      "gatewayAirport": { "name": "Fairbanks", "code": "FAI" },
+      "park": "Denali National Park",
       "mapUrl": "https://maps.app.goo.gl/FCtKVvwCJNu8gBLn7"
     },
     {
@@ -248,6 +335,8 @@
       "location": [64.272634, -15.010037],
       "type": "mountain",
       "status": "visited",
+      "region": "East Iceland",
+      "gatewayAirport": { "name": "Keflavík", "code": "KEF" },
       "mapUrl": "https://maps.app.goo.gl/E6kM2NhmWsP73CEB9",
       "image": "/images/mountains/vestrahorn.jpg",
       "imageAlt": "Vestrahorn rising above the black sand at Stokksnes"
@@ -259,7 +348,251 @@
       "location": [-3.065421, 37.358879],
       "type": "mountain",
       "status": "dream",
+      "region": "Kilimanjaro Region",
+      "gatewayAirport": { "name": "Kilimanjaro", "code": "JRO" },
+      "park": "Kilimanjaro National Park",
       "mapUrl": "https://maps.app.goo.gl/T4sppPkgrcqy6Go47"
+    },
+    {
+      "id": "mount-cleveland",
+      "name": "Mount Cleveland",
+      "countryCode": "US",
+      "location": [48.926584, -113.845066],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Lewis Range",
+      "gatewayAirport": { "name": "Kalispell", "code": "FCA" },
+      "park": "Glacier National Park",
+      "mapUrl": "https://maps.app.goo.gl/4vJMvjAy1ZGi6Sob9"
+    },
+    {
+      "id": "mount-asgard",
+      "name": "Mount Asgard",
+      "countryCode": "CA",
+      "location": [66.651698, -65.304863],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Baffin Mountains",
+      "gatewayAirport": {
+        "name": "Pangnirtung",
+        "code": "YXP",
+        "note": "via Iqaluit (YFB)"
+      },
+      "park": "Auyuittuq National Park",
+      "mapUrl": "https://maps.app.goo.gl/peGN8tVaA7GWvi9t5"
+    },
+    {
+      "id": "lotus-flower-tower",
+      "name": "Lotus Flower Tower",
+      "countryCode": "CA",
+      "location": [62.113135, -127.699462],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Mackenzie Mountains",
+      "gatewayAirport": {
+        "name": "Fort Simpson",
+        "code": "YFS",
+        "note": "via Yellowknife (YZF), charter onward"
+      },
+      "park": "Nahanni National Park Reserve",
+      "mapUrl": "https://maps.app.goo.gl/qH2ECaD2UVgwGKE38"
+    },
+    {
+      "id": "lanin",
+      "name": "Lanín",
+      "countryCode": "AR",
+      "location": [-39.645262, -71.501864],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Northern Patagonia",
+      "gatewayAirport": { "name": "Chapelco", "code": "CPC" },
+      "park": "Lanín National Park",
+      "mapUrl": "https://maps.app.goo.gl/xbscS3wy12ETYcRNA"
+    },
+    {
+      "id": "parinacota",
+      "name": "Parinacota",
+      "countryCode": "CL",
+      "location": [-18.165108, -69.143877],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Altiplano",
+      "gatewayAirport": { "name": "Arica", "code": "ARI" },
+      "park": "Lauca National Park",
+      "mapUrl": "https://maps.app.goo.gl/BW9PGzX5JzUH5WQTA"
+    },
+    {
+      "id": "laila-peak",
+      "name": "Laila Peak",
+      "countryCode": "PK",
+      "location": [35.589647, 76.39978],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Karakoram",
+      "gatewayAirport": {
+        "name": "Skardu",
+        "code": "KDU",
+        "note": "via Islamabad (ISB)"
+      },
+      "park": "Central Karakoram National Park",
+      "mapUrl": "https://maps.app.goo.gl/XwWb4YBRimGL77if8"
+    },
+    {
+      "id": "seceda",
+      "name": "Seceda",
+      "countryCode": "IT",
+      "location": [46.600576, 11.725538],
+      "type": "mountain",
+      "status": "visited",
+      "region": "Dolomites",
+      "gatewayAirport": { "name": "Venice", "code": "VCE" },
+      "park": "Puez-Odle Nature Park",
+      "mapUrl": "https://maps.app.goo.gl/h5sNUhcPSvQWrgeR7"
+    },
+    {
+      "id": "eiger",
+      "name": "Eiger",
+      "countryCode": "CH",
+      "location": [46.573787, 8.002661],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Swiss Alps",
+      "gatewayAirport": { "name": "Zürich", "code": "ZRH" },
+      "mapUrl": "https://maps.app.goo.gl/q3qzDs2gaNmhmPqP8"
+    },
+    {
+      "id": "langkofel",
+      "name": "Langkofel",
+      "countryCode": "IT",
+      "location": [46.52246, 11.735273],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Dolomites",
+      "gatewayAirport": { "name": "Venice", "code": "VCE" },
+      "mapUrl": "https://maps.app.goo.gl/hmxN9YnWYHu1xWcX9"
+    },
+    {
+      "id": "saxer-lucke",
+      "name": "Saxer Lücke",
+      "countryCode": "CH",
+      "location": [47.246587, 9.419523],
+      "type": "pass",
+      "status": "dream",
+      "region": "Appenzell Alps",
+      "gatewayAirport": { "name": "Zürich", "code": "ZRH" },
+      "mapUrl": "https://maps.app.goo.gl/8Bt5D3PDbsDGvyoz6"
+    },
+    {
+      "id": "dallas-divide",
+      "name": "Dallas Divide",
+      "countryCode": "US",
+      "location": [38.092667, -107.881726],
+      "type": "pass",
+      "status": "dream",
+      "region": "San Juan Mountains",
+      "gatewayAirport": { "name": "Montrose", "code": "MTJ" },
+      "mapUrl": "https://maps.app.goo.gl/tHa4WXVAi6Q35ewA9"
+    },
+    {
+      "id": "hallett-peak",
+      "name": "Hallett Peak",
+      "countryCode": "US",
+      "location": [40.301771, -105.682022],
+      "type": "mountain",
+      "status": "visited",
+      "region": "Front Range",
+      "gatewayAirport": { "name": "Denver", "code": "DEN" },
+      "park": "Rocky Mountain National Park",
+      "mapUrl": "https://maps.app.goo.gl/hrYwpd5fy49U8rCJ9",
+      "image": "/images/mountains/hallett-peak.jpg",
+      "imageAlt": "Snowy Hallett Peak above a partially frozen mountain lake framed by pine trees"
+    },
+    {
+      "id": "rosengarten-group",
+      "name": "Rosengarten Group",
+      "countryCode": "IT",
+      "location": [46.466294, 11.647993],
+      "type": "range",
+      "status": "visited",
+      "region": "Dolomites",
+      "gatewayAirport": { "name": "Venice", "code": "VCE" },
+      "park": "Sciliar-Catinaccio Nature Park",
+      "mapUrl": "https://maps.app.goo.gl/1HMu1VSvpazuGHdbA",
+      "image": "/images/mountains/rosengarten-group.jpg",
+      "imageAlt": "The snow-dusted Rosengarten massif rising above alpine meadows"
+    },
+    {
+      "id": "kirkjufell",
+      "name": "Kirkjufell",
+      "countryCode": "IS",
+      "location": [64.94074, -23.309179],
+      "type": "mountain",
+      "status": "visited",
+      "region": "Snæfellsnes",
+      "gatewayAirport": { "name": "Keflavík", "code": "KEF" },
+      "mapUrl": "https://maps.app.goo.gl/E4mPxsemNMnN1B2R6",
+      "image": "/images/mountains/kirkjufell.jpg",
+      "imageAlt": "Kirkjufell rising beyond a waterfall beneath a cloudy Icelandic sky"
+    },
+    {
+      "id": "factory-butte",
+      "name": "Factory Butte",
+      "countryCode": "US",
+      "location": [38.439379, -110.921565],
+      "type": "landform",
+      "status": "dream",
+      "region": "Colorado Plateau",
+      "gatewayAirport": { "name": "Salt Lake City", "code": "SLC" },
+      "mapUrl": "https://maps.app.goo.gl/kjyLQp1PCMbMDNwy9"
+    },
+    {
+      "id": "mount-hood",
+      "name": "Mount Hood",
+      "countryCode": "US",
+      "location": [45.369587, -121.701468],
+      "type": "mountain",
+      "status": "dream",
+      "region": "Cascade Range",
+      "gatewayAirport": { "name": "Portland", "code": "PDX" },
+      "mapUrl": "https://maps.app.goo.gl/gLVwwr2Yx4npd78f9"
+    },
+    {
+      "id": "mount-rundle",
+      "name": "Mount Rundle",
+      "countryCode": "CA",
+      "location": [51.123724, -115.47134],
+      "type": "mountain",
+      "status": "visited",
+      "region": "Canadian Rockies",
+      "gatewayAirport": { "name": "Calgary", "code": "YYC" },
+      "park": "Banff National Park",
+      "mapUrl": "https://maps.app.goo.gl/QCj8Nb7QortNW53R7",
+      "image": "/images/mountains/mount-rundle.jpg",
+      "imageAlt": "Mount Rundle reflected in a calm lake at twilight between dark evergreen trees"
+    },
+    {
+      "id": "tent-ridge",
+      "name": "Tent Ridge",
+      "countryCode": "CA",
+      "location": [50.821449, -115.363907],
+      "type": "ridge",
+      "status": "dream",
+      "region": "Canadian Rockies",
+      "gatewayAirport": { "name": "Calgary", "code": "YYC" },
+      "park": "Spray Valley Provincial Park",
+      "mapUrl": "https://maps.app.goo.gl/kk7DsYnsuiAQAGQY9"
+    },
+    {
+      "id": "space-mountain",
+      "name": "Space Mountain",
+      "countryCode": "US",
+      "location": [28.419438, -81.576685],
+      "type": "attraction",
+      "status": "dream",
+      "region": "Tomorrowland Range",
+      "gatewayAirport": { "name": "Orlando", "code": "MCO" },
+      "park": "Orlando Disneyland National Park",
+      "mapUrl": "https://maps.app.goo.gl/ckp5Gh4AMQGJ3kAn9"
     }
   ]
 }

@@ -66,7 +66,7 @@
 @keyframes mountain-modal-open {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: translate(-50%, calc(-50% + 8px)) scale(0.97);
   }
   to {
     opacity: 1;
@@ -81,7 +81,25 @@
   }
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: translate(-50%, calc(-50% + 5px)) scale(0.98);
+  }
+}
+
+@keyframes mountain-modal-overlay-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mountain-modal-overlay-close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -146,6 +164,7 @@
 }
 
 .mountain-modal[data-state='open'] {
+  transform-origin: center 70%;
   animation: mountain-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -156,6 +175,24 @@
 .mountain-modal.is-closing {
   pointer-events: none;
   animation: mountain-modal-close 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mountain-modal-overlay[data-state='open'] {
+  animation: mountain-modal-overlay-open 200ms ease-out;
+}
+
+.mountain-modal-overlay[data-state='closed'],
+.mountain-modal-overlay.is-closing {
+  pointer-events: none;
+  animation: mountain-modal-overlay-close 150ms ease-out;
+}
+
+@media (min-width: 640px) {
+  .mountain-modal[data-state='open'],
+  .mountain-modal[data-state='closed'],
+  .mountain-modal.is-closing {
+    transform-origin: center;
+  }
 }
 
 .mountain-picker-sheet[data-state='open'] {
@@ -180,6 +217,10 @@
 @media (prefers-reduced-motion: reduce) {
   .mountain-modal[data-state='open'],
   .mountain-modal[data-state='closed'],
+  .mountain-modal.is-closing,
+  .mountain-modal-overlay[data-state='open'],
+  .mountain-modal-overlay[data-state='closed'],
+  .mountain-modal-overlay.is-closing,
   .mountain-picker-sheet[data-state='open'],
   .mountain-picker-sheet[data-state='closed'] {
     animation: none !important;

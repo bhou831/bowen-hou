@@ -20,8 +20,23 @@ export type MountainEntry = {
   name: string;
   countryCode: string;
   location: [latitude: number, longitude: number];
-  type: 'mountain' | 'park' | 'trail';
+  type:
+    | 'mountain'
+    | 'range'
+    | 'ridge'
+    | 'park'
+    | 'trail'
+    | 'pass'
+    | 'landform'
+    | 'attraction';
   status: 'visited' | 'dream';
+  region: string;
+  gatewayAirport: {
+    name: string;
+    code: string;
+    note?: string;
+  };
+  park?: string;
   mapUrl: string;
   description?: string;
   image?: string;
@@ -54,6 +69,8 @@ const INITIAL_THETA = 0.16;
 const AUTO_ROTATE_SPEED = 0.00135;
 const BASE_GLOBE_SCALE = 0.98;
 const MAX_GLOBE_ZOOM = 3;
+const EARTH_RADIUS_KM = 6371;
+const GLOBAL_CLUSTER_RADIUS_KM = 400;
 const MODAL_CLOSE_DURATION = 150;
 
 function mapSamplesForZoom(isMobile: boolean, zoom: number) {
@@ -143,7 +160,6 @@ function projectEntry(
 
 function groupNearbyEntries(
   points: ProjectedEntry[],
-  width: number,
   zoom: number,
 ): EntryCluster[] {
   const visible = [...points.filter((point) => point.visible)].sort((a, b) =>
@@ -152,43 +168,46 @@ function groupNearbyEntries(
   if (zoom >= MAX_GLOBE_ZOOM - 0.1) {
     return visible.map((point) => ({ id: point.entry.id, entries: [point] }));
   }
-  const threshold =
-    Math.min(120, Math.max(46, width * (width < 640 ? 0.13 : 0.15))) /
-    Math.max(1, zoom);
+  const thresholdKm = GLOBAL_CLUSTER_RADIUS_KM / Math.max(1, zoom);
+  const spherePoints = new Map(
+    visible.map((point) => [point.entry.id, toSphere(point.entry.location)]),
+  );
+  const geographicDistance = (a: ProjectedEntry, b: ProjectedEntry) => {
+    const [ax, ay, az] = spherePoints.get(a.entry.id)!;
+    const [bx, by, bz] = spherePoints.get(b.entry.id)!;
+    const chord = Math.min(2, Math.hypot(ax - bx, ay - by, az - bz));
+    return 2 * Math.asin(chord / 2) * EARTH_RADIUS_KM;
+  };
   const visited = new Set<string>();
   const clusters: EntryCluster[] = [];
 
   for (const seed of visible) {
     if (visited.has(seed.entry.id)) continue;
     visited.add(seed.entry.id);
-    // Leader clustering: only absorb points within `threshold` of the seed
-    // itself (no chaining), so a cluster can never span more than roughly
-    // 2x the threshold — unlike flood-fill, it can't stretch across a
-    // continent one hop at a time.
+    // Leader clustering still prevents chaining across a continent, while
+    // geographic distance keeps membership stable as the globe rotates.
     const members = [seed];
     for (const candidate of visible) {
       if (visited.has(candidate.entry.id)) continue;
-      const distance = Math.hypot(
-        (seed.x - candidate.x) * width,
-        (seed.y - candidate.y) * width,
-      );
-      if (distance <= threshold) {
+      const distance = geographicDistance(seed, candidate);
+      if (distance <= thresholdKm) {
         visited.add(candidate.entry.id);
         members.push(candidate);
       }
     }
 
-    // Anchor the cluster badge at the member closest to the group's visual
-    // centre, not an arbitrary member, so it doesn't render on top of
-    // whichever mountain happens to sort first.
-    const centerX =
-      members.reduce((sum, member) => sum + member.x, 0) / members.length;
-    const centerY =
-      members.reduce((sum, member) => sum + member.y, 0) / members.length;
+    // Use a geographic medoid for the badge anchor. Unlike a projected visual
+    // centre, this representative cannot flip merely because the globe turns.
     const [medoid] = [...members].sort(
       (a, b) =>
-        Math.hypot(a.x - centerX, a.y - centerY) -
-        Math.hypot(b.x - centerX, b.y - centerY),
+        members.reduce(
+          (sum, member) => sum + geographicDistance(a, member),
+          0,
+        ) -
+          members.reduce(
+            (sum, member) => sum + geographicDistance(b, member),
+            0,
+          ) || a.entry.id.localeCompare(b.entry.id),
     );
     const rest = members
       .filter((member) => member.entry.id !== medoid.entry.id)
@@ -207,7 +226,7 @@ function groupNearbyEntries(
 
 function EntryHeroPhoto({ entry }: { entry: MountainEntry }) {
   return (
-    <div className="relative aspect-[4/3] w-full">
+    <div className="relative aspect-[3/2] w-full sm:aspect-[2/1]">
       <Image
         src={entry.image as string}
         alt={entry.imageAlt || ''}
@@ -291,9 +310,16 @@ export default function MountainsGlobe({
   const [isInViewport, setIsInViewport] = useState(true);
   const [webglAvailable, setWebglAvailable] = useState(true);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const visitedCount = useMemo(
+    () => entries.filter((entry) => entry.status === 'visited').length,
+    [entries],
+  );
+  const visitedPercentage = entries.length
+    ? (visitedCount / entries.length) * 100
+    : 0;
   const clusters = useMemo(
-    () => groupNearbyEntries(projectedEntries, stageSize.width, zoomLevel),
-    [projectedEntries, stageSize.width, zoomLevel],
+    () => groupNearbyEntries(projectedEntries, zoomLevel),
+    [projectedEntries, zoomLevel],
   );
   const selectedEntry = selection.kind === 'details' ? selection.entry : null;
   const selectedCluster =
@@ -749,11 +775,26 @@ export default function MountainsGlobe({
       </p>
 
       <div className="mountain-story-column pointer-events-none absolute left-4 right-4 top-4 z-30 md:bottom-8 md:left-8 md:right-auto md:top-8 md:flex md:w-[min(22vw,320px)] md:flex-col md:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
-            A personal atlas
-          </p>
-          <p className="mt-1 text-lg text-gray-900">Mountains</p>
+        <div className="w-full max-w-60 md:max-w-none">
+          <div className="flex items-baseline justify-between gap-4 text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 md:text-[11px]">
+            <span>Mountains visited</span>
+            <span className="shrink-0 tabular-nums tracking-[0.08em] text-gray-700">
+              {visitedCount} / {entries.length}
+            </span>
+          </div>
+          <div
+            role="progressbar"
+            aria-label={`${visitedCount} of ${entries.length} mountains visited`}
+            aria-valuemin={0}
+            aria-valuemax={entries.length}
+            aria-valuenow={visitedCount}
+            className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-200/90"
+          >
+            <div
+              className="h-full rounded-full bg-gray-900 transition-[width] duration-500 ease-out motion-reduce:transition-none"
+              style={{ width: `${visitedPercentage}%` }}
+            />
+          </div>
         </div>
         <p className="mountain-story-copy mt-3 max-w-[34rem] text-[15px] leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
           Born in Yunnan, one of the most mountainous regions in the world, I
@@ -892,13 +933,25 @@ export default function MountainsGlobe({
                                     cluster.id,
                                   );
                                 }}
-                                className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm text-gray-900 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400"
-                                aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
+                                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm text-gray-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400 ${
+                                  entry.status === 'visited'
+                                    ? 'bg-amber-50/70 shadow-[inset_0_0_0_1px_rgba(217,119,6,0.1),0_0_16px_rgba(251,191,36,0.1)] hover:bg-amber-50 focus-visible:bg-amber-50'
+                                    : 'hover:bg-gray-100 focus-visible:bg-gray-100'
+                                }`}
+                                aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}, ${entry.status === 'visited' ? 'visited' : 'waiting to be explored'}`}
                               >
                                 <span className="min-w-0 truncate">
                                   {entry.name}
                                 </span>
-                                <span aria-hidden="true" className="shrink-0">
+                                <span
+                                  aria-hidden="true"
+                                  className="flex shrink-0 items-center gap-2"
+                                >
+                                  {entry.status === 'visited' && (
+                                    <span className="rounded-full bg-amber-100/80 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.1em] text-amber-900">
+                                      Visited
+                                    </span>
+                                  )}
                                   {countryFlag(entry.countryCode)}
                                 </span>
                               </button>
@@ -1102,11 +1155,23 @@ export default function MountainsGlobe({
                           selectedCluster.id,
                         );
                       }}
-                      className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-[15px] text-gray-950 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400"
-                      aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
+                      className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-[15px] text-gray-950 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400 ${
+                        entry.status === 'visited'
+                          ? 'bg-amber-50/70 shadow-[inset_0_0_0_1px_rgba(217,119,6,0.1),0_0_18px_rgba(251,191,36,0.1)] hover:bg-amber-50 focus-visible:bg-amber-50'
+                          : 'hover:bg-gray-100 focus-visible:bg-gray-100'
+                      }`}
+                      aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}, ${entry.status === 'visited' ? 'visited' : 'waiting to be explored'}`}
                     >
                       <span className="min-w-0 truncate">{entry.name}</span>
-                      <span aria-hidden="true" className="shrink-0 text-base">
+                      <span
+                        aria-hidden="true"
+                        className="flex shrink-0 items-center gap-2 text-base"
+                      >
+                        {entry.status === 'visited' && (
+                          <span className="rounded-full bg-amber-100/80 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.1em] text-amber-900">
+                            Visited
+                          </span>
+                        )}
                         {countryFlag(entry.countryCode)}
                       </span>
                     </button>
@@ -1131,7 +1196,9 @@ export default function MountainsGlobe({
             ref={modalContentRef}
             forceMount
             onClose={closeEntry}
-            overlayClassName="!z-[70] bg-gray-950/60 backdrop-blur-[2px]"
+            overlayClassName={`mountain-modal-overlay !z-[70] bg-gray-950/60 backdrop-blur-[2px] ${
+              isModalClosing ? 'is-closing' : ''
+            }`}
             closeButtonClassName={
               selectedEntry.image
                 ? '!right-3 !top-3 !h-10 !w-10 border border-white/60 bg-white/85 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:bg-white'
@@ -1145,9 +1212,9 @@ export default function MountainsGlobe({
               event.preventDefault();
               closeEntry();
             }}
-            className={`mountain-modal !z-[80] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[26rem] flex-col overflow-hidden rounded-[1.5rem] border-gray-200/80 bg-white p-0 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none sm:rounded-[1.75rem] ${
-              isModalClosing ? 'is-closing' : ''
-            }`}
+            className={`mountain-modal !z-[80] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[26rem] flex-col overflow-hidden rounded-[1.5rem] bg-white p-0 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none sm:rounded-[1.75rem] ${
+              selectedEntry.image ? 'border-0' : 'border-gray-200/80'
+            } ${isModalClosing ? 'is-closing' : ''}`}
             onCloseAutoFocus={(event) => {
               event.preventDefault();
             }}
@@ -1167,10 +1234,17 @@ export default function MountainsGlobe({
                 <div className="flex items-center gap-2 border-b border-gray-100 px-5 pb-4 pt-6 sm:px-7">
                   <span
                     aria-hidden="true"
-                    className="h-8 w-1 shrink-0 rounded-full bg-gray-300"
+                    className={`h-8 w-1 shrink-0 rounded-full ${
+                      selectedEntry.status === 'visited'
+                        ? 'bg-gray-900'
+                        : 'bg-gray-300'
+                    }`}
                   />
                   <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
-                    Dream destination
+                    {selectedEntry.type} ·{' '}
+                    {selectedEntry.status === 'visited'
+                      ? 'Visited · No photograph'
+                      : 'Waiting to be explored'}
                   </p>
                 </div>
               )}
@@ -1181,7 +1255,11 @@ export default function MountainsGlobe({
                       <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
                         <span>{selectedEntry.type}</span>
                         <span aria-hidden="true">·</span>
-                        <span>Visited</span>
+                        <span>
+                          {selectedEntry.status === 'visited'
+                            ? 'Visited'
+                            : 'Waiting to be explored'}
+                        </span>
                       </div>
                     )}
                     <DialogTitle className="min-w-0 text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
@@ -1200,11 +1278,66 @@ export default function MountainsGlobe({
                       </DialogDescription>
                     ) : (
                       <DialogDescription className="sr-only">
-                        {`${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'dream destination'}.`}
+                        {`${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'waiting to be explored'}.`}
                       </DialogDescription>
                     )}
                   </DialogHeader>
-                  <div className="mt-5">
+                  <dl className="mt-5 overflow-hidden rounded-2xl border border-gray-200/90 bg-gray-50/60 text-sm text-gray-700">
+                    <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 px-4 py-3.5">
+                      <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500">
+                        <span
+                          aria-hidden="true"
+                          className="text-sm leading-none"
+                        >
+                          ✈️
+                        </span>
+                        Airport
+                      </dt>
+                      <dd className="min-w-0 leading-5 text-gray-800">
+                        <span className="font-medium">
+                          {selectedEntry.gatewayAirport.name} (
+                          {selectedEntry.gatewayAirport.code})
+                        </span>
+                        {selectedEntry.gatewayAirport.note && (
+                          <span className="text-gray-500">
+                            {' · '}
+                            {selectedEntry.gatewayAirport.note}
+                          </span>
+                        )}
+                      </dd>
+                    </div>
+                    <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 border-t border-gray-200/80 px-4 py-3.5">
+                      <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500">
+                        <span
+                          aria-hidden="true"
+                          className="text-sm leading-none"
+                        >
+                          🧭
+                        </span>
+                        Region
+                      </dt>
+                      <dd className="min-w-0 font-medium leading-5 text-gray-800">
+                        {selectedEntry.region}
+                      </dd>
+                    </div>
+                    {selectedEntry.park && (
+                      <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 border-t border-gray-200/80 px-4 py-3.5">
+                        <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.1em] text-gray-500">
+                          <span
+                            aria-hidden="true"
+                            className="text-sm leading-none"
+                          >
+                            🏞️
+                          </span>
+                          Park / reserve
+                        </dt>
+                        <dd className="min-w-0 font-medium leading-5 text-gray-800">
+                          {selectedEntry.park}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                  <div className="mt-4">
                     <a
                       href={selectedEntry.mapUrl}
                       target="_blank"
