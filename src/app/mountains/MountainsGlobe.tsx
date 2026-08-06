@@ -796,7 +796,7 @@ export default function MountainsGlobe({
             />
           </div>
         </div>
-        <p className="mountain-story-copy mt-3 max-w-[34rem] text-[15px] leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
+        <p className="mountain-story-copy mt-3 max-w-[34rem] text-sm leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
           Born in Yunnan, one of the most mountainous regions in the world, I
           have always found a deep sense of serenity and belonging in the
           mountains. This is a map of the peaks I have visited—and my dream of
