@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import type { Globe } from 'cobe';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Info } from 'lucide-react';
-import { useReducedMotion } from 'framer-motion';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ExternalLink, Info, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   Dialog,
   DialogContent,
@@ -38,20 +39,28 @@ type ProjectedEntry = {
 type DestinationStatus = MountainEntry['status'];
 
 type EntryCluster = { id: string; entries: ProjectedEntry[] };
-type AnchorStyle = React.CSSProperties;
+type AnchorStyle = React.CSSProperties & {
+  '--mountain-anchor': string;
+  '--mountain-left': string;
+  '--mountain-top': string;
+  '--mountain-visible': string | number;
+};
+type SelectionState =
+  | { kind: 'idle' }
+  | { kind: 'single'; entryId: string }
+  | { kind: 'cluster'; cluster: EntryCluster }
+  | { kind: 'details'; entry: MountainEntry };
 
 const INITIAL_PHI = 0.25;
 const INITIAL_THETA = 0.16;
 const AUTO_ROTATE_SPEED = 0.00135;
 const BASE_GLOBE_SCALE = 0.98;
 const MAX_GLOBE_ZOOM = 3;
-const MAX_POLAROIDS = 6;
-const MAX_MOBILE_POLAROIDS = 3;
 const MODAL_CLOSE_DURATION = 150;
 
 function mapSamplesForZoom(isMobile: boolean, zoom: number) {
-  const baseSamples = isMobile ? 8000 : 16000;
-  const maximumSamples = isMobile ? 20000 : 40000;
+  const baseSamples = isMobile ? 8000 : 20000;
+  const maximumSamples = isMobile ? 20000 : 60000;
   return Math.round(
     Math.min(maximumSamples, baseSamples * Math.pow(zoom, 0.75)),
   );
@@ -175,9 +184,9 @@ function groupNearbyEntries(
         .map(({ entry }) => entry.id)
         .sort()
         .join('--'),
-      entries: members.sort(
-        (a, b) => a.distanceFromCenter - b.distanceFromCenter,
-      ),
+      // Keep a cluster attached to the same physical mountain as the globe
+      // rotates instead of letting its representative change every frame.
+      entries: members.sort((a, b) => a.entry.id.localeCompare(b.entry.id)),
     });
   }
   return clusters;
@@ -218,6 +227,7 @@ function EntryArtwork({
         src={entry.image}
         alt={entry.imageAlt || ''}
         fill
+        priority={modal}
         sizes={compact ? '180px' : '(max-width: 767px) 90vw, 640px'}
         className="object-cover"
       />
@@ -232,55 +242,18 @@ function FallbackDestinationButton({
   entry: MountainEntry;
   onOpen: (entry: MountainEntry, trigger: HTMLButtonElement) => void;
 }) {
-  const isVisited = entry.status === 'visited';
   return (
     <button
       type="button"
       data-mountain-control
       onClick={(event) => onOpen(entry, event.currentTarget)}
-      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-left text-xs text-gray-800 transition hover:border-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-left text-xs text-gray-800 transition hover:border-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
     >
-      <span
-        aria-hidden="true"
-        className={`h-2.5 w-2.5 shrink-0 rounded-full ${
-          isVisited ? 'bg-gray-950' : 'border border-gray-700 bg-white'
-        }`}
-      />
-      <span>{entry.name}</span>
-    </button>
-  );
-}
-
-function PolaroidCard({
-  entry,
-  compact = false,
-  onOpen,
-}: {
-  entry: MountainEntry;
-  compact?: boolean;
-  onOpen: (entry: MountainEntry, trigger: HTMLButtonElement) => void;
-}) {
-  const isVisited = entry.status === 'visited';
-  return (
-    <button
-      type="button"
-      data-mountain-control
-      onClick={(event) => onOpen(entry, event.currentTarget)}
-      className={`mountain-polaroid group pointer-events-auto bg-white text-left shadow-[0_10px_28px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:-translate-y-1 ${
-        isVisited
-          ? 'border border-gray-700'
-          : 'border border-dashed border-gray-500'
-      } ${compact ? 'w-[6.5rem] p-1.5 sm:w-32' : 'w-[6.5rem] p-1.5 sm:w-40 sm:p-2'}`}
-      aria-label={`Open ${entry.name}, ${isVisited ? 'visited' : 'dream destination'}`}
-    >
-      <div className={compact ? 'h-20' : 'h-24 sm:h-28'}>
-        <EntryArtwork entry={entry} compact />
-      </div>
-      <span className="mt-2 block truncate text-center text-xs text-gray-900 sm:text-sm">
-        {entry.name}
+      <span aria-hidden="true" className="text-lg leading-none">
+        ⛰️
       </span>
-      <span className="mt-0.5 block text-center text-[9px] uppercase tracking-[0.16em] text-gray-500">
-        {isVisited ? 'Visited' : 'Dream'}
+      <span>
+        {entry.name} {countryFlag(entry.countryCode)}
       </span>
     </button>
   );
@@ -293,6 +266,7 @@ export default function MountainsGlobe({
 }) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const modalContentRef = useRef<HTMLDivElement | null>(null);
   const globeRef = useRef<Globe | null>(null);
   const animationRef = useRef<number | null>(null);
   const projectionTimerRef = useRef(0);
@@ -312,22 +286,20 @@ export default function MountainsGlobe({
   } | null>(null);
   const activePointersRef = useRef(new Map<number, { x: number; y: number }>());
   const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
-  const modalTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const markerRefs = useRef(new Map<string, HTMLButtonElement>());
+  const selectionOriginIdRef = useRef<string | null>(null);
+  const modalFallbackTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const mobileFirstDestinationRef = useRef<HTMLButtonElement | null>(null);
   const modalCloseTimerRef = useRef<number | null>(null);
+  const detailsOpenFrameRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const [stageSize, setStageSize] = useState({ width: 800, height: 800 });
   const [projectedEntries, setProjectedEntries] = useState<ProjectedEntry[]>(
     [],
   );
-  const [selectedEntry, setSelectedEntry] = useState<MountainEntry | null>(
-    null,
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selection, setSelection] = useState<SelectionState>({ kind: 'idle' });
   const [isModalClosing, setIsModalClosing] = useState(false);
-  const [expandedClusterId, setExpandedClusterId] = useState<string | null>(
-    null,
-  );
   const [isDragging, setIsDragging] = useState(false);
   const [isFocusWithin, setIsFocusWithin] = useState(false);
   const [isInViewport, setIsInViewport] = useState(true);
@@ -345,42 +317,16 @@ export default function MountainsGlobe({
     () => groupNearbyEntries(projectedEntries, stageSize.width, zoomLevel),
     [projectedEntries, stageSize.width, zoomLevel],
   );
-  const expandedCluster = clusters.find(
-    (cluster) => cluster.id === expandedClusterId,
-  );
-  const polaroidIds = new Set(
-    clusters
-      .filter((cluster) => cluster.entries.length === 1)
-      .map((cluster) => cluster.entries[0])
-      .filter((point) => {
-        if (!point.entry.image) return false;
-        const isMobileStage = stageSize.width < 640;
-        const horizontalInset = isMobileStage ? 0.2 : 0.14;
-        const topInset = isMobileStage ? 0.44 : 0.28;
-        return (
-          point.x >= horizontalInset &&
-          point.x <= 1 - horizontalInset &&
-          point.y >= topInset
-        );
-      })
-      .sort((a, b) => a.distanceFromCenter - b.distanceFromCenter)
-      .slice(
-        0,
-        stageSize.width < 640
-          ? zoomLevel >= 2.5
-            ? MAX_POLAROIDS
-            : MAX_MOBILE_POLAROIDS
-          : MAX_POLAROIDS,
-      )
-      .map(({ entry }) => entry.id),
-  );
+  const selectedEntry = selection.kind === 'details' ? selection.entry : null;
+  const selectedCluster =
+    selection.kind === 'cluster' ? selection.cluster : undefined;
+  const isMobileStage = stageSize.width < 640;
   const shouldPause =
     Boolean(prefersReducedMotion) ||
     isDragging ||
     isFocusWithin ||
     zoomLevel > 1.05 ||
-    Boolean(expandedClusterId) ||
-    Boolean(selectedEntry) ||
+    selection.kind !== 'idle' ||
     !isInViewport;
 
   useEffect(() => {
@@ -443,23 +389,20 @@ export default function MountainsGlobe({
           phi: phiRef.current,
           theta: thetaRef.current,
           dark: 0,
-          diffuse: 1.25,
+          diffuse: 1.5,
           mapSamples: mapSamplesForZoom(isMobile, zoomRef.current),
           mapBrightness: 4.8,
           mapBaseBrightness: 0,
           baseColor: [0.97, 0.97, 0.97],
           markerColor: [0.08, 0.08, 0.08],
           glowColor: [1, 1, 1],
-          markerElevation: 0.01,
+          markerElevation: 0.02,
           scale: BASE_GLOBE_SCALE * zoomRef.current,
           markers: visibleEntries.map((entry) => ({
             id: entry.id,
             location: entry.location,
-            size: entry.status === 'visited' ? 0.035 : 0.028,
-            color:
-              entry.status === 'visited'
-                ? ([0.06, 0.06, 0.06] as [number, number, number])
-                : ([0.5, 0.5, 0.5] as [number, number, number]),
+            // This exposes COBE's native CSS anchor without drawing a dot.
+            size: 0,
           })),
         });
         globeRef.current = globe;
@@ -530,14 +473,45 @@ export default function MountainsGlobe({
     };
   }, [visibleEntries]);
 
-  useEffect(() => {
-    if (expandedClusterId && !expandedCluster) setExpandedClusterId(null);
-  }, [expandedCluster, expandedClusterId]);
+  const registerMarker = useCallback(
+    (id: string, node: HTMLButtonElement | null) => {
+      if (node) markerRefs.current.set(id, node);
+      else markerRefs.current.delete(id);
+    },
+    [],
+  );
+
+  const focusSelectionOrigin = useCallback(() => {
+    const originId = selectionOriginIdRef.current;
+    window.requestAnimationFrame(() => {
+      if (originId) {
+        markerRefs.current.get(originId)?.focus({ preventScroll: true });
+      } else {
+        modalFallbackTriggerRef.current?.focus({ preventScroll: true });
+      }
+    });
+  }, []);
+
+  const dismissTransientSelection = useCallback(
+    (restoreFocus = false) => {
+      setSelection((current) =>
+        current.kind === 'single' || current.kind === 'cluster'
+          ? { kind: 'idle' }
+          : current,
+      );
+      resumeAtRef.current = performance.now() + 1200;
+      if (restoreFocus) focusSelectionOrigin();
+    },
+    [focusSelectionOrigin],
+  );
 
   useEffect(
     () => () => {
       if (modalCloseTimerRef.current) {
         window.clearTimeout(modalCloseTimerRef.current);
+      }
+      if (detailsOpenFrameRef.current) {
+        window.cancelAnimationFrame(detailsOpenFrameRef.current);
       }
     },
     [],
@@ -545,45 +519,82 @@ export default function MountainsGlobe({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setExpandedClusterId(null);
+      if (
+        event.key === 'Escape' &&
+        (selection.kind === 'single' || selection.kind === 'cluster')
+      ) {
+        dismissTransientSelection(true);
+      }
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        (selection.kind === 'single' || selection.kind === 'cluster') &&
+        event.target instanceof Element &&
+        !event.target.closest('[data-mountain-selection]')
+      ) {
+        dismissTransientSelection(false);
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [dismissTransientSelection, selection.kind]);
 
-  const openEntry = (entry: MountainEntry, trigger: HTMLButtonElement) => {
+  const openEntry = (
+    entry: MountainEntry,
+    trigger: HTMLButtonElement,
+    originId?: string,
+  ) => {
     if (modalCloseTimerRef.current) {
       window.clearTimeout(modalCloseTimerRef.current);
       modalCloseTimerRef.current = null;
     }
+    if (detailsOpenFrameRef.current) {
+      window.cancelAnimationFrame(detailsOpenFrameRef.current);
+      detailsOpenFrameRef.current = null;
+    }
     triggerHaptic();
-    modalTriggerRef.current = trigger;
-    setExpandedClusterId(null);
-    setSelectedEntry(entry);
+    pauseRef.current = true;
+    selectionOriginIdRef.current = originId ?? null;
+    modalFallbackTriggerRef.current = originId ? null : trigger;
     setIsModalClosing(false);
-    setIsModalOpen(true);
+    if (originId && isMobileStage) {
+      // The mobile picker and details view are separate Radix portals. Let the
+      // sheet leave the focus stack before the details dialog enters.
+      setSelection({ kind: 'idle' });
+      detailsOpenFrameRef.current = window.requestAnimationFrame(() => {
+        detailsOpenFrameRef.current = null;
+        pauseRef.current = true;
+        setSelection({ kind: 'details', entry });
+      });
+      return;
+    }
+    // The desktop picker is an anchored popover, so opening synchronously is
+    // both simpler and more reliable than waiting for another animation frame.
+    setSelection({ kind: 'details', entry });
   };
   const closeEntry = () => {
     if (isModalClosing) return;
     triggerHaptic();
     setIsModalClosing(true);
     modalCloseTimerRef.current = window.setTimeout(() => {
-      setIsModalOpen(false);
       setIsModalClosing(false);
-      setSelectedEntry(null);
+      setSelection({ kind: 'idle' });
       modalCloseTimerRef.current = null;
-      window.requestAnimationFrame(() => {
-        modalTriggerRef.current?.focus({ preventScroll: true });
-      });
+      focusSelectionOrigin();
     }, MODAL_CLOSE_DURATION);
   };
   const anchorStyle = (entry: ProjectedEntry): AnchorStyle => ({
-    left: `${entry.x * 100}%`,
-    top: `${entry.y * 100}%`,
-    opacity: entry.visible ? 1 : 0,
+    '--mountain-anchor': `--cobe-${entry.entry.id}`,
+    '--mountain-left': `${entry.x * 100}%`,
+    '--mountain-top': `${entry.y * 100}%`,
+    '--mountain-visible': `var(--cobe-visible-${entry.entry.id}, ${entry.visible ? 1 : 0})`,
   });
   const toggleStatus = (status: DestinationStatus) => {
-    setExpandedClusterId(null);
+    dismissTransientSelection(false);
     setVisibleStatuses((current) =>
       current.includes(status)
         ? current.filter((item) => item !== status)
@@ -627,6 +638,7 @@ export default function MountainsGlobe({
       ),
     );
     if (Math.abs(nextZoom - zoomRef.current) < 0.001) return;
+    dismissTransientSelection(false);
     updateZoom(nextZoom);
     resumeAtRef.current = performance.now() + 900;
   };
@@ -634,7 +646,7 @@ export default function MountainsGlobe({
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest('[data-mountain-control]'))
       return;
-    setExpandedClusterId(null);
+    dismissTransientSelection(false);
     activePointersRef.current.set(event.pointerId, {
       x: event.clientX,
       y: event.clientY,
@@ -707,6 +719,37 @@ export default function MountainsGlobe({
     }
   };
 
+  const markerTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.16, ease: 'easeOut' as const };
+  const clusterEntriesForList = (cluster: EntryCluster) =>
+    [...cluster.entries].sort((a, b) =>
+      a.entry.name.localeCompare(b.entry.name),
+    );
+  const toggleCluster = (cluster: EntryCluster) => {
+    triggerHaptic();
+    pauseRef.current = true;
+    selectionOriginIdRef.current = cluster.id;
+    setSelection((current) =>
+      current.kind === 'cluster' && current.cluster.id === cluster.id
+        ? { kind: 'idle' }
+        : { kind: 'cluster', cluster },
+    );
+  };
+  const activateSingleEntry = (
+    entry: MountainEntry,
+    trigger: HTMLButtonElement,
+  ) => {
+    if (selection.kind === 'single' && selection.entryId === entry.id) {
+      openEntry(entry, trigger, entry.id);
+      return;
+    }
+    triggerHaptic();
+    pauseRef.current = true;
+    selectionOriginIdRef.current = entry.id;
+    setSelection({ kind: 'single', entryId: entry.id });
+  };
+
   return (
     <section className="mountains-page relative -mx-4 -my-8 h-[calc(100dvh-4rem)] overflow-hidden md:-mx-8">
       <h1 className="sr-only">Mountains</h1>
@@ -720,11 +763,11 @@ export default function MountainsGlobe({
       <div className="mountain-story-column pointer-events-none absolute left-4 right-16 top-4 z-30 md:bottom-8 md:left-8 md:right-auto md:top-8 md:flex md:w-[min(22vw,320px)] md:flex-col md:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
-            A personal atlas (Beta)
+            A personal atlas
           </p>
           <p className="mt-1 text-lg text-gray-900">Mountains</p>
         </div>
-        <p className="mountain-story-copy mt-3 max-w-[34rem] text-[13px] leading-relaxed text-gray-600 sm:text-sm md:mt-0 md:text-[15px] md:leading-7">
+        <p className="mountain-story-copy mt-3 max-w-[34rem] text-[15px] leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
           Born in Yunnan, one of the most mountainous regions in the world, I
           have always found a deep sense of serenity and belonging in the
           mountains. This is a map of the peaks I have visited—and my dream of
@@ -815,91 +858,217 @@ export default function MountainsGlobe({
             clusters.map((cluster) => {
               const anchor = cluster.entries[0];
               if (cluster.entries.length > 1) {
-                const isExpanded = cluster.id === expandedClusterId;
+                const isOpen =
+                  selection.kind === 'cluster' &&
+                  selection.cluster.id === cluster.id;
+                const horizontalPlacement =
+                  anchor.x < 0.3
+                    ? '-left-5'
+                    : anchor.x > 0.7
+                      ? '-right-5'
+                      : 'left-1/2 -translate-x-1/2';
+                const verticalPlacement =
+                  anchor.y < 0.45 ? 'top-8' : 'bottom-8';
                 return (
                   <div
                     key={cluster.id}
-                    className="mountain-anchor pointer-events-none absolute z-20"
+                    className={`mountain-anchor pointer-events-none absolute ${isOpen ? 'z-30' : 'z-20'}`}
                     style={anchorStyle(anchor)}
                   >
-                    <button
-                      type="button"
-                      data-mountain-control
-                      onClick={() => {
-                        triggerHaptic();
-                        if (stageSize.width < 640) {
-                          const nextZoom = Math.min(
-                            MAX_GLOBE_ZOOM,
-                            Math.max(
-                              zoomRef.current + 0.65,
-                              zoomRef.current * 1.5,
-                            ),
-                          );
-                          updateZoom(nextZoom);
-                          setExpandedClusterId(null);
-                        } else {
-                          setExpandedClusterId(isExpanded ? null : cluster.id);
+                    <div className="-translate-x-1/2 -translate-y-1/2">
+                      <motion.button
+                        type="button"
+                        data-mountain-control
+                        data-mountain-selection
+                        ref={(node) => registerMarker(cluster.id, node)}
+                        onPointerDown={() => {
+                          pauseRef.current = true;
+                        }}
+                        onClick={() => {
+                          toggleCluster(cluster);
+                        }}
+                        whileHover={
+                          prefersReducedMotion ? undefined : { scale: 1.06 }
                         }
-                      }}
-                      className="pointer-events-auto grid h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-gray-800 bg-white px-3 text-sm text-gray-950 shadow-lg"
-                      aria-expanded={
-                        stageSize.width >= 640 ? isExpanded : undefined
-                      }
-                      aria-label={`${cluster.entries.length} nearby destinations${stageSize.width < 640 ? '. Pinch or tap to zoom in' : ''}`}
-                    >
-                      {cluster.entries.length}
-                    </button>
-                    {isExpanded && (
-                      <div className="pointer-events-auto absolute bottom-8 left-1/2 hidden -translate-x-1/2 items-end gap-2 md:flex">
-                        {cluster.entries.map(({ entry }, index) => (
-                          <div
-                            key={entry.id}
-                            style={{
-                              transform: `rotate(${(index - (cluster.entries.length - 1) / 2) * 3}deg)`,
-                            }}
-                          >
-                            <PolaroidCard
-                              entry={entry}
-                              compact
-                              onOpen={openEntry}
-                            />
+                        whileTap={
+                          prefersReducedMotion ? undefined : { scale: 0.94 }
+                        }
+                        transition={markerTransition}
+                        className="group pointer-events-auto relative grid h-11 w-11 place-items-center rounded-full text-[28px] leading-none transition-colors hover:bg-white/55 focus-visible:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white/80 md:text-[34px]"
+                        aria-expanded={isOpen}
+                        aria-label={`Show ${cluster.entries.length} destinations in this area`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)]"
+                        >
+                          ⛰️
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute right-0 top-0 grid h-5 min-w-5 place-items-center rounded-full border-2 border-white bg-gray-950 px-1 font-sans text-[10px] font-semibold leading-none text-white shadow-sm"
+                        >
+                          {cluster.entries.length}
+                        </span>
+                      </motion.button>
+                    </div>
+                    <AnimatePresence>
+                      {isOpen && !isMobileStage && (
+                        <motion.div
+                          data-mountain-selection
+                          role="dialog"
+                          aria-label={`${cluster.entries.length} destinations in this area`}
+                          initial={{ opacity: 0, scale: 0.96, y: 4 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.97, y: 2 }}
+                          transition={markerTransition}
+                          className={`pointer-events-auto absolute ${horizontalPlacement} ${verticalPlacement} w-64 overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl`}
+                        >
+                          <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+                            <p className="text-xs font-medium uppercase tracking-[0.16em] text-gray-500">
+                              Mountains nearby
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => dismissTransientSelection(true)}
+                              className="grid h-8 w-8 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+                              aria-label="Close destination list"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
                           </div>
-                        ))}
-                      </div>
-                    )}
+                          <div className="max-h-[min(20rem,48vh)] overflow-y-auto p-1.5">
+                            {clusterEntriesForList(cluster).map(({ entry }) => (
+                              <button
+                                type="button"
+                                key={entry.id}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  openEntry(
+                                    entry,
+                                    event.currentTarget,
+                                    cluster.id,
+                                  );
+                                }}
+                                className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm text-gray-900 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400"
+                                aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
+                              >
+                                <span className="min-w-0 truncate">
+                                  {entry.name}
+                                </span>
+                                <span aria-hidden="true" className="shrink-0">
+                                  {countryFlag(entry.countryCode)}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               }
 
               const { entry } = anchor;
+              const isRevealed =
+                selection.kind === 'single' && selection.entryId === entry.id;
+              const horizontalLabelPlacement =
+                anchor.x < 0.25
+                  ? '-translate-x-[15%]'
+                  : anchor.x > 0.75
+                    ? '-translate-x-[85%]'
+                    : '-translate-x-1/2';
               return (
                 <div
                   key={entry.id}
-                  className="mountain-anchor pointer-events-none absolute z-10"
+                  className={`mountain-anchor pointer-events-none absolute ${isRevealed ? 'z-30' : 'z-10'}`}
                   style={anchorStyle(anchor)}
                 >
-                  {polaroidIds.has(entry.id) ? (
-                    <div
-                      className="origin-bottom"
-                      style={{
-                        transform: `translate(-50%, -100%) rotate(${(entry.id.length % 5) - 2}deg)`,
-                      }}
-                    >
-                      <PolaroidCard entry={entry} onOpen={openEntry} />
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      data-mountain-control
-                      onClick={(event) => openEntry(entry, event.currentTarget)}
-                      className={`pointer-events-auto relative h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full before:absolute before:left-1/2 before:top-1/2 before:h-3 before:w-3 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full ${
-                        entry.status === 'visited'
-                          ? 'before:bg-gray-950'
-                          : 'before:border before:border-gray-800 before:bg-white'
-                      }`}
-                      aria-label={`Open ${entry.name}`}
-                    />
-                  )}
+                  <div
+                    className={`${isRevealed ? horizontalLabelPlacement : '-translate-x-1/2'} -translate-y-1/2`}
+                  >
+                    <AnimatePresence initial={false} mode="wait">
+                      {isRevealed ? (
+                        <motion.button
+                          key="name"
+                          type="button"
+                          data-mountain-control
+                          data-mountain-selection
+                          ref={(node) => registerMarker(entry.id, node)}
+                          onPointerDown={() => {
+                            pauseRef.current = true;
+                          }}
+                          onClick={(event) =>
+                            activateSingleEntry(entry, event.currentTarget)
+                          }
+                          initial={{
+                            opacity: 0,
+                            scale: 0.94,
+                            filter: 'blur(2px)',
+                          }}
+                          animate={{
+                            opacity: 1,
+                            scale: 1,
+                            filter: 'blur(0px)',
+                          }}
+                          exit={{ opacity: 0, scale: 0.96 }}
+                          transition={markerTransition}
+                          className="pointer-events-auto flex h-11 max-w-[min(15rem,80vw)] items-center gap-1.5 rounded-full border border-gray-200 bg-white/95 px-3 text-sm text-gray-950 shadow-[0_8px_24px_rgba(15,23,42,0.15)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                          aria-label={`Open ${entry.name} details`}
+                        >
+                          <span className="truncate">{entry.name}</span>
+                          <span aria-hidden="true" className="shrink-0">
+                            {countryFlag(entry.countryCode)}
+                          </span>
+                        </motion.button>
+                      ) : (
+                        <motion.button
+                          key="emoji"
+                          type="button"
+                          data-mountain-control
+                          data-mountain-selection
+                          ref={(node) => registerMarker(entry.id, node)}
+                          onPointerDown={() => {
+                            pauseRef.current = true;
+                          }}
+                          onClick={(event) =>
+                            activateSingleEntry(entry, event.currentTarget)
+                          }
+                          initial={{
+                            opacity: 0,
+                            scale: 0.9,
+                            filter: 'blur(2px)',
+                          }}
+                          animate={{
+                            opacity: 1,
+                            scale: 1,
+                            filter: 'blur(0px)',
+                          }}
+                          exit={{
+                            opacity: 0,
+                            scale: 0.86,
+                            filter: 'blur(2px)',
+                          }}
+                          whileHover={
+                            prefersReducedMotion ? undefined : { scale: 1.06 }
+                          }
+                          whileTap={
+                            prefersReducedMotion ? undefined : { scale: 0.94 }
+                          }
+                          transition={markerTransition}
+                          className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full text-[28px] leading-none transition-colors hover:bg-white/55 focus-visible:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white/80 md:text-[34px]"
+                          aria-label={`Show ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="drop-shadow-[0_2px_3px_rgba(15,23,42,0.2)]"
+                          >
+                            ⛰️
+                          </span>
+                        </motion.button>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               );
             })}
@@ -937,8 +1106,85 @@ export default function MountainsGlobe({
         </div>
       </div>
 
+      <DialogPrimitive.Root open={Boolean(selectedCluster && isMobileStage)}>
+        {selectedCluster && isMobileStage && (
+          <DialogPrimitive.Portal>
+            <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-gray-950/15 backdrop-blur-[1px] data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+            <DialogPrimitive.Content
+              data-mountain-selection
+              className="mountain-picker-sheet fixed bottom-2 left-1/2 z-[60] flex max-h-[min(55dvh,25rem)] w-[calc(100%-1rem)] max-w-md -translate-x-1/2 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/[0.98] shadow-[0_24px_70px_rgba(15,23,42,0.24)] focus:outline-none"
+              onOpenAutoFocus={(event) => {
+                event.preventDefault();
+                window.requestAnimationFrame(() => {
+                  mobileFirstDestinationRef.current?.focus({
+                    preventScroll: true,
+                  });
+                });
+              }}
+              onCloseAutoFocus={(event) => event.preventDefault()}
+              onPointerDownOutside={() => dismissTransientSelection(false)}
+              onEscapeKeyDown={(event) => {
+                event.preventDefault();
+                dismissTransientSelection(true);
+              }}
+            >
+              <div className="flex items-start justify-between gap-4 border-b border-gray-100 px-5 pb-3 pt-4">
+                <div>
+                  <DialogPrimitive.Title className="text-base font-medium text-gray-950">
+                    Mountains nearby
+                  </DialogPrimitive.Title>
+                  <DialogPrimitive.Description className="mt-0.5 text-xs text-gray-500">
+                    Choose a destination to see its details.
+                  </DialogPrimitive.Description>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => dismissTransientSelection(true)}
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+                >
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close destination list</span>
+                </button>
+              </div>
+              <div className="min-h-0 overflow-y-auto p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+                {clusterEntriesForList(selectedCluster).map(
+                  ({ entry }, index) => (
+                    <button
+                      type="button"
+                      key={entry.id}
+                      ref={
+                        index === 0
+                          ? (node) => {
+                              mobileFirstDestinationRef.current = node;
+                            }
+                          : undefined
+                      }
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        openEntry(
+                          entry,
+                          event.currentTarget,
+                          selectedCluster.id,
+                        );
+                      }}
+                      className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-[15px] text-gray-950 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400"
+                      aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}`}
+                    >
+                      <span className="min-w-0 truncate">{entry.name}</span>
+                      <span aria-hidden="true" className="shrink-0 text-base">
+                        {countryFlag(entry.countryCode)}
+                      </span>
+                    </button>
+                  ),
+                )}
+              </div>
+            </DialogPrimitive.Content>
+          </DialogPrimitive.Portal>
+        )}
+      </DialogPrimitive.Root>
+
       <Dialog
-        open={isModalOpen}
+        open={selection.kind === 'details'}
         onOpenChange={(open) => {
           if (!open) {
             closeEntry();
@@ -947,9 +1193,11 @@ export default function MountainsGlobe({
       >
         {selectedEntry && (
           <DialogContent
+            ref={modalContentRef}
             forceMount
             onClose={closeEntry}
-            closeButtonClassName="!right-2 !top-2 !h-9 !w-9 bg-white/90 opacity-100 shadow-sm sm:!right-3 sm:!top-3"
+            overlayClassName="!z-[70] bg-gray-950/60 backdrop-blur-[2px]"
+            closeButtonClassName="!right-3 !top-3 !h-10 !w-10 border border-gray-200 bg-white/95 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.08)] hover:border-gray-300 hover:bg-gray-50 sm:!right-4 sm:!top-4"
             onEscapeKeyDown={(event) => {
               event.preventDefault();
               closeEntry();
@@ -958,21 +1206,27 @@ export default function MountainsGlobe({
               event.preventDefault();
               closeEntry();
             }}
-            className={`mountain-modal flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm flex-col overflow-hidden bg-white p-0 ${
+            className={`mountain-modal !z-[80] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[25rem] flex-col overflow-hidden rounded-[1.5rem] border-gray-200/80 bg-white p-0 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none sm:rounded-[1.75rem] ${
               isModalClosing ? 'is-closing' : ''
             }`}
             onCloseAutoFocus={(event) => {
               event.preventDefault();
             }}
+            onOpenAutoFocus={(event) => {
+              event.preventDefault();
+              window.requestAnimationFrame(() => {
+                modalContentRef.current?.focus({ preventScroll: true });
+              });
+            }}
           >
             <div className="min-h-0 overflow-y-auto">
-              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-20 sm:p-6 sm:pt-20">
-                <div className="mx-auto aspect-square w-[72%] overflow-hidden rounded-sm border border-gray-100 bg-stone-50">
+              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16 sm:p-7 sm:pt-16">
+                <div className="mx-auto aspect-square w-[76%] overflow-hidden rounded-xl border border-gray-100 bg-stone-50 shadow-[0_10px_32px_rgba(15,23,42,0.06)] ring-1 ring-black/[0.02]">
                   <EntryArtwork entry={selectedEntry} modal />
                 </div>
-                <div className="mt-4 min-w-0">
+                <div className="mt-5 min-w-0">
                   <DialogHeader className="min-w-0 text-left">
-                    <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-gray-500">
+                    <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
                       <span>{selectedEntry.type}</span>
                       <span aria-hidden="true">·</span>
                       <span>
@@ -981,8 +1235,8 @@ export default function MountainsGlobe({
                           : 'Dream destination'}
                       </span>
                     </div>
-                    <div className="flex min-w-0 items-center justify-between gap-3">
-                      <DialogTitle className="min-w-0 text-xl font-semibold leading-tight text-gray-950 sm:text-2xl">
+                    <div className="flex min-w-0 items-center justify-between gap-4">
+                      <DialogTitle className="min-w-0 text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
                         <span
                           role="img"
                           aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
@@ -998,7 +1252,7 @@ export default function MountainsGlobe({
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={triggerHaptic}
-                          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gray-300 transition hover:border-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gray-200 bg-gray-50/80 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0"
                           aria-label={`Open ${selectedEntry.name} in Google Maps`}
                         >
                           <Image
@@ -1012,7 +1266,7 @@ export default function MountainsGlobe({
                       )}
                     </div>
                     {selectedEntry.description ? (
-                      <DialogDescription className="whitespace-pre-line pt-2 text-base leading-relaxed text-gray-700">
+                      <DialogDescription className="whitespace-pre-line pt-2 text-[15px] leading-7 text-gray-600">
                         {selectedEntry.description}
                       </DialogDescription>
                     ) : (
@@ -1022,13 +1276,13 @@ export default function MountainsGlobe({
                     )}
                   </DialogHeader>
                   {selectedEntry.description && (
-                    <div className="mt-4 flex justify-start">
+                    <div className="mt-5 flex justify-start border-t border-gray-100 pt-4">
                       <a
                         href={selectedEntry.mapUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={triggerHaptic}
-                        className="grid h-11 w-11 place-items-center rounded-full border border-gray-300 transition hover:border-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                        className="inline-flex h-11 items-center gap-2 rounded-full border border-gray-200 bg-gray-50/80 px-4 text-sm text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:border-gray-400 hover:bg-white hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0"
                         aria-label={`Open ${selectedEntry.name} in Google Maps`}
                       >
                         <Image
@@ -1038,6 +1292,7 @@ export default function MountainsGlobe({
                           height={18}
                           className="h-[18px] w-[18px] object-contain"
                         />
+                        <span>View on Google Maps</span>
                       </a>
                     </div>
                   )}

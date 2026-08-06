@@ -12,6 +12,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const navTrackRef = useRef<HTMLDivElement | null>(null);
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const navLabelRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [activePill, setActivePill] = useState({
@@ -53,13 +54,27 @@ export default function Layout({ children }: LayoutProps) {
   const updateActivePill = useCallback(() => {
     const activeItem = navItemRefs.current[activeIndex];
     const activeLabel = navLabelRefs.current[activeIndex];
-    if (!activeItem || !activeLabel) return;
+    const navTrack = navTrackRef.current;
+    if (!activeItem || !activeLabel || !navTrack) return;
+
+    const trackRect = navTrack.getBoundingClientRect();
+    const labelRect = activeLabel.getBoundingClientRect();
+    const labelLeft = labelRect.left - trackRect.left;
 
     const isCompactNavigation = window.innerWidth < 640;
-    const leftPadding = isCompactNavigation ? 7 : 19;
-    const rightPadding = isCompactNavigation ? 7 : 11;
-    const labelLeft = activeItem.offsetLeft + activeLabel.offsetLeft;
-    const width = activeLabel.offsetWidth + leftPadding + rightPadding;
+    if (isCompactNavigation) {
+      const compactPillPadding = 15;
+      setActivePill({
+        left: labelLeft - compactPillPadding,
+        width: labelRect.width + compactPillPadding * 2,
+        ready: true,
+      });
+      return;
+    }
+
+    const leftPadding = 19;
+    const rightPadding = 11;
+    const width = labelRect.width + leftPadding + rightPadding;
 
     setActivePill({
       left: labelLeft - leftPadding,
@@ -81,7 +96,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [updateActivePill]);
 
   const navLinkClassName = (path: string) =>
-    `relative z-10 inline-flex h-11 flex-1 items-center justify-center rounded-full px-1 text-[11px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:flex-none sm:px-2.5 sm:text-sm md:px-3.5 md:text-base ${
+    `relative z-10 inline-flex h-11 min-w-0 flex-none items-center justify-center rounded-full px-[3px] text-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:px-2.5 md:px-3.5 md:text-base ${
       isActive(path)
         ? 'font-medium text-gray-950'
         : 'text-gray-700 hover:text-gray-950'
@@ -109,11 +124,14 @@ export default function Layout({ children }: LayoutProps) {
           scrolled ? 'shadow-sm' : ''
         }`}
       >
-        <div className="flex h-16 max-w-full items-center justify-between pl-4 pr-4 md:pl-8 md:pr-8">
-          <div className="relative flex w-full items-center justify-between gap-0 rounded-full p-1 sm:inline-flex sm:w-auto sm:justify-start sm:gap-1">
+        <div className="flex h-16 max-w-full items-center justify-start px-8">
+          <div
+            ref={navTrackRef}
+            className="relative inline-flex max-w-full items-center gap-[1.35rem] rounded-full p-1"
+          >
             <span
               aria-hidden="true"
-              className="absolute bottom-2 top-2 z-0 overflow-hidden rounded-full border border-white/75 bg-white/35 shadow-[0_1px_8px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(15,23,42,0.04)] backdrop-blur-2xl transition-[transform,width,opacity] duration-200 ease-out before:absolute before:inset-0 before:bg-[linear-gradient(110deg,rgba(255,255,255,0.72),rgba(255,255,255,0.22)_46%,rgba(226,232,240,0.3))] before:opacity-80 before:content-[''] motion-reduce:transition-none"
+              className="absolute bottom-2 left-0 top-2 z-0 overflow-hidden rounded-full border border-white/75 bg-white/35 shadow-[0_1px_8px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(15,23,42,0.04)] backdrop-blur-2xl transition-[transform,width,opacity] duration-200 ease-out before:absolute before:inset-0 before:bg-[linear-gradient(110deg,rgba(255,255,255,0.72),rgba(255,255,255,0.22)_46%,rgba(226,232,240,0.3))] before:opacity-80 before:content-[''] motion-reduce:transition-none"
               style={{
                 opacity: activePill.ready ? 1 : 0,
                 transform: `translateX(${activePill.left}px)`,
