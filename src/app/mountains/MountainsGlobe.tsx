@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import type { Globe } from 'cobe';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -292,10 +291,9 @@ export default function MountainsGlobe({
   const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
   const markerRefs = useRef(new Map<string, HTMLButtonElement>());
   const selectionOriginIdRef = useRef<string | null>(null);
+  const detailsReturnClusterRef = useRef<EntryCluster | null>(null);
   const modalFallbackTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const mobileFirstDestinationRef = useRef<HTMLButtonElement | null>(null);
   const modalCloseTimerRef = useRef<number | null>(null);
-  const detailsOpenFrameRef = useRef<number | null>(null);
   const mapSamplesTimerRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
@@ -322,9 +320,6 @@ export default function MountainsGlobe({
     [projectedEntries, zoomLevel],
   );
   const selectedEntry = selection.kind === 'details' ? selection.entry : null;
-  const selectedCluster =
-    selection.kind === 'cluster' ? selection.cluster : undefined;
-  const isMobileStage = stageSize.width < 640;
   const shouldPause =
     Boolean(prefersReducedMotion) ||
     isDragging ||
@@ -516,9 +511,6 @@ export default function MountainsGlobe({
       if (modalCloseTimerRef.current) {
         window.clearTimeout(modalCloseTimerRef.current);
       }
-      if (detailsOpenFrameRef.current) {
-        window.cancelAnimationFrame(detailsOpenFrameRef.current);
-      }
       if (mapSamplesTimerRef.current) {
         window.clearTimeout(mapSamplesTimerRef.current);
       }
@@ -557,32 +549,17 @@ export default function MountainsGlobe({
     trigger: HTMLButtonElement,
     originId?: string,
   ) => {
+    detailsReturnClusterRef.current =
+      selection.kind === 'cluster' ? selection.cluster : null;
     if (modalCloseTimerRef.current) {
       window.clearTimeout(modalCloseTimerRef.current);
       modalCloseTimerRef.current = null;
-    }
-    if (detailsOpenFrameRef.current) {
-      window.cancelAnimationFrame(detailsOpenFrameRef.current);
-      detailsOpenFrameRef.current = null;
     }
     triggerHaptic();
     pauseRef.current = true;
     selectionOriginIdRef.current = originId ?? null;
     modalFallbackTriggerRef.current = originId ? null : trigger;
     setIsModalClosing(false);
-    if (originId && isMobileStage) {
-      // The mobile picker and details view are separate Radix portals. Let the
-      // sheet leave the focus stack before the details dialog enters.
-      setSelection({ kind: 'idle' });
-      detailsOpenFrameRef.current = window.requestAnimationFrame(() => {
-        detailsOpenFrameRef.current = null;
-        pauseRef.current = true;
-        setSelection({ kind: 'details', entry });
-      });
-      return;
-    }
-    // The desktop picker is an anchored popover, so opening synchronously is
-    // both simpler and more reliable than waiting for another animation frame.
     setSelection({ kind: 'details', entry });
   };
   const closeEntry = () => {
@@ -590,8 +567,14 @@ export default function MountainsGlobe({
     triggerHaptic();
     setIsModalClosing(true);
     modalCloseTimerRef.current = window.setTimeout(() => {
+      const returnCluster = detailsReturnClusterRef.current;
+      detailsReturnClusterRef.current = null;
       setIsModalClosing(false);
-      setSelection({ kind: 'idle' });
+      setSelection(
+        returnCluster
+          ? { kind: 'cluster', cluster: returnCluster }
+          : { kind: 'idle' },
+      );
       modalCloseTimerRef.current = null;
       focusSelectionOrigin();
     }, MODAL_CLOSE_DURATION);
@@ -770,7 +753,7 @@ export default function MountainsGlobe({
       <p className="sr-only">
         Born in Yunnan, one of the most mountainous regions in the world, I have
         always found a deep sense of serenity and belonging in the mountains.
-        This is a map of the peaks I have visited—and my dream of exploring
+        This is a map of the peaks I have visited and my dream of exploring
         every beautiful mountain I can reach.
       </p>
 
@@ -799,7 +782,7 @@ export default function MountainsGlobe({
         <p className="mountain-story-copy mt-3 max-w-[34rem] text-sm leading-relaxed text-gray-600 md:mt-0 md:text-[18px] md:leading-7">
           Born in Yunnan, one of the most mountainous regions in the world, I
           have always found a deep sense of serenity and belonging in the
-          mountains. This is a map of the peaks I have visited—and my dream of
+          mountains. This is a map of the peaks I have visited and my dream of
           exploring every beautiful mountain I can reach.
         </p>
       </div>
@@ -847,6 +830,20 @@ export default function MountainsGlobe({
                       : 'left-1/2 -translate-x-1/2';
                 const verticalPlacement =
                   anchor.y < 0.45 ? 'top-8' : 'bottom-8';
+                const isCompactStage = stageSize.width < 640;
+                const compactPickerWidth = Math.min(
+                  256,
+                  Math.max(1, stageSize.width - 16),
+                );
+                const compactPickerLeft =
+                  Math.min(
+                    stageSize.width - compactPickerWidth - 8,
+                    Math.max(
+                      8,
+                      anchor.x * stageSize.width - compactPickerWidth / 2,
+                    ),
+                  ) -
+                  anchor.x * stageSize.width;
                 return (
                   <div
                     key={cluster.id}
@@ -895,7 +892,7 @@ export default function MountainsGlobe({
                       </motion.button>
                     </div>
                     <AnimatePresence>
-                      {isOpen && !isMobileStage && (
+                      {isOpen && (
                         <motion.div
                           data-mountain-control
                           data-mountain-selection
@@ -905,7 +902,12 @@ export default function MountainsGlobe({
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.97, y: 2 }}
                           transition={markerTransition}
-                          className={`pointer-events-auto absolute ${horizontalPlacement} ${verticalPlacement} w-64 overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl`}
+                          style={
+                            isCompactStage
+                              ? { left: compactPickerLeft }
+                              : undefined
+                          }
+                          className={`pointer-events-auto absolute ${isCompactStage ? '' : horizontalPlacement} ${verticalPlacement} w-64 max-w-[calc(100vw-1rem)] overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl`}
                         >
                           <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
                             <p className="text-xs font-medium uppercase tracking-[0.16em] text-gray-500">
@@ -1093,95 +1095,6 @@ export default function MountainsGlobe({
           )}
         </div>
       </div>
-
-      <DialogPrimitive.Root open={Boolean(selectedCluster && isMobileStage)}>
-        {selectedCluster && isMobileStage && (
-          <DialogPrimitive.Portal>
-            <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-gray-950/15 backdrop-blur-[1px] data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-            <DialogPrimitive.Content
-              data-mountain-selection
-              className="mountain-picker-sheet fixed bottom-2 left-1/2 z-[60] flex max-h-[min(55dvh,25rem)] w-[calc(100%-1rem)] max-w-md -translate-x-1/2 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/[0.98] shadow-[0_24px_70px_rgba(15,23,42,0.24)] focus:outline-none"
-              onOpenAutoFocus={(event) => {
-                event.preventDefault();
-                window.requestAnimationFrame(() => {
-                  mobileFirstDestinationRef.current?.focus({
-                    preventScroll: true,
-                  });
-                });
-              }}
-              onCloseAutoFocus={(event) => event.preventDefault()}
-              onPointerDownOutside={() => dismissTransientSelection(false)}
-              onEscapeKeyDown={(event) => {
-                event.preventDefault();
-                dismissTransientSelection(true);
-              }}
-            >
-              <div className="flex items-start justify-between gap-4 border-b border-gray-100 px-5 pb-3 pt-4">
-                <div>
-                  <DialogPrimitive.Title className="text-base font-medium text-gray-950">
-                    Mountains nearby
-                  </DialogPrimitive.Title>
-                  <DialogPrimitive.Description className="mt-0.5 text-xs text-gray-500">
-                    Choose a destination to see its details.
-                  </DialogPrimitive.Description>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => dismissTransientSelection(true)}
-                  className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
-                >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Close destination list</span>
-                </button>
-              </div>
-              <div className="min-h-0 overflow-y-auto p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-                {clusterEntriesForList(selectedCluster).map(
-                  ({ entry }, index) => (
-                    <button
-                      type="button"
-                      key={entry.id}
-                      ref={
-                        index === 0
-                          ? (node) => {
-                              mobileFirstDestinationRef.current = node;
-                            }
-                          : undefined
-                      }
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        openEntry(
-                          entry,
-                          event.currentTarget,
-                          selectedCluster.id,
-                        );
-                      }}
-                      className={`flex min-h-12 w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-[15px] text-gray-950 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400 ${
-                        entry.status === 'visited'
-                          ? 'bg-amber-50/70 shadow-[inset_0_0_0_1px_rgba(217,119,6,0.1),0_0_18px_rgba(251,191,36,0.1)] hover:bg-amber-50 focus-visible:bg-amber-50'
-                          : 'hover:bg-gray-100 focus-visible:bg-gray-100'
-                      }`}
-                      aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}, ${entry.status === 'visited' ? 'visited' : 'waiting to be explored'}`}
-                    >
-                      <span className="min-w-0 truncate">{entry.name}</span>
-                      <span
-                        aria-hidden="true"
-                        className="flex shrink-0 items-center gap-2 text-base"
-                      >
-                        {entry.status === 'visited' && (
-                          <span className="rounded-full bg-amber-100/80 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.1em] text-amber-900">
-                            Visited
-                          </span>
-                        )}
-                        {countryFlag(entry.countryCode)}
-                      </span>
-                    </button>
-                  ),
-                )}
-              </div>
-            </DialogPrimitive.Content>
-          </DialogPrimitive.Portal>
-        )}
-      </DialogPrimitive.Root>
 
       <Dialog
         open={selection.kind === 'details'}

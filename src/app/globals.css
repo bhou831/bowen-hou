@@ -103,28 +103,6 @@
   }
 }
 
-@keyframes mountain-picker-open {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 1rem) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-}
-
-@keyframes mountain-picker-close {
-  from {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translate(-50%, 0.75rem) scale(0.985);
-  }
-}
-
 .mountain-anchor {
   left: var(--mountain-left);
   top: var(--mountain-top);
@@ -195,14 +173,6 @@
   }
 }
 
-.mountain-picker-sheet[data-state='open'] {
-  animation: mountain-picker-open 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mountain-picker-sheet[data-state='closed'] {
-  animation: mountain-picker-close 140ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 @media (min-width: 768px) and (max-height: 500px) {
   .mountains-page .mountain-story-column {
     width: min(30vw, 260px);
@@ -220,9 +190,7 @@
   .mountain-modal.is-closing,
   .mountain-modal-overlay[data-state='open'],
   .mountain-modal-overlay[data-state='closed'],
-  .mountain-modal-overlay.is-closing,
-  .mountain-picker-sheet[data-state='open'],
-  .mountain-picker-sheet[data-state='closed'] {
+  .mountain-modal-overlay.is-closing {
     animation: none !important;
   }
 
