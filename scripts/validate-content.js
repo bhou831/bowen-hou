@@ -7,7 +7,29 @@ const publicDirectory = path.join(projectRoot, 'public');
 const collections =
   require('../src/content/photography/collections.json').collections;
 const albums = require('../src/content/music/albums.json').albums;
+const mountainEntries =
+  require('../src/content/mountains/entries.json').entries;
 const failures = [];
+const supportedCountryCodes = new Set([
+  'AR',
+  'CA',
+  'CH',
+  'CL',
+  'CN',
+  'ES',
+  'ID',
+  'IS',
+  'IT',
+  'JP',
+  'NP',
+  'NO',
+  'NZ',
+  'PE',
+  'PK',
+  'RU',
+  'TZ',
+  'US',
+]);
 
 function addFailure(message) {
   failures.push(message);
@@ -117,6 +139,71 @@ for (const album of albums) {
   }
 }
 
+if (!Array.isArray(mountainEntries)) {
+  addFailure('Mountain entries must be an array.');
+} else {
+  requireUniqueIds(mountainEntries, 'mountain entry');
+  for (const entry of mountainEntries) {
+    const label = `Mountain entry "${entry.id}"`;
+    requireText(entry.name, `${label} name`);
+    if (entry.description !== undefined) {
+      requireText(entry.description, `${label} description`);
+    }
+
+    if (!supportedCountryCodes.has(entry.countryCode)) {
+      addFailure(`${label} countryCode must be a supported ISO country code.`);
+    }
+
+    if (!['mountain', 'park', 'trail'].includes(entry.type)) {
+      addFailure(`${label} type must be mountain, park, or trail.`);
+    }
+    if (!['visited', 'dream'].includes(entry.status)) {
+      addFailure(`${label} status must be visited or dream.`);
+    }
+    if (
+      !Array.isArray(entry.location) ||
+      entry.location.length !== 2 ||
+      !entry.location.every((coordinate) => Number.isFinite(coordinate))
+    ) {
+      addFailure(`${label} location must be a [latitude, longitude] tuple.`);
+    } else {
+      const [latitude, longitude] = entry.location;
+      if (latitude < -90 || latitude > 90) {
+        addFailure(`${label} latitude must be between -90 and 90.`);
+      }
+      if (longitude < -180 || longitude > 180) {
+        addFailure(`${label} longitude must be between -180 and 180.`);
+      }
+    }
+
+    if (entry.status === 'visited' && !entry.image) {
+      addFailure(`${label} must include an image when status is visited.`);
+    }
+    if (entry.image) {
+      requireLocalAsset(entry.image, `${label} image`);
+      requireText(entry.imageAlt, `${label} image alt text`);
+    } else if (entry.imageAlt) {
+      addFailure(`${label} cannot include imageAlt without an image.`);
+    }
+
+    requireHttpsUrl(entry.mapUrl, `${label} map URL`);
+    if (typeof entry.mapUrl === 'string') {
+      try {
+        const hostname = new URL(entry.mapUrl).hostname;
+        const isGoogleMapsHost =
+          hostname === 'maps.app.goo.gl' ||
+          hostname === 'google.com' ||
+          hostname.endsWith('.google.com');
+        if (!isGoogleMapsHost) {
+          addFailure(`${label} map URL must point to Google Maps.`);
+        }
+      } catch {
+        // requireHttpsUrl reports malformed URLs.
+      }
+    }
+  }
+}
+
 const requiredSiteAssets = [
   '/favicon.ico',
   '/images/og/og.jpg',
@@ -158,5 +245,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Content validation passed: ${collections.length} collections, ${albums.length} albums, and ${journalFiles.length} journal post(s).`,
+  `Content validation passed: ${collections.length} collections, ${albums.length} albums, ${mountainEntries.length} mountain entries, and ${journalFiles.length} journal post(s).`,
 );

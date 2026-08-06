@@ -101,9 +101,10 @@ export default function Photography() {
     );
 
     swipeAnimationTimeout.current = setTimeout(() => {
-      setCurrentImageIndex((prev) =>
-        (prev + direction + selectedCollection.images.length) %
-        selectedCollection.images.length,
+      setCurrentImageIndex(
+        (prev) =>
+          (prev + direction + selectedCollection.images.length) %
+          selectedCollection.images.length,
       );
       setDragOffset(0);
       setIsSwipeAnimating(false);
@@ -257,8 +258,7 @@ export default function Photography() {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    const carouselWidth =
-      carouselRef.current?.clientWidth ?? window.innerWidth;
+    const carouselWidth = carouselRef.current?.clientWidth ?? window.innerWidth;
     const shouldChangeImage =
       isHorizontalSwipe.current && Math.abs(deltaX) > carouselWidth * 0.16;
 

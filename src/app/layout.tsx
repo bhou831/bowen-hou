@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: '%s | Bowen Hou',
   },
   description:
-    'Bowen Hou (侯博文) is a software engineer and photographer. This is his personal website, photo archive, journal, and music collection.',
+    'Bowen Hou (侯博文) is a software engineer and photographer. This is his personal website, photo archive, mountain atlas, journal, and music collection.',
   metadataBase: new URL('https://bowen-hou.com'),
   alternates: {
     canonical: '/',

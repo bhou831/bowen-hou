@@ -18,7 +18,13 @@ function generateSitemap() {
   });
 
   // Your other routes (with trailing slashes for trailingSlash: true config)
-  const staticRoutes = ['/', '/journal/', '/music/', '/photography/'];
+  const staticRoutes = [
+    '/',
+    '/journal/',
+    '/music/',
+    '/mountains/',
+    '/photography/',
+  ];
 
   // Combine all routes
   const allRoutes = [...staticRoutes, ...journalSlugs, ...photographySlugs];

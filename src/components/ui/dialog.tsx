@@ -34,8 +34,9 @@ const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     closeButtonClassName?: string;
+    onClose?: () => void;
   }
->(({ className, closeButtonClassName, children, ...props }, ref) => (
+>(({ className, closeButtonClassName, children, onClose, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -47,15 +48,29 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close
-        className={cn(
-          'absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500',
-          closeButtonClassName,
-        )}
-      >
-        <X className="h-5 w-5" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
+      {onClose ? (
+        <button
+          type="button"
+          onClick={onClose}
+          className={cn(
+            'absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500',
+            closeButtonClassName,
+          )}
+        >
+          <X className="h-5 w-5" />
+          <span className="sr-only">Close</span>
+        </button>
+      ) : (
+        <DialogPrimitive.Close
+          className={cn(
+            'absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500',
+            closeButtonClassName,
+          )}
+        >
+          <X className="h-5 w-5" />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPortal>
 ));

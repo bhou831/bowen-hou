@@ -141,7 +141,8 @@ export default function Home() {
             and shift toward engagement-based recommendations made me think it
             is no longer a serious platform for photo sharing. The level of
             creator control I want over content layout and arrangement is still
-            missing from other platforms like 500px, VSCO, etc. I hope you enjoy this page and become a regular visitor.
+            missing from other platforms like 500px, VSCO, etc. I hope you enjoy
+            this page and become a regular visitor.
           </p>
         </div>
       </div>

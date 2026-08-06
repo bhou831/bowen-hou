@@ -1,6 +1,6 @@
 # Bowen Hou
 
-Source for [bowen-hou.com](https://bowen-hou.com), a personal photography archive, music journal, and occasional blog.
+Source for [bowen-hou.com](https://bowen-hou.com), a personal photography archive, music journal, mountains atlas, and occasional blog.
 
 The site is built with Next.js, React, Tailwind CSS, and the Spectral typeface. It is exported as static files and deployed to AWS S3.
 
@@ -39,6 +39,7 @@ npm run format
 
 - Photography metadata: `src/content/photography/collections.json`
 - Music recommendations: `src/content/music/albums.json`
+- Mountains atlas: `src/content/mountains/entries.json`
 - Journal posts: `src/content/journal/*.md`
 - Local media: `public/images/`
 
@@ -129,6 +130,44 @@ Change `country=US` to the storefront in the Apple Music URL when necessary.
 If Apple does not provide a preview, omit `preview`; the album modal will show
 “Preview unavailable.” Run `npm run build` after adding the album to validate
 the content and static export.
+
+### Add a mountain destination
+
+Add mountain, park, and trail entries to `src/content/mountains/entries.json`.
+Local images belong in `public/images/mountains/`.
+
+```json
+{
+  "id": "unique-slug",
+  "name": "Destination name",
+  "countryCode": "US",
+  "location": [46.8523, -121.7603],
+  "type": "mountain",
+  "status": "visited",
+  "mapUrl": "https://maps.app.goo.gl/example",
+  "description": "An optional personal story.",
+  "image": "/images/mountains/example.jpg",
+  "imageAlt": "A descriptive alternative for the photograph"
+}
+```
+
+`type` must be `mountain`, `park`, or `trail`; `status` must be `visited` or
+`dream`. Every entry needs a supported two-letter country code and a Google
+Maps URL. Descriptions are optional. Visited entries require a local image and
+alt text. Dream entries can omit both and will use the contour placeholder.
+
+Create an optimized atlas photograph from an existing source without changing
+the original:
+
+```sh
+just add-mountain-photo --id <entry-id> --source <path-to-image>
+```
+
+The helper corrects orientation, strips metadata, keeps the original aspect
+ratio, and writes a JPEG no larger than 2 megapixels or 1600px on its longest
+edge to `public/images/mountains/<entry-id>.jpg`. It will not upscale images or
+overwrite an existing atlas photograph. Run `npm run validate-content` after
+editing the atlas.
 
 ## Deployment
 

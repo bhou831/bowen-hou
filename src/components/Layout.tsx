@@ -24,6 +24,7 @@ export default function Layout({ children }: LayoutProps) {
     { href: '/', label: 'Home' },
     { href: '/photography', label: 'Photography' },
     { href: '/music', label: 'Music' },
+    { href: '/mountains', label: 'Mountains' },
     { href: '/journal', label: 'Journal' },
   ];
 
@@ -54,8 +55,9 @@ export default function Layout({ children }: LayoutProps) {
     const activeLabel = navLabelRefs.current[activeIndex];
     if (!activeItem || !activeLabel) return;
 
-    const leftPadding = 19;
-    const rightPadding = 11;
+    const isCompactNavigation = window.innerWidth < 640;
+    const leftPadding = isCompactNavigation ? 7 : 19;
+    const rightPadding = isCompactNavigation ? 7 : 11;
     const labelLeft = activeItem.offsetLeft + activeLabel.offsetLeft;
     const width = activeLabel.offsetWidth + leftPadding + rightPadding;
 
@@ -79,7 +81,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [updateActivePill]);
 
   const navLinkClassName = (path: string) =>
-    `relative z-10 inline-flex h-11 items-center justify-center rounded-full px-2.5 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:px-3.5 md:text-base ${
+    `relative z-10 inline-flex h-11 items-center justify-center rounded-full px-1 text-[11px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:px-2.5 sm:text-sm md:px-3.5 md:text-base ${
       isActive(path)
         ? 'font-medium text-gray-950'
         : 'text-gray-700 hover:text-gray-950'
@@ -108,7 +110,7 @@ export default function Layout({ children }: LayoutProps) {
         }`}
       >
         <div className="pl-4 pr-4 md:pl-8 md:pr-8 flex justify-between items-center h-16 max-w-full">
-          <div className="relative inline-flex items-center gap-1 rounded-full p-1">
+          <div className="relative inline-flex items-center gap-0 rounded-full p-1 sm:gap-1">
             <span
               aria-hidden="true"
               className="absolute bottom-2 top-2 z-0 overflow-hidden rounded-full border border-white/75 bg-white/35 shadow-[0_1px_8px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(15,23,42,0.04)] backdrop-blur-2xl transition-[transform,width,opacity] duration-200 ease-out before:absolute before:inset-0 before:bg-[linear-gradient(110deg,rgba(255,255,255,0.72),rgba(255,255,255,0.22)_46%,rgba(226,232,240,0.3))] before:opacity-80 before:content-[''] motion-reduce:transition-none"
