@@ -866,7 +866,7 @@ export default function MountainsGlobe({
 
       <div
         data-mountain-selection
-        className="absolute right-4 top-4 z-50 md:right-8 md:top-8"
+        className="mountain-leaderboard-control absolute right-4 top-4 z-50 md:right-8 md:top-8"
       >
         <motion.button
           ref={leaderboardTriggerRef}
@@ -915,8 +915,7 @@ export default function MountainsGlobe({
                       opacity: { duration: 0.25 },
                     }
               }
-              style={{ transformOrigin: 'top right' }}
-              className="absolute right-0 top-[calc(100%+0.65rem)] flex max-h-[calc(100dvh-11rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl"
+              className="mountain-leaderboard-popover absolute right-0 top-[calc(100%+0.65rem)] flex max-h-[calc(100dvh-11rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl"
             >
               <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
                 <div>

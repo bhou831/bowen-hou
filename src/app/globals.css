@@ -141,6 +141,23 @@
     );
 }
 
+.mountain-leaderboard-popover {
+  transform-origin: top right;
+}
+
+@media (max-width: 639px) and (orientation: portrait) {
+  .mountain-leaderboard-control {
+    top: auto !important;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .mountain-leaderboard-popover {
+    top: auto !important;
+    bottom: calc(100% + 0.65rem);
+    transform-origin: bottom right;
+  }
+}
+
 .mountain-modal[data-state='open'] {
   transform-origin: center 70%;
   animation: mountain-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
