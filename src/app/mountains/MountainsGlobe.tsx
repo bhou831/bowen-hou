@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import type { Globe } from 'cobe';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { Trophy, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   Dialog,
@@ -29,6 +29,8 @@ export type MountainEntry = {
     | 'landform'
     | 'attraction';
   status: 'visited' | 'dream';
+  rating?: number;
+  ratingNote?: string;
   markerStyle: 'mountain' | 'snow' | 'fuji' | 'volcano';
   region: string;
   gatewayAirport: {
@@ -62,7 +64,18 @@ type SelectionState =
   | { kind: 'idle' }
   | { kind: 'single'; entryId: string }
   | { kind: 'cluster'; cluster: EntryCluster }
+  | { kind: 'leaderboard'; expanded: boolean }
   | { kind: 'details'; entry: MountainEntry };
+
+type ReturnSelection = Extract<
+  SelectionState,
+  { kind: 'cluster' | 'leaderboard' }
+>;
+
+type RankedEntry = {
+  entry: MountainEntry;
+  rank: number;
+};
 
 const INITIAL_PHI = 0.25;
 const INITIAL_THETA = 0.16;
@@ -309,8 +322,10 @@ export default function MountainsGlobe({
   const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
   const markerRefs = useRef(new Map<string, HTMLButtonElement>());
   const selectionOriginIdRef = useRef<string | null>(null);
-  const detailsReturnClusterRef = useRef<EntryCluster | null>(null);
+  const detailsReturnSelectionRef = useRef<ReturnSelection | null>(null);
   const modalFallbackTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const leaderboardTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const leaderboardScrollTopRef = useRef(0);
   const modalCloseTimerRef = useRef<number | null>(null);
   const mapSamplesTimerRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -333,6 +348,28 @@ export default function MountainsGlobe({
   const visitedPercentage = entries.length
     ? (visitedCount / entries.length) * 100
     : 0;
+  const rankedEntries = useMemo<RankedEntry[]>(() => {
+    const ratedEntries = entries
+      .filter(
+        (entry): entry is MountainEntry & { rating: number } =>
+          entry.status === 'visited' && typeof entry.rating === 'number',
+      )
+      .sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name));
+
+    return ratedEntries.map((entry, index) => ({
+      entry,
+      rank:
+        index > 0 && entry.rating === ratedEntries[index - 1].rating
+          ? ratedEntries.findIndex(
+              (candidate) => candidate.rating === entry.rating,
+            ) + 1
+          : index + 1,
+    }));
+  }, [entries]);
+  const leaderboardEntries =
+    selection.kind === 'leaderboard' && selection.expanded
+      ? rankedEntries
+      : rankedEntries.slice(0, 10);
   const clusters = useMemo(
     () => groupNearbyEntries(projectedEntries, zoomLevel),
     [projectedEntries, zoomLevel],
@@ -514,14 +551,24 @@ export default function MountainsGlobe({
   const dismissTransientSelection = useCallback(
     (restoreFocus = false) => {
       setSelection((current) =>
-        current.kind === 'single' || current.kind === 'cluster'
+        current.kind === 'single' ||
+        current.kind === 'cluster' ||
+        current.kind === 'leaderboard'
           ? { kind: 'idle' }
           : current,
       );
       resumeAtRef.current = performance.now() + 1200;
-      if (restoreFocus) focusSelectionOrigin();
+      if (restoreFocus) {
+        if (selection.kind === 'leaderboard') {
+          window.requestAnimationFrame(() => {
+            leaderboardTriggerRef.current?.focus({ preventScroll: true });
+          });
+        } else {
+          focusSelectionOrigin();
+        }
+      }
     },
-    [focusSelectionOrigin],
+    [focusSelectionOrigin, selection.kind],
   );
 
   useEffect(
@@ -540,14 +587,18 @@ export default function MountainsGlobe({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
         event.key === 'Escape' &&
-        (selection.kind === 'single' || selection.kind === 'cluster')
+        (selection.kind === 'single' ||
+          selection.kind === 'cluster' ||
+          selection.kind === 'leaderboard')
       ) {
         dismissTransientSelection(true);
       }
     };
     const handlePointerDown = (event: PointerEvent) => {
       if (
-        (selection.kind === 'single' || selection.kind === 'cluster') &&
+        (selection.kind === 'single' ||
+          selection.kind === 'cluster' ||
+          selection.kind === 'leaderboard') &&
         event.target instanceof Element &&
         !event.target.closest('[data-mountain-selection]')
       ) {
@@ -567,8 +618,10 @@ export default function MountainsGlobe({
     trigger: HTMLButtonElement,
     originId?: string,
   ) => {
-    detailsReturnClusterRef.current =
-      selection.kind === 'cluster' ? selection.cluster : null;
+    detailsReturnSelectionRef.current =
+      selection.kind === 'cluster' || selection.kind === 'leaderboard'
+        ? selection
+        : null;
     if (modalCloseTimerRef.current) {
       window.clearTimeout(modalCloseTimerRef.current);
       modalCloseTimerRef.current = null;
@@ -585,14 +638,10 @@ export default function MountainsGlobe({
     triggerHaptic();
     setIsModalClosing(true);
     modalCloseTimerRef.current = window.setTimeout(() => {
-      const returnCluster = detailsReturnClusterRef.current;
-      detailsReturnClusterRef.current = null;
+      const returnSelection = detailsReturnSelectionRef.current;
+      detailsReturnSelectionRef.current = null;
       setIsModalClosing(false);
-      setSelection(
-        returnCluster
-          ? { kind: 'cluster', cluster: returnCluster }
-          : { kind: 'idle' },
-      );
+      setSelection(returnSelection ?? { kind: 'idle' });
       modalCloseTimerRef.current = null;
       focusSelectionOrigin();
     }, MODAL_CLOSE_DURATION);
@@ -751,6 +800,16 @@ export default function MountainsGlobe({
         : { kind: 'cluster', cluster },
     );
   };
+  const toggleLeaderboard = () => {
+    triggerHaptic();
+    pauseRef.current = true;
+    leaderboardScrollTopRef.current = 0;
+    setSelection((current) =>
+      current.kind === 'leaderboard'
+        ? { kind: 'idle' }
+        : { kind: 'leaderboard', expanded: false },
+    );
+  };
   const activateSingleEntry = (
     entry: MountainEntry,
     trigger: HTMLButtonElement,
@@ -803,6 +862,165 @@ export default function MountainsGlobe({
           mountains. This is a map of the peaks I have visited and my dream of
           exploring every beautiful mountain I can reach.
         </p>
+      </div>
+
+      <div
+        data-mountain-selection
+        className="absolute right-4 top-4 z-50 md:right-8 md:top-8"
+      >
+        <motion.button
+          ref={leaderboardTriggerRef}
+          type="button"
+          data-mountain-control
+          onClick={toggleLeaderboard}
+          whileHover={prefersReducedMotion ? undefined : { scale: 1.05 }}
+          whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+          transition={markerTransition}
+          className="grid h-11 w-11 place-items-center rounded-full border border-gray-200/90 bg-white/90 text-gray-700 shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-colors hover:border-gray-300 hover:bg-white hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+          aria-label="Open personal mountain leaderboard"
+          aria-expanded={selection.kind === 'leaderboard'}
+        >
+          <Trophy className="h-[1.15rem] w-[1.15rem]" strokeWidth={1.8} />
+        </motion.button>
+
+        <AnimatePresence>
+          {selection.kind === 'leaderboard' && (
+            <motion.div
+              role="dialog"
+              aria-label={
+                selection.expanded
+                  ? 'All personal mountain rankings'
+                  : 'Personal top 10 mountains'
+              }
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={
+                prefersReducedMotion
+                  ? { opacity: 0, scale: 1, transition: { duration: 0 } }
+                  : {
+                      opacity: 0,
+                      scale: 0.99,
+                      transition: {
+                        duration: 0.15,
+                        ease: [0.22, 1, 0.36, 1],
+                      },
+                    }
+              }
+              transition={
+                prefersReducedMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: 0.25,
+                      ease: [0.22, 1, 0.36, 1],
+                      opacity: { duration: 0.25 },
+                    }
+              }
+              style={{ transformOrigin: 'top right' }}
+              className="absolute right-0 top-[calc(100%+0.65rem)] flex max-h-[calc(100dvh-11rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.18)] backdrop-blur-xl"
+            >
+              <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-gray-500">
+                    {selection.expanded
+                      ? 'Personal rankings'
+                      : 'Personal top 10'}
+                  </p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">
+                    Raw beauty · jaw-dropping factor
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => dismissTransientSelection(true)}
+                  className="grid h-8 w-8 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+                  aria-label="Close mountain leaderboard"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div
+                ref={(node) => {
+                  if (node) node.scrollTop = leaderboardScrollTopRef.current;
+                }}
+                onScroll={(event) => {
+                  leaderboardScrollTopRef.current =
+                    event.currentTarget.scrollTop;
+                }}
+                className="min-h-0 overflow-y-auto p-1.5"
+              >
+                {leaderboardEntries.map(({ entry, rank }) => {
+                  const podiumStyle =
+                    rank === 1
+                      ? 'border-amber-200/80 bg-amber-50/85 text-amber-950'
+                      : rank === 2
+                        ? 'border-slate-200 bg-slate-50/90 text-slate-900'
+                        : rank === 3
+                          ? 'border-orange-200/70 bg-orange-50/70 text-orange-950'
+                          : 'border-transparent text-gray-900 hover:bg-gray-100';
+
+                  return (
+                    <button
+                      type="button"
+                      key={entry.id}
+                      ref={(node) =>
+                        registerMarker(`leaderboard-${entry.id}`, node)
+                      }
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        openEntry(
+                          entry,
+                          event.currentTarget,
+                          `leaderboard-${entry.id}`,
+                        );
+                      }}
+                      className={`flex min-h-11 w-full items-center gap-3 rounded-xl border px-3 py-2 text-left text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400 ${podiumStyle}`}
+                      aria-label={`Open ${entry.name}, ranked number ${rank} with a rating of ${entry.rating?.toFixed(1)} out of 10`}
+                    >
+                      <span className="w-7 shrink-0 text-center font-sans text-xs font-semibold tabular-nums opacity-70">
+                        #{rank}
+                      </span>
+                      <span className="min-w-0 flex-1 truncate">
+                        {entry.name}
+                      </span>
+                      <span aria-hidden="true" className="shrink-0">
+                        {countryFlag(entry.countryCode)}
+                      </span>
+                      <span className="shrink-0 font-sans text-xs font-semibold tabular-nums">
+                        {entry.rating?.toFixed(1)}
+                        <span className="font-normal opacity-55"> / 10</span>
+                      </span>
+                    </button>
+                  );
+                })}
+
+                {!selection.expanded && rankedEntries.length > 10 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic();
+                      setSelection({ kind: 'leaderboard', expanded: true });
+                    }}
+                    className="mt-1 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-3 text-xs font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-400"
+                    aria-label={`See all ${rankedEntries.length} rated mountains`}
+                  >
+                    <span aria-hidden="true" className="tracking-[0.18em]">
+                      •••
+                    </span>
+                    See all {rankedEntries.length}
+                  </button>
+                )}
+
+                <p className="mx-2 mb-2 mt-2 border-t border-gray-100 pt-3 text-[11px] leading-[1.55] text-gray-500">
+                  Ranked for raw beauty and jaw-dropping impact—especially
+                  jagged granite, sharp peaks, and high contrast. Personal
+                  opinion only; accessibility and hiking infrastructure are not
+                  considered.
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="absolute inset-x-0 bottom-0 top-40 grid place-items-center px-2 pb-2 sm:top-32 sm:px-6 sm:pb-4 md:inset-y-0 md:left-[min(24vw,352px)] md:top-0 md:pt-0">

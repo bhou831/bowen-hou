@@ -145,6 +145,7 @@ Add mountain, range, ridge, park, trail, pass, landform, and attraction entries 
   "location": [46.8523, -121.7603],
   "type": "mountain",
   "status": "visited",
+  "rating": 9.0,
   "markerStyle": "snow",
   "region": "Cascade Range",
   "gatewayAirport": {
@@ -167,6 +168,9 @@ country code, geographic region, practical gateway airport with a three-letter
 code, Google Maps URL, and a `markerStyle` of `mountain`, `snow`, `fuji`, or
 `volcano`. The marker style controls the globe emoji; `fuji` is reserved for
 Mount Fuji, while clustered destinations use their dominant non-Fuji style.
+Visited destinations also need either a `rating` from 0–10 (with at most one
+decimal place) or a non-empty `ratingNote` explaining why they are currently
+unrated. Ratings and rating notes are not allowed on unvisited destinations.
 Airport connection notes, park or reserve names, and descriptions are optional.
 Any entry can omit photography and use the contour placeholder; when an image
 is present, descriptive alternative text is required.

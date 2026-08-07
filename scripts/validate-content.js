@@ -193,6 +193,37 @@ if (!Array.isArray(mountainEntries)) {
     if (!['visited', 'dream'].includes(entry.status)) {
       addFailure(`${label} status must be visited or dream.`);
     }
+    if (entry.rating !== undefined) {
+      if (
+        typeof entry.rating !== 'number' ||
+        !Number.isFinite(entry.rating) ||
+        entry.rating < 0 ||
+        entry.rating > 10 ||
+        Math.round(entry.rating * 10) !== entry.rating * 10
+      ) {
+        addFailure(
+          `${label} rating must be between 0 and 10 with at most one decimal place.`,
+        );
+      }
+      if (entry.status !== 'visited') {
+        addFailure(`${label} only visited destinations can have a rating.`);
+      }
+    }
+    if (entry.ratingNote !== undefined) {
+      requireText(entry.ratingNote, `${label} rating note`);
+      if (entry.status !== 'visited') {
+        addFailure(
+          `${label} only visited destinations can have a rating note.`,
+        );
+      }
+    }
+    if (
+      entry.status === 'visited' &&
+      entry.rating === undefined &&
+      entry.ratingNote === undefined
+    ) {
+      addFailure(`${label} visited destinations need a rating or rating note.`);
+    }
     if (!['mountain', 'snow', 'fuji', 'volcano'].includes(entry.markerStyle)) {
       addFailure(
         `${label} markerStyle must be mountain, snow, fuji, or volcano.`,
