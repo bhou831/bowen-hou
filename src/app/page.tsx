@@ -109,12 +109,6 @@ export default function Home() {
               <a href="https://cmu.edu">Carnegie Mellon</a>
             and{' '}
               <a href="https://ce.lafayette.edu">Lafayette College</a>
-            <span
-              className="ann ann-s ann-amber ann-desktop-only"
-              data-note="Lehigh Valley"
-            >
-              <a href="https://ce.lafayette.edu">Lafayette College</a>
-            </span>
             .
           </p>
           <p>
