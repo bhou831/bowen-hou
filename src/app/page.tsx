@@ -106,10 +106,9 @@ export default function Home() {
             I’m a senior software engineer at{' '}
             <a href="https://autodesk.com">Autodesk</a>, where I work on data
             quality assurance. Before that, I studied at{' '}
-              <a href="https://cmu.edu">Carnegie Mellon</a>
-            and{' '}
-              <a href="https://ce.lafayette.edu">Lafayette College</a>
-            .
+            <a href="https://cmu.edu">Carnegie Mellon</a>
+            <span> </span>
+            and <a href="https://ce.lafayette.edu">Lafayette College</a>.
           </p>
           <p>
             This site serves as an archive of my photos and music
