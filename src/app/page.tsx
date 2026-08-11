@@ -106,19 +106,9 @@ export default function Home() {
             I’m a senior software engineer at{' '}
             <a href="https://autodesk.com">Autodesk</a>, where I work on data
             quality assurance. Before that, I studied at{' '}
-            <span
-              className="ann ann-nw ann-blue ann-short-arrow"
-              data-note="The Steel City"
-            >
               <a href="https://cmu.edu">Carnegie Mellon</a>
-            </span>{' '}
             and{' '}
-            <span
-              className="ann ann-nw ann-amber ann-short-arrow ann-mobile-only"
-              data-note="Lehigh Valley"
-            >
               <a href="https://ce.lafayette.edu">Lafayette College</a>
-            </span>
             <span
               className="ann ann-s ann-amber ann-desktop-only"
               data-note="Lehigh Valley"
