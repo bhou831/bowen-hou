@@ -103,6 +103,52 @@
   }
 }
 
+@keyframes mountain-detail-chevron-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(2px);
+  }
+}
+
+.mountain-detail-chevron {
+  transform: translateX(0);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mountain-detail-chevron-arm {
+  transform-box: view-box;
+  transform-origin: 10.5px 8px;
+  vector-effect: non-scaling-stroke;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .mountain-detail-link:hover .mountain-detail-chevron,
+  .mountain-detail-link:focus-visible .mountain-detail-chevron {
+    transform: translateX(2px);
+  }
+
+  .mountain-detail-link:hover .mountain-detail-chevron-arm-top,
+  .mountain-detail-link:focus-visible .mountain-detail-chevron-arm-top {
+    transform: rotate(8deg);
+  }
+
+  .mountain-detail-link:hover .mountain-detail-chevron-arm-bottom,
+  .mountain-detail-link:focus-visible .mountain-detail-chevron-arm-bottom {
+    transform: rotate(-8deg);
+  }
+}
+
+@media (hover: none) {
+  .mountain-detail-chevron {
+    animation: mountain-detail-chevron-nudge 500ms
+      cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+  }
+}
+
 .mountain-anchor {
   left: var(--mountain-left);
   top: var(--mountain-top);
@@ -212,7 +258,10 @@
   }
 
   .mountain-anchor,
-  .mountain-stage canvas {
+  .mountain-stage canvas,
+  .mountain-detail-chevron,
+  .mountain-detail-chevron-arm {
+    animation: none !important;
     transition: none !important;
   }
 }

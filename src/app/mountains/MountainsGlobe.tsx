@@ -1247,12 +1247,37 @@ export default function MountainsGlobe({
                           }}
                           exit={{ opacity: 0, scale: 0.96 }}
                           transition={markerTransition}
-                          className="pointer-events-auto flex h-11 max-w-[min(15rem,80vw)] items-center gap-1.5 rounded-full border border-gray-200 bg-white/95 px-3 text-sm text-gray-950 shadow-[0_8px_24px_rgba(15,23,42,0.15)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                          className="mountain-detail-link pointer-events-auto flex h-11 max-w-[min(15rem,80vw)] items-center gap-1.5 rounded-full border border-gray-200 bg-white/95 px-3 text-sm text-gray-950 shadow-[0_8px_24px_rgba(15,23,42,0.15)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                           aria-label={`Open ${entry.name} details`}
                         >
                           <span className="truncate">{entry.name}</span>
                           <span aria-hidden="true" className="shrink-0">
                             {countryFlag(entry.countryCode)}
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="mountain-detail-chevron ml-0.5 inline-flex shrink-0"
+                          >
+                            <svg
+                              viewBox="0 0 16 16"
+                              className="h-3.5 w-3.5"
+                              fill="none"
+                            >
+                              <path
+                                className="mountain-detail-chevron-arm mountain-detail-chevron-arm-top"
+                                d="M6 3.5L10.5 8"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                className="mountain-detail-chevron-arm mountain-detail-chevron-arm-bottom"
+                                d="M10.5 8L6 12.5"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                              />
+                            </svg>
                           </span>
                         </motion.button>
                       ) : (
