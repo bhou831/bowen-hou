@@ -3,6 +3,7 @@ import path from 'path';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { remark } from 'remark';
+import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
 import { formatDate, getPostBySlug } from '@/lib/blog-utils';
 
@@ -51,20 +52,25 @@ export default async function JournalPost({ params }: { params: ParamsType }) {
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const processedContent = await remark().use(html).process(post.content);
+  const processedContent = await remark()
+    .use(remarkGfm)
+    .use(html)
+    .process(post.content);
   const contentHtml = processedContent.toString();
 
   return (
     <div className="w-full flex justify-center">
-      <article className="w-full max-w-2xl">
-        <h1 className="text-3xl font-bold text-gray-900 text-left">
-          {post.title}
-        </h1>
-        <p className="text-sm text-gray-500 mt-2 mb-8">
-          {formatDate(post.date)} · {post.readingTime} min read
-        </p>
+      <article className="w-full max-w-6xl">
+        <header className="mx-auto w-full max-w-2xl lg:max-w-3xl">
+          <h1 className="text-3xl font-bold text-gray-900 text-left">
+            {post.title}
+          </h1>
+          <p className="text-sm text-gray-500 mt-2 mb-8">
+            {formatDate(post.date)} · {post.readingTime} min read
+          </p>
+        </header>
         <div
-          className="prose"
+          className="journal-prose prose max-w-none"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
       </article>

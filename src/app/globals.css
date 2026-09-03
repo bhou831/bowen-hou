@@ -11,6 +11,44 @@
   }
 }
 
+.journal-prose > :not(table) {
+  max-width: 42rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.journal-prose > p:has(> img:only-child) {
+  max-width: 64rem;
+}
+
+.journal-prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  white-space: normal;
+}
+
+.journal-prose th,
+.journal-prose td {
+  min-width: 4.5rem;
+  vertical-align: top;
+}
+
+.journal-prose th:last-child,
+.journal-prose td:last-child {
+  min-width: 18rem;
+}
+
+@media (min-width: 1024px) {
+  .journal-prose > :not(table, p:has(> img:only-child)) {
+    max-width: 48rem;
+  }
+}
+
 @keyframes slideshow-progress {
   from {
     width: 0%;
