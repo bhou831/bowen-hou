@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Info, Smartphone, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Info, Smartphone } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -33,7 +33,7 @@ export default function Photography() {
   );
   const sheetTouchStartY = useRef<number | null>(null);
   const descriptionOpenButtonRef = useRef<HTMLButtonElement>(null);
-  const descriptionCloseButtonRef = useRef<HTMLButtonElement>(null);
+  const descriptionSheetToggleRef = useRef<HTMLButtonElement>(null);
   const lightboxTriggerRef = useRef<HTMLButtonElement | null>(null);
   const wasDescriptionOpen = useRef(false);
   const hasShownRotateHint = useRef(false);
@@ -159,7 +159,7 @@ export default function Photography() {
 
   useEffect(() => {
     if (isDescriptionOpen) {
-      descriptionCloseButtonRef.current?.focus({ preventScroll: true });
+      descriptionSheetToggleRef.current?.focus({ preventScroll: true });
     } else if (wasDescriptionOpen.current && isLightboxOpen) {
       descriptionOpenButtonRef.current?.focus({ preventScroll: true });
     }
@@ -427,10 +427,14 @@ export default function Photography() {
                   ref={descriptionOpenButtonRef}
                   onClick={() => {
                     triggerHaptic();
-                    setIsDescriptionOpen(true);
+                    setIsDescriptionOpen((open) => !open);
                   }}
                   className="xl:hidden absolute bottom-[calc(env(safe-area-inset-bottom)+2.25rem)] left-1/2 z-10 flex min-h-11 max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full bg-black/45 px-4 py-2 text-white backdrop-blur-sm hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                  aria-label="Show image description"
+                  aria-label={
+                    isDescriptionOpen
+                      ? 'Hide image description'
+                      : 'Show image description'
+                  }
                   aria-expanded={isDescriptionOpen}
                   aria-controls="photo-description-sheet"
                 >
@@ -511,31 +515,24 @@ export default function Photography() {
                 aria-hidden={!isDescriptionOpen}
                 inert={!isDescriptionOpen}
               >
-                <div
-                  className="mx-auto mb-4 h-5 w-16 touch-none pt-2"
+                <button
+                  type="button"
+                  ref={descriptionSheetToggleRef}
+                  className="mx-auto mb-4 flex h-8 w-20 touch-none items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  onClick={() => {
+                    triggerHaptic();
+                    setIsDescriptionOpen(false);
+                  }}
                   onTouchStart={handleSheetTouchStart}
                   onTouchEnd={handleSheetTouchEnd}
-                  aria-hidden="true"
+                  aria-label="Hide image description"
                 >
                   <div className="mx-auto h-1 w-10 rounded-full bg-white/30" />
-                </div>
+                </button>
 
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-medium">
-                    {selectedCollection.title}
-                  </h3>
-                  <button
-                    ref={descriptionCloseButtonRef}
-                    onClick={() => {
-                      triggerHaptic();
-                      setIsDescriptionOpen(false);
-                    }}
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                    aria-label="Hide image description"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
+                <h3 className="mb-4 text-xl font-medium">
+                  {selectedCollection.title}
+                </h3>
 
                 <div className="w-full h-px bg-white/20">
                   <div
