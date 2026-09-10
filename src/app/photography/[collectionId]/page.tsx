@@ -107,7 +107,7 @@ export default async function PhotoCollectionPage({
         <h1 className="mt-3 text-3xl font-light text-gray-900">
           {collection.title}
         </h1>
-        <p className="mt-4 whitespace-pre-line text-gray-700">
+        <p className="mt-4 whitespace-pre-line text-base text-gray-700">
           {collection.description}
         </p>
       </div>

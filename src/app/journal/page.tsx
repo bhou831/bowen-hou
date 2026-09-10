@@ -6,7 +6,7 @@ export default async function Journal() {
 
   return (
     <div>
-      <div className="w-full max-w-3xl">
+      <div className="mx-auto w-full max-w-3xl">
         <h1 className="sr-only">Journal</h1>
         <div className="space-y-6 sm:space-y-8">
           {posts.map((post) => (
@@ -21,7 +21,7 @@ export default async function Journal() {
                 <p className="text-sm text-gray-500 mt-2">
                   {formatDate(post.date)} · {post.readingTime} min read
                 </p>
-                <p className="mt-4 text-gray-700">{post.excerpt}</p>
+                <p className="mt-4 text-base text-gray-700">{post.excerpt}</p>
               </Link>
             </article>
           ))}

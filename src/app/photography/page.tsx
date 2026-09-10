@@ -316,7 +316,7 @@ export default function Photography() {
             </div>
 
             <div className="mt-3 relative inline-block">
-              <h3 className="relative inline-block text-left text-md font-light tracking-wide text-gray-700">
+              <h3 className="relative inline-block text-left text-base font-light tracking-wide text-gray-700">
                 <span>{collection.title}</span>
                 <span
                   aria-hidden="true"
@@ -484,7 +484,7 @@ export default function Photography() {
                     />
                   </div>
 
-                  <p className="text-md whitespace-pre-line font-light leading-relaxed py-2 pb-10 mb-4 mt-4">
+                  <p className="text-base whitespace-pre-line font-light leading-relaxed py-2 pb-10 mb-4 mt-4">
                     {selectedCollection.description}
                   </p>
                 </div>
@@ -543,7 +543,7 @@ export default function Photography() {
                   />
                 </div>
 
-                <p className="text-md whitespace-pre-line font-light leading-relaxed py-4 pb-2">
+                <p className="text-base whitespace-pre-line font-light leading-relaxed py-4 pb-2">
                   {selectedCollection.description}
                 </p>
               </div>
