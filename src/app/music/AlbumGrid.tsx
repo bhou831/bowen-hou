@@ -96,7 +96,13 @@ function formatPreviewTime(seconds: number) {
   return `0:${Math.floor(seconds).toString().padStart(2, '0')}`;
 }
 
-function VinylPreviewPlayer({ album }: { album: Album }) {
+function VinylPreviewPlayer({
+  album,
+  recordRef,
+}: {
+  album: Album;
+  recordRef?: React.Ref<HTMLDivElement>;
+}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -171,6 +177,7 @@ function VinylPreviewPlayer({ album }: { album: Album }) {
   return (
     <div className="w-full">
       <motion.div
+        ref={recordRef}
         initial={
           prefersReducedMotion
             ? false
@@ -178,7 +185,7 @@ function VinylPreviewPlayer({ album }: { album: Album }) {
         }
         animate={{ borderRadius: '9999px', opacity: 1, scale: 1 }}
         transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-        className="relative aspect-square w-full"
+        className="relative mx-auto aspect-square w-full"
       >
         <div
           aria-hidden="true"
@@ -371,6 +378,143 @@ function StreamingLinks({
   );
 }
 
+function AlbumDetails({ album }: { album: Album }) {
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const artistRef = useRef<HTMLSpanElement>(null);
+  const recordRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+  const [detailsExpanded, setDetailsExpanded] = useState(false);
+  const [detailsOverflow, setDetailsOverflow] = useState(false);
+  const [scrollWholeCard, setScrollWholeCard] = useState(false);
+
+  useEffect(() => {
+    const body = bodyRef.current;
+    const header = headerRef.current;
+    const title = titleRef.current;
+    const artist = artistRef.current;
+    const player = playerRef.current;
+    const record = recordRef.current;
+    if (!body || !header || !title || !artist || !player || !record) return;
+
+    const measure = () => {
+      if (!detailsExpanded) {
+        setDetailsOverflow(
+          title.scrollHeight > title.clientHeight + 1 ||
+            artist.scrollHeight > artist.clientHeight + 1,
+        );
+      }
+
+      if (!body.clientHeight || !player.clientWidth) return;
+
+      // Keep the centered record as large as possible while reserving a third
+      // of the card for reading. Fall back to whole-card scrolling if even a
+      // smaller record cannot fit (expanded names, large text, player errors).
+      const styles = getComputedStyle(body);
+      const spacing =
+        parseFloat(styles.paddingTop) +
+        parseFloat(styles.paddingBottom) +
+        2 * (parseFloat(styles.rowGap) || 0);
+      const controlsHeight = player.offsetHeight - record.offsetHeight;
+      const availableRecordHeight = Math.floor(
+        (body.clientHeight * 2) / 3 -
+          header.offsetHeight -
+          controlsHeight -
+          spacing,
+      );
+      const needsWholeCard = availableRecordHeight < 112;
+      const recordSize = needsWholeCard
+        ? player.clientWidth
+        : Math.min(player.clientWidth, availableRecordHeight);
+      const width = `${recordSize}px`;
+      if (record.style.width !== width) record.style.width = width;
+      setScrollWholeCard(needsWholeCard);
+    };
+
+    const observer = new ResizeObserver(measure);
+    [body, header, title, artist, player].forEach((element) =>
+      observer.observe(element),
+    );
+    measure();
+    return () => observer.disconnect();
+  }, [detailsExpanded]);
+
+  return (
+    <div
+      ref={bodyRef}
+      className="album-modal-body"
+      data-scroll-whole-card={scrollWholeCard}
+    >
+      <div ref={headerRef} className="shrink-0">
+        <DialogHeader className="px-8 md:pl-0">
+          <DialogTitle className="break-words text-2xl font-bold text-gray-900">
+            <span
+              ref={titleRef}
+              id={`album-title-${album.id}`}
+              className="album-modal-title"
+              data-expanded={detailsExpanded}
+            >
+              {album.title}
+            </span>
+          </DialogTitle>
+          <DialogDescription className="break-words text-lg text-gray-600">
+            <span
+              ref={artistRef}
+              id={`album-artist-${album.id}`}
+              className="album-modal-artist"
+              data-expanded={detailsExpanded}
+            >
+              {album.artist}
+            </span>
+          </DialogDescription>
+        </DialogHeader>
+        {detailsOverflow && (
+          <button
+            type="button"
+            aria-expanded={detailsExpanded}
+            aria-controls={`album-title-${album.id} album-artist-${album.id}`}
+            onClick={() => setDetailsExpanded((expanded) => !expanded)}
+            className="album-title-toggle mx-auto min-h-11 items-center rounded px-2 text-xs text-gray-500 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+          >
+            {detailsExpanded ? 'Show less' : 'Show full title & artist'}
+          </button>
+        )}
+      </div>
+
+      <div ref={playerRef} className="album-modal-player">
+        <VinylPreviewPlayer album={album} recordRef={recordRef} />
+      </div>
+
+      <div
+        className="album-modal-review"
+        role="region"
+        aria-label="Album links and review"
+        tabIndex={0}
+      >
+        <StreamingLinks links={album.links} className="mb-4 justify-center" />
+        <p className="whitespace-pre-line break-words text-gray-700">
+          {album.description}
+        </p>
+      </div>
+
+      <div className="album-modal-desktop min-h-0 flex-1 overflow-y-auto pr-2">
+        <div className="flex gap-6">
+          <div className="w-[300px] flex-[0_0_300px]">
+            <VinylPreviewPlayer album={album} />
+          </div>
+          <div className="flex w-1/2 flex-col">
+            <p className="whitespace-pre-line text-gray-700">
+              {album.description}
+            </p>
+            <StreamingLinks links={album.links} className="mt-6" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AlbumGrid({ albums }: { albums: Album[] }) {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
   const albumTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -423,63 +567,110 @@ export default function AlbumGrid({ albums }: { albums: Album[] }) {
       <Dialog open={!!selectedAlbum} onOpenChange={handleAlbumOpenChange}>
         {selectedAlbum && (
           <DialogContent
-            className="flex max-h-[90dvh] max-w-2xl flex-col overflow-hidden bg-white"
+            className="album-modal flex max-h-[90dvh] max-w-2xl flex-col overflow-hidden bg-white p-0 md:p-6"
+            closeButtonClassName="z-10 bg-white"
             onCloseAutoFocus={(event) => {
               event.preventDefault();
               albumTriggerRef.current?.focus({ preventScroll: true });
             }}
           >
-            <DialogHeader className="shrink-0">
-              <DialogTitle className="text-2xl font-bold text-gray-900">
-                {selectedAlbum.title}
-              </DialogTitle>
-              <DialogDescription className="text-lg text-gray-600">
-                {selectedAlbum.artist}
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="flex min-h-0 flex-1 flex-col gap-4 md:hidden">
-              <div className="mx-auto w-[min(52vw,31dvh,220px)] shrink-0">
-                <VinylPreviewPlayer album={selectedAlbum} />
-              </div>
-
-              <StreamingLinks
-                links={selectedAlbum.links}
-                className="shrink-0 justify-center"
-              />
-
-              <div className="min-h-0 flex-1 overflow-y-auto pr-2">
-                <p className="whitespace-pre-line text-gray-700">
-                  {selectedAlbum.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="hidden min-h-0 flex-1 overflow-y-auto pr-2 md:block">
-              <div className="flex gap-6">
-                {/* Vinyl Preview */}
-                <div className="w-[300px] flex-[0_0_300px]">
-                  <VinylPreviewPlayer album={selectedAlbum} />
-                </div>
-
-                {/* Album Details */}
-                <div className="flex flex-col w-full md:w-1/2">
-                  <p className="whitespace-pre-line text-gray-700">
-                    {selectedAlbum.description}
-                  </p>
-
-                  {/* Streaming Links */}
-                  <StreamingLinks
-                    links={selectedAlbum.links}
-                    className="mt-6"
-                  />
-                </div>
-              </div>
-            </div>
+            <AlbumDetails key={selectedAlbum.id} album={selectedAlbum} />
           </DialogContent>
         )}
       </Dialog>
       <style jsx global>{`
+        .album-modal-body {
+          display: contents;
+        }
+
+        .album-modal-title,
+        .album-modal-artist {
+          display: block;
+        }
+
+        .album-modal-player,
+        .album-modal-review,
+        .album-title-toggle {
+          display: none;
+        }
+
+        @media (max-width: 767px), (max-width: 1023px) and (max-height: 600px) {
+          .album-modal {
+            padding: 0;
+          }
+
+          .album-modal-body {
+            display: flex;
+            height: 90dvh;
+            min-height: 0;
+            flex-direction: column;
+            gap: 1rem;
+            overflow: hidden;
+            padding: 1.5rem;
+          }
+
+          .album-modal-title[data-expanded='false'],
+          .album-modal-artist[data-expanded='false'] {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
+
+          .album-title-toggle {
+            display: flex;
+          }
+
+          .album-modal-player {
+            display: block;
+            width: min(52vw, 31dvh, 220px);
+            margin-inline: auto;
+            flex-shrink: 0;
+          }
+
+          .album-modal-review {
+            display: block;
+            min-height: 0;
+            flex: 1;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.5rem;
+          }
+
+          .album-modal-review:focus-visible {
+            outline: 2px solid #9ca3af;
+            outline-offset: 2px;
+          }
+
+          .album-modal-desktop {
+            display: none;
+          }
+
+          .album-modal-body[data-scroll-whole-card='true'] {
+            overflow-y: auto;
+            overscroll-behavior: contain;
+          }
+
+          .album-modal-body[data-scroll-whole-card='true'] .album-modal-review {
+            flex: none;
+            overflow: visible;
+          }
+        }
+
+        @media (max-width: 767px) and (max-height: 600px),
+          (max-width: 1023px) and (orientation: landscape) and (max-height: 600px) {
+          .album-modal-body {
+            overflow-y: auto;
+            overscroll-behavior: contain;
+          }
+
+          .album-modal-review {
+            flex: none;
+            overflow: visible;
+          }
+        }
+
         .album-tilt {
           perspective: 900px;
         }
