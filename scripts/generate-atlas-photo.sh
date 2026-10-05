@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Generate a smaller cover image for a mountain atlas entry.
+# Generate an optimized photo for a mountain atlas entry.
 
 set -euo pipefail
 

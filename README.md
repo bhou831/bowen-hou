@@ -175,11 +175,14 @@ Airport connection notes, park or reserve names, and descriptions are optional.
 Any entry can omit photography and use the contour placeholder; when an image
 is present, descriptive alternative text is required.
 
-Create an optimized mountain atlas cover image from an existing source without changing
+Atlas photos use a 3:2 frame. Set an optional `imagePosition` (for example,
+`"50% 40%"`) on an entry to adjust its crop and keep the summit in view.
+
+Create an optimized atlas photo from an existing source without changing
 the original:
 
 ```sh
-just generate-cover-image --id <entry-id> --source <path-to-image> [--replace]
+just generate-atlas-photo --id <entry-id> --source <path-to-image> [--replace]
 ```
 
 The helper corrects orientation, strips metadata, keeps the original aspect

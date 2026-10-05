@@ -241,6 +241,11 @@ mv "$STAGE_DIR" "$DEST_DIR"
 STAGE_DIR=""
 DEST_INSTALLED=true
 
+# macOS may retain the hidden flag from the dot-prefixed staging directory.
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    chflags nohidden "$DEST_DIR"
+fi
+
 mv "$JSON_TEMP" "$COLLECTIONS_JSON"
 JSON_TEMP=""
 DEST_INSTALLED=false

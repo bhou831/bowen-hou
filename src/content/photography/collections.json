@@ -1,6 +1,55 @@
 {
   "collections": [
     {
+      "id": "Baker2026",
+      "title": "Mount Baker",
+      "description": "We did the Chain Lakes hike in pretty terrible weather: occasional rain, thick clouds, and a slippery trail. The clouds blocked the sunlight and muted the fall colors around Mount Baker, but the trail itself was amazing. As the name suggests, it links a series of glacial lakes tucked into the valleys. It was only 6 or 7 miles, but the view kept changing with every step.\n\nThe road was closed to incoming traffic from 7 a.m. to 4 p.m., so we had the trail mostly to ourselves. The moody weather made everything feel even quieter, and we really enjoyed being alone in the woods.",
+      "coverImage": "/images/collections/Baker2026/cover.jpg",
+      "images": [
+        "/images/collections/Baker2026/Baker2026_1.JPG",
+        "/images/collections/Baker2026/Baker2026_2.JPG",
+        "/images/collections/Baker2026/Baker2026_3.JPG",
+        "/images/collections/Baker2026/Baker2026_4.JPG",
+        "/images/collections/Baker2026/Baker2026_5.JPG",
+        "/images/collections/Baker2026/Baker2026_6.JPG",
+        "/images/collections/Baker2026/Baker2026_7.JPG",
+        "/images/collections/Baker2026/Baker2026_8.JPG",
+        "/images/collections/Baker2026/Baker2026_9.JPG",
+        "/images/collections/Baker2026/Baker2026_10.JPG",
+        "/images/collections/Baker2026/Baker2026_11.JPG",
+        "/images/collections/Baker2026/Baker2026_12.JPG",
+        "/images/collections/Baker2026/Baker2026_13.JPG",
+        "/images/collections/Baker2026/Baker2026_14.JPG",
+        "/images/collections/Baker2026/Baker2026_15.JPG",
+        "/images/collections/Baker2026/Baker2026_16.JPG",
+        "/images/collections/Baker2026/Baker2026_17.JPG",
+        "/images/collections/Baker2026/Baker2026_18.JPG",
+        "/images/collections/Baker2026/Baker2026_19.JPG",
+        "/images/collections/Baker2026/Baker2026_20.JPG"
+      ]
+    },
+    {
+      "id": "Rainier2026",
+      "title": "Mount Rainier NP 2026",
+      "description": "My second time at Rainier. A sunny day on a weekend meant the trail was absolutely packed. Snow from the day before had left the roads in rough shape, and we ended up hiking the Skyline Trail over two days.\n\nSnow covered much of the iconic golden-red huckleberry foliage. Surprisingly, the leaves only seemed to turn bright red when the sunlight hit them at a certain angle. I couldn't find a good angle to get both the bushes and Mount Rainier in the same frame, but we really enjoyed the hike.",
+      "coverImage": "/images/collections/Rainier2026/cover.jpg",
+      "images": [
+        "/images/collections/Rainier2026/Rainier2026_1.JPG",
+        "/images/collections/Rainier2026/Rainier2026_2.JPG",
+        "/images/collections/Rainier2026/Rainier2026_3.JPG",
+        "/images/collections/Rainier2026/Rainier2026_4.JPG",
+        "/images/collections/Rainier2026/Rainier2026_5.JPG",
+        "/images/collections/Rainier2026/Rainier2026_6.JPG",
+        "/images/collections/Rainier2026/Rainier2026_7.JPG",
+        "/images/collections/Rainier2026/Rainier2026_8.JPG",
+        "/images/collections/Rainier2026/Rainier2026_9.JPG",
+        "/images/collections/Rainier2026/Rainier2026_10.JPG",
+        "/images/collections/Rainier2026/Rainier2026_11.JPG",
+        "/images/collections/Rainier2026/Rainier2026_12.JPG",
+        "/images/collections/Rainier2026/Rainier2026_13.JPG"
+      ]
+    },
+    {
       "id": "Alsace",
       "title": "The Alsace",
       "description": "Strasbourg and Colmar are as Alsatian as it gets. I liked Strasbourg a lot—it basically runs on German hardware and French software. The tram is efficient, making it easy to get from the train station to downtown.\n\nThe historic neighborhoods are just across the river from the newer developments, so like many European cities, you get to enjoy both.\n\nColmar was so beautiful and curated that it almost feels like Disneyland, with surreal buildings, crowds of tourists, overpriced souvenirs, and generic shops.",
@@ -210,7 +259,7 @@
     },
     {
       "id": "Shizuoka2025",
-      "title": "Shizuoka 2025",
+      "title": "Shizuoka",
       "description": "I traveled to Fujikawa and Shimizu to view Mt. Fuji, and passed by the Shimizu/Shizuoka area.\n\nIt was the home to one of Japan’s most important deep-water ports, Shimizu serves as a major hub for exports such as frozen tuna, paper products, and industrial goods, with ships, trucks, and logistics moving in a steady rhythm throughout the day.\n\nDespite the constant flow of freight, the infrastructure is immaculate: streets are clean, rivers are lined with pedestrian walkways, and the city functions with quiet efficiency.\n\nMany buildings here date back to the 1970s and 80s, and as people gravitate toward Tokyo, the remaining shops and restaurants feel quieter, with owners sitting outside waiting for customers, leaving me unsure whether I arrived during an off-peak hour or it's just how the city now lives day to day.",
       "coverImage": "/images/collections/Shizuoka2025/cover.jpg",
       "images": [
@@ -894,7 +943,7 @@
     },
     {
       "id": "rainier24",
-      "title": "Mt. Rainier NP 2024",
+      "title": "Mount Rainier NP 2024",
       "description": "Mount Rainier National Park, Skyline Trail",
       "coverImage": "/images/collections/rainier24/cover.jpg",
       "images": [

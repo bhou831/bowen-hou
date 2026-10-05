@@ -1,6 +1,40 @@
 {
   "albums": [
     {
+      "id": "album-10-05-26-2",
+      "title": "Roger Nichols & the Small Circle of Friends",
+      "artist": "Roger Nichols & the Small Circle of Friends",
+      "coverImage": "/images/albums/roger-nichols-small-circle-of-friends/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "Love So Fine",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e6/87/b6/e687b665-6f90-442a-d2e1-c9bf14a9c35a/mzaf_16670807883225869197.plus.aac.p.m4a"
+      },
+      "description": "I found this album while looking for the Japanese band Small Circle of Friends. It turns out they named themselves after Roger Nichols' group, which made me curious enough to give this a listen.\n\nIt's a sunshine pop album (first time knowing this genres): breezy, melodic, and easy to listen to. But the closer I listen, the more I notice the unusual key changes and chord progressions. It sounds bright on the surface, then gets a little more bittersweet hidden.\n\nI can hear why Shibuyakei artists were drawn to this sound. That mix of pop, jazz, and bossa nova, with its cosmopolitan feel, has so much of what I love about their music.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/roger-nichols-the-small-circle-of-friends/1424516359",
+        "spotify": "https://open.spotify.com/album/0hZhqRKrl4bxg8fbVpIFJ4",
+        "youtube": "https://youtube.com/playlist?list=OLAK5uy_kV1leE0IFtJ3Gaicp6mfREgPtySP_ipMQ&si=0J946zUizkLtY9gq"
+      }
+    },
+    {
+      "id": "album-10-05-26",
+      "title": "Life 1",
+      "artist": "Quadeca",
+      "coverImage": "/images/albums/life-1/cover.jpg",
+      "preview": {
+        "source": "apple",
+        "trackTitle": "It goes like this",
+        "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/f2/ff/88f2ff87-c260-baab-4fdd-1463afb26651/mzaf_15102332427600921694.plus.aac.p.m4a"
+      },
+      "description": "This album dropped quietly in late 2026, just a few months after the massive hit Vanisher Horizon Scraper. I hit play about ten minutes before the Jersey City 5K, waiting for my corral to move. When \"It goes like this\" came on, my race started too. Those three minutes and forty seconds felt elevated and completely mesmerizing.\n\nI hear a lot of similarities to the previous album, from the instruments and orchestration to the way he layers his harmonies. Even so, this one brought a breath of fresh air to my October.",
+      "links": {
+        "appleMusic": "https://music.apple.com/us/album/life-1/6815153792",
+        "spotify": "https://open.spotify.com/album/1QFbsd56xkkvG1WE51O1bD",
+        "youtube": "https://youtu.be/oWjiPvUFH1c?si=wQu4E34AhwLTKtwc"
+      }
+    },
+    {
       "id": "album-07-31-26",
       "title": "Jordan: The Comeback",
       "artist": "Prefab Sprout",

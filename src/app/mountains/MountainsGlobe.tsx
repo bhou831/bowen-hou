@@ -43,6 +43,7 @@ export type MountainEntry = {
   description?: string;
   image?: string;
   imageAlt?: string;
+  imagePosition?: string;
 };
 
 type ProjectedEntry = {
@@ -256,7 +257,7 @@ function groupNearbyEntries(
 
 function EntryHeroPhoto({ entry }: { entry: MountainEntry }) {
   return (
-    <div className="relative aspect-[3/2] w-full sm:aspect-[2/1]">
+    <div className="relative aspect-[3/2] w-full">
       <Image
         src={entry.image as string}
         alt={entry.imageAlt || ''}
@@ -264,6 +265,7 @@ function EntryHeroPhoto({ entry }: { entry: MountainEntry }) {
         priority
         sizes="(max-width: 767px) 90vw, 640px"
         className="object-cover"
+        style={{ objectPosition: entry.imagePosition ?? '50% 50%' }}
       />
     </div>
   );
@@ -1177,7 +1179,7 @@ export default function MountainsGlobe({
                                     ? 'bg-amber-50/70 shadow-[inset_0_0_0_1px_rgba(217,119,6,0.1),0_0_16px_rgba(251,191,36,0.1)] hover:bg-amber-50 focus-visible:bg-amber-50'
                                     : 'hover:bg-gray-100 focus-visible:bg-gray-100'
                                 }`}
-                                aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}, ${entry.status === 'visited' ? 'visited' : 'waiting to be explored'}`}
+                                aria-label={`Open ${entry.name}, ${COUNTRY_NAMES[entry.countryCode]}, ${entry.status === 'visited' ? 'visited' : 'to do'}`}
                               >
                                 <span className="min-w-0 truncate">
                                   {entry.name}
@@ -1376,8 +1378,8 @@ export default function MountainsGlobe({
             }`}
             closeButtonClassName={
               selectedEntry.image
-                ? '!right-3 !top-3 !h-10 !w-10 border border-white/60 bg-white/85 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:bg-white'
-                : '!right-3 !top-3 !h-10 !w-10 border border-gray-200 bg-white/95 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.08)] hover:border-gray-300 hover:bg-gray-50 sm:!right-4 sm:!top-4'
+                ? '!right-3 !top-3 !h-11 !w-11 border border-white/60 bg-white/85 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:bg-white'
+                : '!right-3 !top-3 !h-11 !w-11 border border-gray-200 bg-white/95 text-gray-700 opacity-100 shadow-[0_4px_16px_rgba(15,23,42,0.08)] hover:border-gray-300 hover:bg-gray-50 sm:!right-4 sm:!top-4'
             }
             onEscapeKeyDown={(event) => {
               event.preventDefault();
@@ -1400,13 +1402,13 @@ export default function MountainsGlobe({
               });
             }}
           >
-            <div className="min-h-0 overflow-y-auto">
+            <div className="min-h-0 overflow-y-auto overscroll-contain">
               {selectedEntry.image ? (
                 <div className="border-b border-gray-100">
                   <EntryHeroPhoto entry={selectedEntry} />
                 </div>
               ) : (
-                <div className="flex items-center gap-2 border-b border-gray-100 px-5 pb-4 pt-6 sm:px-7">
+                <div className="flex items-center gap-2 border-b border-gray-100 pb-4 pl-5 pr-16 pt-6 sm:pl-7 sm:pr-20">
                   <span
                     aria-hidden="true"
                     className={`h-8 w-1 shrink-0 rounded-full ${
@@ -1419,7 +1421,7 @@ export default function MountainsGlobe({
                     {selectedEntry.type} ·{' '}
                     {selectedEntry.status === 'visited'
                       ? 'Visited · No photograph'
-                      : 'Waiting to be explored'}
+                      : 'To do'}
                   </p>
                 </div>
               )}
@@ -1433,80 +1435,62 @@ export default function MountainsGlobe({
                         <span>
                           {selectedEntry.status === 'visited'
                             ? 'Visited'
-                            : 'Waiting to be explored'}
+                            : 'To do'}
                         </span>
                       </div>
                     )}
-                    <DialogTitle className="min-w-0 text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
-                      <span
-                        role="img"
-                        aria-label={COUNTRY_NAMES[selectedEntry.countryCode]}
-                        className="mr-2"
-                      >
+                    <div className="flex items-start justify-between gap-4">
+                      <DialogTitle className="min-w-0 break-words text-2xl font-semibold leading-[1.12] tracking-[-0.025em] text-gray-950 sm:text-[1.7rem]">
+                        {selectedEntry.name}
+                      </DialogTitle>
+                      {selectedEntry.status === 'visited' &&
+                        typeof selectedEntry.rating === 'number' && (
+                          <span
+                            className="shrink-0 whitespace-nowrap pt-0.5 text-lg font-medium tabular-nums text-gray-800"
+                            aria-label={`Personal rating: ${selectedEntry.rating.toFixed(1)} out of 10`}
+                          >
+                            {selectedEntry.rating.toFixed(1)}
+                            <span className="ml-1 text-xs font-normal text-gray-400">
+                              / 10
+                            </span>
+                          </span>
+                        )}
+                    </div>
+                    <p className="break-words pt-1 text-sm leading-6 text-gray-500">
+                      <span aria-hidden="true" className="mr-1.5">
                         {countryFlag(selectedEntry.countryCode)}
                       </span>
-                      {selectedEntry.name}
-                    </DialogTitle>
+                      {selectedEntry.region} ·{' '}
+                      {COUNTRY_NAMES[selectedEntry.countryCode]}
+                    </p>
                     {selectedEntry.description ? (
                       <DialogDescription className="whitespace-pre-line pt-2 text-base leading-7 text-gray-600">
                         {selectedEntry.description}
                       </DialogDescription>
                     ) : (
                       <DialogDescription className="sr-only">
-                        {`${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'waiting to be explored'}.`}
+                        {`${selectedEntry.name}, ${selectedEntry.status === 'visited' ? 'visited' : 'to do'}.`}
                       </DialogDescription>
                     )}
                   </DialogHeader>
-                  <dl className="mt-5 overflow-hidden rounded-2xl border border-gray-200/90 bg-gray-50/60 text-sm text-gray-700">
-                    <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 px-4 py-3.5">
-                      <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500">
-                        <span
-                          aria-hidden="true"
-                          className="text-sm leading-none"
-                        >
-                          ✈️
-                        </span>
-                        Airport
-                      </dt>
-                      <dd className="min-w-0 leading-5 text-gray-800">
-                        <span className="font-medium">
-                          {selectedEntry.gatewayAirport.name} (
-                          {selectedEntry.gatewayAirport.code})
-                        </span>
+                  <dl className="mt-5 space-y-3 border-t border-gray-100 pt-4 text-xs leading-5">
+                    <div className="grid grid-cols-[4rem_minmax(0,1fr)] gap-3">
+                      <dt className="text-gray-400">Airport</dt>
+                      <dd className="min-w-0 break-words text-gray-600">
+                        {selectedEntry.gatewayAirport.name} (
+                        {selectedEntry.gatewayAirport.code})
                         {selectedEntry.gatewayAirport.note && (
                           <span className="text-gray-500">
-                            {' · '}
-                            {selectedEntry.gatewayAirport.note}
+                            {' '}
+                            · {selectedEntry.gatewayAirport.note}
                           </span>
                         )}
                       </dd>
                     </div>
-                    <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 border-t border-gray-200/80 px-4 py-3.5">
-                      <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500">
-                        <span
-                          aria-hidden="true"
-                          className="text-sm leading-none"
-                        >
-                          🧭
-                        </span>
-                        Region
-                      </dt>
-                      <dd className="min-w-0 font-medium leading-5 text-gray-800">
-                        {selectedEntry.region}
-                      </dd>
-                    </div>
                     {selectedEntry.park && (
-                      <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-start gap-3 border-t border-gray-200/80 px-4 py-3.5">
-                        <dt className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.1em] text-gray-500">
-                          <span
-                            aria-hidden="true"
-                            className="text-sm leading-none"
-                          >
-                            🏞️
-                          </span>
-                          Park / reserve
-                        </dt>
-                        <dd className="min-w-0 font-medium leading-5 text-gray-800">
+                      <div className="grid grid-cols-[4rem_minmax(0,1fr)] gap-3">
+                        <dt className="text-gray-400">Park</dt>
+                        <dd className="min-w-0 break-words text-gray-600">
                           {selectedEntry.park}
                         </dd>
                       </div>
