@@ -10,10 +10,10 @@ add-album *args:
 cap-photo-edge *args:
     ./scripts/cap-photo-edge.sh {{args}}
 
-# Create an optimized atlas copy without modifying the source photograph
-# Usage: just add-mountain-photo --id <entry-id> --source <path>
-add-mountain-photo *args:
-    ./scripts/add-mountain-photo.sh {{args}}
+# Generate a mountain atlas cover image without modifying the source photograph
+# Usage: just generate-cover-image --id <entry-id> --source <path> [--replace]
+generate-cover-image *args:
+    ./scripts/generate-cover-image.sh {{args}}
 
 dev:
     - npm run dev

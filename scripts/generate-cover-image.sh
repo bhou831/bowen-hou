@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Generate a smaller cover image for a mountain atlas entry.
+
 set -euo pipefail
 
 usage() {
